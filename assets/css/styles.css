@@ -122,28 +122,10 @@ button{font:inherit;color:inherit}
   max-width:24ch;padding-left:clamp(16px,2vw,28px);border-left:2px solid var(--yellow);
 }
 
-/* ---------- Work tiles ---------- */
-.work{padding-top:0}
-.tiles{
-  display:grid;grid-template-columns:repeat(6,1fr);
-  gap:clamp(40px,5vw,72px) clamp(12px,1.6vw,24px);
-}
-.tile--full{grid-column:1/-1}
-.tile--half{grid-column:span 3}
-.tile--third{grid-column:span 2}
-.tile__img{overflow:hidden;background:#0a0a0a}
-.tile__img img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease)}
-.tile--full .tile__img{aspect-ratio:16/7}
-.tile--half .tile__img{aspect-ratio:3/2}
-.tile--third .tile__img{aspect-ratio:4/5}
-.tile:hover .tile__img img{transform:scale(1.03)}
-@media (prefers-reduced-motion: reduce){ .tile__img img{transition:none} .tile:hover .tile__img img{transform:none} }
-.tile figcaption{
-  display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:4px 16px;
-  margin-top:14px;
-}
-.tile__title{font-size:15px;font-weight:700;letter-spacing:-.005em}
-.tile__tag{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gray)}
+/* ---------- Reel (video accent) ---------- */
+.reel{padding:0}
+.reel__frame{position:relative;overflow:hidden;background:#0a0a0a;aspect-ratio:1280/674}
+.reel__video{display:block;width:100%;height:100%;object-fit:cover}
 
 /* ---------- How we work ---------- */
 .rows{border-top:1px solid var(--rule)}
@@ -165,6 +147,10 @@ button{font:inherit;color:inherit}
 
 /* ---------- Team ---------- */
 .team{padding-top:0}
+.team__grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(32px,6vw,112px);align-items:end}
+.team__img{overflow:hidden;background:#0a0a0a;aspect-ratio:2/3;max-width:560px}
+.team__img img{width:100%;height:100%;object-fit:cover}
+.team__copy{padding-bottom:clamp(0px,2vw,24px)}
 .team__line{
   font-size:clamp(26px,3.4vw,54px);font-weight:700;line-height:1.14;letter-spacing:-.025em;max-width:28ch;
 }
@@ -210,8 +196,8 @@ button{font:inherit;color:inherit}
   .nav__menu a{padding:17px 0;border-bottom:1px solid var(--rule);font-size:13px;color:#fff}
   .nav.is-open{background:#000;border-bottom-color:var(--rule)}
 
-  .tile--half{grid-column:1/-1}
-  .tile--third{grid-column:span 3}
+  .team__grid{grid-template-columns:1fr;align-items:start}
+  .team__img{max-width:420px}
   .row{grid-template-columns:1fr;gap:16px}
   .months{grid-template-columns:1fr;gap:40px}
   .intro__body{margin-left:0}
@@ -221,11 +207,10 @@ button{font:inherit;color:inherit}
   body{font-size:16px}
   .hero{min-height:88svh}
   .hero__slogan{font-size:clamp(40px,11.6vw,64px);letter-spacing:-.04em}
-  .tiles{gap:32px 12px}
-  .tile--full .tile__img{aspect-ratio:4/3}
-  .tile figcaption{margin-top:10px}
-  .tile__title{font-size:14px}
-  .tile__tag{font-size:10px;letter-spacing:.12em}
+  .reel .wrap{padding-inline:0}
+  .reel__frame{aspect-ratio:4/5}
+  .reel__video{object-position:38% 50%}
+  .team__img{max-width:none}
   .close__links{flex-direction:column;gap:10px}
   .close__links .sep{display:none}
   .footer__inner{flex-direction:column;align-items:flex-start;gap:16px}

@@ -51,7 +51,6 @@
       <span class="visually-hidden">Menu</span>
     </button>
     <nav class="nav__menu" id="navMenu" aria-label="Primary">
-      <a href="#work">Work</a>
       <a href="#how">How we work</a>
       <a href="#contact">Contact</a>
     </nav>
@@ -78,71 +77,13 @@
     </div>
   </section>
 
-  <!-- ============ WORK ============ -->
-  <section class="section work" id="work">
+  <!-- ============ REEL ============ -->
+  <section class="reel" aria-label="Reel">
     <div class="wrap">
-      <p class="label reveal">The work</p>
-      <div class="tiles">
-        <figure class="tile tile--full reveal">
-          <div class="tile__img"><img src="assets/img/work-shadows.jpg" alt="Woman in a car interior, face half in shadow" width="1600" height="1067" loading="lazy" decoding="async"></div>
-          <figcaption><span class="tile__title">Shadows</span><span class="tile__tag">Film</span></figcaption>
-        </figure>
-        <figure class="tile tile--half reveal">
-          <div class="tile__img"><img src="assets/img/work-eyes.jpg" alt="Black and white close-up of a model's eyes above a dark wrap" width="1600" height="1067" loading="lazy" decoding="async"></div>
-          <figcaption><span class="tile__title">Eyes</span><span class="tile__tag">Portrait</span></figcaption>
-        </figure>
-        <figure class="tile tile--half reveal">
-          <div class="tile__img"><img src="assets/img/work-fitness.jpg" alt="Four people in athletic wear walking a bridge trail at dusk" width="1600" height="1067" loading="lazy" decoding="async"></div>
-          <figcaption><span class="tile__title">Dusk Run</span><span class="tile__tag">Fitness / Dallas</span></figcaption>
-        </figure>
-        <figure class="tile tile--third reveal">
-          <div class="tile__img"><img src="assets/img/work-cross.jpg" alt="Portrait lit through a cross-shaped cutout" width="1040" height="1300" loading="lazy" decoding="async"></div>
-          <figcaption><span class="tile__title">Cross</span><span class="tile__tag">Portrait</span></figcaption>
-        </figure>
-        <figure class="tile tile--third reveal">
-          <div class="tile__img"><img src="assets/img/work-addiction.jpg" alt="Conceptual still life with gold pedestal, powder, and a hand" width="1300" height="1300" loading="lazy" decoding="async"></div>
-          <figcaption><span class="tile__title">Addiction</span><span class="tile__tag">Still life</span></figcaption>
-        </figure>
-        <figure class="tile tile--third reveal">
-          <div class="tile__img"><img src="assets/img/work-glitz.jpg" alt="Portrait covered in gold glitter" width="1040" height="1300" loading="lazy" decoding="async"></div>
-          <figcaption><span class="tile__title">Glitz</span><span class="tile__tag">Beauty</span></figcaption>
-        </figure>
-        <figure class="tile tile--third reveal">
-          <div class="tile__img"><img src="assets/img/work-xoe-frames.jpg" alt="Model in leather jacket seated between framed prints" width="1040" height="1300" loading="lazy" decoding="async"></div>
-          <figcaption><span class="tile__title">Frames</span><span class="tile__tag">Editorial</span></figcaption>
-        </figure>
-        <figure class="tile tile--third reveal">
-          <div class="tile__img"><img src="assets/img/work-lumi.jpg" alt="Studio headshot with soft light and gold hoops" width="1040" height="1300" loading="lazy" decoding="async"></div>
-          <figcaption><span class="tile__title">Soft Light</span><span class="tile__tag">Studio</span></figcaption>
-        </figure>
-        <figure class="tile tile--third reveal">
-          <div class="tile__img"><img src="assets/img/work-smoke.jpg" alt="Black and white portrait with smoke across the face" width="1040" height="1300" loading="lazy" decoding="async"></div>
-          <figcaption><span class="tile__title">Smoke</span><span class="tile__tag">Portrait</span></figcaption>
-        </figure>
-        <figure class="tile tile--third reveal">
-          <div class="tile__img"><img src="assets/img/work-void.jpg" alt="Face seen through a gap in white architectural beams" width="1040" height="1300" loading="lazy" decoding="async"></div>
-          <figcaption><span class="tile__title">Void</span><span class="tile__tag">Editorial</span></figcaption>
-        </figure>
-        <figure class="tile tile--third reveal">
-          <div class="tile__img"><img src="assets/img/work-bridge.jpg" alt="Cable-stayed bridge seen through trees" width="900" height="1125" loading="lazy" decoding="async"></div>
-          <figcaption><span class="tile__title">Bridge</span><span class="tile__tag">Dallas</span></figcaption>
-        </figure>
-        <figure class="tile tile--third reveal">
-          <div class="tile__img"><img src="assets/img/work-xoe-table.jpg" alt="Editorial figure draped across a table in a dim gallery room" width="1300" height="1300" loading="lazy" decoding="async"></div>
-          <figcaption><span class="tile__title">Table</span><span class="tile__tag">Editorial</span></figcaption>
-        </figure>
-        <figure class="tile tile--third reveal">
-          <div class="tile__img"><img src="assets/img/work-red-sparrow.jpg" alt="Portrait in red on a red set" width="1040" height="1300" loading="lazy" decoding="async"></div>
-          <figcaption><span class="tile__title">Red</span><span class="tile__tag">Campaign</span></figcaption>
-        </figure>
-        <figure class="tile tile--third reveal">
-          <div class="tile__img"><img src="assets/img/work-ski-mask.jpg" alt="Portrait in a black balaclava and pearl necklace" width="1040" height="1300" loading="lazy" decoding="async"></div>
-          <figcaption><span class="tile__title">Ski Mask</span><span class="tile__tag">Fashion</span></figcaption>
-        </figure>
-        <figure class="tile tile--third reveal">
-          <div class="tile__img"><img src="assets/img/work-spiders.jpg" alt="Figure posed inside a web of hanging chains" width="1158" height="1158" loading="lazy" decoding="async"></div>
-          <figcaption><span class="tile__title">Chains</span><span class="tile__tag">Concept</span></figcaption>
-        </figure>
+      <div class="reel__frame">
+        <video class="reel__video" id="reel" autoplay muted loop playsinline preload="auto" poster="assets/img/reel-poster.jpg" width="1280" height="674" aria-label="Film still: a woman with red hair seated in a car at night, lit through the window">
+          <source src="assets/video/reel.mp4" type="video/mp4">
+        </video>
       </div>
     </div>
   </section>
@@ -198,9 +139,14 @@
 
   <!-- ============ TEAM ============ -->
   <section class="section team" id="team">
-    <div class="wrap">
-      <p class="label reveal">The team</p>
-      <p class="team__line reveal">Creative direction by B. Moore, a working photographer and filmmaker. Writers, crew, and talent in-house.</p>
+    <div class="wrap team__grid">
+      <figure class="team__img reveal">
+        <img src="assets/img/portrait.jpg" alt="Studio beauty portrait: wet dark hair across the face, orange eyeshadow, hand at the chin" width="1000" height="1500" loading="lazy" decoding="async">
+      </figure>
+      <div class="team__copy">
+        <p class="label reveal">The team</p>
+        <p class="team__line reveal">Creative direction by B. Moore, a working photographer and filmmaker. Writers, crew, and talent in-house.</p>
+      </div>
     </div>
   </section>
 
