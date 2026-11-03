@@ -75,38 +75,4 @@
     /* Safety net: nothing may stay hidden longer than a few seconds. */
     window.setTimeout(revealAll, 4000);
   }
-
-  /* ---------- Reel video ----------
-     Muted + playsinline so iOS will autoplay it. Reduced-motion users get the
-     poster frame only; otherwise it only plays while on screen. */
-  var reel = document.getElementById('reel');
-  if (reel) {
-    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)');
-    var tryPlay = function () {
-      reel.muted = true;
-      var p = reel.play();
-      if (p && p.catch) p.catch(function () {});
-    };
-    var applyMotionPref = function () {
-      if (reduce && reduce.matches) {
-        reel.removeAttribute('autoplay');
-        reel.pause();
-        try { reel.currentTime = 0; } catch (e) {}
-        reel.load(); /* back to the poster */
-      } else {
-        tryPlay();
-      }
-    };
-    applyMotionPref();
-    if (reduce && reduce.addEventListener) reduce.addEventListener('change', applyMotionPref);
-
-    if ('IntersectionObserver' in window) {
-      new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          if (reduce && reduce.matches) return;
-          if (entry.isIntersecting) tryPlay(); else reel.pause();
-        });
-      }, { threshold: 0.15 }).observe(reel);
-    }
-  }
 })();
