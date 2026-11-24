@@ -401,6 +401,7 @@
       min-height:236px;
     }
   }
+  .follow__visual{overflow:visible}
   .recycle{
     position:relative;
     width:240px;
@@ -414,18 +415,44 @@
     height:236px;
     overflow:visible;
   }
-  .recycle__spin{
-    transform-box:view-box;
-    transform-origin:120px 118px;
+  .recycle__back{
+    fill:none;
+    stroke:#9C860A;
+    stroke-width:34;
+    stroke-linecap:butt;
+    stroke-linejoin:round;
+    stroke-dasharray:10 23.333;
+    stroke-dashoffset:5;
   }
-  .recycle__band{fill:#9C860A}
-  .recycle__head{fill:var(--gold)}
+  .recycle__front{
+    fill:none;
+    stroke:var(--gold);
+    stroke-width:34;
+    stroke-linecap:butt;
+    stroke-linejoin:round;
+    stroke-dasharray:17.5 15.833;
+    stroke-dashoffset:-5;
+  }
+  .recycle__head{
+    position:absolute;
+    top:0;left:0;
+    width:52px;
+    height:88px;
+    overflow:visible;
+    offset-path:path("M120.00,54.00L122.60,54.11L125.19,54.45L127.73,55.01L130.22,55.79L132.63,56.79L134.94,57.99L137.14,59.38L139.22,60.96L141.14,62.72L142.91,64.63L144.50,66.69L145.91,68.89L147.22,71.14L148.52,73.40L149.83,75.66L151.13,77.92L152.43,80.18L153.74,82.43L155.04,84.69L156.34,86.95L157.65,89.21L158.95,91.46L160.25,93.72L161.56,95.98L162.86,98.24L164.16,100.49L165.47,102.75L166.77,105.01L168.07,107.27L169.38,109.53L170.68,111.78L171.99,114.04L173.29,116.30L174.59,118.56L175.90,120.81L177.20,123.07L178.50,125.33L179.81,127.59L181.11,129.85L182.41,132.10L183.72,134.36L184.97,136.65L186.03,139.03L186.87,141.49L187.50,144.02L187.91,146.60L188.09,149.20L188.05,151.80L187.78,154.39L187.29,156.95L186.57,159.46L185.65,161.90L184.51,164.24L183.17,166.48L181.65,168.59L179.95,170.57L178.08,172.38L176.06,174.03L173.91,175.50L171.63,176.78L169.26,177.85L166.80,178.71L164.28,179.36L161.70,179.78L159.11,179.98L156.50,180.00L153.89,180.00L151.28,180.00L148.68,180.00L146.07,180.00L143.46,180.00L140.86,180.00L138.25,180.00L135.64,180.00L133.04,180.00L130.43,180.00L127.82,180.00L125.21,180.00L122.61,180.00L120.00,180.00L117.39,180.00L114.79,180.00L112.18,180.00L109.57,180.00L106.96,180.00L104.36,180.00L101.75,180.00L99.14,180.00L96.54,180.00L93.93,180.00L91.32,180.00L88.72,180.00L86.11,180.00L83.50,180.00L80.89,179.98L78.30,179.78L75.72,179.36L73.20,178.71L70.74,177.85L68.37,176.78L66.09,175.50L63.94,174.03L61.92,172.38L60.05,170.57L58.35,168.59L56.83,166.48L55.49,164.24L54.35,161.90L53.43,159.46L52.71,156.95L52.22,154.39L51.95,151.80L51.91,149.20L52.09,146.60L52.50,144.02L53.13,141.49L53.97,139.03L55.03,136.65L56.28,134.36L57.59,132.10L58.89,129.85L60.19,127.59L61.50,125.33L62.80,123.07L64.10,120.81L65.41,118.56L66.71,116.30L68.01,114.04L69.32,111.78L70.62,109.53L71.93,107.27L73.23,105.01L74.53,102.75L75.84,100.49L77.14,98.24L78.44,95.98L79.75,93.72L81.05,91.46L82.35,89.21L83.66,86.95L84.96,84.69L86.26,82.43L87.57,80.18L88.87,77.92L90.17,75.66L91.48,73.40L92.78,71.14L94.09,68.89L95.50,66.69L97.09,64.63L98.86,62.72L100.78,60.96L102.86,59.38L105.06,57.99L107.37,56.79L109.78,55.79L112.27,55.01L114.81,54.45L117.40,54.11L120.00,54.00Z");
+    offset-anchor:16px 44px;
+    offset-rotate:auto;
+  }
+  .recycle__head--1{offset-distance:22.5%}
+  .recycle__head--2{offset-distance:55.833%}
+  .recycle__head--3{offset-distance:89.166%}
+  .recycle__head-shape{fill:var(--gold)}
 
 
 
-  /* ---------- Traffic light: green until in view, then yellow (speed up) ---------- */
+  /* ---------- Traffic light: NYC-style signal, green until in view, then yellow ---------- */
   .signal{
-    padding-block:clamp(36px,6vh,72px) clamp(24px,4vh,48px);
+    padding-block:clamp(28px,5vh,56px) clamp(20px,3.6vh,40px);
   }
   .signal__light{
     display:block;
@@ -433,52 +460,41 @@
     height:auto;
     overflow:visible;
   }
-  .signal__housing{
-    fill:#000;
-    stroke:rgba(255,255,255,.86);
-    stroke-width:1.5;
-  }
+  .signal__mast{fill:url(#mast-metal);stroke:#0A0A0A;stroke-width:.8}
+  .signal__mast-hi{fill:none;stroke:rgba(255,255,255,.18);stroke-width:1.4;stroke-linecap:round}
+  .signal__backplate{fill:#0B130E;stroke:#1C2A20;stroke-width:1}
+  .signal__housing{fill:url(#housing-paint);stroke:#0A140F;stroke-width:1.2}
+  .signal__housing-lip{fill:#0C1812;stroke:#0A140F;stroke-width:.6}
+  .signal__door{fill:url(#door-paint);stroke:#0D1A12;stroke-width:.9}
+  .signal__seam{stroke:#0A140F;stroke-width:2;stroke-linecap:round}
+  .signal__hanger-bar{fill:#1A1A1A;stroke:#0A0A0A;stroke-width:.6}
+  .signal__hanger-plate,
+  .signal__hanger-foot{fill:#242424;stroke:#0A0A0A;stroke-width:.6}
+  .signal__visor{fill:#0A120E;stroke:#060A07;stroke-width:.8}
+  .signal__visor-lip{stroke:#1A2A20;stroke-width:1.2;fill:none}
+  .signal__tunnel{fill:#050806}
+  .signal__bezel{fill:none;stroke:#1C2C22;stroke-width:2.4}
+  .signal__fresnel circle{fill:none;stroke:rgba(255,255,255,.15);stroke-width:.7}
+  .signal__glint{fill:rgba(255,255,255,.15);stroke:none}
   .signal__lamp{
-    stroke-width:1.25;
+    stroke-width:1.1;
     transition:fill .4s ease,stroke .4s ease,filter .4s ease;
   }
-  .signal__lamp--red{
-    fill:#1a0a0a;
-    stroke:rgba(255,80,80,.28);
-  }
-  .signal__lamp--yellow{
-    fill:#141414;
-    stroke:rgba(255,255,255,.28);
-  }
-  .signal__lamp--green{
-    fill:#2EBB5A;
-    stroke:#6EE58A;
-    filter:url(#signal-green-glow);
-  }
+  .signal__lamp--red{fill:#1a0a0a;stroke:rgba(255,80,80,.28)}
+  .signal__lamp--yellow{fill:#141414;stroke:rgba(255,255,255,.28)}
+  .signal__lamp--green{fill:#2EBB5A;stroke:#6EE58A;filter:url(#signal-green-glow)}
   [data-motion="signal"].is-playing .signal__lamp--green,
   [data-motion="signal"].is-static .signal__lamp--green{
-    fill:#141414;
-    stroke:rgba(255,255,255,.28);
-    filter:none;
+    fill:#141414;stroke:rgba(255,255,255,.28);filter:none;
   }
   [data-motion="signal"].is-playing .signal__lamp--yellow,
   [data-motion="signal"].is-static .signal__lamp--yellow{
-    fill:var(--gold);
-    stroke:#F3DE55;
-    filter:url(#signal-yellow-glow);
+    fill:var(--gold);stroke:#F3DE55;filter:url(#signal-yellow-glow);
   }
   @media (prefers-reduced-motion:reduce){
     .signal__lamp{transition:none}
-    .signal__lamp--green{
-      fill:#141414;
-      stroke:rgba(255,255,255,.28);
-      filter:none;
-    }
-    .signal__lamp--yellow{
-      fill:var(--gold);
-      stroke:#F3DE55;
-      filter:url(#signal-yellow-glow);
-    }
+    .signal__lamp--green{fill:#141414;stroke:rgba(255,255,255,.28);filter:none}
+    .signal__lamp--yellow{fill:var(--gold);stroke:#F3DE55;filter:url(#signal-yellow-glow)}
   }
 
   /* ---------- The mantra ---------- */
@@ -741,7 +757,7 @@
     stroke-width:.28;
   }
   .walker__phone-screen{fill:var(--gold)}
-  .walker__phone-glow{fill:var(--gold);opacity:.4}
+  .walker__face-glow{fill:url(#fig-phone-light);stroke:none}
 
   /* Sell: a men's bifold that opens on the vertical fold, then a gold card levitates */
   .wallet{
@@ -959,10 +975,30 @@
       48%,80%{opacity:.95;transform:scale(1.15)}
       92%,100%{opacity:0;transform:scale(.6)}
     }
-    [data-motion].is-playing .recycle__spin{animation:recycle-spin 12s linear infinite}
-    @keyframes recycle-spin{
-      from{transform:rotate(0deg)}
-      to{transform:rotate(360deg)}
+    [data-motion].is-playing .recycle__back{animation:recycle-snake-back 9s linear infinite}
+    [data-motion].is-playing .recycle__front{animation:recycle-snake-front 9s linear infinite}
+    [data-motion].is-playing .recycle__head--1{animation:recycle-snake-head-1 9s linear infinite}
+    [data-motion].is-playing .recycle__head--2{animation:recycle-snake-head-2 9s linear infinite}
+    [data-motion].is-playing .recycle__head--3{animation:recycle-snake-head-3 9s linear infinite}
+    @keyframes recycle-snake-back{
+      from{stroke-dashoffset:5}
+      to{stroke-dashoffset:-95.0}
+    }
+    @keyframes recycle-snake-front{
+      from{stroke-dashoffset:-5}
+      to{stroke-dashoffset:-105.0}
+    }
+    @keyframes recycle-snake-head-1{
+      from{offset-distance:22.5%}
+      to{offset-distance:122.5%}
+    }
+    @keyframes recycle-snake-head-2{
+      from{offset-distance:55.833%}
+      to{offset-distance:155.833%}
+    }
+    @keyframes recycle-snake-head-3{
+      from{offset-distance:89.166%}
+      to{offset-distance:189.166%}
     }
   }
 </style>
@@ -985,27 +1021,111 @@
 
     <section class="signal" id="signal" aria-label="Yellow means speed up to the next section">
       <div class="signal__inner">
-        <svg class="signal__light" data-motion="signal" viewBox="0 0 720 180" aria-hidden="true">
+        <svg class="signal__light" data-motion="signal" viewBox="0 0 720 248" aria-hidden="true">
           <defs>
+            <linearGradient id="mast-metal" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#5A5A5A"/>
+              <stop offset="22%" stop-color="#3A3A3A"/>
+              <stop offset="55%" stop-color="#1E1E1E"/>
+              <stop offset="100%" stop-color="#111"/>
+            </linearGradient>
+            <linearGradient id="housing-paint" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#2C4A38"/>
+              <stop offset="14%" stop-color="#1A3326"/>
+              <stop offset="100%" stop-color="#101E16"/>
+            </linearGradient>
+            <linearGradient id="door-paint" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#243E30"/>
+              <stop offset="100%" stop-color="#15261C"/>
+            </linearGradient>
             <filter id="signal-green-glow" x="-40%" y="-40%" width="180%" height="180%">
-              <feGaussianBlur stdDeviation="6" result="blur"/>
-              <feMerge>
-                <feMergeNode in="blur"/>
-                <feMergeNode in="SourceGraphic"/>
-              </feMerge>
+              <feGaussianBlur stdDeviation="5" result="blur"/>
+              <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
             </filter>
             <filter id="signal-yellow-glow" x="-50%" y="-50%" width="200%" height="200%">
-              <feGaussianBlur stdDeviation="8" result="blur"/>
-              <feMerge>
-                <feMergeNode in="blur"/>
-                <feMergeNode in="SourceGraphic"/>
-              </feMerge>
+              <feGaussianBlur stdDeviation="7" result="blur"/>
+              <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
             </filter>
           </defs>
-          <rect class="signal__housing" x="16" y="32" width="688" height="116" rx="20"/>
-          <circle class="signal__lamp signal__lamp--red" cx="144" cy="90" r="40"/>
-          <circle class="signal__lamp signal__lamp--yellow" cx="360" cy="90" r="40"/>
-          <circle class="signal__lamp signal__lamp--green" cx="576" cy="90" r="40"/>
+          <rect class="signal__mast" x="16" y="20" width="688" height="16" rx="8"/>
+          <path class="signal__mast-hi" d="M28 23.6 H692"/>
+          <g class="signal__hanger" transform="translate(168 0)">
+            <rect class="signal__hanger-bar" x="-6" y="30" width="12" height="46" rx="1.5"/>
+            <rect class="signal__hanger-plate" x="-16" y="18" width="32" height="18" rx="2"/>
+            <rect class="signal__hanger-foot" x="-14" y="68" width="28" height="12" rx="2"/>
+            <g class="signal__rivet" transform="translate(0,27)"><circle r="2.4" fill="#3A5548" stroke="#0A120E" stroke-width="0.6"/><circle cx="-0.5" cy="-0.6" r="0.84" fill="#6A8A74" opacity=".7"/></g><g class="signal__rivet" transform="translate(-8,27)"><circle r="1.8" fill="#3A5548" stroke="#0A120E" stroke-width="0.6"/><circle cx="-0.5" cy="-0.6" r="0.63" fill="#6A8A74" opacity=".7"/></g><g class="signal__rivet" transform="translate(8,27)"><circle r="1.8" fill="#3A5548" stroke="#0A120E" stroke-width="0.6"/><circle cx="-0.5" cy="-0.6" r="0.63" fill="#6A8A74" opacity=".7"/></g><g class="signal__rivet" transform="translate(0,74)"><circle r="2.2" fill="#3A5548" stroke="#0A120E" stroke-width="0.6"/><circle cx="-0.5" cy="-0.6" r="0.77" fill="#6A8A74" opacity=".7"/></g>
+          </g>
+          <g class="signal__hanger" transform="translate(360 0)">
+            <rect class="signal__hanger-bar" x="-6" y="30" width="12" height="46" rx="1.5"/>
+            <rect class="signal__hanger-plate" x="-16" y="18" width="32" height="18" rx="2"/>
+            <rect class="signal__hanger-foot" x="-14" y="68" width="28" height="12" rx="2"/>
+            <g class="signal__rivet" transform="translate(0,27)"><circle r="2.4" fill="#3A5548" stroke="#0A120E" stroke-width="0.6"/><circle cx="-0.5" cy="-0.6" r="0.84" fill="#6A8A74" opacity=".7"/></g><g class="signal__rivet" transform="translate(-8,27)"><circle r="1.8" fill="#3A5548" stroke="#0A120E" stroke-width="0.6"/><circle cx="-0.5" cy="-0.6" r="0.63" fill="#6A8A74" opacity=".7"/></g><g class="signal__rivet" transform="translate(8,27)"><circle r="1.8" fill="#3A5548" stroke="#0A120E" stroke-width="0.6"/><circle cx="-0.5" cy="-0.6" r="0.63" fill="#6A8A74" opacity=".7"/></g><g class="signal__rivet" transform="translate(0,74)"><circle r="2.2" fill="#3A5548" stroke="#0A120E" stroke-width="0.6"/><circle cx="-0.5" cy="-0.6" r="0.77" fill="#6A8A74" opacity=".7"/></g>
+          </g>
+          <g class="signal__hanger" transform="translate(552 0)">
+            <rect class="signal__hanger-bar" x="-6" y="30" width="12" height="46" rx="1.5"/>
+            <rect class="signal__hanger-plate" x="-16" y="18" width="32" height="18" rx="2"/>
+            <rect class="signal__hanger-foot" x="-14" y="68" width="28" height="12" rx="2"/>
+            <g class="signal__rivet" transform="translate(0,27)"><circle r="2.4" fill="#3A5548" stroke="#0A120E" stroke-width="0.6"/><circle cx="-0.5" cy="-0.6" r="0.84" fill="#6A8A74" opacity=".7"/></g><g class="signal__rivet" transform="translate(-8,27)"><circle r="1.8" fill="#3A5548" stroke="#0A120E" stroke-width="0.6"/><circle cx="-0.5" cy="-0.6" r="0.63" fill="#6A8A74" opacity=".7"/></g><g class="signal__rivet" transform="translate(8,27)"><circle r="1.8" fill="#3A5548" stroke="#0A120E" stroke-width="0.6"/><circle cx="-0.5" cy="-0.6" r="0.63" fill="#6A8A74" opacity=".7"/></g><g class="signal__rivet" transform="translate(0,74)"><circle r="2.2" fill="#3A5548" stroke="#0A120E" stroke-width="0.6"/><circle cx="-0.5" cy="-0.6" r="0.77" fill="#6A8A74" opacity=".7"/></g>
+          </g>
+          <rect class="signal__backplate" x="44" y="68" width="632" height="156" rx="8"/>
+          <rect class="signal__housing" x="56" y="78" width="608" height="140" rx="7"/>
+          <rect class="signal__housing-lip" x="56" y="212" width="608" height="8" rx="2"/>
+          <rect class="signal__door" x="66.0" y="88" width="188.0" height="120" rx="5"/>
+          <rect class="signal__door" x="262.0" y="88" width="188.0" height="120" rx="5"/>
+          <rect class="signal__door" x="458.0" y="88" width="188.0" height="120" rx="5"/>
+          <line class="signal__seam" x1="258.7" y1="84" x2="258.7" y2="212"/>
+          <line class="signal__seam" x1="461.3" y1="84" x2="461.3" y2="212"/>
+          <g class="signal__rivet" transform="translate(74.0,96)"><circle r="2.1" fill="#3A5548" stroke="#0A120E" stroke-width="0.6"/><circle cx="-0.5" cy="-0.6" r="0.735" fill="#6A8A74" opacity=".7"/></g>
+          <g class="signal__rivet" transform="translate(246.0,96)"><circle r="2.1" fill="#3A5548" stroke="#0A120E" stroke-width="0.6"/><circle cx="-0.5" cy="-0.6" r="0.735" fill="#6A8A74" opacity=".7"/></g>
+          <g class="signal__rivet" transform="translate(74.0,200)"><circle r="2.1" fill="#3A5548" stroke="#0A120E" stroke-width="0.6"/><circle cx="-0.5" cy="-0.6" r="0.735" fill="#6A8A74" opacity=".7"/></g>
+          <g class="signal__rivet" transform="translate(246.0,200)"><circle r="2.1" fill="#3A5548" stroke="#0A120E" stroke-width="0.6"/><circle cx="-0.5" cy="-0.6" r="0.735" fill="#6A8A74" opacity=".7"/></g>
+          <g class="signal__rivet" transform="translate(160.0,96)"><circle r="2.1" fill="#3A5548" stroke="#0A120E" stroke-width="0.6"/><circle cx="-0.5" cy="-0.6" r="0.735" fill="#6A8A74" opacity=".7"/></g>
+          <g class="signal__rivet" transform="translate(160.0,200)"><circle r="2.1" fill="#3A5548" stroke="#0A120E" stroke-width="0.6"/><circle cx="-0.5" cy="-0.6" r="0.735" fill="#6A8A74" opacity=".7"/></g>
+          <g class="signal__rivet" transform="translate(270.0,96)"><circle r="2.1" fill="#3A5548" stroke="#0A120E" stroke-width="0.6"/><circle cx="-0.5" cy="-0.6" r="0.735" fill="#6A8A74" opacity=".7"/></g>
+          <g class="signal__rivet" transform="translate(442.0,96)"><circle r="2.1" fill="#3A5548" stroke="#0A120E" stroke-width="0.6"/><circle cx="-0.5" cy="-0.6" r="0.735" fill="#6A8A74" opacity=".7"/></g>
+          <g class="signal__rivet" transform="translate(270.0,200)"><circle r="2.1" fill="#3A5548" stroke="#0A120E" stroke-width="0.6"/><circle cx="-0.5" cy="-0.6" r="0.735" fill="#6A8A74" opacity=".7"/></g>
+          <g class="signal__rivet" transform="translate(442.0,200)"><circle r="2.1" fill="#3A5548" stroke="#0A120E" stroke-width="0.6"/><circle cx="-0.5" cy="-0.6" r="0.735" fill="#6A8A74" opacity=".7"/></g>
+          <g class="signal__rivet" transform="translate(356.0,96)"><circle r="2.1" fill="#3A5548" stroke="#0A120E" stroke-width="0.6"/><circle cx="-0.5" cy="-0.6" r="0.735" fill="#6A8A74" opacity=".7"/></g>
+          <g class="signal__rivet" transform="translate(356.0,200)"><circle r="2.1" fill="#3A5548" stroke="#0A120E" stroke-width="0.6"/><circle cx="-0.5" cy="-0.6" r="0.735" fill="#6A8A74" opacity=".7"/></g>
+          <g class="signal__rivet" transform="translate(466.0,96)"><circle r="2.1" fill="#3A5548" stroke="#0A120E" stroke-width="0.6"/><circle cx="-0.5" cy="-0.6" r="0.735" fill="#6A8A74" opacity=".7"/></g>
+          <g class="signal__rivet" transform="translate(638.0,96)"><circle r="2.1" fill="#3A5548" stroke="#0A120E" stroke-width="0.6"/><circle cx="-0.5" cy="-0.6" r="0.735" fill="#6A8A74" opacity=".7"/></g>
+          <g class="signal__rivet" transform="translate(466.0,200)"><circle r="2.1" fill="#3A5548" stroke="#0A120E" stroke-width="0.6"/><circle cx="-0.5" cy="-0.6" r="0.735" fill="#6A8A74" opacity=".7"/></g>
+          <g class="signal__rivet" transform="translate(638.0,200)"><circle r="2.1" fill="#3A5548" stroke="#0A120E" stroke-width="0.6"/><circle cx="-0.5" cy="-0.6" r="0.735" fill="#6A8A74" opacity=".7"/></g>
+          <g class="signal__rivet" transform="translate(552.0,96)"><circle r="2.1" fill="#3A5548" stroke="#0A120E" stroke-width="0.6"/><circle cx="-0.5" cy="-0.6" r="0.735" fill="#6A8A74" opacity=".7"/></g>
+          <g class="signal__rivet" transform="translate(552.0,200)"><circle r="2.1" fill="#3A5548" stroke="#0A120E" stroke-width="0.6"/><circle cx="-0.5" cy="-0.6" r="0.735" fill="#6A8A74" opacity=".7"/></g>
+          <g class="signal__unit" transform="translate(162 148)">
+            <path class="signal__visor" d="M-48,22 L-48,-4 C-48,-50 48,-50 48,-4 L48,22 L35,22 L35,-2 C35,-34 -35,-34 -35,-2 L-35,22 Z"/>
+            <path class="signal__visor-lip" d="M-35,-2 C-35,-34 35,-34 35,-2"/>
+            <circle class="signal__tunnel" r="33.5"/>
+            <circle class="signal__bezel" r="36.5"/>
+            <circle class="signal__lamp signal__lamp--red" r="32"/>
+            <g class="signal__fresnel">
+              <circle r="26"/><circle r="20"/><circle r="14"/><circle r="8"/>
+            </g>
+            <ellipse class="signal__glint" cx="-9" cy="-11" rx="11" ry="6" transform="rotate(-32)"/>
+          </g>
+          <g class="signal__unit" transform="translate(360 148)">
+            <path class="signal__visor" d="M-48,22 L-48,-4 C-48,-50 48,-50 48,-4 L48,22 L35,22 L35,-2 C35,-34 -35,-34 -35,-2 L-35,22 Z"/>
+            <path class="signal__visor-lip" d="M-35,-2 C-35,-34 35,-34 35,-2"/>
+            <circle class="signal__tunnel" r="33.5"/>
+            <circle class="signal__bezel" r="36.5"/>
+            <circle class="signal__lamp signal__lamp--yellow" r="32"/>
+            <g class="signal__fresnel">
+              <circle r="26"/><circle r="20"/><circle r="14"/><circle r="8"/>
+            </g>
+            <ellipse class="signal__glint" cx="-9" cy="-11" rx="11" ry="6" transform="rotate(-32)"/>
+          </g>
+          <g class="signal__unit" transform="translate(558 148)">
+            <path class="signal__visor" d="M-48,22 L-48,-4 C-48,-50 48,-50 48,-4 L48,22 L35,22 L35,-2 C35,-34 -35,-34 -35,-2 L-35,22 Z"/>
+            <path class="signal__visor-lip" d="M-35,-2 C-35,-34 35,-34 35,-2"/>
+            <circle class="signal__tunnel" r="33.5"/>
+            <circle class="signal__bezel" r="36.5"/>
+            <circle class="signal__lamp signal__lamp--green" r="32"/>
+            <g class="signal__fresnel">
+              <circle r="26"/><circle r="20"/><circle r="14"/><circle r="8"/>
+            </g>
+            <ellipse class="signal__glint" cx="-9" cy="-11" rx="11" ry="6" transform="rotate(-32)"/>
+          </g>
         </svg>
       </div>
     </section>
@@ -1050,6 +1170,11 @@
                     <stop offset="55%" stop-color="#E8C90A" stop-opacity=".12"/>
                     <stop offset="100%" stop-color="#E8C90A" stop-opacity="0"/>
                   </radialGradient>
+                  <radialGradient id="fig-phone-light" cx="42%" cy="70%" r="75%">
+                    <stop offset="0%" stop-color="#E8C90A" stop-opacity=".55"/>
+                    <stop offset="40%" stop-color="#E8C90A" stop-opacity=".28"/>
+                    <stop offset="100%" stop-color="#E8C90A" stop-opacity="0"/>
+                  </radialGradient>
                 </defs>
                 <path class="crowd__ground" d="M16 176 H224"/>
                 <ellipse class="crowd__halo" cx="192" cy="100" rx="52" ry="52"/>
@@ -1069,14 +1194,16 @@
                     <g class="walker__bob">
                       <path class="walker__arm walker__arm--l" d="M1.0 5.4 L1.0 11.0"/>
                       <path class="walker__leg walker__leg--l" d="M0 10.2 L0 16.5"/>
-                      <circle cx="2.6" cy="2.3" r="2.35"/>
-                      <path d="M4.85 2.45 L5.45 2.85"/>
                       <path d="M1.4 4.55 L0 10.2"/>
-                      <path class="walker__arm-hold" d="M1.0 5.4 L5.5 3.15"/>
-                      <g class="walker__phone" transform="translate(5.15 1.15) rotate(-18)">
-                        <ellipse class="walker__phone-glow" cx="1.0" cy="1.7" rx="2.2" ry="2.6"/>
-                        <rect class="walker__phone-body" x="0" y="0" width="2.05" height="3.55" rx="0.28"/>
-                        <rect class="walker__phone-screen" x="0.28" y="0.32" width="1.5" height="2.55" rx="0.1"/>
+                      <ellipse class="walker__face-glow" cx="4.7" cy="5.15" rx="2.8" ry="2.4"/>
+                      <g class="walker__head" transform="rotate(55 2.15 4.52)">
+                        <circle cx="2.6" cy="2.3" r="2.35"/>
+                        <path d="M4.88 2.40 L6.25 3.35"/>
+                      </g>
+                      <path class="walker__arm-hold" d="M1.0 5.4 Q2.25 8.15 5.6 7.65"/>
+                      <g class="walker__phone" transform="translate(5.45 6.95) rotate(62)">
+                        <rect class="walker__phone-body" x="0" y="0" width="2.1" height="3.6" rx="0.3"/>
+                        <rect class="walker__phone-screen" x="0.28" y="0.32" width="1.54" height="2.6" rx="0.1"/>
                       </g>
                       <path class="walker__leg walker__leg--r" d="M0 10.2 L0 16.5"/>
                     </g>
@@ -1085,14 +1212,16 @@
                     <g class="walker__bob">
                       <path class="walker__arm walker__arm--l" d="M1.0 5.4 L1.0 11.0"/>
                       <path class="walker__leg walker__leg--l" d="M0 10.2 L0 16.5"/>
-                      <circle cx="2.6" cy="2.3" r="2.35"/>
-                      <path d="M4.85 2.45 L5.45 2.85"/>
                       <path d="M1.4 4.55 L0 10.2"/>
-                      <path class="walker__arm-hold" d="M1.0 5.4 L5.5 3.15"/>
-                      <g class="walker__phone" transform="translate(5.15 1.15) rotate(-18)">
-                        <ellipse class="walker__phone-glow" cx="1.0" cy="1.7" rx="2.2" ry="2.6"/>
-                        <rect class="walker__phone-body" x="0" y="0" width="2.05" height="3.55" rx="0.28"/>
-                        <rect class="walker__phone-screen" x="0.28" y="0.32" width="1.5" height="2.55" rx="0.1"/>
+                      <ellipse class="walker__face-glow" cx="4.7" cy="5.15" rx="2.8" ry="2.4"/>
+                      <g class="walker__head" transform="rotate(55 2.15 4.52)">
+                        <circle cx="2.6" cy="2.3" r="2.35"/>
+                        <path d="M4.88 2.40 L6.25 3.35"/>
+                      </g>
+                      <path class="walker__arm-hold" d="M1.0 5.4 Q2.25 8.15 5.6 7.65"/>
+                      <g class="walker__phone" transform="translate(5.45 6.95) rotate(62)">
+                        <rect class="walker__phone-body" x="0" y="0" width="2.1" height="3.6" rx="0.3"/>
+                        <rect class="walker__phone-screen" x="0.28" y="0.32" width="1.54" height="2.6" rx="0.1"/>
                       </g>
                       <path class="walker__leg walker__leg--r" d="M0 10.2 L0 16.5"/>
                     </g>
@@ -1101,14 +1230,16 @@
                     <g class="walker__bob">
                       <path class="walker__arm walker__arm--l" d="M1.0 5.4 L1.0 11.0"/>
                       <path class="walker__leg walker__leg--l" d="M0 10.2 L0 16.5"/>
-                      <circle cx="2.6" cy="2.3" r="2.35"/>
-                      <path d="M4.85 2.45 L5.45 2.85"/>
                       <path d="M1.4 4.55 L0 10.2"/>
-                      <path class="walker__arm-hold" d="M1.0 5.4 L5.5 3.15"/>
-                      <g class="walker__phone" transform="translate(5.15 1.15) rotate(-18)">
-                        <ellipse class="walker__phone-glow" cx="1.0" cy="1.7" rx="2.2" ry="2.6"/>
-                        <rect class="walker__phone-body" x="0" y="0" width="2.05" height="3.55" rx="0.28"/>
-                        <rect class="walker__phone-screen" x="0.28" y="0.32" width="1.5" height="2.55" rx="0.1"/>
+                      <ellipse class="walker__face-glow" cx="4.7" cy="5.15" rx="2.8" ry="2.4"/>
+                      <g class="walker__head" transform="rotate(55 2.15 4.52)">
+                        <circle cx="2.6" cy="2.3" r="2.35"/>
+                        <path d="M4.88 2.40 L6.25 3.35"/>
+                      </g>
+                      <path class="walker__arm-hold" d="M1.0 5.4 Q2.25 8.15 5.6 7.65"/>
+                      <g class="walker__phone" transform="translate(5.45 6.95) rotate(62)">
+                        <rect class="walker__phone-body" x="0" y="0" width="2.1" height="3.6" rx="0.3"/>
+                        <rect class="walker__phone-screen" x="0.28" y="0.32" width="1.54" height="2.6" rx="0.1"/>
                       </g>
                       <path class="walker__leg walker__leg--r" d="M0 10.2 L0 16.5"/>
                     </g>
@@ -1117,14 +1248,16 @@
                     <g class="walker__bob">
                       <path class="walker__arm walker__arm--l" d="M1.0 5.4 L1.0 11.0"/>
                       <path class="walker__leg walker__leg--l" d="M0 10.2 L0 16.5"/>
-                      <circle cx="2.6" cy="2.3" r="2.35"/>
-                      <path d="M4.85 2.45 L5.45 2.85"/>
                       <path d="M1.4 4.55 L0 10.2"/>
-                      <path class="walker__arm-hold" d="M1.0 5.4 L5.5 3.15"/>
-                      <g class="walker__phone" transform="translate(5.15 1.15) rotate(-18)">
-                        <ellipse class="walker__phone-glow" cx="1.0" cy="1.7" rx="2.2" ry="2.6"/>
-                        <rect class="walker__phone-body" x="0" y="0" width="2.05" height="3.55" rx="0.28"/>
-                        <rect class="walker__phone-screen" x="0.28" y="0.32" width="1.5" height="2.55" rx="0.1"/>
+                      <ellipse class="walker__face-glow" cx="4.7" cy="5.15" rx="2.8" ry="2.4"/>
+                      <g class="walker__head" transform="rotate(55 2.15 4.52)">
+                        <circle cx="2.6" cy="2.3" r="2.35"/>
+                        <path d="M4.88 2.40 L6.25 3.35"/>
+                      </g>
+                      <path class="walker__arm-hold" d="M1.0 5.4 Q2.25 8.15 5.6 7.65"/>
+                      <g class="walker__phone" transform="translate(5.45 6.95) rotate(62)">
+                        <rect class="walker__phone-body" x="0" y="0" width="2.1" height="3.6" rx="0.3"/>
+                        <rect class="walker__phone-screen" x="0.28" y="0.32" width="1.54" height="2.6" rx="0.1"/>
                       </g>
                       <path class="walker__leg walker__leg--r" d="M0 10.2 L0 16.5"/>
                     </g>
@@ -1133,14 +1266,16 @@
                     <g class="walker__bob">
                       <path class="walker__arm walker__arm--l" d="M1.0 5.4 L1.0 11.0"/>
                       <path class="walker__leg walker__leg--l" d="M0 10.2 L0 16.5"/>
-                      <circle cx="2.6" cy="2.3" r="2.35"/>
-                      <path d="M4.85 2.45 L5.45 2.85"/>
                       <path d="M1.4 4.55 L0 10.2"/>
-                      <path class="walker__arm-hold" d="M1.0 5.4 L5.5 3.15"/>
-                      <g class="walker__phone" transform="translate(5.15 1.15) rotate(-18)">
-                        <ellipse class="walker__phone-glow" cx="1.0" cy="1.7" rx="2.2" ry="2.6"/>
-                        <rect class="walker__phone-body" x="0" y="0" width="2.05" height="3.55" rx="0.28"/>
-                        <rect class="walker__phone-screen" x="0.28" y="0.32" width="1.5" height="2.55" rx="0.1"/>
+                      <ellipse class="walker__face-glow" cx="4.7" cy="5.15" rx="2.8" ry="2.4"/>
+                      <g class="walker__head" transform="rotate(55 2.15 4.52)">
+                        <circle cx="2.6" cy="2.3" r="2.35"/>
+                        <path d="M4.88 2.40 L6.25 3.35"/>
+                      </g>
+                      <path class="walker__arm-hold" d="M1.0 5.4 Q2.25 8.15 5.6 7.65"/>
+                      <g class="walker__phone" transform="translate(5.45 6.95) rotate(62)">
+                        <rect class="walker__phone-body" x="0" y="0" width="2.1" height="3.6" rx="0.3"/>
+                        <rect class="walker__phone-screen" x="0.28" y="0.32" width="1.54" height="2.6" rx="0.1"/>
                       </g>
                       <path class="walker__leg walker__leg--r" d="M0 10.2 L0 16.5"/>
                     </g>
@@ -1207,15 +1342,12 @@
           <div class="follow__visual" data-motion="evergreen" aria-hidden="true">
             <div class="recycle">
               <svg class="recycle__canvas" viewBox="0 0 240 236" aria-hidden="true">
-                <g class="recycle__spin">
-                  <path class="recycle__band" d="M71.80,151.32L68.05,156.60L62.56,165.21L60.27,170.09L58.90,174.74L58.37,178.47L58.37,183.81L58.71,187.07L59.28,189.86L60.21,192.65L61.44,194.98L62.79,196.60L64.42,197.96L66.28,198.85L68.14,199.31L71.63,199.63L116.28,199.63L117.23,199.31L117.67,198.23L117.67,151.95L117.36,151.00L116.28,150.56L73.49,150.56L72.60,150.77Z"/>
-                  <path class="recycle__band" d="M193.38,78.17L192.56,78.17L153.49,100.81L152.49,101.81L152.49,102.65L173.07,136.84L175.50,140.77L176.77,141.66L196.98,141.72L200.47,141.23L203.49,140.26L205.58,139.31L208.84,137.39L214.65,132.65L216.28,130.79L217.70,128.70L218.86,126.37L219.51,124.28L219.77,122.42L219.68,119.63L219.05,117.30L218.14,115.44L194.27,78.93Z"/>
-                  <path class="recycle__band" d="M85.12,27.07L81.86,27.41L78.84,28.08L76.51,29.16L74.46,30.79L71.46,35.21L50.95,68.00L50.72,68.89L51.04,69.69L51.63,70.22L89.07,95.29L89.98,95.59L90.97,95.17L114.00,59.63L114.48,58.00L113.32,54.98L108.08,44.98L104.19,39.16L100.55,34.74L96.74,31.23L93.26,28.99L89.30,27.56Z"/>
-                  <path class="recycle__head" d="M92.39,21.87L97.67,24.05L101.40,25.91L103.49,27.32L106.28,29.86L109.49,33.58L112.88,38.23L116.26,43.81L119.13,49.16L131.23,74.74L131.10,75.59L130.47,76.27L124.19,79.31L123.00,80.20L122.56,81.02L122.60,82.19L123.13,82.95L123.95,83.41L129.30,84.05L166.98,87.07L167.82,86.86L168.82,85.91L188.84,52.19L189.85,49.86L190.15,48.47L190.04,47.07L189.58,46.31L188.60,45.95L186.51,46.60L178.14,50.39L177.25,50.45L176.70,50.18L175.98,49.16L168.03,33.35L165.88,29.86L164.42,28.23L161.40,25.78L158.37,24.13L155.35,23.03L151.16,22.08L147.67,21.72Z"/>
-                  <path class="recycle__head" d="M24.42,91.47L23.45,92.10L22.98,92.90L22.94,94.00L23.40,94.81L24.65,95.82L32.33,100.56L32.96,101.30L33.07,101.95L32.73,102.88L23.81,116.84L21.37,121.49L20.42,124.28L20.00,127.07L20.66,130.79L21.56,133.12L23.28,136.37L50.72,184.28L51.40,185.04L51.54,184.51L50.97,178.47L51.31,174.51L52.47,169.63L54.12,165.67L77.82,128.23L78.71,127.30L79.77,127.18L86.74,131.36L88.37,131.87L89.20,131.62L89.73,130.98L89.85,130.09L89.64,128.93L89.01,127.30L70.06,91.72L68.99,90.41L67.44,90.09L56.05,90.56L29.77,91.02Z"/>
-                  <path class="recycle__head" d="M218.03,139.29L217.42,139.50L212.56,143.45L208.60,145.74L204.42,147.39L199.07,148.55L192.56,149.16L154.19,149.16L153.15,148.85L152.62,148.00L152.56,142.88L151.92,139.18L151.31,138.47L150.70,138.19L149.79,138.27L148.99,138.82L146.98,141.95L127.91,174.98L127.44,176.37L128.05,178.00L146.66,206.60L151.01,212.80L152.09,213.60L153.26,213.84L154.38,213.45L155.12,212.61L155.35,211.49L155.35,201.72L155.56,200.85L156.11,200.30L156.98,200.09L175.12,200.09L178.37,199.75L180.70,199.23L183.02,198.30L185.35,196.86L186.91,195.44L188.79,192.88L217.74,140.33Z"/>
-                </g>
+                <path class="recycle__back" pathLength="100" d="M120.00,54.00L122.60,54.11L125.19,54.45L127.73,55.01L130.22,55.79L132.63,56.79L134.94,57.99L137.14,59.38L139.22,60.96L141.14,62.72L142.91,64.63L144.50,66.69L145.91,68.89L147.22,71.14L148.52,73.40L149.83,75.66L151.13,77.92L152.43,80.18L153.74,82.43L155.04,84.69L156.34,86.95L157.65,89.21L158.95,91.46L160.25,93.72L161.56,95.98L162.86,98.24L164.16,100.49L165.47,102.75L166.77,105.01L168.07,107.27L169.38,109.53L170.68,111.78L171.99,114.04L173.29,116.30L174.59,118.56L175.90,120.81L177.20,123.07L178.50,125.33L179.81,127.59L181.11,129.85L182.41,132.10L183.72,134.36L184.97,136.65L186.03,139.03L186.87,141.49L187.50,144.02L187.91,146.60L188.09,149.20L188.05,151.80L187.78,154.39L187.29,156.95L186.57,159.46L185.65,161.90L184.51,164.24L183.17,166.48L181.65,168.59L179.95,170.57L178.08,172.38L176.06,174.03L173.91,175.50L171.63,176.78L169.26,177.85L166.80,178.71L164.28,179.36L161.70,179.78L159.11,179.98L156.50,180.00L153.89,180.00L151.28,180.00L148.68,180.00L146.07,180.00L143.46,180.00L140.86,180.00L138.25,180.00L135.64,180.00L133.04,180.00L130.43,180.00L127.82,180.00L125.21,180.00L122.61,180.00L120.00,180.00L117.39,180.00L114.79,180.00L112.18,180.00L109.57,180.00L106.96,180.00L104.36,180.00L101.75,180.00L99.14,180.00L96.54,180.00L93.93,180.00L91.32,180.00L88.72,180.00L86.11,180.00L83.50,180.00L80.89,179.98L78.30,179.78L75.72,179.36L73.20,178.71L70.74,177.85L68.37,176.78L66.09,175.50L63.94,174.03L61.92,172.38L60.05,170.57L58.35,168.59L56.83,166.48L55.49,164.24L54.35,161.90L53.43,159.46L52.71,156.95L52.22,154.39L51.95,151.80L51.91,149.20L52.09,146.60L52.50,144.02L53.13,141.49L53.97,139.03L55.03,136.65L56.28,134.36L57.59,132.10L58.89,129.85L60.19,127.59L61.50,125.33L62.80,123.07L64.10,120.81L65.41,118.56L66.71,116.30L68.01,114.04L69.32,111.78L70.62,109.53L71.93,107.27L73.23,105.01L74.53,102.75L75.84,100.49L77.14,98.24L78.44,95.98L79.75,93.72L81.05,91.46L82.35,89.21L83.66,86.95L84.96,84.69L86.26,82.43L87.57,80.18L88.87,77.92L90.17,75.66L91.48,73.40L92.78,71.14L94.09,68.89L95.50,66.69L97.09,64.63L98.86,62.72L100.78,60.96L102.86,59.38L105.06,57.99L107.37,56.79L109.78,55.79L112.27,55.01L114.81,54.45L117.40,54.11L120.00,54.00Z"/>
+                <path class="recycle__front" pathLength="100" d="M120.00,54.00L122.60,54.11L125.19,54.45L127.73,55.01L130.22,55.79L132.63,56.79L134.94,57.99L137.14,59.38L139.22,60.96L141.14,62.72L142.91,64.63L144.50,66.69L145.91,68.89L147.22,71.14L148.52,73.40L149.83,75.66L151.13,77.92L152.43,80.18L153.74,82.43L155.04,84.69L156.34,86.95L157.65,89.21L158.95,91.46L160.25,93.72L161.56,95.98L162.86,98.24L164.16,100.49L165.47,102.75L166.77,105.01L168.07,107.27L169.38,109.53L170.68,111.78L171.99,114.04L173.29,116.30L174.59,118.56L175.90,120.81L177.20,123.07L178.50,125.33L179.81,127.59L181.11,129.85L182.41,132.10L183.72,134.36L184.97,136.65L186.03,139.03L186.87,141.49L187.50,144.02L187.91,146.60L188.09,149.20L188.05,151.80L187.78,154.39L187.29,156.95L186.57,159.46L185.65,161.90L184.51,164.24L183.17,166.48L181.65,168.59L179.95,170.57L178.08,172.38L176.06,174.03L173.91,175.50L171.63,176.78L169.26,177.85L166.80,178.71L164.28,179.36L161.70,179.78L159.11,179.98L156.50,180.00L153.89,180.00L151.28,180.00L148.68,180.00L146.07,180.00L143.46,180.00L140.86,180.00L138.25,180.00L135.64,180.00L133.04,180.00L130.43,180.00L127.82,180.00L125.21,180.00L122.61,180.00L120.00,180.00L117.39,180.00L114.79,180.00L112.18,180.00L109.57,180.00L106.96,180.00L104.36,180.00L101.75,180.00L99.14,180.00L96.54,180.00L93.93,180.00L91.32,180.00L88.72,180.00L86.11,180.00L83.50,180.00L80.89,179.98L78.30,179.78L75.72,179.36L73.20,178.71L70.74,177.85L68.37,176.78L66.09,175.50L63.94,174.03L61.92,172.38L60.05,170.57L58.35,168.59L56.83,166.48L55.49,164.24L54.35,161.90L53.43,159.46L52.71,156.95L52.22,154.39L51.95,151.80L51.91,149.20L52.09,146.60L52.50,144.02L53.13,141.49L53.97,139.03L55.03,136.65L56.28,134.36L57.59,132.10L58.89,129.85L60.19,127.59L61.50,125.33L62.80,123.07L64.10,120.81L65.41,118.56L66.71,116.30L68.01,114.04L69.32,111.78L70.62,109.53L71.93,107.27L73.23,105.01L74.53,102.75L75.84,100.49L77.14,98.24L78.44,95.98L79.75,93.72L81.05,91.46L82.35,89.21L83.66,86.95L84.96,84.69L86.26,82.43L87.57,80.18L88.87,77.92L90.17,75.66L91.48,73.40L92.78,71.14L94.09,68.89L95.50,66.69L97.09,64.63L98.86,62.72L100.78,60.96L102.86,59.38L105.06,57.99L107.37,56.79L109.78,55.79L112.27,55.01L114.81,54.45L117.40,54.11L120.00,54.00Z"/>
               </svg>
+              <svg class="recycle__head recycle__head--1" viewBox="0 0 52 88" aria-hidden="true"><path class="recycle__head-shape" d="M16,27 L1,3 L44,44 L1,85 L16,61 Z"/></svg>
+              <svg class="recycle__head recycle__head--2" viewBox="0 0 52 88" aria-hidden="true"><path class="recycle__head-shape" d="M16,27 L1,3 L44,44 L1,85 L16,61 Z"/></svg>
+              <svg class="recycle__head recycle__head--3" viewBox="0 0 52 88" aria-hidden="true"><path class="recycle__head-shape" d="M16,27 L1,3 L44,44 L1,85 L16,61 Z"/></svg>
             </div>
           </div>
         </div>
