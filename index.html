@@ -420,6 +420,62 @@
     letter-spacing:-.011em;
     text-wrap:pretty;
   }
+  .follow__layout{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:clamp(36px,6vw,64px);
+    align-items:center;
+  }
+  @media (min-width:900px){
+    .follow__layout{
+      grid-template-columns:minmax(0,1fr) 240px;
+      gap:clamp(40px,6vw,80px);
+    }
+  }
+  .follow__copy{min-width:0}
+  .follow__visual{
+    display:flex;
+    align-items:center;
+    justify-content:flex-start;
+    margin:0;
+    min-height:0;
+    overflow:visible;
+  }
+  @media (min-width:900px){
+    .follow__visual{
+      justify-content:center;
+      width:240px;
+      min-height:236px;
+    }
+  }
+  .recycle{
+    position:relative;
+    width:240px;
+    height:236px;
+    flex:0 0 auto;
+    overflow:visible;
+  }
+  .recycle__arrow{
+    position:absolute;
+    top:0;
+    left:0;
+    width:52px;
+    height:24px;
+    overflow:visible;
+    offset-path:path("M107.88,64.00A14,14 0 0 1 132.12,64.00L194.48,172.00A14,14 0 0 1 182.35,193.00L57.65,193.00A14,14 0 0 1 45.52,172.00Z");
+    offset-anchor:center;
+    offset-rotate:auto;
+    offset-distance:0%;
+  }
+  .recycle__arrow--2{offset-distance:33.333%}
+  .recycle__arrow--3{offset-distance:66.667%}
+  .recycle__arrow-shape{
+    fill:none;
+    stroke:var(--gold);
+    stroke-width:1.75;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+  }
 
   /* ---------- The mantra ---------- */
   .method{
@@ -888,6 +944,13 @@
       48%,80%{opacity:.95;transform:scale(1.15)}
       92%,100%{opacity:0;transform:scale(.6)}
     }
+    [data-motion].is-playing .recycle__arrow--1{animation:recycle-cycle 9s linear infinite}
+    [data-motion].is-playing .recycle__arrow--2{animation:recycle-cycle 9s linear infinite;animation-delay:-3s}
+    [data-motion].is-playing .recycle__arrow--3{animation:recycle-cycle 9s linear infinite;animation-delay:-6s}
+    @keyframes recycle-cycle{
+      from{offset-distance:0%}
+      to{offset-distance:100%}
+    }
   }
 </style>
 </head>
@@ -1139,8 +1202,28 @@
 
     <section class="follow" id="evergreen">
       <div class="follow__inner">
-        <h2 class="follow__title">A video you post today can bring you business months from now.</h2>
-        <p class="follow__body">We write, produce, and distribute content people can keep finding.</p>
+        <div class="follow__layout">
+          <div class="follow__copy">
+            <h2 class="follow__title">A video you post today can bring you business months from now.</h2>
+            <p class="follow__body">We write, produce, and distribute content people can keep finding.</p>
+          </div>
+          <div class="follow__visual" data-motion="evergreen" aria-hidden="true">
+            <div class="recycle">
+              <svg class="recycle__arrow recycle__arrow--1" viewBox="0 0 52 24" aria-hidden="true">
+                <path class="recycle__arrow-shape" d="M4 12 H32"/>
+                <path class="recycle__arrow-shape" d="M24 4 L46 12 L24 20"/>
+              </svg>
+              <svg class="recycle__arrow recycle__arrow--2" viewBox="0 0 52 24" aria-hidden="true">
+                <path class="recycle__arrow-shape" d="M4 12 H32"/>
+                <path class="recycle__arrow-shape" d="M24 4 L46 12 L24 20"/>
+              </svg>
+              <svg class="recycle__arrow recycle__arrow--3" viewBox="0 0 52 24" aria-hidden="true">
+                <path class="recycle__arrow-shape" d="M4 12 H32"/>
+                <path class="recycle__arrow-shape" d="M24 4 L46 12 L24 20"/>
+              </svg>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
