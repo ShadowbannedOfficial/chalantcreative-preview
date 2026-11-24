@@ -22,6 +22,7 @@
   :root{
     --gold:#E8C90A;
     --playfair:"Playfair Display",Georgia,"Times New Roman",serif;
+    --heading:"Helvetica Neue",Helvetica,Arial,sans-serif;
     --montserrat:"Montserrat",Helvetica,Arial,sans-serif;
     --inter:"Inter",Helvetica,Arial,sans-serif;
     --ink:#0a0a0a;
@@ -146,7 +147,7 @@
     to{transform:translateX(-50%)}
   }
 
-  /* ---------- Case study: Results ---------- */
+  /* ---------- Case study ---------- */
   .results{
     padding-block:clamp(88px,16vh,200px) clamp(96px,18vh,220px);
   }
@@ -163,11 +164,11 @@
     margin:0;
     max-width:14em;
     color:#fff;
-    font-family:var(--playfair);
+    font-family:var(--heading);
     font-size:clamp(44px,7vw,108px);
-    font-weight:600;
+    font-weight:700;
     line-height:.95;
-    letter-spacing:-.03em;
+    letter-spacing:-.02em;
     text-wrap:pretty;
   }
   .results__title span{display:block}
@@ -190,11 +191,11 @@
   .results__hero-num{
     margin:0;
     color:#fff;
-    font-family:var(--playfair);
+    font-family:var(--heading);
     font-size:clamp(64px,14vw,180px);
-    font-weight:600;
-    line-height:.9;
-    letter-spacing:-.04em;
+    font-weight:700;
+    line-height:.95;
+    letter-spacing:-.02em;
     font-variant-numeric:tabular-nums;
   }
   .results__hero-label{
@@ -229,11 +230,11 @@
   .results__stat-num{
     margin:0;
     color:#fff;
-    font-family:var(--playfair);
+    font-family:var(--heading);
     font-size:clamp(28px,3.4vw,48px);
-    font-weight:600;
+    font-weight:700;
     line-height:1;
-    letter-spacing:-.03em;
+    letter-spacing:-.02em;
     font-variant-numeric:tabular-nums;
   }
   .results__stat-label{
@@ -260,9 +261,10 @@
   .results__chart-title{
     margin:0 0 8px;
     color:#fff;
-    font-family:var(--playfair);
+    font-family:var(--heading);
     font-size:clamp(24px,2.4vw,36px);
-    font-weight:600;
+    font-weight:700;
+    line-height:1.05;
     letter-spacing:-.02em;
   }
   .results__chart-note{
@@ -308,9 +310,10 @@
     text-transform:uppercase;
   }
   .chart .val{
-    font-family:var(--playfair),serif;
+    font-family:var(--heading),sans-serif;
     font-size:18px;
-    font-weight:600;
+    font-weight:700;
+    letter-spacing:-.02em;
   }
   .chart .tick{
     font-family:var(--inter),sans-serif;
@@ -399,11 +402,11 @@
     margin:0;
     max-width:16em;
     color:#fff;
-    font-family:var(--playfair);
+    font-family:var(--heading);
     font-size:clamp(36px,5.2vw,72px);
-    font-weight:600;
-    line-height:1.04;
-    letter-spacing:-.03em;
+    font-weight:700;
+    line-height:1.05;
+    letter-spacing:-.02em;
     text-wrap:pretty;
   }
   .follow__body{
@@ -418,7 +421,7 @@
     text-wrap:pretty;
   }
 
-  /* ---------- The method ---------- */
+  /* ---------- The mantra ---------- */
   .method{
     padding-block:clamp(88px,16vh,200px) clamp(64px,10vh,140px);
   }
@@ -453,7 +456,7 @@
   .method__title{
     margin:0;
     color:#fff;
-    font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family:var(--heading);
     font-size:clamp(48px,7.5vw,120px);
     font-weight:700;
     line-height:.95;
@@ -902,9 +905,9 @@
       </div>
     </section>
 
-        <section class="method" id="method" aria-labelledby="method-heading">
+        <section class="method" id="mantra" aria-labelledby="mantra-heading">
       <div class="method__inner">
-        <h2 class="method__eyebrow" id="method-heading" data-animate>The method</h2>
+        <h2 class="method__eyebrow" id="mantra-heading" data-animate>The mantra</h2>
         <div class="method__list">
           <article class="method__row" data-animate>
             <div class="method__copy">
@@ -1141,9 +1144,9 @@
       </div>
     </section>
 
-    <section class="results" id="results">
+    <section class="results" id="case-study" aria-labelledby="case-study-heading">
       <div class="results__inner">
-        <p class="results__eyebrow" data-animate>Results</p>
+        <p class="results__eyebrow" id="case-study-heading" data-animate>Case study</p>
         <h2 class="results__title" data-animate><span>The first thirty days.</span> <span>Organic only.</span></h2>
         <p class="results__lede" data-animate>For a DFW hospitality client, CHALANT built a new account using an organic content strategy and a no-ad creative campaign.</p>
 
@@ -1186,26 +1189,25 @@
         <div class="results__charts">
           <figure class="results__chart results__chart--wide" data-animate>
             <figcaption class="results__chart-title">Followers</figcaption>
-            <p class="results__chart-note">The readings we have. No daily series was recorded, so the line only connects these three points. The time axis is approximate; the mid-tenure figure is not a dated reading.</p>
-            <svg class="chart" viewBox="0 0 800 320" role="img" aria-label="Follower counts at the start, mid-tenure, and October 30: 150, about 556, and 647.">
+            <p class="results__chart-note">Only two readings were recorded: 150 on day 1 and 647 at one month. The line simply connects those points. There is no sourced follower count at two weeks, so that mark is an axis tick only.</p>
+            <svg class="chart" viewBox="0 0 800 320" role="img" aria-label="Follower counts on day 1 and at one month: 150 and 647. The two-week mark is an axis tick only; no reading was recorded then.">
               <line class="grid" x1="72" y1="48" x2="760" y2="48"/>
               <line class="grid" x1="72" y1="124" x2="760" y2="124"/>
               <line class="grid" x1="72" y1="200" x2="760" y2="200"/>
               <line class="axis" x1="72" y1="276" x2="760" y2="276"/>
+              <line class="axis" x1="381" y1="276" x2="381" y2="284"/>
               <text class="tick" x="64" y="52" text-anchor="end">700</text>
               <text class="tick" x="64" y="128" text-anchor="end">450</text>
               <text class="tick" x="64" y="204" text-anchor="end">200</text>
               <text class="tick" x="64" y="280" text-anchor="end">0</text>
-              <polyline class="line" pathLength="1" points="120,227.14 400,94.90 680,65.26"/>
+              <polyline class="line" pathLength="1" points="120,227.14 680,65.26"/>
               <circle class="chart-dot" cx="120" cy="227.14" r="6"/>
-              <circle class="chart-dot" cx="400" cy="94.90" r="6"/>
               <circle class="chart-dot" cx="680" cy="65.26" r="6"/>
               <text class="val" x="120" y="214" text-anchor="middle">150</text>
-              <text class="val" x="400" y="82" text-anchor="middle">~556</text>
               <text class="val" x="680" y="52" text-anchor="middle">647</text>
-              <text class="lbl" x="120" y="302" text-anchor="middle">Start</text>
-              <text class="lbl" x="400" y="302" text-anchor="middle">Mid-tenure</text>
-              <text class="lbl" x="680" y="302" text-anchor="middle">October 30</text>
+              <text class="lbl" x="120" y="302" text-anchor="middle">Day 1</text>
+              <text class="lbl" x="381" y="302" text-anchor="middle">2 Weeks</text>
+              <text class="lbl" x="680" y="302" text-anchor="middle">One Month</text>
             </svg>
           </figure>
 
