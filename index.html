@@ -456,17 +456,23 @@
   }
 
   /* Scroll reveals */
+  .method [data-animate],
   .results [data-animate]{--rise:18px}
   @media (prefers-reduced-motion:no-preference){
+    .method [data-animate],
     .results [data-animate]{
       opacity:0;
       transform:translateY(var(--rise));
       transition:opacity .9s cubic-bezier(.22,.8,.24,1), transform .9s cubic-bezier(.22,.8,.24,1);
     }
+    .method [data-animate].is-in,
     .results [data-animate].is-in{
       opacity:1;
       transform:none;
     }
+    .method__part:nth-child(1){transition-delay:0s}
+    .method__part:nth-child(2){transition-delay:.12s}
+    .method__part:nth-child(3){transition-delay:.24s}
     .results .line{
       stroke-dasharray:1;
       stroke-dashoffset:1;
@@ -512,6 +518,294 @@
       to{transform:scale(1)}
     }
   }
+
+  /* ---------- The method ---------- */
+  .method{
+    padding-block:clamp(88px,16vh,200px) clamp(64px,10vh,140px);
+    padding-left:max(16px,4.5vw,env(safe-area-inset-left,0px));
+    padding-right:max(16px,4.5vw,env(safe-area-inset-right,0px));
+    color:#fff;
+    background:#000;
+  }
+  .method__inner{max-width:1180px}
+  .method__eyebrow{
+    margin:0 0 clamp(36px,6vh,72px);
+    color:var(--gold);
+    font-family:var(--montserrat);
+    font-size:clamp(11px,.85vw,13px);
+    font-weight:600;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+  }
+  .method__grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:clamp(56px,9vh,96px);
+  }
+  @media (min-width:900px){
+    .method__grid{
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:0;
+    }
+    .method__part{
+      padding-right:clamp(24px,2.8vw,48px);
+    }
+    .method__part + .method__part{
+      padding-left:clamp(24px,2.8vw,48px);
+      border-left:1px solid rgba(255,255,255,.16);
+    }
+    .method__part:last-child{padding-right:0}
+  }
+  .method__visual{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    height:236px;
+    margin:0;
+  }
+  .method__index{
+    margin:clamp(22px,3vh,32px) 0 0;
+    color:var(--gold);
+    font-family:var(--montserrat);
+    font-size:clamp(11px,.85vw,13px);
+    font-weight:600;
+    letter-spacing:.22em;
+  }
+  .method__title{
+    margin:12px 0 0;
+    color:#fff;
+    font-family:var(--playfair);
+    font-size:clamp(28px,2.6vw,38px);
+    font-weight:600;
+    line-height:1.08;
+    letter-spacing:-.03em;
+    text-wrap:pretty;
+  }
+  .method__sub{
+    margin:16px 0 0;
+    max-width:22em;
+    color:rgba(255,255,255,.72);
+    font-family:var(--inter);
+    font-size:clamp(15px,1.15vw,17px);
+    font-weight:400;
+    line-height:1.5;
+    letter-spacing:-.011em;
+    text-wrap:pretty;
+  }
+
+  /* Entertain: scrolling phone */
+  .phone{
+    position:relative;
+    width:128px;
+    height:236px;
+    flex:0 0 auto;
+  }
+  .phone__shell{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    display:block;
+    pointer-events:none;
+    z-index:2;
+  }
+  .phone__screen{
+    position:absolute;
+    top:22px;
+    left:10px;
+    right:10px;
+    bottom:14px;
+    overflow:hidden;
+    border-radius:8px;
+    z-index:1;
+    -webkit-mask-image:linear-gradient(to bottom,transparent 0%,#000 12%,#000 88%,transparent 100%);
+    mask-image:linear-gradient(to bottom,transparent 0%,#000 12%,#000 88%,transparent 100%);
+  }
+  .phone__feed{
+    --frame-h:72px;
+    --frame-gap:8px;
+    --step:calc(var(--frame-h) + var(--frame-gap));
+    --lock:calc(100px - (5 * var(--step) + (var(--frame-h) / 2)));
+    display:flex;
+    flex-direction:column;
+    gap:var(--frame-gap);
+    will-change:transform,filter,opacity;
+    transform:translate3d(0,var(--lock),0);
+  }
+  .frame{
+    box-sizing:border-box;
+    height:var(--frame-h);
+    padding:8px;
+    border:1px solid rgba(255,255,255,.22);
+    border-radius:4px;
+    background:#050505;
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+    overflow:hidden;
+  }
+  .frame__shot{
+    display:block;
+    flex:1;
+    min-height:0;
+    border:1px solid rgba(255,255,255,.2);
+    border-radius:2px;
+    background:rgba(255,255,255,.04);
+  }
+  .frame__row{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    flex:0 0 auto;
+  }
+  .frame__avatar{
+    width:10px;
+    height:10px;
+    border-radius:50%;
+    border:1px solid rgba(255,255,255,.35);
+    flex:0 0 auto;
+  }
+  .frame__lines{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    gap:3px;
+    flex:1;
+    min-width:0;
+  }
+  .frame__lines i{
+    display:block;
+    height:1px;
+    background:rgba(255,255,255,.32);
+    font-style:normal;
+  }
+  .frame__lines i:first-child{width:72%}
+  .frame__lines i:last-child{width:48%}
+  .frame--lock{
+    border-color:var(--gold);
+    background:rgba(232,201,10,.08);
+    box-shadow:0 0 0 1px var(--gold), 0 0 18px rgba(232,201,10,.28);
+  }
+
+  /* Educate: play / progress bar */
+  .playbar{
+    display:block;
+    width:min(220px,100%);
+    height:auto;
+    overflow:visible;
+  }
+  .playbar__icon{
+    fill:none;
+    stroke:var(--gold);
+    stroke-width:1.25;
+    stroke-linejoin:round;
+    stroke-linecap:round;
+  }
+  .playbar__track{fill:rgba(255,255,255,.16)}
+  .playbar__fill{
+    fill:var(--gold);
+    transform-box:fill-box;
+    transform-origin:0 50%;
+    transform:scaleX(.72);
+  }
+
+  /* Sell: brand-mark afterimage */
+  .afterimage{
+    position:relative;
+    width:130px;
+    height:150px;
+    display:grid;
+    place-items:center;
+  }
+  .afterimage__letter,
+  .afterimage__ghost{
+    font-family:var(--playfair);
+    font-size:120px;
+    font-weight:600;
+    line-height:1;
+    letter-spacing:-.05em;
+  }
+  .afterimage__letter{
+    position:relative;
+    z-index:1;
+    color:#fff;
+  }
+  .afterimage__ghost{
+    position:absolute;
+    left:50%;
+    top:50%;
+    color:var(--gold);
+    opacity:.42;
+    filter:blur(5px);
+    transform:translate(calc(-50% + 8px), calc(-50% + 7px));
+    z-index:0;
+    pointer-events:none;
+  }
+
+  @media (prefers-reduced-motion:no-preference){
+    .phone__feed{
+      transform:translate3d(0,0,0);
+      filter:blur(6px);
+    }
+    .frame--lock{
+      border-color:rgba(255,255,255,.22);
+      background:#050505;
+      box-shadow:none;
+    }
+    .playbar__fill{transform:scaleX(0)}
+    [data-motion].is-playing .phone__feed{
+      animation:method-feed 10s linear infinite;
+    }
+    [data-motion].is-playing .frame--lock{
+      animation:method-lock 10s linear infinite;
+    }
+    [data-motion].is-playing .playbar__fill{
+      animation:method-fill 10s cubic-bezier(.22,.8,.24,1) infinite;
+    }
+    [data-motion].is-playing .afterimage__ghost{
+      animation:method-glow 4.5s ease-in-out infinite;
+    }
+    @keyframes method-feed{
+      0%{transform:translate3d(0,0,0);filter:blur(6px);opacity:0}
+      4%{opacity:1}
+      18%{transform:translate3d(0,calc(var(--lock)*0.85),0);filter:blur(4px);opacity:1}
+      35%{transform:translate3d(0,calc(var(--lock)*0.98),0);filter:blur(.6px)}
+      40%{transform:translate3d(0,var(--lock),0);filter:blur(0)}
+      88%{transform:translate3d(0,var(--lock),0);filter:blur(0);opacity:1}
+      100%{transform:translate3d(0,var(--lock),0);filter:blur(0);opacity:0}
+    }
+    @keyframes method-lock{
+      0%,38%{
+        border-color:rgba(255,255,255,.22);
+        background:#050505;
+        box-shadow:none;
+      }
+      42%,84%{
+        border-color:var(--gold);
+        background:rgba(232,201,10,.08);
+        box-shadow:0 0 0 1px var(--gold), 0 0 18px rgba(232,201,10,.28);
+      }
+      63%{
+        box-shadow:0 0 0 1px var(--gold), 0 0 28px rgba(232,201,10,.5);
+      }
+      92%,100%{
+        border-color:rgba(255,255,255,.22);
+        background:#050505;
+        box-shadow:none;
+      }
+    }
+    @keyframes method-fill{
+      0%{transform:scaleX(0)}
+      8%{transform:scaleX(0)}
+      42%{transform:scaleX(.72)}
+      88%{transform:scaleX(.72)}
+      100%{transform:scaleX(0)}
+    }
+    @keyframes method-glow{
+      0%,100%{opacity:.26;filter:blur(6px)}
+      50%{opacity:.55;filter:blur(3.5px)}
+    }
+  }
 </style>
 </head>
 <body>
@@ -535,6 +829,82 @@
     <section class="follow">
       <h2>A video you post today can bring you business months from now.</h2>
       <p>We write, produce, and distribute content people can keep finding. Each piece has a job: introduce your business, explain what you offer, or give someone a reason to buy.</p>
+    </section>
+
+
+    <section class="method" id="method" aria-labelledby="method-heading">
+      <div class="method__inner">
+        <h2 class="method__eyebrow" id="method-heading" data-animate>The method</h2>
+        <div class="method__grid">
+          <article class="method__part" data-animate>
+            <div class="method__visual" data-motion="entertain" aria-hidden="true">
+              <div class="phone">
+                <svg class="phone__shell" viewBox="0 0 128 236" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="1.25" y="1.25" width="125.5" height="233.5" rx="26" stroke="rgba(255,255,255,0.42)" stroke-width="1.25"/>
+                  <rect x="48" y="10" width="32" height="5" rx="2.5" fill="rgba(255,255,255,0.35)"/>
+                </svg>
+                <div class="phone__screen">
+                  <div class="phone__feed">
+                    <div class="frame"><span class="frame__shot"></span></div>
+                    <div class="frame">
+                      <span class="frame__row"><span class="frame__avatar"></span><span class="frame__lines"><i></i><i></i></span></span>
+                      <span class="frame__shot"></span>
+                    </div>
+                    <div class="frame">
+                      <span class="frame__shot"></span>
+                      <span class="frame__lines"><i></i><i></i></span>
+                    </div>
+                    <div class="frame">
+                      <span class="frame__row"><span class="frame__avatar"></span><span class="frame__lines"><i></i><i></i></span></span>
+                    </div>
+                    <div class="frame"><span class="frame__shot"></span></div>
+                    <div class="frame frame--lock">
+                      <span class="frame__shot"></span>
+                      <span class="frame__lines"><i></i><i></i></span>
+                    </div>
+                    <div class="frame">
+                      <span class="frame__row"><span class="frame__avatar"></span><span class="frame__lines"><i></i><i></i></span></span>
+                      <span class="frame__shot"></span>
+                    </div>
+                    <div class="frame">
+                      <span class="frame__shot"></span>
+                      <span class="frame__lines"><i></i><i></i></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <p class="method__index">01</p>
+            <h3 class="method__title">Entertain the masses</h3>
+            <p class="method__sub">Content engineered to stop the scroll.</p>
+          </article>
+
+          <article class="method__part" data-animate>
+            <div class="method__visual" data-motion="educate" aria-hidden="true">
+              <svg class="playbar" viewBox="0 0 220 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <polygon class="playbar__icon" points="8,18 8,62 46,40"/>
+                <rect class="playbar__track" x="64" y="39" width="148" height="2" rx="1"/>
+                <rect class="playbar__fill" x="64" y="39" width="148" height="2" rx="1"/>
+              </svg>
+            </div>
+            <p class="method__index">02</p>
+            <h3 class="method__title">Educate the interested</h3>
+            <p class="method__sub">Reward them for watching and they will follow.</p>
+          </article>
+
+          <article class="method__part" data-animate>
+            <div class="method__visual" data-motion="sell" aria-hidden="true">
+              <div class="afterimage">
+                <span class="afterimage__ghost">C</span>
+                <span class="afterimage__letter">C</span>
+              </div>
+            </div>
+            <p class="method__index">03</p>
+            <h3 class="method__title">Sell the committed</h3>
+            <p class="method__sub">Be the first name they think of when your industry comes up.</p>
+          </article>
+        </div>
+      </div>
     </section>
 
     <section class="results" id="results">
@@ -671,11 +1041,13 @@
 
 <script>
 (function(){
-  var nodes = document.querySelectorAll('.results [data-animate]');
+  var nodes = document.querySelectorAll('.method [data-animate], .results [data-animate]');
   if (!nodes.length) return;
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var motions = document.querySelectorAll('[data-motion]');
   if (reduce || !('IntersectionObserver' in window)){
     nodes.forEach(function(el){ el.classList.add('is-in'); });
+    motions.forEach(function(el){ el.classList.add('is-static'); });
     return;
   }
   var io = new IntersectionObserver(function(entries){
@@ -687,6 +1059,20 @@
     });
   }, { threshold: 0.22, rootMargin: '0px 0px -8% 0px' });
   nodes.forEach(function(el){ io.observe(el); });
+
+  var mio = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if (entry.isIntersecting){
+        var el = entry.target;
+        el.classList.remove('is-playing');
+        void el.offsetWidth;
+        el.classList.add('is-playing');
+      } else {
+        entry.target.classList.remove('is-playing');
+      }
+    });
+  }, { threshold: 0.35 });
+  motions.forEach(function(el){ mio.observe(el); });
 })();
 </script>
 </body>
