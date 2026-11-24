@@ -664,28 +664,42 @@
     transform-origin:50% 0%;
   }
 
-  /* Sell: a line-art wallet opening */
+  /* Sell: a line-art bifold wallet that unfolds, then a gold card levitates */
   .wallet{
     display:block;
     width:min(168px,100%);
     height:auto;
     overflow:visible;
+    perspective:900px;
+    isolation:isolate;
   }
-  .wallet__body,
+  .wallet__bulk,
+  .wallet__panel,
   .wallet__flap-shape{
     fill:#000;
     stroke:rgba(255,255,255,.86);
     stroke-width:1.25;
     stroke-linejoin:round;
   }
-  .wallet__inner{
-    fill:none;
-    stroke:rgba(255,255,255,.28);
+  .wallet__bulk{
+    stroke:rgba(255,255,255,.32);
     stroke-width:1;
+  }
+  .wallet__sleeve-shape{
+    fill:#000;
+    stroke:rgba(255,255,255,.86);
+    stroke-width:1.25;
     stroke-linejoin:round;
+    stroke-linecap:round;
+  }
+  .wallet__sleeve-lip{
+    fill:none;
+    stroke:rgba(255,255,255,.7);
+    stroke-width:1.25;
+    stroke-linecap:round;
   }
   .wallet__bill{
-    fill:rgba(232,201,10,.08);
+    fill:rgba(232,201,10,.14);
     stroke:var(--gold);
     stroke-width:1.25;
     stroke-linejoin:round;
@@ -698,16 +712,20 @@
   }
   .wallet__glow{
     fill:url(#wallet-glow);
-    opacity:.75;
+    opacity:.9;
     pointer-events:none;
+    transform-box:fill-box;
+    transform-origin:50% 50%;
   }
   .wallet__flap{
     transform-box:fill-box;
     transform-origin:50% 0%;
-    transform:rotate(-162deg);
+    transform:rotateX(-180deg);
+    z-index:0;
   }
   .wallet__cash{
-    transform:translateY(-8px);
+    transform:translateY(-124px);
+    opacity:1;
   }
 
   /* Final / reduced-motion defaults: the landed state */
@@ -720,9 +738,9 @@
       filter:blur(5px);
     }
     .slot__payline{border-top-color:rgba(232,201,10,.18); box-shadow:none}
-    .wallet__flap{transform:rotate(0deg)}
-    .wallet__cash{transform:translateY(22px);opacity:0}
-    .wallet__glow{opacity:0}
+    .wallet__flap{transform:rotateX(0deg)}
+    .wallet__cash{transform:translateY(0);opacity:0}
+    .wallet__glow{opacity:0;transform:scale(.6)}
 
     [data-motion].is-playing .slot__reel--1{animation:slot-spin-1 10s linear infinite}
     [data-motion].is-playing .slot__reel--2{animation:slot-spin-2 10s linear infinite}
@@ -740,9 +758,9 @@
     [data-motion].is-playing .walker__arm--r{animation:walk-arm-r .7s ease-in-out var(--delay,0s) infinite}
     [data-motion].is-playing .crowd__ground-scroll{animation:ground-scroll 1.4s linear infinite}
 
-    [data-motion].is-playing .wallet__flap{animation:wallet-open 8s ease-in-out infinite}
-    [data-motion].is-playing .wallet__cash{animation:wallet-rise 8s ease-in-out infinite}
-    [data-motion].is-playing .wallet__glow{animation:wallet-glow 8s ease-in-out infinite}
+    [data-motion].is-playing .wallet__flap{animation:wallet-open 10s ease-in-out infinite}
+    [data-motion].is-playing .wallet__cash{animation:wallet-rise 10s ease-in-out infinite}
+    [data-motion].is-playing .wallet__glow{animation:wallet-glow 10s ease-in-out infinite}
 
     @keyframes slot-spin-1{
       0%{transform:translate3d(0,0,0);filter:blur(6px)}
@@ -809,44 +827,54 @@
     }
     @keyframes walk-bob{
       0%,100%{transform:translateY(0)}
-      50%{transform:translateY(-0.85px)}
+      50%{transform:translateY(-0.7px)}
     }
     @keyframes walk-leg-l{
-      0%,100%{transform:rotate(15deg)}
-      50%{transform:rotate(-15deg)}
+      0%,100%{transform:rotate(-5deg) scaleY(1.1)}
+      50%{transform:rotate(4deg) scaleY(0.82)}
     }
     @keyframes walk-leg-r{
-      0%,100%{transform:rotate(-15deg)}
-      50%{transform:rotate(15deg)}
+      0%,100%{transform:rotate(4deg) scaleY(0.82)}
+      50%{transform:rotate(-5deg) scaleY(1.1)}
     }
     @keyframes walk-arm-l{
-      0%,100%{transform:rotate(-12deg)}
-      50%{transform:rotate(12deg)}
+      0%,100%{transform:rotate(8deg) scaleY(0.9)}
+      50%{transform:rotate(-9deg) scaleY(1.06)}
     }
     @keyframes walk-arm-r{
-      0%,100%{transform:rotate(12deg)}
-      50%{transform:rotate(-12deg)}
+      0%,100%{transform:rotate(-9deg) scaleY(1.06)}
+      50%{transform:rotate(8deg) scaleY(0.9)}
     }
     @keyframes ground-scroll{
       from{transform:translateY(0)}
       to{transform:translateY(16px)}
     }
     @keyframes wallet-open{
-      0%,10%{transform:rotate(0deg)}
-      30%,72%{transform:rotate(-162deg)}
-      90%,100%{transform:rotate(0deg)}
+      0%,8%{transform:rotateX(0deg);z-index:2}
+      18%{transform:rotateX(-90deg);z-index:2}
+      22%{transform:rotateX(-126deg);z-index:0}
+      28%,82%{transform:rotateX(-180deg);z-index:0}
+      88%{transform:rotateX(-126deg);z-index:0}
+      92%{transform:rotateX(-90deg);z-index:2}
+      94%,100%{transform:rotateX(0deg);z-index:2}
     }
     @keyframes wallet-rise{
-      0%,16%{transform:translateY(22px);opacity:0}
-      38%,70%{transform:translateY(-8px);opacity:1}
-      88%,100%{transform:translateY(22px);opacity:0}
+      0%,16%{transform:translateY(0);opacity:0}
+      20%,30%{transform:translateY(0);opacity:1}
+      48%{transform:translateY(-124px);opacity:1}
+      56%{transform:translateY(-132px);opacity:1}
+      64%{transform:translateY(-118px);opacity:1}
+      72%{transform:translateY(-128px);opacity:1}
+      80%{transform:translateY(-124px);opacity:1}
+      88%{transform:translateY(0);opacity:1}
+      93%,100%{transform:translateY(0);opacity:0}
     }
     @keyframes wallet-glow{
-      0%,20%{opacity:0}
-      40%{opacity:.85}
-      58%{opacity:.5}
-      70%{opacity:.8}
-      86%,100%{opacity:0}
+      0%,10%{opacity:0;transform:scale(.6)}
+      18%{opacity:.4;transform:scale(.8)}
+      28%{opacity:.7;transform:scale(1)}
+      48%,80%{opacity:.95;transform:scale(1.15)}
+      92%,100%{opacity:0;transform:scale(.6)}
     }
   }
 </style>
@@ -925,113 +953,124 @@
                 <ellipse class="crowd__halo" cx="120" cy="38" rx="34" ry="34"/>
                 <g class="crowd__teacher" style="--delay:0.0s" transform="translate(120 26) scale(2.15)"><g class="walker" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
                     <g class="walker__bob">
-                      <circle cx="0" cy="2.1" r="2.15"/>
-                      <path d="M0 4.3 V8.1"/>
-                      <path class="walker__arm walker__arm--l" d="M0 5.3 L-2.8 8.4"/>
-                      <path class="walker__arm walker__arm--r" d="M0 5.3 L2.8 8.4"/>
-                      <path class="walker__leg walker__leg--l" d="M0 8.1 L-2.2 13.1"/>
-                      <path class="walker__leg walker__leg--r" d="M0 8.1 L2.2 13.1"/>
+                      <circle cx="0" cy="2.05" r="2.15"/>
+                      <path d="M-2.55 4.45 H2.55"/>
+                      <path d="M0 4.45 V8.15"/>
+                      <path class="walker__arm walker__arm--l" d="M-2.55 4.55 L-2.4 8.4"/>
+                      <path class="walker__arm walker__arm--r" d="M2.55 4.55 L2.4 8.4"/>
+                      <path class="walker__leg walker__leg--l" d="M0 8.15 L-0.65 13.15"/>
+                      <path class="walker__leg walker__leg--r" d="M0 8.15 L0.65 13.15"/>
                     </g>
                   </g></g>
                 <text class="crowd__label" x="120" y="70" text-anchor="middle">YOUR BRAND</text>
                 <g class="crowd__fig" style="--delay:0.08s" transform="translate(104 96) scale(1.32)"><g class="walker" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
                     <g class="walker__bob">
-                      <circle cx="0" cy="2.1" r="2.15"/>
-                      <path d="M0 4.3 V8.1"/>
-                      <path class="walker__arm walker__arm--l" d="M0 5.3 L-2.8 8.4"/>
-                      <path class="walker__arm walker__arm--r" d="M0 5.3 L2.8 8.4"/>
-                      <path class="walker__leg walker__leg--l" d="M0 8.1 L-2.2 13.1"/>
-                      <path class="walker__leg walker__leg--r" d="M0 8.1 L2.2 13.1"/>
+                      <circle cx="0" cy="2.05" r="2.15"/>
+                      <path d="M-2.55 4.45 H2.55"/>
+                      <path d="M0 4.45 V8.15"/>
+                      <path class="walker__arm walker__arm--l" d="M-2.55 4.55 L-2.4 8.4"/>
+                      <path class="walker__arm walker__arm--r" d="M2.55 4.55 L2.4 8.4"/>
+                      <path class="walker__leg walker__leg--l" d="M0 8.15 L-0.65 13.15"/>
+                      <path class="walker__leg walker__leg--r" d="M0 8.15 L0.65 13.15"/>
                     </g>
                   </g></g>
                 <g class="crowd__fig" style="--delay:0.18s" transform="translate(136 96) scale(1.32)"><g class="walker" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
                     <g class="walker__bob">
-                      <circle cx="0" cy="2.1" r="2.15"/>
-                      <path d="M0 4.3 V8.1"/>
-                      <path class="walker__arm walker__arm--l" d="M0 5.3 L-2.8 8.4"/>
-                      <path class="walker__arm walker__arm--r" d="M0 5.3 L2.8 8.4"/>
-                      <path class="walker__leg walker__leg--l" d="M0 8.1 L-2.2 13.1"/>
-                      <path class="walker__leg walker__leg--r" d="M0 8.1 L2.2 13.1"/>
+                      <circle cx="0" cy="2.05" r="2.15"/>
+                      <path d="M-2.55 4.45 H2.55"/>
+                      <path d="M0 4.45 V8.15"/>
+                      <path class="walker__arm walker__arm--l" d="M-2.55 4.55 L-2.4 8.4"/>
+                      <path class="walker__arm walker__arm--r" d="M2.55 4.55 L2.4 8.4"/>
+                      <path class="walker__leg walker__leg--l" d="M0 8.15 L-0.65 13.15"/>
+                      <path class="walker__leg walker__leg--r" d="M0 8.15 L0.65 13.15"/>
                     </g>
                   </g></g>
                 <g class="crowd__fig" style="--delay:0.04s" transform="translate(82 132) scale(1.32)"><g class="walker" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
                     <g class="walker__bob">
-                      <circle cx="0" cy="2.1" r="2.15"/>
-                      <path d="M0 4.3 V8.1"/>
-                      <path class="walker__arm walker__arm--l" d="M0 5.3 L-2.8 8.4"/>
-                      <path class="walker__arm walker__arm--r" d="M0 5.3 L2.8 8.4"/>
-                      <path class="walker__leg walker__leg--l" d="M0 8.1 L-2.2 13.1"/>
-                      <path class="walker__leg walker__leg--r" d="M0 8.1 L2.2 13.1"/>
+                      <circle cx="0" cy="2.05" r="2.15"/>
+                      <path d="M-2.55 4.45 H2.55"/>
+                      <path d="M0 4.45 V8.15"/>
+                      <path class="walker__arm walker__arm--l" d="M-2.55 4.55 L-2.4 8.4"/>
+                      <path class="walker__arm walker__arm--r" d="M2.55 4.55 L2.4 8.4"/>
+                      <path class="walker__leg walker__leg--l" d="M0 8.15 L-0.65 13.15"/>
+                      <path class="walker__leg walker__leg--r" d="M0 8.15 L0.65 13.15"/>
                     </g>
                   </g></g>
                 <g class="crowd__fig" style="--delay:0.14s" transform="translate(120 132) scale(1.32)"><g class="walker" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
                     <g class="walker__bob">
-                      <circle cx="0" cy="2.1" r="2.15"/>
-                      <path d="M0 4.3 V8.1"/>
-                      <path class="walker__arm walker__arm--l" d="M0 5.3 L-2.8 8.4"/>
-                      <path class="walker__arm walker__arm--r" d="M0 5.3 L2.8 8.4"/>
-                      <path class="walker__leg walker__leg--l" d="M0 8.1 L-2.2 13.1"/>
-                      <path class="walker__leg walker__leg--r" d="M0 8.1 L2.2 13.1"/>
+                      <circle cx="0" cy="2.05" r="2.15"/>
+                      <path d="M-2.55 4.45 H2.55"/>
+                      <path d="M0 4.45 V8.15"/>
+                      <path class="walker__arm walker__arm--l" d="M-2.55 4.55 L-2.4 8.4"/>
+                      <path class="walker__arm walker__arm--r" d="M2.55 4.55 L2.4 8.4"/>
+                      <path class="walker__leg walker__leg--l" d="M0 8.15 L-0.65 13.15"/>
+                      <path class="walker__leg walker__leg--r" d="M0 8.15 L0.65 13.15"/>
                     </g>
                   </g></g>
                 <g class="crowd__fig" style="--delay:0.24s" transform="translate(158 132) scale(1.32)"><g class="walker" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
                     <g class="walker__bob">
-                      <circle cx="0" cy="2.1" r="2.15"/>
-                      <path d="M0 4.3 V8.1"/>
-                      <path class="walker__arm walker__arm--l" d="M0 5.3 L-2.8 8.4"/>
-                      <path class="walker__arm walker__arm--r" d="M0 5.3 L2.8 8.4"/>
-                      <path class="walker__leg walker__leg--l" d="M0 8.1 L-2.2 13.1"/>
-                      <path class="walker__leg walker__leg--r" d="M0 8.1 L2.2 13.1"/>
+                      <circle cx="0" cy="2.05" r="2.15"/>
+                      <path d="M-2.55 4.45 H2.55"/>
+                      <path d="M0 4.45 V8.15"/>
+                      <path class="walker__arm walker__arm--l" d="M-2.55 4.55 L-2.4 8.4"/>
+                      <path class="walker__arm walker__arm--r" d="M2.55 4.55 L2.4 8.4"/>
+                      <path class="walker__leg walker__leg--l" d="M0 8.15 L-0.65 13.15"/>
+                      <path class="walker__leg walker__leg--r" d="M0 8.15 L0.65 13.15"/>
                     </g>
                   </g></g>
                 <g class="crowd__fig" style="--delay:0.1s" transform="translate(50 172) scale(1.32)"><g class="walker" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
                     <g class="walker__bob">
-                      <circle cx="0" cy="2.1" r="2.15"/>
-                      <path d="M0 4.3 V8.1"/>
-                      <path class="walker__arm walker__arm--l" d="M0 5.3 L-2.8 8.4"/>
-                      <path class="walker__arm walker__arm--r" d="M0 5.3 L2.8 8.4"/>
-                      <path class="walker__leg walker__leg--l" d="M0 8.1 L-2.2 13.1"/>
-                      <path class="walker__leg walker__leg--r" d="M0 8.1 L2.2 13.1"/>
+                      <circle cx="0" cy="2.05" r="2.15"/>
+                      <path d="M-2.55 4.45 H2.55"/>
+                      <path d="M0 4.45 V8.15"/>
+                      <path class="walker__arm walker__arm--l" d="M-2.55 4.55 L-2.4 8.4"/>
+                      <path class="walker__arm walker__arm--r" d="M2.55 4.55 L2.4 8.4"/>
+                      <path class="walker__leg walker__leg--l" d="M0 8.15 L-0.65 13.15"/>
+                      <path class="walker__leg walker__leg--r" d="M0 8.15 L0.65 13.15"/>
                     </g>
                   </g></g>
                 <g class="crowd__fig" style="--delay:0.2s" transform="translate(85 172) scale(1.32)"><g class="walker" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
                     <g class="walker__bob">
-                      <circle cx="0" cy="2.1" r="2.15"/>
-                      <path d="M0 4.3 V8.1"/>
-                      <path class="walker__arm walker__arm--l" d="M0 5.3 L-2.8 8.4"/>
-                      <path class="walker__arm walker__arm--r" d="M0 5.3 L2.8 8.4"/>
-                      <path class="walker__leg walker__leg--l" d="M0 8.1 L-2.2 13.1"/>
-                      <path class="walker__leg walker__leg--r" d="M0 8.1 L2.2 13.1"/>
+                      <circle cx="0" cy="2.05" r="2.15"/>
+                      <path d="M-2.55 4.45 H2.55"/>
+                      <path d="M0 4.45 V8.15"/>
+                      <path class="walker__arm walker__arm--l" d="M-2.55 4.55 L-2.4 8.4"/>
+                      <path class="walker__arm walker__arm--r" d="M2.55 4.55 L2.4 8.4"/>
+                      <path class="walker__leg walker__leg--l" d="M0 8.15 L-0.65 13.15"/>
+                      <path class="walker__leg walker__leg--r" d="M0 8.15 L0.65 13.15"/>
                     </g>
                   </g></g>
                 <g class="crowd__fig" style="--delay:0.0s" transform="translate(120 172) scale(1.32)"><g class="walker" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
                     <g class="walker__bob">
-                      <circle cx="0" cy="2.1" r="2.15"/>
-                      <path d="M0 4.3 V8.1"/>
-                      <path class="walker__arm walker__arm--l" d="M0 5.3 L-2.8 8.4"/>
-                      <path class="walker__arm walker__arm--r" d="M0 5.3 L2.8 8.4"/>
-                      <path class="walker__leg walker__leg--l" d="M0 8.1 L-2.2 13.1"/>
-                      <path class="walker__leg walker__leg--r" d="M0 8.1 L2.2 13.1"/>
+                      <circle cx="0" cy="2.05" r="2.15"/>
+                      <path d="M-2.55 4.45 H2.55"/>
+                      <path d="M0 4.45 V8.15"/>
+                      <path class="walker__arm walker__arm--l" d="M-2.55 4.55 L-2.4 8.4"/>
+                      <path class="walker__arm walker__arm--r" d="M2.55 4.55 L2.4 8.4"/>
+                      <path class="walker__leg walker__leg--l" d="M0 8.15 L-0.65 13.15"/>
+                      <path class="walker__leg walker__leg--r" d="M0 8.15 L0.65 13.15"/>
                     </g>
                   </g></g>
                 <g class="crowd__fig" style="--delay:0.16s" transform="translate(155 172) scale(1.32)"><g class="walker" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
                     <g class="walker__bob">
-                      <circle cx="0" cy="2.1" r="2.15"/>
-                      <path d="M0 4.3 V8.1"/>
-                      <path class="walker__arm walker__arm--l" d="M0 5.3 L-2.8 8.4"/>
-                      <path class="walker__arm walker__arm--r" d="M0 5.3 L2.8 8.4"/>
-                      <path class="walker__leg walker__leg--l" d="M0 8.1 L-2.2 13.1"/>
-                      <path class="walker__leg walker__leg--r" d="M0 8.1 L2.2 13.1"/>
+                      <circle cx="0" cy="2.05" r="2.15"/>
+                      <path d="M-2.55 4.45 H2.55"/>
+                      <path d="M0 4.45 V8.15"/>
+                      <path class="walker__arm walker__arm--l" d="M-2.55 4.55 L-2.4 8.4"/>
+                      <path class="walker__arm walker__arm--r" d="M2.55 4.55 L2.4 8.4"/>
+                      <path class="walker__leg walker__leg--l" d="M0 8.15 L-0.65 13.15"/>
+                      <path class="walker__leg walker__leg--r" d="M0 8.15 L0.65 13.15"/>
                     </g>
                   </g></g>
                 <g class="crowd__fig" style="--delay:0.28s" transform="translate(190 172) scale(1.32)"><g class="walker" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
                     <g class="walker__bob">
-                      <circle cx="0" cy="2.1" r="2.15"/>
-                      <path d="M0 4.3 V8.1"/>
-                      <path class="walker__arm walker__arm--l" d="M0 5.3 L-2.8 8.4"/>
-                      <path class="walker__arm walker__arm--r" d="M0 5.3 L2.8 8.4"/>
-                      <path class="walker__leg walker__leg--l" d="M0 8.1 L-2.2 13.1"/>
-                      <path class="walker__leg walker__leg--r" d="M0 8.1 L2.2 13.1"/>
+                      <circle cx="0" cy="2.05" r="2.15"/>
+                      <path d="M-2.55 4.45 H2.55"/>
+                      <path d="M0 4.45 V8.15"/>
+                      <path class="walker__arm walker__arm--l" d="M-2.55 4.55 L-2.4 8.4"/>
+                      <path class="walker__arm walker__arm--r" d="M2.55 4.55 L2.4 8.4"/>
+                      <path class="walker__leg walker__leg--l" d="M0 8.15 L-0.65 13.15"/>
+                      <path class="walker__leg walker__leg--r" d="M0 8.15 L0.65 13.15"/>
                     </g>
                   </g></g>
               </svg>
@@ -1043,24 +1082,35 @@
               <p class="method__sub">Be the first name they think of when your industry comes up.</p>
             </div>
             <div class="method__visual" data-motion="sell" aria-hidden="true">
-              <svg class="wallet" viewBox="0 0 160 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <svg class="wallet" viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <defs>
                   <radialGradient id="wallet-glow" cx="50%" cy="50%" r="50%">
-                    <stop offset="0%" stop-color="#E8C90A" stop-opacity=".45"/>
-                    <stop offset="55%" stop-color="#E8C90A" stop-opacity=".12"/>
+                    <stop offset="0%" stop-color="#E8C90A" stop-opacity=".6"/>
+                    <stop offset="45%" stop-color="#E8C90A" stop-opacity=".16"/>
                     <stop offset="100%" stop-color="#E8C90A" stop-opacity="0"/>
                   </radialGradient>
+                  <clipPath id="wallet-sleeve-clip">
+                    <rect x="-40" y="-80" width="280" height="228"/>
+                  </clipPath>
                 </defs>
-                <ellipse class="wallet__glow" cx="80" cy="58" rx="50" ry="38"/>
-                <rect class="wallet__body" x="28" y="70" width="104" height="50" rx="6"/>
-                <rect class="wallet__inner" x="36" y="78" width="88" height="34" rx="3"/>
-                <g class="wallet__flap">
-                  <rect class="wallet__flap-shape" x="28" y="70" width="104" height="50" rx="6"/>
+                <rect class="wallet__bulk" x="38" y="134" width="124" height="68" rx="7"/>
+                <g class="wallet__back">
+                  <rect class="wallet__panel" x="36" y="130" width="128" height="70" rx="7"/>
                 </g>
-                <g class="wallet__cash">
-                  <rect class="wallet__bill" x="50" y="38" width="60" height="40" rx="2"/>
-                  <path class="wallet__bill-rule" d="M58 50 H102"/>
-                  <path class="wallet__bill-rule" d="M58 58 H90"/>
+                <g class="wallet__sleeve">
+                  <path class="wallet__sleeve-shape" d="M54 148 H146 Q152 148 152 154 V186 Q152 194 144 194 H56 Q48 194 48 186 V154 Q48 148 54 148 Z"/>
+                  <path class="wallet__sleeve-lip" d="M50 148 H150"/>
+                </g>
+                <g class="wallet__flap">
+                  <rect class="wallet__panel wallet__flap-shape" x="36" y="130" width="128" height="70" rx="7"/>
+                </g>
+                <g clip-path="url(#wallet-sleeve-clip)">
+                  <g class="wallet__cash">
+                    <ellipse class="wallet__glow" cx="100" cy="136" rx="52" ry="38"/>
+                    <rect class="wallet__bill" x="64" y="136" width="72" height="42" rx="2"/>
+                    <path class="wallet__bill-rule" d="M74 150 H126"/>
+                    <path class="wallet__bill-rule" d="M74 158 H112"/>
+                  </g>
                 </g>
               </svg>
             </div>
