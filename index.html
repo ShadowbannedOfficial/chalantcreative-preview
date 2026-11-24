@@ -1,178 +1,693 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Chalant Creative — Social Media Agency | Dallas, TX</title>
-<meta name="description" content="Chalant Creative is a social media agency out of Dallas. Strategy, scripts, production, talent, editing, and distribution built around organic reach.">
-<link rel="canonical" href="https://chalantcreative.com/">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CHALANT CREATIVE — Coming Soon</title>
+<meta name="description" content="Chalant Creative. Something is coming. Under construction.">
 <meta name="theme-color" content="#000000">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta property="og:title" content="CHALANT CREATIVE — Coming Soon">
+<meta property="og:description" content="Under construction. Coming soon.">
+<meta property="og:image" content="https://shadowbannedofficial.github.io/chalantcreative-preview/logo.png">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Chalant Creative">
-<meta property="og:description" content="Entertain the masses, educate the interested, sell the committed.">
-<meta property="og:url" content="https://chalantcreative.com/">
-<meta property="og:image" content="https://chalantcreative.com/assets/img/mark-banner.jpg">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Chalant Creative">
-<meta name="twitter:description" content="Entertain the masses, educate the interested, sell the committed.">
-<link rel="icon" href="assets/favicon.png" sizes="any">
-<link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
-<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
-<link rel="stylesheet" href="assets/css/styles.css">
-<script>
-  /* Progressive enhancement only: with JS off, every section is fully visible. */
-  document.documentElement.classList.add('js');
-  window.setTimeout(function () {
-    if (!window.__chalantRevealReady) document.documentElement.classList.remove('js');
-  }, 2500);
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "Chalant Creative",
-  "url": "https://chalantcreative.com/",
-  "email": "brian@chalantcreative.com",
-  "description": "Social media agency in Dallas, Texas.",
-  "address": { "@type": "PostalAddress", "addressLocality": "Dallas", "addressRegion": "TX", "addressCountry": "US" },
-  "sameAs": ["https://www.instagram.com/chalant_agency/"]
-}
-</script>
+<link rel="icon" href="favicon.png">
+<link rel="apple-touch-icon" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,500;0,14..32,600;1,14..32,400&family=Montserrat:wght@500;600;700&family=Playfair+Display:wght@500;600;700&display=swap">
+<style>
+  :root{
+    --tape:#ffd400;
+    --ink:#0a0a0a;
+    /* tan(2.5deg): the ribbon's tilt, used to square the anchor with it */
+    --tilt:.043661;
+  }
+  *{box-sizing:border-box}
+  html,body{height:auto;min-height:100%}
+  body{
+    margin:0;
+    background:#000;
+    color:#fff;
+    overflow-x:clip;
+    overscroll-behavior:none;
+    -webkit-font-smoothing:antialiased;
+    -webkit-text-size-adjust:100%;
+    font-family:"Helvetica Neue",Helvetica,Arial,"Segoe UI",system-ui,sans-serif;
+  }
+
+  /* ------------------------------------------------------------------
+     The wordmark and the ribbon share one measuring system, so the tape
+     is pinned to the letters rather than to a percentage of the window.
+
+     .mark is sized to the exact ink box of the wordmark (1370 x 468 in
+     source pixels), so every offset below is a fraction of the real
+     letterforms, never of the window. Within that box CHALANT runs from
+     row 0 to row 217, putting its cap midline 108.5/468 = 23.18% down
+     the box. (.234 is that figure nudged to sit dead centre of the
+     ribbon's antialiased lower edge, as rendered.)
+
+     The ribbon hangs from its own bottom edge (transform-origin 50%
+     100%) and is rotated about that point, so the tilt can never drag
+     the anchor off target. --tape-drop biases that anchor down by half
+     the tilt's rise between the screen centre and the wordmark's centre,
+     which parks the lower edge on CHALANT's midline at both ends of the
+     mark instead of only at the screen centre.
+     ------------------------------------------------------------------ */
+  .stage{
+    position:relative;
+    height:100dvh;
+    overflow:hidden;
+
+    /* 66vw holds the mark's centre close to the screen centre. The ribbon
+       is tilted, so its straight lower edge can be exactly on CHALANT's
+       midline at only one x: the screen centre and the wordmark's centre
+       have to share the error between them. A bigger mark keeps the two
+       points closer together, and keeps that shared error inside tolerance
+       at every shape. 240dvh only steps in on very wide letterbox windows,
+       so the mark never grows taller than the screen. */
+    --mark-w:min(66vw,240dvh);
+    --mark-h:calc(var(--mark-w) * 468 / 1370);
+    --mark-right:5vw;
+    --mark-bottom:8dvh;
+    --mark-top:calc(100dvh - var(--mark-bottom) - var(--mark-h));
+
+    --chalant-mid:calc(var(--mark-top) + var(--mark-h) * .234);
+    --tape-drop:calc((50vw - var(--mark-right) - var(--mark-w) / 2) * var(--tilt) / 2);
+    --tape-h:min(22.4vmax,34dvh);
+    --tape-top:calc(var(--chalant-mid) + var(--tape-drop) - var(--tape-h));
+  }
+
+  .mark{
+    position:absolute;
+    top:var(--mark-top);
+    right:var(--mark-right);
+    width:var(--mark-w);
+    height:var(--mark-h);
+  }
+  /* logo.png and lockup.png are cropped to the same ink, so a matching
+     negative offset cancels the transparent margin: the box edge is the
+     edge of the letterforms. */
+  .mark img{
+    position:absolute;
+    display:block;
+    height:auto;
+    user-select:none;
+    -webkit-user-drag:none;
+  }
+  /* logo.png 3000x3000 — ink at x1607..2976, y1272..1739 */
+  .mark--wide img{
+    width:calc(var(--mark-w) * 3000 / 1370);
+    left:calc(var(--mark-w) * -1607 / 1370);
+    top:calc(var(--mark-h) * -1272 / 468);
+  }
+  /* lockup.png 1418x517 — ink at x25..1394, y25..492 */
+  .mark--tall img{
+    width:calc(var(--mark-w) * 1418 / 1370);
+    left:calc(var(--mark-w) * -25 / 1370);
+    top:calc(var(--mark-h) * -25 / 468);
+  }
+  .mark--tall{display:none}
+
+  /* ---------- photoreal caution tape ---------- */
+  .tape{
+    position:absolute;
+    left:50%;
+    top:var(--tape-top);
+    width:150vmax;
+    height:var(--tape-h);
+    transform-origin:50% 100%;
+    transform:translateX(-50%) rotate(-2.5deg);
+    /* the tile is a whole number of stripe periods wide (9 x 424px), so it
+       repeats without a seam, and sizing it by the ribbon's height keeps
+       the stripe angle identical at every viewport width */
+    background-image:url("tape-tile.jpg");
+    background-repeat:repeat-x;
+    background-position:50% 50%;
+    background-size:auto 100%;
+    pointer-events:none;
+  }
+  .tape__text{
+    position:absolute;
+    left:0;
+    right:0;
+    top:50%;
+    transform:translateY(-50%);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:0 .55em;
+    padding-inline:2vw;
+    color:#0a0a0a;
+    font-weight:800;
+    font-size:clamp(13px,calc(var(--tape-h) * .115),44px);
+    line-height:1;
+    letter-spacing:.015em;
+    text-transform:uppercase;
+    white-space:nowrap;
+    text-shadow:none;
+  }
+  .dot{
+    width:.2em;
+    height:.2em;
+    border-radius:50%;
+    background:#0a0a0a;
+    flex:0 0 auto;
+  }
+
+  /* ---------- iPhone / portrait: centred lockup ---------- */
+  @media (max-aspect-ratio:1/1){
+    .stage{
+      --mark-w:min(88vw,152dvh);
+      --mark-top:calc(60dvh - var(--mark-h) / 2);
+      --tape-drop:0px;
+      --tape-h:min(35.6vw,26dvh);
+    }
+    .mark{right:auto;left:calc(50% - var(--mark-w) / 2)}
+    .mark--wide{display:none}
+    .mark--tall{display:block}
+    .tape__text{
+      font-size:clamp(12px,calc(var(--tape-h) * .115),30px);
+      letter-spacing:.005em;
+      gap:0 .45em;
+      padding-inline:1vw;
+    }
+  }
+
+  /* The statement is the next module: full width, left aligned, and set
+     at the same scale as the wordmark rather than as a caption under it. */
+  .statement{
+    min-height:100dvh;
+    padding-block:clamp(80px,16vh,200px) clamp(96px,18vh,220px);
+    padding-left:max(16px,4.5vw,env(safe-area-inset-left,0px));
+    padding-right:max(16px,4.5vw,env(safe-area-inset-right,0px));
+    text-align:left;
+  }
+  .pair{
+    margin:0;
+    max-width:100%;
+    /* 10.5vw matches CHALANT's cap height in the wide lockup (66vw × 217/1370). */
+    font-size:clamp(42px,10.5vw,240px);
+    font-weight:800;
+    line-height:.9;
+    letter-spacing:-.045em;
+  }
+  @media (max-aspect-ratio:1/1){
+    .pair{
+      /* Portrait lockup is 88vw, so the cap height is 13.9vw. */
+      font-size:clamp(46px,13.9vw,140px);
+    }
+  }
+  .pair + .pair{margin-top:clamp(64px,12vh,160px)}
+  .slogan,
+  .support{
+    display:block;
+    max-width:100%;
+    text-align:left;
+    text-wrap:balance;
+    hyphens:none;
+    word-break:normal;
+    overflow-wrap:normal;
+  }
+  .support{
+    margin-top:.2em;
+    font-size:clamp(28px,.5em,96px);
+    font-weight:700;
+    line-height:1.05;
+    letter-spacing:-.03em;
+  }
+
+  /* Next module: a display headline and a subordinate paragraph. */
+  .follow{
+    min-height:100dvh;
+    padding-block:clamp(80px,16vh,200px) clamp(96px,18vh,220px);
+    padding-left:max(16px,4.5vw,env(safe-area-inset-left,0px));
+    padding-right:max(16px,4.5vw,env(safe-area-inset-right,0px));
+    text-align:left;
+  }
+  .follow h2,
+  .follow p{
+    margin:0;
+    max-width:100%;
+    text-align:left;
+    hyphens:none;
+    word-break:normal;
+    overflow-wrap:normal;
+  }
+  .follow h2{
+    max-width:16em;
+    font-size:clamp(40px,6.6vw,96px);
+    font-weight:800;
+    line-height:.96;
+    letter-spacing:-.04em;
+    text-wrap:pretty;
+  }
+  .follow p{
+    max-width:34em;
+    margin-top:clamp(36px,6vh,80px);
+    font-size:clamp(20px,1.7vw,28px);
+    font-weight:400;
+    line-height:1.45;
+    letter-spacing:-.011em;
+    text-wrap:pretty;
+  }
+
+  @media (prefers-reduced-motion:no-preference){
+    .tape{animation:settle .8s cubic-bezier(.22,.8,.24,1) both}
+    /* transform only — the ribbon never fades, so it is always fully opaque */
+    @keyframes settle{
+      from{transform:translateX(-50%) rotate(-2.5deg) translateY(-18px)}
+      to{transform:translateX(-50%) rotate(-2.5deg)}
+    }
+  }
+  @media (prefers-reduced-motion:reduce){
+    .tape{animation:none}
+  }
+
+  /* ---------- Case study: Results ---------- */
+  :root{
+    --gold:#E8C90A;
+    --playfair:"Playfair Display",Georgia,"Times New Roman",serif;
+    --montserrat:"Montserrat",Helvetica,Arial,sans-serif;
+    --inter:"Inter",Helvetica,Arial,sans-serif;
+  }
+  .results{
+    padding-block:clamp(88px,16vh,200px) clamp(96px,18vh,220px);
+    padding-left:max(16px,4.5vw,env(safe-area-inset-left,0px));
+    padding-right:max(16px,4.5vw,env(safe-area-inset-right,0px));
+    color:#fff;
+    background:#000;
+  }
+  .results__inner{max-width:1180px}
+  .results__eyebrow{
+    margin:0 0 clamp(18px,3vh,32px);
+    color:var(--gold);
+    font-family:var(--montserrat);
+    font-size:clamp(11px,.85vw,13px);
+    font-weight:600;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+  }
+  .results__title{
+    margin:0;
+    max-width:14em;
+    color:#fff;
+    font-family:var(--playfair);
+    font-size:clamp(44px,7vw,108px);
+    font-weight:600;
+    line-height:.95;
+    letter-spacing:-.03em;
+    text-wrap:pretty;
+  }
+  .results__title span{display:block}
+  .results__lede{
+    margin:clamp(28px,5vh,56px) 0 0;
+    max-width:34em;
+    color:#fff;
+    font-family:var(--inter);
+    font-size:clamp(18px,1.55vw,24px);
+    font-weight:400;
+    line-height:1.5;
+    letter-spacing:-.011em;
+    text-wrap:pretty;
+  }
+  .results__hero{
+    margin-top:clamp(56px,10vh,120px);
+    padding-top:clamp(36px,5vh,56px);
+    border-top:1px solid rgba(232,201,10,.35);
+  }
+  .results__hero-num{
+    margin:0;
+    color:#fff;
+    font-family:var(--playfair);
+    font-size:clamp(64px,14vw,180px);
+    font-weight:600;
+    line-height:.9;
+    letter-spacing:-.04em;
+    font-variant-numeric:tabular-nums;
+  }
+  .results__hero-label{
+    margin:clamp(12px,2vh,20px) 0 0;
+    color:#fff;
+    font-family:var(--montserrat);
+    font-size:clamp(14px,1.2vw,20px);
+    font-weight:600;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+  }
+  .results__stats{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:0;
+    margin:clamp(48px,8vh,96px) 0 0;
+    padding:0;
+    list-style:none;
+  }
+  @media (min-width:800px){
+    .results__stats{grid-template-columns:repeat(4,minmax(0,1fr))}
+  }
+  .results__stat{
+    padding:clamp(22px,3.2vh,36px) clamp(16px,2vw,28px) clamp(26px,3.6vh,40px) 0;
+    border-top:1px solid rgba(255,255,255,.16);
+  }
+  @media (min-width:800px){
+    .results__stat:nth-child(4n+1),
+    .results__stats .results__stat:first-child{padding-left:0}
+    .results__stat{padding-right:clamp(16px,2vw,28px)}
+  }
+  .results__stat-num{
+    margin:0;
+    color:#fff;
+    font-family:var(--playfair);
+    font-size:clamp(28px,3.4vw,48px);
+    font-weight:600;
+    line-height:1;
+    letter-spacing:-.03em;
+    font-variant-numeric:tabular-nums;
+  }
+  .results__stat-label{
+    margin:10px 0 0;
+    max-width:14em;
+    color:rgba(255,255,255,.72);
+    font-family:var(--montserrat);
+    font-size:clamp(11px,.85vw,13px);
+    font-weight:500;
+    line-height:1.4;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+  }
+  .results__charts{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:clamp(48px,7vh,88px);
+    margin-top:clamp(72px,12vh,140px);
+  }
+  @media (min-width:900px){
+    .results__charts{grid-template-columns:1.15fr .85fr}
+    .results__chart--wide{grid-column:1 / -1}
+  }
+  .results__chart-title{
+    margin:0 0 8px;
+    color:#fff;
+    font-family:var(--playfair);
+    font-size:clamp(24px,2.4vw,36px);
+    font-weight:600;
+    letter-spacing:-.02em;
+  }
+  .results__chart-note{
+    margin:0 0 clamp(22px,3vh,36px);
+    max-width:42em;
+    color:rgba(255,255,255,.62);
+    font-family:var(--inter);
+    font-size:clamp(13px,1vw,15px);
+    line-height:1.5;
+  }
+  .chart{
+    display:block;
+    width:100%;
+    height:auto;
+    overflow:visible;
+  }
+  .chart text{fill:#fff}
+  .chart .axis,
+  .chart .grid{
+    stroke:rgba(255,255,255,.14);
+    stroke-width:1;
+    fill:none;
+  }
+  .chart .line{
+    fill:none;
+    stroke:var(--gold);
+    stroke-width:2.5;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+  }
+  .chart .chart-dot{
+    fill:#000;
+    stroke:var(--gold);
+    stroke-width:2.5;
+  }
+  .chart .bar{fill:var(--gold)}
+  .chart .bar-track{fill:rgba(255,255,255,.08)}
+  .chart .lbl{
+    font-family:var(--montserrat),sans-serif;
+    font-size:11px;
+    font-weight:600;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+  }
+  .chart .val{
+    font-family:var(--playfair),serif;
+    font-size:18px;
+    font-weight:600;
+  }
+  .chart .tick{
+    font-family:var(--inter),sans-serif;
+    font-size:11px;
+    fill:rgba(255,255,255,.55);
+  }
+  .results__source{
+    margin:clamp(56px,8vh,96px) 0 0;
+    color:rgba(255,255,255,.48);
+    font-family:var(--inter);
+    font-size:clamp(12px,.9vw,14px);
+    letter-spacing:.01em;
+  }
+
+  /* Scroll reveals */
+  .results [data-animate]{--rise:18px}
+  @media (prefers-reduced-motion:no-preference){
+    .results [data-animate]{
+      opacity:0;
+      transform:translateY(var(--rise));
+      transition:opacity .9s cubic-bezier(.22,.8,.24,1), transform .9s cubic-bezier(.22,.8,.24,1);
+    }
+    .results [data-animate].is-in{
+      opacity:1;
+      transform:none;
+    }
+    .results .line{
+      stroke-dasharray:1;
+      stroke-dashoffset:1;
+    }
+    .results .is-in .line{
+      animation:draw-line 1.4s cubic-bezier(.22,.8,.24,1) .2s forwards;
+    }
+    .results .chart-dot{
+      opacity:0;
+      transform-box:fill-box;
+      transform-origin:center;
+      transform:scale(.4);
+    }
+    .results .is-in .chart-dot{
+      animation:pop-dot .5s cubic-bezier(.22,.8,.24,1) forwards;
+    }
+    .results .is-in .chart-dot:nth-of-type(1){animation-delay:.35s}
+    .results .is-in .chart-dot:nth-of-type(2){animation-delay:.7s}
+    .results .is-in .chart-dot:nth-of-type(3){animation-delay:1.05s}
+    .results .bar{
+      transform-box:fill-box;
+      transform-origin:0 50%;
+      transform:scaleX(0);
+    }
+    .results .bar--up{transform-origin:50% 100%; transform:scaleY(0)}
+    .results .is-in .bar,
+    .results .is-in .bar--up{
+      animation:grow-bar 1s cubic-bezier(.22,.8,.24,1) forwards;
+    }
+    .results .is-in .bar:nth-of-type(1),
+    .results .is-in .bar--up:nth-of-type(1){animation-delay:.15s}
+    .results .is-in .bar:nth-of-type(2),
+    .results .is-in .bar--up:nth-of-type(2){animation-delay:.3s}
+    .results .is-in .bar:nth-of-type(3),
+    .results .is-in .bar--up:nth-of-type(3){animation-delay:.45s}
+    @keyframes draw-line{
+      to{stroke-dashoffset:0}
+    }
+    @keyframes pop-dot{
+      to{opacity:1;transform:scale(1)}
+    }
+    @keyframes grow-bar{
+      to{transform:scale(1)}
+    }
+  }
+</style>
 </head>
 <body>
-<a class="skip" href="#main">Skip to content</a>
-
-<header class="nav" id="nav">
-  <div class="nav__inner">
-    <a class="brand" href="#top" aria-label="Chalant Creative — home">
-      <img class="brand__mark" src="assets/img/mark-slate.png" alt="" width="900" height="303">
-      <span class="brand__type">Chalant<span>Creative</span></span>
-    </a>
-    <button class="nav__toggle" id="navToggle" aria-expanded="false" aria-controls="navMenu">
-      <span class="nav__toggle-bars" aria-hidden="true"><i></i><i></i></span>
-      <span class="visually-hidden">Menu</span>
-    </button>
-    <nav class="nav__menu" id="navMenu" aria-label="Primary">
-      <a href="#how">How we work</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </div>
-</header>
-
-<main id="main">
-
-  <!-- ============ HERO ============ -->
-  <section class="hero" id="top">
-    <div class="wrap">
-      <div class="hero__block">
-        <h1 class="hero__slogan">
-          <span class="hero__phrase">Entertain the masses</span>
-          <span class="hero__phrase">Educate the interested</span>
-          <span class="hero__phrase">Sell the committed</span>
-        </h1>
-        <p class="hero__support">Stop the scroll</p>
-        <p class="hero__support">Teach</p>
-        <p class="hero__support">Cash in</p>
+  <main>
+    <section class="stage">
+      <div class="mark mark--wide"><img src="logo.png" alt="Chalant Creative" width="3000" height="3000"></div>
+      <div class="mark mark--tall"><img src="lockup.png" alt="Chalant Creative" width="1418" height="517"></div>
+      <div class="tape" role="img" aria-label="Under construction. Coming soon.">
+        <div class="tape__text">
+          <span>Under Construction</span>
+          <span class="dot" aria-hidden="true"></span>
+          <span>Coming Soon</span>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+    <section class="statement">
+      <p class="pair"><span class="slogan">Entertain the masses</span><span class="support">Stop the scroll</span></p>
+      <p class="pair"><span class="slogan">Educate the interested</span><span class="support">Teach</span></p>
+      <p class="pair"><span class="slogan">Sell the committed</span><span class="support">Cash in</span></p>
+    </section>
+    <section class="follow">
+      <h2>A video you post today can bring you business months from now.</h2>
+      <p>We write, produce, and distribute content people can keep finding. Each piece has a job: introduce your business, explain what you offer, or give someone a reason to buy.</p>
+    </section>
 
-  <div class="tape" role="presentation"></div>
+    <section class="results" id="results">
+      <div class="results__inner">
+        <p class="results__eyebrow" data-animate>Results</p>
+        <h2 class="results__title" data-animate><span>Thirty days.</span> <span>Organic only.</span></h2>
+        <p class="results__lede" data-animate>For a Deep Ellum hospitality client, CHALANT built an organic content practice. No paid ads.</p>
 
-  <!-- ============ INTRO ============ -->
-  <section class="section intro" id="intro">
-    <div class="wrap">
-      <p class="intro__lead reveal">A business in 2027 survives on content that reaches the algorithm organically.</p>
-      <p class="intro__body reveal">We're a social media agency out of Dallas. We write and produce content for the algorithm, using the platform's organic reach to put it in front of people who don't already follow you.</p>
-      <p class="intro__kicker reveal">Rent attention with paid ads, or earn it through the algorithm.</p>
-    </div>
-  </section>
+        <div class="results__hero" data-animate>
+          <p class="results__hero-num">114,586</p>
+          <p class="results__hero-label">Views in 30 days</p>
+        </div>
 
-  <!-- ============ HOW WE WORK ============ -->
-  <section class="section how" id="how">
-    <div class="wrap">
-      <p class="label reveal">How we work</p>
-      <ol class="rows">
-        <li class="row reveal">
-          <h2 class="row__title">Strategy and scripts.</h2>
-          <p class="row__text">We start with what you sell and who needs it. We decide what to make, then write the scripts before the camera comes out.</p>
-        </li>
-        <li class="row reveal">
-          <h2 class="row__title">Production and talent.</h2>
-          <p class="row__text">We bring the crew and direct the shoot. If you need someone on camera, we bring talent too. For select clients, we work with footage they shoot themselves.</p>
-        </li>
-        <li class="row reveal">
-          <h2 class="row__title">Editing and distribution.</h2>
-          <p class="row__text">We cut the footage, set the pace, and get the sound right. Then we prepare and publish it for each platform.</p>
-        </li>
-        <li class="row reveal">
-          <h2 class="row__title">Review and refinement.</h2>
-          <p class="row__text">We look at what people watch, where they leave, and what they do next. We use that to decide what to change in the next script, shoot, and edit.</p>
-        </li>
-      </ol>
-    </div>
-  </section>
+        <ul class="results__stats">
+          <li class="results__stat" data-animate>
+            <p class="results__stat-num">22,459</p>
+            <p class="results__stat-label">Viewers</p>
+          </li>
+          <li class="results__stat" data-animate>
+            <p class="results__stat-num">5,346</p>
+            <p class="results__stat-label">Profile visits</p>
+          </li>
+          <li class="results__stat" data-animate>
+            <p class="results__stat-num">3,268</p>
+            <p class="results__stat-label">Interactions</p>
+          </li>
+          <li class="results__stat" data-animate>
+            <p class="results__stat-num">288</p>
+            <p class="results__stat-label">Link taps</p>
+          </li>
+          <li class="results__stat" data-animate>
+            <p class="results__stat-num">150 → 647</p>
+            <p class="results__stat-label">Followers, +331%</p>
+          </li>
+          <li class="results__stat" data-animate>
+            <p class="results__stat-num">54.3%</p>
+            <p class="results__stat-label">of views from non-followers</p>
+          </li>
+          <li class="results__stat" data-animate>
+            <p class="results__stat-num">86</p>
+            <p class="results__stat-label">Pieces of content in month one</p>
+          </li>
+        </ul>
 
-  <!-- ============ FIRST 90 DAYS ============ -->
-  <section class="section days" id="first-90-days">
-    <div class="wrap">
-      <p class="label reveal">The first 90 days</p>
-      <ol class="months">
-        <li class="month reveal">
-          <span class="month__n">Month one</span>
-          <h3 class="month__name">Foundation.</h3>
-          <p>We review your content and competitors, set the direction, and begin writing and production.</p>
-        </li>
-        <li class="month reveal">
-          <span class="month__n">Month two</span>
-          <h3 class="month__name">Publishing.</h3>
-          <p>We publish, watch the response, and use it to guide the next round of content.</p>
-        </li>
-        <li class="month reveal">
-          <span class="month__n">Month three</span>
-          <h3 class="month__name">Review.</h3>
-          <p>We compare the results with where you started and decide what to keep, change, or stop making.</p>
-        </li>
-      </ol>
-    </div>
-  </section>
+        <div class="results__charts">
+          <figure class="results__chart results__chart--wide" data-animate>
+            <figcaption class="results__chart-title">Followers</figcaption>
+            <p class="results__chart-note">The readings we have. No daily series was recorded, so the line only connects these three points. The time axis is approximate; the mid-tenure figure is not a dated reading.</p>
+            <svg class="chart" viewBox="0 0 800 320" role="img" aria-label="Follower counts at the start, mid-tenure, and October 30: 150, about 556, and 647.">
+              <line class="grid" x1="72" y1="48" x2="760" y2="48"/>
+              <line class="grid" x1="72" y1="124" x2="760" y2="124"/>
+              <line class="grid" x1="72" y1="200" x2="760" y2="200"/>
+              <line class="axis" x1="72" y1="276" x2="760" y2="276"/>
+              <text class="tick" x="64" y="52" text-anchor="end">700</text>
+              <text class="tick" x="64" y="128" text-anchor="end">450</text>
+              <text class="tick" x="64" y="204" text-anchor="end">200</text>
+              <text class="tick" x="64" y="280" text-anchor="end">0</text>
+              <polyline class="line" pathLength="1" points="120,227.14 400,94.90 680,65.26"/>
+              <circle class="chart-dot" cx="120" cy="227.14" r="6"/>
+              <circle class="chart-dot" cx="400" cy="94.90" r="6"/>
+              <circle class="chart-dot" cx="680" cy="65.26" r="6"/>
+              <text class="val" x="120" y="214" text-anchor="middle">150</text>
+              <text class="val" x="400" y="82" text-anchor="middle">~556</text>
+              <text class="val" x="680" y="52" text-anchor="middle">647</text>
+              <text class="lbl" x="120" y="302" text-anchor="middle">Start</text>
+              <text class="lbl" x="400" y="302" text-anchor="middle">Mid-tenure</text>
+              <text class="lbl" x="680" y="302" text-anchor="middle">October 30</text>
+            </svg>
+          </figure>
 
-  <!-- ============ TEAM ============ -->
-  <section class="section team" id="team">
-    <div class="wrap">
-      <p class="label reveal">The team</p>
-      <p class="team__line reveal">Creative direction by B. Moore, photographer and filmmaker. Writers, crew, and talent take the work from script through production.</p>
-    </div>
-  </section>
+          <figure class="results__chart" data-animate>
+            <figcaption class="results__chart-title">Views by format</figcaption>
+            <p class="results__chart-note">Share of views across Reels, Stories, and feed posts.</p>
+            <svg class="chart" viewBox="0 0 520 220" role="img" aria-label="Views by format: Reels 47.8 percent, Stories 37.6 percent, Posts 14.7 percent.">
+              <rect class="bar-track" x="150" y="18" width="340" height="28" rx="2"/>
+              <rect class="bar" x="150" y="18" width="162.52" height="28" rx="2"/>
+              <text class="lbl" x="0" y="37">Reels</text>
+              <text class="val" x="504" y="39" text-anchor="end">47.8%</text>
 
-  <!-- ============ CLOSE ============ -->
-  <section class="section close" id="contact">
-    <div class="wrap">
-      <p class="label reveal">Contact</p>
-      <p class="close__links reveal">
-        <a href="mailto:brian@chalantcreative.com">brian@chalantcreative.com</a>
-        <span class="sep" aria-hidden="true">·</span>
-        <a href="https://www.instagram.com/chalant_agency/" target="_blank" rel="noopener">@chalant_agency</a>
-        <span class="sep" aria-hidden="true">·</span>
-        <span>Dallas, Texas</span>
-      </p>
-    </div>
-  </section>
+              <rect class="bar-track" x="150" y="80" width="340" height="28" rx="2"/>
+              <rect class="bar" x="150" y="80" width="127.84" height="28" rx="2"/>
+              <text class="lbl" x="0" y="99">Stories</text>
+              <text class="val" x="504" y="101" text-anchor="end">37.6%</text>
 
-</main>
+              <rect class="bar-track" x="150" y="142" width="340" height="28" rx="2"/>
+              <rect class="bar" x="150" y="142" width="49.98" height="28" rx="2"/>
+              <text class="lbl" x="0" y="161">Posts</text>
+              <text class="val" x="504" y="163" text-anchor="end">14.7%</text>
+            </svg>
+          </figure>
 
-<div class="tape" role="presentation"></div>
+          <figure class="results__chart" data-animate>
+            <figcaption class="results__chart-title">Who was watching</figcaption>
+            <p class="results__chart-note">Share of views from existing followers and from people who were not already following.</p>
+            <svg class="chart" viewBox="0 0 520 220" role="img" aria-label="Views from followers 45.7 percent and from non-followers 54.3 percent.">
+              <rect class="bar-track" x="150" y="40" width="340" height="36" rx="2"/>
+              <rect class="bar" x="150" y="40" width="155.38" height="36" rx="2"/>
+              <text class="lbl" x="0" y="63">Followers</text>
+              <text class="val" x="504" y="65" text-anchor="end">45.7%</text>
 
-<footer class="footer">
-  <div class="wrap footer__inner">
-    <a class="brand brand--footer" href="#top" aria-label="Chalant Creative — back to top">
-      <img class="brand__mark" src="assets/img/mark-slate.png" alt="" width="900" height="303">
-      <span class="brand__type">Chalant<span>Creative</span></span>
-    </a>
-    <p class="footer__copy">&copy; 2026 Chalant Creative.</p>
-  </div>
-</footer>
+              <rect class="bar-track" x="150" y="116" width="340" height="36" rx="2"/>
+              <rect class="bar" x="150" y="116" width="184.62" height="36" rx="2"/>
+              <text class="lbl" x="0" y="139">Non-followers</text>
+              <text class="val" x="504" y="141" text-anchor="end">54.3%</text>
+            </svg>
+          </figure>
 
-<script src="assets/js/main.js" defer></script>
+          <figure class="results__chart results__chart--wide" data-animate>
+            <figcaption class="results__chart-title">Average views per day</figcaption>
+            <p class="results__chart-note">From Instagram’s rolling 90- and 30-day totals as of November 17, 2026. Each bar is that window’s total divided by its days.</p>
+            <svg class="chart" viewBox="0 0 800 320" role="img" aria-label="Average views per day: 1,648 from August 19 to October 17, and 2,566 from October 18 to November 2.">
+              <line class="grid" x1="80" y1="40" x2="760" y2="40"/>
+              <line class="grid" x1="80" y1="118" x2="760" y2="118"/>
+              <line class="grid" x1="80" y1="196" x2="760" y2="196"/>
+              <line class="axis" x1="80" y1="260" x2="760" y2="260"/>
+              <text class="tick" x="72" y="44" text-anchor="end">3,000</text>
+              <text class="tick" x="72" y="122" text-anchor="end">2,000</text>
+              <text class="tick" x="72" y="200" text-anchor="end">1,000</text>
+              <text class="tick" x="72" y="264" text-anchor="end">0</text>
+              <rect class="bar bar--up" x="200" y="139.15" width="140" height="120.85" rx="2"/>
+              <rect class="bar bar--up" x="460" y="71.83" width="140" height="188.17" rx="2"/>
+              <text class="val" x="270" y="129" text-anchor="middle">1,648</text>
+              <text class="val" x="530" y="62" text-anchor="middle">2,566</text>
+              <text class="lbl" x="270" y="286" text-anchor="middle">Aug 19–Oct 17</text>
+              <text class="lbl" x="530" y="286" text-anchor="middle">Oct 18–Nov 2</text>
+            </svg>
+          </figure>
+        </div>
+
+        <p class="results__source">Source: Instagram Insights, last 30 days through Oct 30, 2026.</p>
+      </div>
+    </section>
+  </main>
+
+<script>
+(function(){
+  var nodes = document.querySelectorAll('.results [data-animate]');
+  if (!nodes.length) return;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce || !('IntersectionObserver' in window)){
+    nodes.forEach(function(el){ el.classList.add('is-in'); });
+    return;
+  }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if (entry.isIntersecting){
+        entry.target.classList.add('is-in');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.22, rootMargin: '0px 0px -8% 0px' });
+  nodes.forEach(function(el){ io.observe(el); });
+})();
+</script>
 </body>
 </html>
