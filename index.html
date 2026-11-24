@@ -18,11 +18,13 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,500;0,14..32,600;1,14..32,400&family=Montserrat:wght@500;600;700&family=Playfair+Display:wght@500;600;700&display=swap">
 <style>
+
   :root{
-    --tape:#ffd400;
+    --gold:#E8C90A;
+    --playfair:"Playfair Display",Georgia,"Times New Roman",serif;
+    --montserrat:"Montserrat",Helvetica,Arial,sans-serif;
+    --inter:"Inter",Helvetica,Arial,sans-serif;
     --ink:#0a0a0a;
-    /* tan(2.5deg): the ribbon's tilt, used to square the anchor with it */
-    --tilt:.043661;
   }
   *{box-sizing:border-box}
   html,body{height:auto;min-height:100%}
@@ -34,252 +36,90 @@
     overscroll-behavior:none;
     -webkit-font-smoothing:antialiased;
     -webkit-text-size-adjust:100%;
-    font-family:"Helvetica Neue",Helvetica,Arial,"Segoe UI",system-ui,sans-serif;
+    font-family:var(--inter);
   }
 
-  /* ------------------------------------------------------------------
-     The wordmark and the ribbon share one measuring system, so the tape
-     is pinned to the letters rather than to a percentage of the window.
-
-     .mark is sized to the exact ink box of the wordmark (1370 x 468 in
-     source pixels), so every offset below is a fraction of the real
-     letterforms, never of the window. Within that box CHALANT runs from
-     row 0 to row 217, putting its cap midline 108.5/468 = 23.18% down
-     the box. (.234 is that figure nudged to sit dead centre of the
-     ribbon's antialiased lower edge, as rendered.)
-
-     The ribbon hangs from its own bottom edge (transform-origin 50%
-     100%) and is rotated about that point, so the tilt can never drag
-     the anchor off target. --tape-drop biases that anchor down by half
-     the tilt's rise between the screen centre and the wordmark's centre,
-     which parks the lower edge on CHALANT's midline at both ends of the
-     mark instead of only at the screen centre.
-     ------------------------------------------------------------------ */
-  .stage{
-    position:relative;
-    height:100dvh;
-    overflow:hidden;
-
-    /* 66vw holds the mark's centre close to the screen centre. The ribbon
-       is tilted, so its straight lower edge can be exactly on CHALANT's
-       midline at only one x: the screen centre and the wordmark's centre
-       have to share the error between them. A bigger mark keeps the two
-       points closer together, and keeps that shared error inside tolerance
-       at every shape. 240dvh only steps in on very wide letterbox windows,
-       so the mark never grows taller than the screen. */
-    --mark-w:min(66vw,240dvh);
-    --mark-h:calc(var(--mark-w) * 468 / 1370);
-    --mark-right:5vw;
-    --mark-bottom:8dvh;
-    --mark-top:calc(100dvh - var(--mark-bottom) - var(--mark-h));
-
-    --chalant-mid:calc(var(--mark-top) + var(--mark-h) * .234);
-    --tape-drop:calc((50vw - var(--mark-right) - var(--mark-w) / 2) * var(--tilt) / 2);
-    --tape-h:min(22.4vmax,34dvh);
-    --tape-top:calc(var(--chalant-mid) + var(--tape-drop) - var(--tape-h));
-  }
-
-  .mark{
-    position:absolute;
-    top:var(--mark-top);
-    right:var(--mark-right);
-    width:var(--mark-w);
-    height:var(--mark-h);
-  }
-  /* logo.png and lockup.png are cropped to the same ink, so a matching
-     negative offset cancels the transparent margin: the box edge is the
-     edge of the letterforms. */
-  .mark img{
-    position:absolute;
-    display:block;
-    height:auto;
-    user-select:none;
-    -webkit-user-drag:none;
-  }
-  /* logo.png 3000x3000 — ink at x1607..2976, y1272..1739 */
-  .mark--wide img{
-    width:calc(var(--mark-w) * 3000 / 1370);
-    left:calc(var(--mark-w) * -1607 / 1370);
-    top:calc(var(--mark-h) * -1272 / 468);
-  }
-  /* lockup.png 1418x517 — ink at x25..1394, y25..492 */
-  .mark--tall img{
-    width:calc(var(--mark-w) * 1418 / 1370);
-    left:calc(var(--mark-w) * -25 / 1370);
-    top:calc(var(--mark-h) * -25 / 468);
-  }
-  .mark--tall{display:none}
-
-  /* ---------- photoreal caution tape ---------- */
-  .tape{
-    position:absolute;
-    left:50%;
-    top:var(--tape-top);
-    width:150vmax;
-    height:var(--tape-h);
-    transform-origin:50% 100%;
-    transform:translateX(-50%) rotate(-2.5deg);
-    /* the tile is a whole number of stripe periods wide (9 x 424px), so it
-       repeats without a seam, and sizing it by the ribbon's height keeps
-       the stripe angle identical at every viewport width */
-    background-image:url("tape-tile.jpg");
-    background-repeat:repeat-x;
-    background-position:50% 50%;
-    background-size:auto 100%;
-    pointer-events:none;
-  }
-  .tape__text{
-    position:absolute;
-    left:0;
-    right:0;
-    top:50%;
-    transform:translateY(-50%);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:0 .55em;
-    padding-inline:2vw;
-    color:#0a0a0a;
-    font-weight:800;
-    font-size:clamp(13px,calc(var(--tape-h) * .115),44px);
-    line-height:1;
-    letter-spacing:.015em;
-    text-transform:uppercase;
-    white-space:nowrap;
-    text-shadow:none;
-  }
-  .dot{
-    width:.2em;
-    height:.2em;
-    border-radius:50%;
-    background:#0a0a0a;
-    flex:0 0 auto;
-  }
-
-  /* ---------- iPhone / portrait: centred lockup ---------- */
-  @media (max-aspect-ratio:1/1){
-    .stage{
-      --mark-w:min(88vw,152dvh);
-      --mark-top:calc(60dvh - var(--mark-h) / 2);
-      --tape-drop:0px;
-      --tape-h:min(35.6vw,26dvh);
-    }
-    .mark{right:auto;left:calc(50% - var(--mark-w) / 2)}
-    .mark--wide{display:none}
-    .mark--tall{display:block}
-    .tape__text{
-      font-size:clamp(12px,calc(var(--tape-h) * .115),30px);
-      letter-spacing:.005em;
-      gap:0 .45em;
-      padding-inline:1vw;
-    }
-  }
-
-  /* The statement is the next module: full width, left aligned, and set
-     at the same scale as the wordmark rather than as a caption under it. */
-  .statement{
-    min-height:100dvh;
-    padding-block:clamp(80px,16vh,200px) clamp(96px,18vh,220px);
-    padding-left:max(16px,4.5vw,env(safe-area-inset-left,0px));
-    padding-right:max(16px,4.5vw,env(safe-area-inset-right,0px));
-    text-align:left;
-  }
-  .pair{
-    margin:0;
-    max-width:100%;
-    /* 10.5vw matches CHALANT's cap height in the wide lockup (66vw × 217/1370). */
-    font-size:clamp(42px,10.5vw,240px);
-    font-weight:800;
-    line-height:.9;
-    letter-spacing:-.045em;
-  }
-  @media (max-aspect-ratio:1/1){
-    .pair{
-      /* Portrait lockup is 88vw, so the cap height is 13.9vw. */
-      font-size:clamp(46px,13.9vw,140px);
-    }
-  }
-  .pair + .pair{margin-top:clamp(64px,12vh,160px)}
-  .slogan,
-  .support{
-    display:block;
-    max-width:100%;
-    text-align:left;
-    text-wrap:balance;
-    hyphens:none;
-    word-break:normal;
-    overflow-wrap:normal;
-  }
-  .support{
-    margin-top:.2em;
-    font-size:clamp(28px,.5em,96px);
-    font-weight:700;
-    line-height:1.05;
-    letter-spacing:-.03em;
-  }
-
-  /* Next module: a display headline and a subordinate paragraph. */
-  .follow{
-    min-height:100dvh;
-    padding-block:clamp(80px,16vh,200px) clamp(96px,18vh,220px);
-    padding-left:max(16px,4.5vw,env(safe-area-inset-left,0px));
-    padding-right:max(16px,4.5vw,env(safe-area-inset-right,0px));
-    text-align:left;
-  }
-  .follow h2,
-  .follow p{
-    margin:0;
-    max-width:100%;
-    text-align:left;
-    hyphens:none;
-    word-break:normal;
-    overflow-wrap:normal;
-  }
-  .follow h2{
-    max-width:16em;
-    font-size:clamp(40px,6.6vw,96px);
-    font-weight:800;
-    line-height:.96;
-    letter-spacing:-.04em;
-    text-wrap:pretty;
-  }
-  .follow p{
-    max-width:34em;
-    margin-top:clamp(36px,6vh,80px);
-    font-size:clamp(20px,1.7vw,28px);
-    font-weight:400;
-    line-height:1.45;
-    letter-spacing:-.011em;
-    text-wrap:pretty;
-  }
-
-  @media (prefers-reduced-motion:no-preference){
-    .tape{animation:settle .8s cubic-bezier(.22,.8,.24,1) both}
-    /* transform only — the ribbon never fades, so it is always fully opaque */
-    @keyframes settle{
-      from{transform:translateX(-50%) rotate(-2.5deg) translateY(-18px)}
-      to{transform:translateX(-50%) rotate(-2.5deg)}
-    }
-  }
-  @media (prefers-reduced-motion:reduce){
-    .tape{animation:none}
-  }
-
-  /* ---------- Case study: Results ---------- */
-  :root{
-    --gold:#E8C90A;
-    --playfair:"Playfair Display",Georgia,"Times New Roman",serif;
-    --montserrat:"Montserrat",Helvetica,Arial,sans-serif;
-    --inter:"Inter",Helvetica,Arial,sans-serif;
-  }
+  /* Shared editorial measure, matching Results */
+  .hero__inner,
+  .method__inner,
+  .follow__inner,
+  .results__inner{max-width:1180px}
+  .hero,
+  .method,
+  .follow,
   .results{
-    padding-block:clamp(88px,16vh,200px) clamp(96px,18vh,220px);
     padding-left:max(16px,4.5vw,env(safe-area-inset-left,0px));
     padding-right:max(16px,4.5vw,env(safe-area-inset-right,0px));
     color:#fff;
     background:#000;
   }
-  .results__inner{max-width:1180px}
+
+  /* ---------- Hero: wordmark + caution tape ---------- */
+  .hero{
+    padding-top:clamp(72px,12vh,140px);
+    padding-bottom:0;
+    padding-left:0;
+    padding-right:0;
+  }
+  .hero__inner{
+    padding-left:max(16px,4.5vw,env(safe-area-inset-left,0px));
+    padding-right:max(16px,4.5vw,env(safe-area-inset-right,0px));
+  }
+  .hero__logo{
+    display:block;
+    width:min(100%,1180px);
+    height:auto;
+    user-select:none;
+    -webkit-user-drag:none;
+  }
+  .hero__tape{
+    margin-top:clamp(48px,8vh,96px);
+    height:clamp(44px,6vw,58px);
+    overflow:hidden;
+    background-image:url("tape-tile.jpg");
+    background-repeat:repeat-x;
+    background-position:50% 50%;
+    background-size:auto 100%;
+  }
+  .hero__tape-track{
+    display:flex;
+    align-items:center;
+    width:max-content;
+    height:100%;
+  }
+  .hero__tape-group{
+    display:flex;
+    align-items:center;
+    gap:0 .65em;
+    padding-inline:.65em;
+    color:var(--ink);
+    font-family:var(--montserrat);
+    font-size:clamp(12px,1.2vw,16px);
+    font-weight:700;
+    letter-spacing:.16em;
+    line-height:1;
+    text-transform:uppercase;
+    white-space:nowrap;
+  }
+  .hero__tape-group .dot{
+    width:.22em;
+    height:.22em;
+    border-radius:50%;
+    background:var(--ink);
+    flex:0 0 auto;
+  }
+  @media (prefers-reduced-motion:no-preference){
+    .hero__tape-track{animation:tape-scroll 42s linear infinite}
+  }
+  @keyframes tape-scroll{
+    from{transform:translateX(0)}
+    to{transform:translateX(-50%)}
+  }
+
+  /* ---------- Case study: Results ---------- */
+  .results{
+    padding-block:clamp(88px,16vh,200px) clamp(96px,18vh,220px);
+  }
   .results__eyebrow{
     margin:0 0 clamp(18px,3vh,32px);
     color:var(--gold);
@@ -519,15 +359,39 @@
     }
   }
 
+
+  /* ---------- Evergreen ---------- */
+  .follow{
+    padding-block:clamp(88px,16vh,200px);
+    border-top:1px solid rgba(255,255,255,.16);
+  }
+  .follow__title{
+    margin:0;
+    max-width:16em;
+    color:#fff;
+    font-family:var(--playfair);
+    font-size:clamp(36px,5.2vw,72px);
+    font-weight:600;
+    line-height:1.04;
+    letter-spacing:-.03em;
+    text-wrap:pretty;
+  }
+  .follow__body{
+    margin:clamp(28px,5vh,56px) 0 0;
+    max-width:34em;
+    color:#fff;
+    font-family:var(--inter);
+    font-size:clamp(18px,1.55vw,24px);
+    font-weight:400;
+    line-height:1.5;
+    letter-spacing:-.011em;
+    text-wrap:pretty;
+  }
+
   /* ---------- The method ---------- */
   .method{
     padding-block:clamp(88px,16vh,200px) clamp(64px,10vh,140px);
-    padding-left:max(16px,4.5vw,env(safe-area-inset-left,0px));
-    padding-right:max(16px,4.5vw,env(safe-area-inset-right,0px));
-    color:#fff;
-    background:#000;
   }
-  .method__inner{max-width:1180px}
   .method__eyebrow{
     margin:0 0 clamp(36px,6vh,72px);
     color:var(--gold);
@@ -581,8 +445,17 @@
     letter-spacing:-.03em;
     text-wrap:pretty;
   }
+  .method__kicker{
+    margin:10px 0 0;
+    color:var(--gold);
+    font-family:var(--montserrat);
+    font-size:clamp(12px,.95vw,14px);
+    font-weight:600;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+  }
   .method__sub{
-    margin:16px 0 0;
+    margin:14px 0 0;
     max-width:22em;
     color:rgba(255,255,255,.72);
     font-family:var(--inter);
@@ -725,27 +598,28 @@
     transform:scale(.35);
   }
 
-  /* Educate: figures gather to a brand */
+  /* Educate: a procession in V formation, walking in place */
   .crowd{
     display:block;
     width:min(240px,100%);
     height:auto;
     overflow:visible;
   }
-  .crowd__fig{
-    color:rgba(255,255,255,.88);
-    transform:translate(0,0);
-  }
-  .crowd__fig use,
-  .crowd__teacher use{
+  .crowd__fig,
+  .crowd__teacher{
     fill:none;
     stroke:currentColor;
-    stroke-width:1.15;
     stroke-linecap:round;
     stroke-linejoin:round;
   }
-  .crowd__teacher{color:var(--gold)}
-  .crowd__teacher use{stroke-width:1.45}
+  .crowd__fig{
+    color:rgba(255,255,255,.88);
+    stroke-width:1.15;
+  }
+  .crowd__teacher{
+    color:var(--gold);
+    stroke-width:1.4;
+  }
   .crowd__halo{
     fill:url(#crowd-halo);
     opacity:.9;
@@ -759,46 +633,67 @@
     font-weight:600;
     letter-spacing:.22em;
   }
+  .crowd__ground{
+    stroke:rgba(255,255,255,.16);
+    stroke-width:.7;
+    stroke-linecap:round;
+    fill:none;
+  }
+  .walker__arm,
+  .walker__leg{
+    transform-box:fill-box;
+    transform-origin:50% 0%;
+  }
 
-  /* Sell: neon brand mark */
-  .neon{
-    position:relative;
-    width:130px;
-    height:150px;
-    display:grid;
-    place-items:center;
+  /* Sell: a line-art wallet opening */
+  .wallet{
+    display:block;
+    width:min(168px,100%);
+    height:auto;
+    overflow:visible;
   }
-  .neon__after,
-  .neon__core{
-    font-family:var(--playfair);
-    font-size:120px;
-    font-weight:600;
-    line-height:1;
-    letter-spacing:-.05em;
+  .wallet__body,
+  .wallet__flap-shape{
+    fill:#000;
+    stroke:rgba(255,255,255,.86);
+    stroke-width:1.25;
+    stroke-linejoin:round;
   }
-  .neon__core{
-    position:relative;
-    z-index:1;
-    color:#fff;
+  .wallet__inner{
+    fill:none;
+    stroke:rgba(255,255,255,.28);
+    stroke-width:1;
+    stroke-linejoin:round;
   }
-  .neon__after{
-    position:absolute;
-    left:50%;
-    top:50%;
-    color:var(--gold);
-    opacity:.5;
-    filter:blur(6px);
-    transform:translate(calc(-50% + 7px), calc(-50% + 6px));
-    z-index:0;
+  .wallet__bill{
+    fill:rgba(232,201,10,.08);
+    stroke:var(--gold);
+    stroke-width:1.25;
+    stroke-linejoin:round;
+  }
+  .wallet__bill-rule{
+    stroke:var(--gold);
+    stroke-width:1;
+    stroke-linecap:round;
+    opacity:.7;
+  }
+  .wallet__glow{
+    fill:url(#wallet-glow);
+    opacity:.75;
     pointer-events:none;
+  }
+  .wallet__flap{
+    transform-box:fill-box;
+    transform-origin:50% 0%;
+    transform:rotate(-162deg);
+  }
+  .wallet__cash{
+    transform:translateY(-8px);
   }
 
   /* Final / reduced-motion defaults: the landed state */
   .slot__reel{transform:translate3d(0,var(--lock),0)}
   .slot__payline{border-top-color:rgba(232,201,10,.7); box-shadow:0 0 10px rgba(232,201,10,.28)}
-  .neon__core{
-    text-shadow:0 0 8px rgba(232,201,10,.7), 0 0 22px rgba(232,201,10,.35);
-  }
 
   @media (prefers-reduced-motion:no-preference){
     .slot__reel{
@@ -806,12 +701,9 @@
       filter:blur(5px);
     }
     .slot__payline{border-top-color:rgba(232,201,10,.18); box-shadow:none}
-    .crowd__fig{opacity:0; transform:translate(var(--tx),var(--ty))}
-    .crowd__halo{opacity:0}
-    .crowd__teacher{opacity:0}
-    .crowd__label{opacity:0}
-    .neon__core{opacity:0; text-shadow:none}
-    .neon__after{opacity:0}
+    .wallet__flap{transform:rotate(0deg)}
+    .wallet__cash{transform:translateY(22px);opacity:0}
+    .wallet__glow{opacity:0}
 
     [data-motion].is-playing .slot__reel--1{animation:slot-spin-1 10s linear infinite}
     [data-motion].is-playing .slot__reel--2{animation:slot-spin-2 10s linear infinite}
@@ -821,13 +713,17 @@
     [data-motion].is-playing .slot__ring{animation:slot-ring 10s linear infinite}
     [data-motion].is-playing .slot__sym--hit i{animation:slot-hit 10s linear infinite}
 
-    [data-motion].is-playing .crowd__halo{animation:crowd-halo 10s ease-in-out infinite}
-    [data-motion].is-playing .crowd__teacher{animation:crowd-teacher 10s ease-out infinite}
-    [data-motion].is-playing .crowd__label{animation:crowd-label 10s ease-out infinite}
-    [data-motion].is-playing .crowd__fig{animation:crowd-gather 10s ease-out var(--delay,0s) infinite}
+    [data-motion].is-playing .crowd__halo{animation:crowd-halo 3.2s ease-in-out infinite}
+    [data-motion].is-playing .walker__bob{animation:walk-bob .7s ease-in-out var(--delay,0s) infinite}
+    [data-motion].is-playing .walker__leg--l{animation:walk-leg-l .7s ease-in-out var(--delay,0s) infinite}
+    [data-motion].is-playing .walker__leg--r{animation:walk-leg-r .7s ease-in-out var(--delay,0s) infinite}
+    [data-motion].is-playing .walker__arm--l{animation:walk-arm-l .7s ease-in-out var(--delay,0s) infinite}
+    [data-motion].is-playing .walker__arm--r{animation:walk-arm-r .7s ease-in-out var(--delay,0s) infinite}
+    [data-motion].is-playing .crowd__ground-scroll{animation:ground-scroll 1.4s linear infinite}
 
-    [data-motion].is-playing .neon__core{animation:neon-on 10s linear infinite}
-    [data-motion].is-playing .neon__after{animation:neon-after 10s linear infinite}
+    [data-motion].is-playing .wallet__flap{animation:wallet-open 8s ease-in-out infinite}
+    [data-motion].is-playing .wallet__cash{animation:wallet-rise 8s ease-in-out infinite}
+    [data-motion].is-playing .wallet__glow{animation:wallet-glow 8s ease-in-out infinite}
 
     @keyframes slot-spin-1{
       0%{transform:translate3d(0,0,0);filter:blur(6px)}
@@ -872,94 +768,83 @@
     }
     @keyframes slot-hit{
       0%,52%{
-        border-color:rgba(255,255,255,.28);
-        background:transparent;
-        box-shadow:none;
+        border-color:var(--gold);
+        background:rgba(232,201,10,.12);
+        box-shadow:0 0 6px rgba(232,201,10,.28);
       }
       56%,86%{
         border-color:var(--gold);
-        background:rgba(232,201,10,.16);
+        background:rgba(232,201,10,.2);
         box-shadow:0 0 12px rgba(232,201,10,.55);
       }
       64%{box-shadow:0 0 18px rgba(232,201,10,.8)}
       92%,100%{
-        border-color:rgba(255,255,255,.28);
-        background:transparent;
-        box-shadow:none;
+        border-color:var(--gold);
+        background:rgba(232,201,10,.12);
+        box-shadow:0 0 6px rgba(232,201,10,.28);
       }
     }
     @keyframes crowd-halo{
-      0%,6%{opacity:0;transform:scale(.7)}
-      18%{opacity:.85;transform:scale(1)}
+      0%,100%{opacity:.8;transform:scale(1)}
       50%{opacity:1;transform:scale(1.06)}
-      84%{opacity:.85;transform:scale(1)}
-      92%,100%{opacity:0;transform:scale(1)}
     }
-    @keyframes crowd-teacher{
-      0%,4%{opacity:0}
-      14%,86%{opacity:1}
-      94%,100%{opacity:0}
+    @keyframes walk-bob{
+      0%,100%{transform:translateY(0)}
+      50%{transform:translateY(-0.85px)}
     }
-    @keyframes crowd-label{
-      0%,16%{opacity:0}
-      28%,86%{opacity:1}
-      94%,100%{opacity:0}
+    @keyframes walk-leg-l{
+      0%,100%{transform:rotate(15deg)}
+      50%{transform:rotate(-15deg)}
     }
-    @keyframes crowd-gather{
-      0%{transform:translate(var(--tx),var(--ty));opacity:0}
-      8%{transform:translate(var(--tx),var(--ty));opacity:0}
-      42%{transform:translate(0,0);opacity:.88}
-      86%{transform:translate(0,0);opacity:.88}
-      94%,100%{transform:translate(0,0);opacity:0}
+    @keyframes walk-leg-r{
+      0%,100%{transform:rotate(-15deg)}
+      50%{transform:rotate(15deg)}
     }
-    @keyframes neon-on{
-      0%,10%{opacity:0;text-shadow:none}
-      12%{opacity:.65;text-shadow:0 0 6px rgba(232,201,10,.5)}
-      14%{opacity:0;text-shadow:none}
-      20%{opacity:1;text-shadow:0 0 8px rgba(232,201,10,.7),0 0 22px rgba(232,201,10,.35)}
-      23%{opacity:.18;text-shadow:none}
-      25%{opacity:1;text-shadow:0 0 8px rgba(232,201,10,.8),0 0 24px rgba(232,201,10,.4)}
-      30%{opacity:.45}
-      33%{opacity:1;text-shadow:0 0 10px rgba(232,201,10,.85),0 0 28px rgba(232,201,10,.45)}
-      50%{text-shadow:0 0 8px rgba(232,201,10,.7),0 0 20px rgba(232,201,10,.32)}
-      62%{opacity:1;text-shadow:0 0 12px rgba(232,201,10,.9),0 0 30px rgba(232,201,10,.5)}
-      86%{opacity:1;text-shadow:0 0 8px rgba(232,201,10,.7),0 0 22px rgba(232,201,10,.35)}
-      94%,100%{opacity:0;text-shadow:none}
+    @keyframes walk-arm-l{
+      0%,100%{transform:rotate(-12deg)}
+      50%{transform:rotate(12deg)}
     }
-    @keyframes neon-after{
-      0%,24%{opacity:0;transform:translate(calc(-50% + 7px), calc(-50% + 6px));filter:blur(8px)}
-      36%{opacity:.28}
-      50%{opacity:.55;filter:blur(5px);transform:translate(calc(-50% + 8px), calc(-50% + 7px))}
-      68%{opacity:.4;filter:blur(7px)}
-      86%{opacity:.5;filter:blur(5px)}
-      94%,100%{opacity:0;filter:blur(8px)}
+    @keyframes walk-arm-r{
+      0%,100%{transform:rotate(12deg)}
+      50%{transform:rotate(-12deg)}
+    }
+    @keyframes ground-scroll{
+      from{transform:translateY(0)}
+      to{transform:translateY(16px)}
+    }
+    @keyframes wallet-open{
+      0%,10%{transform:rotate(0deg)}
+      30%,72%{transform:rotate(-162deg)}
+      90%,100%{transform:rotate(0deg)}
+    }
+    @keyframes wallet-rise{
+      0%,16%{transform:translateY(22px);opacity:0}
+      38%,70%{transform:translateY(-8px);opacity:1}
+      88%,100%{transform:translateY(22px);opacity:0}
+    }
+    @keyframes wallet-glow{
+      0%,20%{opacity:0}
+      40%{opacity:.85}
+      58%{opacity:.5}
+      70%{opacity:.8}
+      86%,100%{opacity:0}
     }
   }
 </style>
 </head>
 <body>
   <main>
-    <section class="stage">
-      <div class="mark mark--wide"><img src="logo.png" alt="Chalant Creative" width="3000" height="3000"></div>
-      <div class="mark mark--tall"><img src="lockup.png" alt="Chalant Creative" width="1418" height="517"></div>
-      <div class="tape" role="img" aria-label="Under construction. Coming soon.">
-        <div class="tape__text">
-          <span>Under Construction</span>
-          <span class="dot" aria-hidden="true"></span>
-          <span>Coming Soon</span>
+    <section class="hero" id="top" aria-label="CHALANT CREATIVE">
+      <div class="hero__inner">
+        <img class="hero__logo" src="lockup.png" alt="CHALANT CREATIVE" width="1418" height="517">
+      </div>
+      <div class="hero__tape" role="img" aria-label="Always under construction.">
+        <div class="hero__tape-track">
+          <div class="hero__tape-group"><span>Always under construction</span><span class="dot" aria-hidden="true"></span><span>Always under construction</span><span class="dot" aria-hidden="true"></span><span>Always under construction</span><span class="dot" aria-hidden="true"></span><span>Always under construction</span><span class="dot" aria-hidden="true"></span><span>Always under construction</span><span class="dot" aria-hidden="true"></span><span>Always under construction</span><span class="dot" aria-hidden="true"></span><span>Always under construction</span><span class="dot" aria-hidden="true"></span><span>Always under construction</span><span class="dot" aria-hidden="true"></span></div>
+          <div class="hero__tape-group" aria-hidden="true"><span>Always under construction</span><span class="dot" aria-hidden="true"></span><span>Always under construction</span><span class="dot" aria-hidden="true"></span><span>Always under construction</span><span class="dot" aria-hidden="true"></span><span>Always under construction</span><span class="dot" aria-hidden="true"></span><span>Always under construction</span><span class="dot" aria-hidden="true"></span><span>Always under construction</span><span class="dot" aria-hidden="true"></span><span>Always under construction</span><span class="dot" aria-hidden="true"></span><span>Always under construction</span><span class="dot" aria-hidden="true"></span></div>
         </div>
       </div>
     </section>
-    <section class="statement">
-      <p class="pair"><span class="slogan">Entertain the masses</span><span class="support">Stop the scroll</span></p>
-      <p class="pair"><span class="slogan">Educate the interested</span><span class="support">Teach</span></p>
-      <p class="pair"><span class="slogan">Sell the committed</span><span class="support">Cash in</span></p>
-    </section>
-    <section class="follow">
-      <h2>A video you post today can bring you business months from now.</h2>
-      <p>We write, produce, and distribute content people can keep finding. Each piece has a job: introduce your business, explain what you offer, or give someone a reason to buy.</p>
-    </section>
-
 
     <section class="method" id="method" aria-labelledby="method-heading">
       <div class="method__inner">
@@ -986,49 +871,191 @@
             </div>
             <p class="method__index">01</p>
             <h3 class="method__title">Entertain the masses</h3>
+            <p class="method__kicker">Stop the scroll</p>
             <p class="method__sub">Content engineered to stop the scroll.</p>
           </article>
 
           <article class="method__part" data-animate>
             <div class="method__visual" data-motion="educate" aria-hidden="true">
-              <svg class="crowd" viewBox="0 0 240 200" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+              <svg class="crowd" viewBox="0 0 240 200" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <defs>
                   <radialGradient id="crowd-halo" cx="50%" cy="50%" r="50%">
                     <stop offset="0%" stop-color="#E8C90A" stop-opacity=".42"/>
                     <stop offset="55%" stop-color="#E8C90A" stop-opacity=".12"/>
                     <stop offset="100%" stop-color="#E8C90A" stop-opacity="0"/>
                   </radialGradient>
-                  <g id="crowd-fig" fill="none" stroke="currentColor" stroke-width="1.15" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="0" cy="2.4" r="2.25"/>
-                    <path d="M0 4.8v1.1"/>
-                    <path d="M-3.6 12.2C-3.2 8.4-1.8 6.6 0 6.6s3.2 1.8 3.6 5.6"/>
-                  </g>
+                  <clipPath id="crowd-ground-clip">
+                    <rect x="16" y="78" width="208" height="122"/>
+                  </clipPath>
                 </defs>
-                <ellipse class="crowd__halo" cx="120" cy="82" rx="46" ry="46"/>
-                <g class="crowd__teacher" transform="translate(120 70) scale(2.15)">
-                  <use href="#crowd-fig" xlink:href="#crowd-fig"/>
+                <g class="crowd__ground" clip-path="url(#crowd-ground-clip)">
+                  <g class="crowd__ground-scroll">
+                  <path d="M92 84 h10"/>
+                  <path d="M138 84 h10"/>
+                  <path d="M84 118 h10"/>
+                  <path d="M146 118 h10"/>
+                  <path d="M72 156 h10"/>
+                  <path d="M158 156 h10"/>
+                  <path d="M62 194 h10"/>
+                  <path d="M168 194 h10"/>
+                  </g>
                 </g>
-                <text class="crowd__label" x="120" y="128" text-anchor="middle">YOUR BRAND</text>
-                <g class="crowd__fig" style="--tx:0px;--ty:-54px;--delay:0s"><g transform="translate(120 38) scale(1.28)"><use href="#crowd-fig" xlink:href="#crowd-fig"/></g></g><g class="crowd__fig" style="--tx:-42px;--ty:-36px;--delay:0.08s"><g transform="translate(82 52) scale(1.28)"><use href="#crowd-fig" xlink:href="#crowd-fig"/></g></g><g class="crowd__fig" style="--tx:45px;--ty:-36px;--delay:0.05s"><g transform="translate(160 50) scale(1.28)"><use href="#crowd-fig" xlink:href="#crowd-fig"/></g></g><g class="crowd__fig" style="--tx:-66px;--ty:-12px;--delay:0.16s"><g transform="translate(46 80) scale(1.28)"><use href="#crowd-fig" xlink:href="#crowd-fig"/></g></g><g class="crowd__fig" style="--tx:69px;--ty:-12px;--delay:0.12s"><g transform="translate(196 78) scale(1.28)"><use href="#crowd-fig" xlink:href="#crowd-fig"/></g></g><g class="crowd__fig" style="--tx:-75px;--ty:24px;--delay:0.22s"><g transform="translate(36 118) scale(1.28)"><use href="#crowd-fig" xlink:href="#crowd-fig"/></g></g><g class="crowd__fig" style="--tx:78px;--ty:24px;--delay:0.18s"><g transform="translate(206 116) scale(1.28)"><use href="#crowd-fig" xlink:href="#crowd-fig"/></g></g><g class="crowd__fig" style="--tx:-48px;--ty:54px;--delay:0.3s"><g transform="translate(68 150) scale(1.28)"><use href="#crowd-fig" xlink:href="#crowd-fig"/></g></g><g class="crowd__fig" style="--tx:0px;--ty:66px;--delay:0.26s"><g transform="translate(120 164) scale(1.28)"><use href="#crowd-fig" xlink:href="#crowd-fig"/></g></g><g class="crowd__fig" style="--tx:51px;--ty:51px;--delay:0.34s"><g transform="translate(174 148) scale(1.28)"><use href="#crowd-fig" xlink:href="#crowd-fig"/></g></g>
+                <ellipse class="crowd__halo" cx="120" cy="38" rx="34" ry="34"/>
+                <g class="crowd__teacher" style="--delay:0.0s" transform="translate(120 26) scale(2.15)"><g class="walker" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <g class="walker__bob">
+                      <circle cx="0" cy="2.1" r="2.15"/>
+                      <path d="M0 4.3 V8.1"/>
+                      <path class="walker__arm walker__arm--l" d="M0 5.3 L-2.8 8.4"/>
+                      <path class="walker__arm walker__arm--r" d="M0 5.3 L2.8 8.4"/>
+                      <path class="walker__leg walker__leg--l" d="M0 8.1 L-2.2 13.1"/>
+                      <path class="walker__leg walker__leg--r" d="M0 8.1 L2.2 13.1"/>
+                    </g>
+                  </g></g>
+                <text class="crowd__label" x="120" y="70" text-anchor="middle">YOUR BRAND</text>
+                <g class="crowd__fig" style="--delay:0.08s" transform="translate(104 96) scale(1.32)"><g class="walker" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <g class="walker__bob">
+                      <circle cx="0" cy="2.1" r="2.15"/>
+                      <path d="M0 4.3 V8.1"/>
+                      <path class="walker__arm walker__arm--l" d="M0 5.3 L-2.8 8.4"/>
+                      <path class="walker__arm walker__arm--r" d="M0 5.3 L2.8 8.4"/>
+                      <path class="walker__leg walker__leg--l" d="M0 8.1 L-2.2 13.1"/>
+                      <path class="walker__leg walker__leg--r" d="M0 8.1 L2.2 13.1"/>
+                    </g>
+                  </g></g>
+                <g class="crowd__fig" style="--delay:0.18s" transform="translate(136 96) scale(1.32)"><g class="walker" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <g class="walker__bob">
+                      <circle cx="0" cy="2.1" r="2.15"/>
+                      <path d="M0 4.3 V8.1"/>
+                      <path class="walker__arm walker__arm--l" d="M0 5.3 L-2.8 8.4"/>
+                      <path class="walker__arm walker__arm--r" d="M0 5.3 L2.8 8.4"/>
+                      <path class="walker__leg walker__leg--l" d="M0 8.1 L-2.2 13.1"/>
+                      <path class="walker__leg walker__leg--r" d="M0 8.1 L2.2 13.1"/>
+                    </g>
+                  </g></g>
+                <g class="crowd__fig" style="--delay:0.04s" transform="translate(82 132) scale(1.32)"><g class="walker" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <g class="walker__bob">
+                      <circle cx="0" cy="2.1" r="2.15"/>
+                      <path d="M0 4.3 V8.1"/>
+                      <path class="walker__arm walker__arm--l" d="M0 5.3 L-2.8 8.4"/>
+                      <path class="walker__arm walker__arm--r" d="M0 5.3 L2.8 8.4"/>
+                      <path class="walker__leg walker__leg--l" d="M0 8.1 L-2.2 13.1"/>
+                      <path class="walker__leg walker__leg--r" d="M0 8.1 L2.2 13.1"/>
+                    </g>
+                  </g></g>
+                <g class="crowd__fig" style="--delay:0.14s" transform="translate(120 132) scale(1.32)"><g class="walker" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <g class="walker__bob">
+                      <circle cx="0" cy="2.1" r="2.15"/>
+                      <path d="M0 4.3 V8.1"/>
+                      <path class="walker__arm walker__arm--l" d="M0 5.3 L-2.8 8.4"/>
+                      <path class="walker__arm walker__arm--r" d="M0 5.3 L2.8 8.4"/>
+                      <path class="walker__leg walker__leg--l" d="M0 8.1 L-2.2 13.1"/>
+                      <path class="walker__leg walker__leg--r" d="M0 8.1 L2.2 13.1"/>
+                    </g>
+                  </g></g>
+                <g class="crowd__fig" style="--delay:0.24s" transform="translate(158 132) scale(1.32)"><g class="walker" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <g class="walker__bob">
+                      <circle cx="0" cy="2.1" r="2.15"/>
+                      <path d="M0 4.3 V8.1"/>
+                      <path class="walker__arm walker__arm--l" d="M0 5.3 L-2.8 8.4"/>
+                      <path class="walker__arm walker__arm--r" d="M0 5.3 L2.8 8.4"/>
+                      <path class="walker__leg walker__leg--l" d="M0 8.1 L-2.2 13.1"/>
+                      <path class="walker__leg walker__leg--r" d="M0 8.1 L2.2 13.1"/>
+                    </g>
+                  </g></g>
+                <g class="crowd__fig" style="--delay:0.1s" transform="translate(50 172) scale(1.32)"><g class="walker" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <g class="walker__bob">
+                      <circle cx="0" cy="2.1" r="2.15"/>
+                      <path d="M0 4.3 V8.1"/>
+                      <path class="walker__arm walker__arm--l" d="M0 5.3 L-2.8 8.4"/>
+                      <path class="walker__arm walker__arm--r" d="M0 5.3 L2.8 8.4"/>
+                      <path class="walker__leg walker__leg--l" d="M0 8.1 L-2.2 13.1"/>
+                      <path class="walker__leg walker__leg--r" d="M0 8.1 L2.2 13.1"/>
+                    </g>
+                  </g></g>
+                <g class="crowd__fig" style="--delay:0.2s" transform="translate(85 172) scale(1.32)"><g class="walker" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <g class="walker__bob">
+                      <circle cx="0" cy="2.1" r="2.15"/>
+                      <path d="M0 4.3 V8.1"/>
+                      <path class="walker__arm walker__arm--l" d="M0 5.3 L-2.8 8.4"/>
+                      <path class="walker__arm walker__arm--r" d="M0 5.3 L2.8 8.4"/>
+                      <path class="walker__leg walker__leg--l" d="M0 8.1 L-2.2 13.1"/>
+                      <path class="walker__leg walker__leg--r" d="M0 8.1 L2.2 13.1"/>
+                    </g>
+                  </g></g>
+                <g class="crowd__fig" style="--delay:0.0s" transform="translate(120 172) scale(1.32)"><g class="walker" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <g class="walker__bob">
+                      <circle cx="0" cy="2.1" r="2.15"/>
+                      <path d="M0 4.3 V8.1"/>
+                      <path class="walker__arm walker__arm--l" d="M0 5.3 L-2.8 8.4"/>
+                      <path class="walker__arm walker__arm--r" d="M0 5.3 L2.8 8.4"/>
+                      <path class="walker__leg walker__leg--l" d="M0 8.1 L-2.2 13.1"/>
+                      <path class="walker__leg walker__leg--r" d="M0 8.1 L2.2 13.1"/>
+                    </g>
+                  </g></g>
+                <g class="crowd__fig" style="--delay:0.16s" transform="translate(155 172) scale(1.32)"><g class="walker" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <g class="walker__bob">
+                      <circle cx="0" cy="2.1" r="2.15"/>
+                      <path d="M0 4.3 V8.1"/>
+                      <path class="walker__arm walker__arm--l" d="M0 5.3 L-2.8 8.4"/>
+                      <path class="walker__arm walker__arm--r" d="M0 5.3 L2.8 8.4"/>
+                      <path class="walker__leg walker__leg--l" d="M0 8.1 L-2.2 13.1"/>
+                      <path class="walker__leg walker__leg--r" d="M0 8.1 L2.2 13.1"/>
+                    </g>
+                  </g></g>
+                <g class="crowd__fig" style="--delay:0.28s" transform="translate(190 172) scale(1.32)"><g class="walker" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <g class="walker__bob">
+                      <circle cx="0" cy="2.1" r="2.15"/>
+                      <path d="M0 4.3 V8.1"/>
+                      <path class="walker__arm walker__arm--l" d="M0 5.3 L-2.8 8.4"/>
+                      <path class="walker__arm walker__arm--r" d="M0 5.3 L2.8 8.4"/>
+                      <path class="walker__leg walker__leg--l" d="M0 8.1 L-2.2 13.1"/>
+                      <path class="walker__leg walker__leg--r" d="M0 8.1 L2.2 13.1"/>
+                    </g>
+                  </g></g>
               </svg>
             </div>
             <p class="method__index">02</p>
             <h3 class="method__title">Educate the interested</h3>
+            <p class="method__kicker">Teach</p>
             <p class="method__sub">Reward them for watching and they will follow.</p>
           </article>
 
           <article class="method__part" data-animate>
             <div class="method__visual" data-motion="sell" aria-hidden="true">
-              <div class="neon">
-                <span class="neon__after">C</span>
-                <span class="neon__core">C</span>
-              </div>
+              <svg class="wallet" viewBox="0 0 160 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <radialGradient id="wallet-glow" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stop-color="#E8C90A" stop-opacity=".45"/>
+                    <stop offset="55%" stop-color="#E8C90A" stop-opacity=".12"/>
+                    <stop offset="100%" stop-color="#E8C90A" stop-opacity="0"/>
+                  </radialGradient>
+                </defs>
+                <ellipse class="wallet__glow" cx="80" cy="58" rx="50" ry="38"/>
+                <rect class="wallet__body" x="28" y="70" width="104" height="50" rx="6"/>
+                <rect class="wallet__inner" x="36" y="78" width="88" height="34" rx="3"/>
+                <g class="wallet__flap">
+                  <rect class="wallet__flap-shape" x="28" y="70" width="104" height="50" rx="6"/>
+                </g>
+                <g class="wallet__cash">
+                  <rect class="wallet__bill" x="50" y="38" width="60" height="40" rx="2"/>
+                  <path class="wallet__bill-rule" d="M58 50 H102"/>
+                  <path class="wallet__bill-rule" d="M58 58 H90"/>
+                </g>
+              </svg>
             </div>
             <p class="method__index">03</p>
             <h3 class="method__title">Sell the committed</h3>
+            <p class="method__kicker">Cash in</p>
             <p class="method__sub">Be the first name they think of when your industry comes up.</p>
           </article>
         </div>
+      </div>
+    </section>
+
+    <section class="follow" id="evergreen">
+      <div class="follow__inner">
+        <h2 class="follow__title">A video you post today can bring you business months from now.</h2>
+        <p class="follow__body">We write, produce, and distribute content people can keep finding. Each piece has a job: introduce your business, explain what you offer, or give someone a reason to buy.</p>
       </div>
     </section>
 
