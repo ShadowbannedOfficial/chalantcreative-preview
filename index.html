@@ -55,96 +55,24 @@
     background:#000;
   }
 
-  /* ---------- Hero: wordmark + caution tape across the letters ---------- */
+  /* ---------- Hero: B3 lockup, tape edge to edge ---------- */
   .hero{
-    --gutter:max(16px,4.5vw,env(safe-area-inset-left,0px));
-    --logo-w:min(1180px, calc(100vw - 2 * var(--gutter)));
-    --logo-h:calc(var(--logo-w) * 517 / 1418);
-    /* lockup.png has a 25px inset; CHALANT cap midline is .234 of the 468px ink box */
-    --chalant-mid:calc(var(--logo-h) * 134.512 / 517);
-    --tilt:.043661;
-    --logo-center-x:calc(var(--gutter) + var(--logo-w) / 2);
-    --tape-drop:calc((50vw - var(--logo-center-x)) * var(--tilt) / 2);
-    --tape-h:min(22.4vmax,34dvh);
-    --hero-pad-top:max(clamp(72px,12vh,140px), calc(var(--tape-h) - var(--chalant-mid) + 80px));
-    --tape-top:calc(var(--hero-pad-top) + var(--chalant-mid) + var(--tape-drop) - var(--tape-h));
     position:relative;
     overflow:hidden;
-    padding-top:var(--hero-pad-top);
-    padding-bottom:clamp(48px,8vh,96px);
-    padding-left:0;
-    padding-right:0;
-  }
-  @media (max-aspect-ratio:1/1){
-    .hero{
-      --tape-h:min(35.6vw,26dvh);
-      --tape-drop:0px;
-    }
+    padding:0;
   }
   .hero__inner{
     position:relative;
     z-index:1;
     max-width:none;
-    padding-left:var(--gutter);
-    padding-right:var(--gutter);
+    padding:0;
   }
   .hero__logo{
     display:block;
-    width:var(--logo-w);
-    max-width:100%;
+    width:100%;
     height:auto;
     user-select:none;
     -webkit-user-drag:none;
-  }
-  .hero__tape{
-    position:absolute;
-    left:50%;
-    top:var(--tape-top);
-    width:150vmax;
-    height:var(--tape-h);
-    z-index:2;
-    overflow:hidden;
-    pointer-events:none;
-    transform-origin:50% 100%;
-    transform:translateX(-50%) rotate(-2.5deg);
-    background-image:url("tape-tile.jpg");
-    background-repeat:repeat-x;
-    background-position:50% 50%;
-    background-size:auto 100%;
-  }
-  .hero__tape-track{
-    display:flex;
-    align-items:center;
-    width:max-content;
-    height:100%;
-  }
-  .hero__tape-group{
-    display:flex;
-    align-items:center;
-    gap:0 .65em;
-    padding-inline:.65em;
-    color:var(--ink);
-    font-family:var(--montserrat);
-    font-size:clamp(13px,calc(var(--tape-h) * .115),44px);
-    font-weight:700;
-    letter-spacing:.14em;
-    line-height:1;
-    text-transform:uppercase;
-    white-space:nowrap;
-  }
-  .hero__tape-group .dot{
-    width:.22em;
-    height:.22em;
-    border-radius:50%;
-    background:var(--ink);
-    flex:0 0 auto;
-  }
-  @media (prefers-reduced-motion:no-preference){
-    .hero__tape-track{animation:tape-scroll 42s linear infinite}
-  }
-  @keyframes tape-scroll{
-    from{transform:translateX(0)}
-    to{transform:translateX(-50%)}
   }
 
   /* ---------- Case study ---------- */
@@ -200,7 +128,7 @@
   }
   .results__hero-label{
     margin:clamp(12px,2vh,20px) 0 0;
-    color:#fff;
+    color:var(--gold);
     font-family:var(--montserrat);
     font-size:clamp(14px,1.2vw,20px);
     font-weight:600;
@@ -240,7 +168,7 @@
   .results__stat-label{
     margin:10px 0 0;
     max-width:14em;
-    color:rgba(255,255,255,.72);
+    color:var(--gold);
     font-family:var(--montserrat);
     font-size:clamp(11px,.85vw,13px);
     font-weight:500;
@@ -423,16 +351,18 @@
   .follow__layout{
     display:grid;
     grid-template-columns:1fr;
+    grid-template-areas:"copy" "visual";
     gap:clamp(36px,6vw,64px);
     align-items:center;
   }
   @media (min-width:900px){
     .follow__layout{
-      grid-template-columns:minmax(0,1fr) 240px;
+      grid-template-columns:240px minmax(0,1fr);
+      grid-template-areas:"visual copy";
       gap:clamp(40px,6vw,80px);
     }
   }
-  .follow__copy{min-width:0}
+  .follow__copy{grid-area:copy;min-width:0}
   .follow__visual{
     display:flex;
     align-items:center;
@@ -455,26 +385,43 @@
     flex:0 0 auto;
     overflow:visible;
   }
-  .recycle__arrow{
+  .recycle__canvas{
+    display:block;
+    width:240px;
+    height:236px;
+    overflow:visible;
+  }
+  .recycle__shaft{
+    fill:none;
+    stroke:#fff;
+    stroke-width:48;
+    stroke-linecap:butt;
+    stroke-linejoin:miter;
+    stroke-miterlimit:4;
+    stroke-dasharray:26 74;
+  }
+  .recycle__shaft--1{stroke-dashoffset:14}
+  .recycle__shaft--2{stroke-dashoffset:-19.333}
+  .recycle__shaft--3{stroke-dashoffset:-52.667}
+  .recycle__back{fill:#9C860A}
+  .recycle__front{fill:var(--gold)}
+  .recycle__head{
     position:absolute;
     top:0;
     left:0;
-    width:52px;
-    height:24px;
+    width:28px;
+    height:26px;
     overflow:visible;
-    offset-path:path("M107.88,64.00A14,14 0 0 1 132.12,64.00L194.48,172.00A14,14 0 0 1 182.35,193.00L57.65,193.00A14,14 0 0 1 45.52,172.00Z");
-    offset-anchor:center;
+    offset-path:path("M113.94,47.09A7,7 0 0 1 126.06,47.09L207.94,188.91A7,7 0 0 1 201.88,199.41L38.12,199.41A7,7 0 0 1 32.06,188.91Z");
+    offset-anchor:0% 50%;
     offset-rotate:auto;
-    offset-distance:0%;
+    offset-distance:12%;
   }
-  .recycle__arrow--2{offset-distance:33.333%}
-  .recycle__arrow--3{offset-distance:66.667%}
-  .recycle__arrow-shape{
-    fill:none;
-    stroke:var(--gold);
-    stroke-width:1.75;
-    stroke-linecap:round;
-    stroke-linejoin:round;
+  .recycle__head--2{offset-distance:45.333%}
+  .recycle__head--3{offset-distance:78.667%}
+  .recycle__head-shape{
+    fill:var(--gold);
+    stroke:none;
   }
 
   /* ---------- The mantra ---------- */
@@ -944,12 +891,19 @@
       48%,80%{opacity:.95;transform:scale(1.15)}
       92%,100%{opacity:0;transform:scale(.6)}
     }
-    [data-motion].is-playing .recycle__arrow--1{animation:recycle-cycle 9s linear infinite}
-    [data-motion].is-playing .recycle__arrow--2{animation:recycle-cycle 9s linear infinite;animation-delay:-3s}
-    [data-motion].is-playing .recycle__arrow--3{animation:recycle-cycle 9s linear infinite;animation-delay:-6s}
-    @keyframes recycle-cycle{
-      from{offset-distance:0%}
-      to{offset-distance:100%}
+    [data-motion].is-playing .recycle__shaft--1{animation:recycle-dash 9s linear infinite}
+    [data-motion].is-playing .recycle__shaft--2{animation:recycle-dash 9s linear infinite;animation-delay:-3s}
+    [data-motion].is-playing .recycle__shaft--3{animation:recycle-dash 9s linear infinite;animation-delay:-6s}
+    [data-motion].is-playing .recycle__head--1{animation:recycle-head 9s linear infinite}
+    [data-motion].is-playing .recycle__head--2{animation:recycle-head 9s linear infinite;animation-delay:-3s}
+    [data-motion].is-playing .recycle__head--3{animation:recycle-head 9s linear infinite;animation-delay:-6s}
+    @keyframes recycle-dash{
+      from{stroke-dashoffset:14}
+      to{stroke-dashoffset:-86}
+    }
+    @keyframes recycle-head{
+      from{offset-distance:12%}
+      to{offset-distance:112%}
     }
   }
 </style>
@@ -958,17 +912,14 @@
   <main>
     <section class="hero" id="top" aria-label="CHALANT CREATIVE">
       <div class="hero__inner">
-        <img class="hero__logo" src="lockup.png" alt="CHALANT CREATIVE" width="1418" height="517">
-      </div>
-      <div class="hero__tape" role="img" aria-label="Always under construction.">
-        <div class="hero__tape-track">
-          <div class="hero__tape-group"><span>Always under construction</span><span class="dot" aria-hidden="true"></span><span>Always under construction</span><span class="dot" aria-hidden="true"></span><span>Always under construction</span><span class="dot" aria-hidden="true"></span><span>Always under construction</span><span class="dot" aria-hidden="true"></span><span>Always under construction</span><span class="dot" aria-hidden="true"></span><span>Always under construction</span><span class="dot" aria-hidden="true"></span><span>Always under construction</span><span class="dot" aria-hidden="true"></span><span>Always under construction</span><span class="dot" aria-hidden="true"></span></div>
-          <div class="hero__tape-group" aria-hidden="true"><span>Always under construction</span><span class="dot" aria-hidden="true"></span><span>Always under construction</span><span class="dot" aria-hidden="true"></span><span>Always under construction</span><span class="dot" aria-hidden="true"></span><span>Always under construction</span><span class="dot" aria-hidden="true"></span><span>Always under construction</span><span class="dot" aria-hidden="true"></span><span>Always under construction</span><span class="dot" aria-hidden="true"></span><span>Always under construction</span><span class="dot" aria-hidden="true"></span><span>Always under construction</span><span class="dot" aria-hidden="true"></span></div>
-        </div>
+        <picture>
+          <source srcset="variant-b3.svg" type="image/svg+xml">
+          <img class="hero__logo" src="variant-b3.png" alt="CHALANT CREATIVE" width="2000" height="648">
+        </picture>
       </div>
     </section>
 
-        <section class="method" id="mantra" aria-labelledby="mantra-heading">
+    <section class="method" id="mantra" aria-labelledby="mantra-heading">
       <div class="method__inner">
         <h2 class="method__eyebrow" id="mantra-heading" data-animate>The mantra</h2>
         <div class="method__list">
@@ -1209,17 +1160,36 @@
           </div>
           <div class="follow__visual" data-motion="evergreen" aria-hidden="true">
             <div class="recycle">
-              <svg class="recycle__arrow recycle__arrow--1" viewBox="0 0 52 24" aria-hidden="true">
-                <path class="recycle__arrow-shape" d="M4 12 H32"/>
-                <path class="recycle__arrow-shape" d="M24 4 L46 12 L24 20"/>
+              <svg class="recycle__canvas" viewBox="0 0 240 236" aria-hidden="true">
+                <defs>
+                  <path id="recycle-loop" pathLength="100" d="M113.94,47.09A7,7 0 0 1 126.06,47.09L207.94,188.91A7,7 0 0 1 201.88,199.41L38.12,199.41A7,7 0 0 1 32.06,188.91Z"/>
+                  <mask id="recycle-mask" maskUnits="userSpaceOnUse">
+                    <rect x="-12" y="-12" width="264" height="260" fill="#000"/>
+                    <use href="#recycle-loop" class="recycle__shaft recycle__shaft--1"/>
+                    <use href="#recycle-loop" class="recycle__shaft recycle__shaft--2"/>
+                    <use href="#recycle-loop" class="recycle__shaft recycle__shaft--3"/>
+                  </mask>
+                </defs>
+                <g mask="url(#recycle-mask)">
+                  <path class="recycle__back" d="M96.72,54.91L120.00,14.59L143.28,54.91L124.22,65.91L120.00,58.59L115.78,65.91Z"/>
+                  <path class="recycle__back" d="M209.78,170.09L233.05,210.41L186.50,210.41L186.50,188.41L194.95,188.41L190.72,181.09Z"/>
+                  <path class="recycle__back" d="M53.50,210.41L6.95,210.41L30.22,170.09L49.28,181.09L45.05,188.41L53.50,188.41Z"/>
+                  <path class="recycle__front" d="M142.68,53.87L123.62,64.87L191.32,182.13L210.38,171.13Z"/>
+                  <path class="recycle__front" d="M187.70,210.41L187.70,188.41L52.30,188.41L52.30,210.41Z"/>
+                  <path class="recycle__front" d="M29.62,171.13L48.68,182.13L116.38,64.87L97.32,53.87Z"/>
+                  <path class="recycle__front" d="M96.72,54.91L113.48,25.88L132.70,36.59L115.78,65.91Z"/>
+                  <path class="recycle__front" d="M209.78,170.09L226.54,199.12L207.65,210.41L190.72,181.09Z"/>
+                  <path class="recycle__front" d="M53.50,210.41L19.98,210.41L19.65,188.41L53.50,188.41Z"/>
+                </g>
               </svg>
-              <svg class="recycle__arrow recycle__arrow--2" viewBox="0 0 52 24" aria-hidden="true">
-                <path class="recycle__arrow-shape" d="M4 12 H32"/>
-                <path class="recycle__arrow-shape" d="M24 4 L46 12 L24 20"/>
+              <svg class="recycle__head recycle__head--1" viewBox="0 0 28 26" aria-hidden="true">
+                <path class="recycle__head-shape" d="M0 1.4 L26 13 L0 24.6 L8 13 Z"/>
               </svg>
-              <svg class="recycle__arrow recycle__arrow--3" viewBox="0 0 52 24" aria-hidden="true">
-                <path class="recycle__arrow-shape" d="M4 12 H32"/>
-                <path class="recycle__arrow-shape" d="M24 4 L46 12 L24 20"/>
+              <svg class="recycle__head recycle__head--2" viewBox="0 0 28 26" aria-hidden="true">
+                <path class="recycle__head-shape" d="M0 1.4 L26 13 L0 24.6 L8 13 Z"/>
+              </svg>
+              <svg class="recycle__head recycle__head--3" viewBox="0 0 28 26" aria-hidden="true">
+                <path class="recycle__head-shape" d="M0 1.4 L26 13 L0 24.6 L8 13 Z"/>
               </svg>
             </div>
           </div>
