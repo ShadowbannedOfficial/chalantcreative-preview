@@ -54,28 +54,58 @@
     background:#000;
   }
 
-  /* ---------- Hero: wordmark + caution tape ---------- */
+  /* ---------- Hero: wordmark + caution tape across the letters ---------- */
   .hero{
-    padding-top:clamp(72px,12vh,140px);
-    padding-bottom:0;
+    --gutter:max(16px,4.5vw,env(safe-area-inset-left,0px));
+    --logo-w:min(1180px, calc(100vw - 2 * var(--gutter)));
+    --logo-h:calc(var(--logo-w) * 517 / 1418);
+    /* lockup.png has a 25px inset; CHALANT cap midline is .234 of the 468px ink box */
+    --chalant-mid:calc(var(--logo-h) * 134.512 / 517);
+    --tilt:.043661;
+    --logo-center-x:calc(var(--gutter) + var(--logo-w) / 2);
+    --tape-drop:calc((50vw - var(--logo-center-x)) * var(--tilt) / 2);
+    --tape-h:min(22.4vmax,34dvh);
+    --hero-pad-top:max(clamp(72px,12vh,140px), calc(var(--tape-h) - var(--chalant-mid) + 80px));
+    --tape-top:calc(var(--hero-pad-top) + var(--chalant-mid) + var(--tape-drop) - var(--tape-h));
+    position:relative;
+    overflow:hidden;
+    padding-top:var(--hero-pad-top);
+    padding-bottom:clamp(48px,8vh,96px);
     padding-left:0;
     padding-right:0;
   }
+  @media (max-aspect-ratio:1/1){
+    .hero{
+      --tape-h:min(35.6vw,26dvh);
+      --tape-drop:0px;
+    }
+  }
   .hero__inner{
-    padding-left:max(16px,4.5vw,env(safe-area-inset-left,0px));
-    padding-right:max(16px,4.5vw,env(safe-area-inset-right,0px));
+    position:relative;
+    z-index:1;
+    max-width:none;
+    padding-left:var(--gutter);
+    padding-right:var(--gutter);
   }
   .hero__logo{
     display:block;
-    width:min(100%,1180px);
+    width:var(--logo-w);
+    max-width:100%;
     height:auto;
     user-select:none;
     -webkit-user-drag:none;
   }
   .hero__tape{
-    margin-top:clamp(48px,8vh,96px);
-    height:clamp(44px,6vw,58px);
+    position:absolute;
+    left:50%;
+    top:var(--tape-top);
+    width:150vmax;
+    height:var(--tape-h);
+    z-index:2;
     overflow:hidden;
+    pointer-events:none;
+    transform-origin:50% 100%;
+    transform:translateX(-50%) rotate(-2.5deg);
     background-image:url("tape-tile.jpg");
     background-repeat:repeat-x;
     background-position:50% 50%;
@@ -94,9 +124,9 @@
     padding-inline:.65em;
     color:var(--ink);
     font-family:var(--montserrat);
-    font-size:clamp(12px,1.2vw,16px);
+    font-size:clamp(13px,calc(var(--tape-h) * .115),44px);
     font-weight:700;
-    letter-spacing:.16em;
+    letter-spacing:.14em;
     line-height:1;
     text-transform:uppercase;
     white-space:nowrap;
@@ -310,9 +340,9 @@
       opacity:1;
       transform:none;
     }
-    .method__part:nth-child(1){transition-delay:0s}
-    .method__part:nth-child(2){transition-delay:.12s}
-    .method__part:nth-child(3){transition-delay:.24s}
+    .method__row:nth-child(1){transition-delay:0s}
+    .method__row:nth-child(2){transition-delay:.12s}
+    .method__row:nth-child(3){transition-delay:.24s}
     .results .line{
       stroke-dasharray:1;
       stroke-dashoffset:1;
@@ -401,71 +431,56 @@
     letter-spacing:.22em;
     text-transform:uppercase;
   }
-  .method__grid{
+  .method__list{
+    display:flex;
+    flex-direction:column;
+    gap:clamp(72px,12vh,160px);
+  }
+  .method__row{
     display:grid;
     grid-template-columns:1fr;
-    gap:clamp(56px,9vh,96px);
+    gap:clamp(28px,5vw,48px);
+    align-items:center;
+    text-align:left;
   }
   @media (min-width:900px){
-    .method__grid{
-      grid-template-columns:repeat(3,minmax(0,1fr));
-      gap:0;
+    .method__row{
+      grid-template-columns:minmax(0,1fr) auto;
+      gap:clamp(40px,6vw,80px);
     }
-    .method__part{
-      padding-right:clamp(24px,2.8vw,48px);
-    }
-    .method__part + .method__part{
-      padding-left:clamp(24px,2.8vw,48px);
-      border-left:1px solid rgba(255,255,255,.16);
-    }
-    .method__part:last-child{padding-right:0}
+  }
+  .method__copy{min-width:0}
+  .method__title{
+    margin:0;
+    color:#fff;
+    font-family:var(--playfair);
+    font-size:clamp(48px,7.5vw,120px);
+    font-weight:600;
+    line-height:.95;
+    letter-spacing:-.03em;
+    text-wrap:pretty;
+  }
+  .method__sub{
+    margin:clamp(16px,2.4vh,28px) 0 0;
+    max-width:28em;
+    color:rgba(255,255,255,.84);
+    font-family:var(--inter);
+    font-size:clamp(18px,1.6vw,26px);
+    font-weight:400;
+    line-height:1.45;
+    letter-spacing:-.011em;
+    text-wrap:pretty;
   }
   .method__visual{
     display:flex;
     align-items:center;
-    justify-content:center;
-    height:236px;
+    justify-content:flex-start;
     margin:0;
+    min-height:0;
   }
-  .method__index{
-    margin:clamp(22px,3vh,32px) 0 0;
-    color:var(--gold);
-    font-family:var(--montserrat);
-    font-size:clamp(11px,.85vw,13px);
-    font-weight:600;
-    letter-spacing:.22em;
+  @media (min-width:900px){
+    .method__visual{justify-content:center}
   }
-  .method__title{
-    margin:12px 0 0;
-    color:#fff;
-    font-family:var(--playfair);
-    font-size:clamp(28px,2.6vw,38px);
-    font-weight:600;
-    line-height:1.08;
-    letter-spacing:-.03em;
-    text-wrap:pretty;
-  }
-  .method__kicker{
-    margin:10px 0 0;
-    color:var(--gold);
-    font-family:var(--montserrat);
-    font-size:clamp(12px,.95vw,14px);
-    font-weight:600;
-    letter-spacing:.18em;
-    text-transform:uppercase;
-  }
-  .method__sub{
-    margin:14px 0 0;
-    max-width:22em;
-    color:rgba(255,255,255,.72);
-    font-family:var(--inter);
-    font-size:clamp(15px,1.15vw,17px);
-    font-weight:400;
-    line-height:1.5;
-    letter-spacing:-.011em;
-    text-wrap:pretty;
-  }
-
 
   /* Entertain: phone as a classy slot reel */
   .phone{
@@ -846,11 +861,15 @@
       </div>
     </section>
 
-    <section class="method" id="method" aria-labelledby="method-heading">
+        <section class="method" id="method" aria-labelledby="method-heading">
       <div class="method__inner">
         <h2 class="method__eyebrow" id="method-heading" data-animate>The method</h2>
-        <div class="method__grid">
-          <article class="method__part" data-animate>
+        <div class="method__list">
+          <article class="method__row" data-animate>
+            <div class="method__copy">
+              <h3 class="method__title">Entertain the masses</h3>
+              <p class="method__sub">Content engineered to stop the scroll.</p>
+            </div>
             <div class="method__visual" data-motion="entertain" aria-hidden="true">
               <div class="phone">
                 <svg class="phone__shell" viewBox="0 0 128 236" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -869,13 +888,12 @@
                 </div>
               </div>
             </div>
-            <p class="method__index">01</p>
-            <h3 class="method__title">Entertain the masses</h3>
-            <p class="method__kicker">Stop the scroll</p>
-            <p class="method__sub">Content engineered to stop the scroll.</p>
           </article>
-
-          <article class="method__part" data-animate>
+          <article class="method__row" data-animate>
+            <div class="method__copy">
+              <h3 class="method__title">Educate the interested</h3>
+              <p class="method__sub">Reward them for watching and they will follow.</p>
+            </div>
             <div class="method__visual" data-motion="educate" aria-hidden="true">
               <svg class="crowd" viewBox="0 0 240 200" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <defs>
@@ -1014,13 +1032,12 @@
                   </g></g>
               </svg>
             </div>
-            <p class="method__index">02</p>
-            <h3 class="method__title">Educate the interested</h3>
-            <p class="method__kicker">Teach</p>
-            <p class="method__sub">Reward them for watching and they will follow.</p>
           </article>
-
-          <article class="method__part" data-animate>
+          <article class="method__row" data-animate>
+            <div class="method__copy">
+              <h3 class="method__title">Sell the committed</h3>
+              <p class="method__sub">Be the first name they think of when your industry comes up.</p>
+            </div>
             <div class="method__visual" data-motion="sell" aria-hidden="true">
               <svg class="wallet" viewBox="0 0 160 150" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <defs>
@@ -1043,10 +1060,6 @@
                 </g>
               </svg>
             </div>
-            <p class="method__index">03</p>
-            <h3 class="method__title">Sell the committed</h3>
-            <p class="method__kicker">Cash in</p>
-            <p class="method__sub">Be the first name they think of when your industry comes up.</p>
           </article>
         </div>
       </div>
