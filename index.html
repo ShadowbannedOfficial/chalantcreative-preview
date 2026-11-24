@@ -44,35 +44,58 @@
   .hero__inner,
   .method__inner,
   .follow__inner,
-  .results__inner{max-width:1180px}
+  .results__inner,
+  .signal__inner{max-width:1180px}
   .hero,
   .method,
   .follow,
-  .results{
+  .results,
+  .signal{
     padding-left:max(16px,4.5vw,env(safe-area-inset-left,0px));
     padding-right:max(16px,4.5vw,env(safe-area-inset-right,0px));
     color:#fff;
     background:#000;
   }
 
-  /* ---------- Hero: B3 lockup, tape edge to edge ---------- */
+  /* ---------- Hero: B3 lockup, tape edge to edge, wordmark in-gutter ---------- */
   .hero{
+    --gutter:max(16px,4.5vw,env(safe-area-inset-right,0px));
     position:relative;
     overflow:hidden;
     padding:0;
   }
-  .hero__inner{
+  .hero__stage{
     position:relative;
-    z-index:1;
-    max-width:none;
-    padding:0;
+    display:flex;
+    justify-content:flex-end;
+    padding-top:max(48px,7vw);
+    padding-bottom:max(64px,9vw);
+    padding-right:var(--gutter);
+    padding-left:0;
+  }
+  .hero__lockup{
+    position:relative;
+    width:min(68.5vw, calc(100vw - 2 * var(--gutter)));
+    flex:0 0 auto;
   }
   .hero__logo{
     display:block;
     width:100%;
     height:auto;
+    position:relative;
+    z-index:1;
     user-select:none;
     -webkit-user-drag:none;
+  }
+  .hero__tape{
+    position:absolute;
+    left:calc(-4000 / 1370 * 100%);
+    top:calc(-200 / 468 * 100%);
+    width:calc(8000 / 1370 * 100%);
+    height:calc(900 / 468 * 100%);
+    z-index:2;
+    pointer-events:none;
+    overflow:visible;
   }
 
   /* ---------- Case study ---------- */
@@ -391,37 +414,71 @@
     height:236px;
     overflow:visible;
   }
-  .recycle__shaft{
-    fill:none;
-    stroke:#fff;
-    stroke-width:48;
-    stroke-linecap:butt;
-    stroke-linejoin:miter;
-    stroke-miterlimit:4;
-    stroke-dasharray:26 74;
+  .recycle__spin{
+    transform-box:view-box;
+    transform-origin:120px 118px;
   }
-  .recycle__shaft--1{stroke-dashoffset:14}
-  .recycle__shaft--2{stroke-dashoffset:-19.333}
-  .recycle__shaft--3{stroke-dashoffset:-52.667}
-  .recycle__back{fill:#9C860A}
-  .recycle__front{fill:var(--gold)}
-  .recycle__head{
-    position:absolute;
-    top:0;
-    left:0;
-    width:28px;
-    height:26px;
+  .recycle__band{fill:#9C860A}
+  .recycle__head{fill:var(--gold)}
+
+
+
+  /* ---------- Traffic light: green until in view, then yellow (speed up) ---------- */
+  .signal{
+    padding-block:clamp(36px,6vh,72px) clamp(24px,4vh,48px);
+  }
+  .signal__light{
+    display:block;
+    width:100%;
+    height:auto;
     overflow:visible;
-    offset-path:path("M113.94,47.09A7,7 0 0 1 126.06,47.09L207.94,188.91A7,7 0 0 1 201.88,199.41L38.12,199.41A7,7 0 0 1 32.06,188.91Z");
-    offset-anchor:0% 50%;
-    offset-rotate:auto;
-    offset-distance:12%;
   }
-  .recycle__head--2{offset-distance:45.333%}
-  .recycle__head--3{offset-distance:78.667%}
-  .recycle__head-shape{
+  .signal__housing{
+    fill:#000;
+    stroke:rgba(255,255,255,.86);
+    stroke-width:1.5;
+  }
+  .signal__lamp{
+    stroke-width:1.25;
+    transition:fill .4s ease,stroke .4s ease,filter .4s ease;
+  }
+  .signal__lamp--red{
+    fill:#1a0a0a;
+    stroke:rgba(255,80,80,.28);
+  }
+  .signal__lamp--yellow{
+    fill:#141414;
+    stroke:rgba(255,255,255,.28);
+  }
+  .signal__lamp--green{
+    fill:#2EBB5A;
+    stroke:#6EE58A;
+    filter:url(#signal-green-glow);
+  }
+  [data-motion="signal"].is-playing .signal__lamp--green,
+  [data-motion="signal"].is-static .signal__lamp--green{
+    fill:#141414;
+    stroke:rgba(255,255,255,.28);
+    filter:none;
+  }
+  [data-motion="signal"].is-playing .signal__lamp--yellow,
+  [data-motion="signal"].is-static .signal__lamp--yellow{
     fill:var(--gold);
-    stroke:none;
+    stroke:#F3DE55;
+    filter:url(#signal-yellow-glow);
+  }
+  @media (prefers-reduced-motion:reduce){
+    .signal__lamp{transition:none}
+    .signal__lamp--green{
+      fill:#141414;
+      stroke:rgba(255,255,255,.28);
+      filter:none;
+    }
+    .signal__lamp--yellow{
+      fill:var(--gold);
+      stroke:#F3DE55;
+      filter:url(#signal-yellow-glow);
+    }
   }
 
   /* ---------- The mantra ---------- */
@@ -678,6 +735,13 @@
   .walker__leg--r{transform:rotate(-26deg)}
   .walker__arm--l{transform:rotate(-22deg)}
   .walker__arm--r{transform:rotate(22deg)}
+  .walker__phone-body{
+    fill:#000;
+    stroke:currentColor;
+    stroke-width:.28;
+  }
+  .walker__phone-screen{fill:var(--gold)}
+  .walker__phone-glow{fill:var(--gold);opacity:.4}
 
   /* Sell: a men's bifold that opens on the vertical fold, then a gold card levitates */
   .wallet{
@@ -895,19 +959,10 @@
       48%,80%{opacity:.95;transform:scale(1.15)}
       92%,100%{opacity:0;transform:scale(.6)}
     }
-    [data-motion].is-playing .recycle__shaft--1{animation:recycle-dash 9s linear infinite}
-    [data-motion].is-playing .recycle__shaft--2{animation:recycle-dash 9s linear infinite;animation-delay:-3s}
-    [data-motion].is-playing .recycle__shaft--3{animation:recycle-dash 9s linear infinite;animation-delay:-6s}
-    [data-motion].is-playing .recycle__head--1{animation:recycle-head 9s linear infinite}
-    [data-motion].is-playing .recycle__head--2{animation:recycle-head 9s linear infinite;animation-delay:-3s}
-    [data-motion].is-playing .recycle__head--3{animation:recycle-head 9s linear infinite;animation-delay:-6s}
-    @keyframes recycle-dash{
-      from{stroke-dashoffset:14}
-      to{stroke-dashoffset:-86}
-    }
-    @keyframes recycle-head{
-      from{offset-distance:12%}
-      to{offset-distance:112%}
+    [data-motion].is-playing .recycle__spin{animation:recycle-spin 12s linear infinite}
+    @keyframes recycle-spin{
+      from{transform:rotate(0deg)}
+      to{transform:rotate(360deg)}
     }
   }
 </style>
@@ -915,14 +970,45 @@
 <body>
   <main>
     <section class="hero" id="top" aria-label="CHALANT CREATIVE">
-      <div class="hero__inner">
-        <picture>
-          <source srcset="variant-b3.svg" type="image/svg+xml">
-          <img class="hero__logo" src="variant-b3.png" alt="CHALANT CREATIVE" width="2000" height="648">
-        </picture>
+      <div class="hero__stage">
+        <div class="hero__lockup">
+          <img class="hero__tape" src="tape-b3.svg" alt="" width="8000" height="900" aria-hidden="true">
+          <picture>
+            <source srcset="wordmark.svg" type="image/svg+xml">
+            <img class="hero__logo" src="wordmark.png" alt="CHALANT CREATIVE" width="1370" height="468">
+          </picture>
+        </div>
       </div>
     </section>
 
+
+
+    <section class="signal" id="signal" aria-label="Yellow means speed up to the next section">
+      <div class="signal__inner">
+        <svg class="signal__light" data-motion="signal" viewBox="0 0 720 180" aria-hidden="true">
+          <defs>
+            <filter id="signal-green-glow" x="-40%" y="-40%" width="180%" height="180%">
+              <feGaussianBlur stdDeviation="6" result="blur"/>
+              <feMerge>
+                <feMergeNode in="blur"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+            <filter id="signal-yellow-glow" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="8" result="blur"/>
+              <feMerge>
+                <feMergeNode in="blur"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+          </defs>
+          <rect class="signal__housing" x="16" y="32" width="688" height="116" rx="20"/>
+          <circle class="signal__lamp signal__lamp--red" cx="144" cy="90" r="40"/>
+          <circle class="signal__lamp signal__lamp--yellow" cx="360" cy="90" r="40"/>
+          <circle class="signal__lamp signal__lamp--green" cx="576" cy="90" r="40"/>
+        </svg>
+      </div>
+    </section>
     <section class="method" id="mantra" aria-labelledby="mantra-heading">
       <div class="method__inner">
         <h2 class="method__eyebrow" id="mantra-heading" data-animate>The mantra</h2>
@@ -986,7 +1072,12 @@
                       <circle cx="2.6" cy="2.3" r="2.35"/>
                       <path d="M4.85 2.45 L5.45 2.85"/>
                       <path d="M1.4 4.55 L0 10.2"/>
-                      <path class="walker__arm walker__arm--r" d="M1.0 5.4 L1.0 11.0"/>
+                      <path class="walker__arm-hold" d="M1.0 5.4 L5.5 3.15"/>
+                      <g class="walker__phone" transform="translate(5.15 1.15) rotate(-18)">
+                        <ellipse class="walker__phone-glow" cx="1.0" cy="1.7" rx="2.2" ry="2.6"/>
+                        <rect class="walker__phone-body" x="0" y="0" width="2.05" height="3.55" rx="0.28"/>
+                        <rect class="walker__phone-screen" x="0.28" y="0.32" width="1.5" height="2.55" rx="0.1"/>
+                      </g>
                       <path class="walker__leg walker__leg--r" d="M0 10.2 L0 16.5"/>
                     </g>
                   </g></g>
@@ -997,7 +1088,12 @@
                       <circle cx="2.6" cy="2.3" r="2.35"/>
                       <path d="M4.85 2.45 L5.45 2.85"/>
                       <path d="M1.4 4.55 L0 10.2"/>
-                      <path class="walker__arm walker__arm--r" d="M1.0 5.4 L1.0 11.0"/>
+                      <path class="walker__arm-hold" d="M1.0 5.4 L5.5 3.15"/>
+                      <g class="walker__phone" transform="translate(5.15 1.15) rotate(-18)">
+                        <ellipse class="walker__phone-glow" cx="1.0" cy="1.7" rx="2.2" ry="2.6"/>
+                        <rect class="walker__phone-body" x="0" y="0" width="2.05" height="3.55" rx="0.28"/>
+                        <rect class="walker__phone-screen" x="0.28" y="0.32" width="1.5" height="2.55" rx="0.1"/>
+                      </g>
                       <path class="walker__leg walker__leg--r" d="M0 10.2 L0 16.5"/>
                     </g>
                   </g></g>
@@ -1008,7 +1104,12 @@
                       <circle cx="2.6" cy="2.3" r="2.35"/>
                       <path d="M4.85 2.45 L5.45 2.85"/>
                       <path d="M1.4 4.55 L0 10.2"/>
-                      <path class="walker__arm walker__arm--r" d="M1.0 5.4 L1.0 11.0"/>
+                      <path class="walker__arm-hold" d="M1.0 5.4 L5.5 3.15"/>
+                      <g class="walker__phone" transform="translate(5.15 1.15) rotate(-18)">
+                        <ellipse class="walker__phone-glow" cx="1.0" cy="1.7" rx="2.2" ry="2.6"/>
+                        <rect class="walker__phone-body" x="0" y="0" width="2.05" height="3.55" rx="0.28"/>
+                        <rect class="walker__phone-screen" x="0.28" y="0.32" width="1.5" height="2.55" rx="0.1"/>
+                      </g>
                       <path class="walker__leg walker__leg--r" d="M0 10.2 L0 16.5"/>
                     </g>
                   </g></g>
@@ -1019,7 +1120,12 @@
                       <circle cx="2.6" cy="2.3" r="2.35"/>
                       <path d="M4.85 2.45 L5.45 2.85"/>
                       <path d="M1.4 4.55 L0 10.2"/>
-                      <path class="walker__arm walker__arm--r" d="M1.0 5.4 L1.0 11.0"/>
+                      <path class="walker__arm-hold" d="M1.0 5.4 L5.5 3.15"/>
+                      <g class="walker__phone" transform="translate(5.15 1.15) rotate(-18)">
+                        <ellipse class="walker__phone-glow" cx="1.0" cy="1.7" rx="2.2" ry="2.6"/>
+                        <rect class="walker__phone-body" x="0" y="0" width="2.05" height="3.55" rx="0.28"/>
+                        <rect class="walker__phone-screen" x="0.28" y="0.32" width="1.5" height="2.55" rx="0.1"/>
+                      </g>
                       <path class="walker__leg walker__leg--r" d="M0 10.2 L0 16.5"/>
                     </g>
                   </g></g>
@@ -1030,7 +1136,12 @@
                       <circle cx="2.6" cy="2.3" r="2.35"/>
                       <path d="M4.85 2.45 L5.45 2.85"/>
                       <path d="M1.4 4.55 L0 10.2"/>
-                      <path class="walker__arm walker__arm--r" d="M1.0 5.4 L1.0 11.0"/>
+                      <path class="walker__arm-hold" d="M1.0 5.4 L5.5 3.15"/>
+                      <g class="walker__phone" transform="translate(5.15 1.15) rotate(-18)">
+                        <ellipse class="walker__phone-glow" cx="1.0" cy="1.7" rx="2.2" ry="2.6"/>
+                        <rect class="walker__phone-body" x="0" y="0" width="2.05" height="3.55" rx="0.28"/>
+                        <rect class="walker__phone-screen" x="0.28" y="0.32" width="1.5" height="2.55" rx="0.1"/>
+                      </g>
                       <path class="walker__leg walker__leg--r" d="M0 10.2 L0 16.5"/>
                     </g>
                   </g></g>
@@ -1096,35 +1207,14 @@
           <div class="follow__visual" data-motion="evergreen" aria-hidden="true">
             <div class="recycle">
               <svg class="recycle__canvas" viewBox="0 0 240 236" aria-hidden="true">
-                <defs>
-                  <path id="recycle-loop" pathLength="100" d="M113.94,47.09A7,7 0 0 1 126.06,47.09L207.94,188.91A7,7 0 0 1 201.88,199.41L38.12,199.41A7,7 0 0 1 32.06,188.91Z"/>
-                  <mask id="recycle-mask" maskUnits="userSpaceOnUse">
-                    <rect x="-12" y="-12" width="264" height="260" fill="#000"/>
-                    <use href="#recycle-loop" class="recycle__shaft recycle__shaft--1"/>
-                    <use href="#recycle-loop" class="recycle__shaft recycle__shaft--2"/>
-                    <use href="#recycle-loop" class="recycle__shaft recycle__shaft--3"/>
-                  </mask>
-                </defs>
-                <g mask="url(#recycle-mask)">
-                  <path class="recycle__back" d="M96.72,54.91L120.00,14.59L143.28,54.91L124.22,65.91L120.00,58.59L115.78,65.91Z"/>
-                  <path class="recycle__back" d="M209.78,170.09L233.05,210.41L186.50,210.41L186.50,188.41L194.95,188.41L190.72,181.09Z"/>
-                  <path class="recycle__back" d="M53.50,210.41L6.95,210.41L30.22,170.09L49.28,181.09L45.05,188.41L53.50,188.41Z"/>
-                  <path class="recycle__front" d="M142.68,53.87L123.62,64.87L191.32,182.13L210.38,171.13Z"/>
-                  <path class="recycle__front" d="M187.70,210.41L187.70,188.41L52.30,188.41L52.30,210.41Z"/>
-                  <path class="recycle__front" d="M29.62,171.13L48.68,182.13L116.38,64.87L97.32,53.87Z"/>
-                  <path class="recycle__front" d="M96.72,54.91L113.48,25.88L132.70,36.59L115.78,65.91Z"/>
-                  <path class="recycle__front" d="M209.78,170.09L226.54,199.12L207.65,210.41L190.72,181.09Z"/>
-                  <path class="recycle__front" d="M53.50,210.41L19.98,210.41L19.65,188.41L53.50,188.41Z"/>
+                <g class="recycle__spin">
+                  <path class="recycle__band" d="M71.80,151.32L68.05,156.60L62.56,165.21L60.27,170.09L58.90,174.74L58.37,178.47L58.37,183.81L58.71,187.07L59.28,189.86L60.21,192.65L61.44,194.98L62.79,196.60L64.42,197.96L66.28,198.85L68.14,199.31L71.63,199.63L116.28,199.63L117.23,199.31L117.67,198.23L117.67,151.95L117.36,151.00L116.28,150.56L73.49,150.56L72.60,150.77Z"/>
+                  <path class="recycle__band" d="M193.38,78.17L192.56,78.17L153.49,100.81L152.49,101.81L152.49,102.65L173.07,136.84L175.50,140.77L176.77,141.66L196.98,141.72L200.47,141.23L203.49,140.26L205.58,139.31L208.84,137.39L214.65,132.65L216.28,130.79L217.70,128.70L218.86,126.37L219.51,124.28L219.77,122.42L219.68,119.63L219.05,117.30L218.14,115.44L194.27,78.93Z"/>
+                  <path class="recycle__band" d="M85.12,27.07L81.86,27.41L78.84,28.08L76.51,29.16L74.46,30.79L71.46,35.21L50.95,68.00L50.72,68.89L51.04,69.69L51.63,70.22L89.07,95.29L89.98,95.59L90.97,95.17L114.00,59.63L114.48,58.00L113.32,54.98L108.08,44.98L104.19,39.16L100.55,34.74L96.74,31.23L93.26,28.99L89.30,27.56Z"/>
+                  <path class="recycle__head" d="M92.39,21.87L97.67,24.05L101.40,25.91L103.49,27.32L106.28,29.86L109.49,33.58L112.88,38.23L116.26,43.81L119.13,49.16L131.23,74.74L131.10,75.59L130.47,76.27L124.19,79.31L123.00,80.20L122.56,81.02L122.60,82.19L123.13,82.95L123.95,83.41L129.30,84.05L166.98,87.07L167.82,86.86L168.82,85.91L188.84,52.19L189.85,49.86L190.15,48.47L190.04,47.07L189.58,46.31L188.60,45.95L186.51,46.60L178.14,50.39L177.25,50.45L176.70,50.18L175.98,49.16L168.03,33.35L165.88,29.86L164.42,28.23L161.40,25.78L158.37,24.13L155.35,23.03L151.16,22.08L147.67,21.72Z"/>
+                  <path class="recycle__head" d="M24.42,91.47L23.45,92.10L22.98,92.90L22.94,94.00L23.40,94.81L24.65,95.82L32.33,100.56L32.96,101.30L33.07,101.95L32.73,102.88L23.81,116.84L21.37,121.49L20.42,124.28L20.00,127.07L20.66,130.79L21.56,133.12L23.28,136.37L50.72,184.28L51.40,185.04L51.54,184.51L50.97,178.47L51.31,174.51L52.47,169.63L54.12,165.67L77.82,128.23L78.71,127.30L79.77,127.18L86.74,131.36L88.37,131.87L89.20,131.62L89.73,130.98L89.85,130.09L89.64,128.93L89.01,127.30L70.06,91.72L68.99,90.41L67.44,90.09L56.05,90.56L29.77,91.02Z"/>
+                  <path class="recycle__head" d="M218.03,139.29L217.42,139.50L212.56,143.45L208.60,145.74L204.42,147.39L199.07,148.55L192.56,149.16L154.19,149.16L153.15,148.85L152.62,148.00L152.56,142.88L151.92,139.18L151.31,138.47L150.70,138.19L149.79,138.27L148.99,138.82L146.98,141.95L127.91,174.98L127.44,176.37L128.05,178.00L146.66,206.60L151.01,212.80L152.09,213.60L153.26,213.84L154.38,213.45L155.12,212.61L155.35,211.49L155.35,201.72L155.56,200.85L156.11,200.30L156.98,200.09L175.12,200.09L178.37,199.75L180.70,199.23L183.02,198.30L185.35,196.86L186.91,195.44L188.79,192.88L217.74,140.33Z"/>
                 </g>
-              </svg>
-              <svg class="recycle__head recycle__head--1" viewBox="0 0 28 26" aria-hidden="true">
-                <path class="recycle__head-shape" d="M0 1.4 L26 13 L0 24.6 L8 13 Z"/>
-              </svg>
-              <svg class="recycle__head recycle__head--2" viewBox="0 0 28 26" aria-hidden="true">
-                <path class="recycle__head-shape" d="M0 1.4 L26 13 L0 24.6 L8 13 Z"/>
-              </svg>
-              <svg class="recycle__head recycle__head--3" viewBox="0 0 28 26" aria-hidden="true">
-                <path class="recycle__head-shape" d="M0 1.4 L26 13 L0 24.6 L8 13 Z"/>
               </svg>
             </div>
           </div>
@@ -1268,10 +1358,12 @@
   var nodes = document.querySelectorAll('.method [data-animate], .results [data-animate]');
   if (!nodes.length) return;
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var motions = document.querySelectorAll('[data-motion]');
+  var motions = document.querySelectorAll('[data-motion]:not([data-motion="signal"])');
+  var signals = document.querySelectorAll('[data-motion="signal"]');
   if (reduce || !('IntersectionObserver' in window)){
     nodes.forEach(function(el){ el.classList.add('is-in'); });
     motions.forEach(function(el){ el.classList.add('is-static'); });
+    signals.forEach(function(el){ el.classList.add('is-static'); });
     return;
   }
   var io = new IntersectionObserver(function(entries){
@@ -1297,6 +1389,26 @@
     });
   }, { threshold: 0.35 });
   motions.forEach(function(el){ mio.observe(el); });
+
+  var sio = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      var el = entry.target;
+      if (el._signalTimer){
+        clearTimeout(el._signalTimer);
+        el._signalTimer = null;
+      }
+      if (entry.isIntersecting){
+        // Brief green first, then yellow — even if already in view on load
+        el._signalTimer = setTimeout(function(){
+          el._signalTimer = null;
+          el.classList.add('is-playing');
+        }, 700);
+      } else {
+        el.classList.remove('is-playing');
+      }
+    });
+  }, { threshold: 0.5 });
+  signals.forEach(function(el){ sio.observe(el); });
 })();
 </script>
 </body>
