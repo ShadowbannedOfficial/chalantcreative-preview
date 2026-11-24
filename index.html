@@ -593,7 +593,8 @@
     text-wrap:pretty;
   }
 
-  /* Entertain: scrolling phone */
+
+  /* Entertain: phone as a classy slot reel */
   .phone{
     position:relative;
     width:128px;
@@ -607,7 +608,7 @@
     height:100%;
     display:block;
     pointer-events:none;
-    z-index:2;
+    z-index:4;
   }
   .phone__screen{
     position:absolute;
@@ -618,192 +619,320 @@
     overflow:hidden;
     border-radius:8px;
     z-index:1;
-    -webkit-mask-image:linear-gradient(to bottom,transparent 0%,#000 12%,#000 88%,transparent 100%);
-    mask-image:linear-gradient(to bottom,transparent 0%,#000 12%,#000 88%,transparent 100%);
-  }
-  .phone__feed{
-    --frame-h:72px;
-    --frame-gap:8px;
-    --step:calc(var(--frame-h) + var(--frame-gap));
-    --lock:calc(100px - (5 * var(--step) + (var(--frame-h) / 2)));
-    display:flex;
-    flex-direction:column;
-    gap:var(--frame-gap);
-    will-change:transform,filter,opacity;
-    transform:translate3d(0,var(--lock),0);
-  }
-  .frame{
-    box-sizing:border-box;
-    height:var(--frame-h);
-    padding:8px;
-    border:1px solid rgba(255,255,255,.22);
-    border-radius:4px;
     background:#050505;
-    display:flex;
-    flex-direction:column;
-    gap:6px;
+    -webkit-mask-image:linear-gradient(to bottom,transparent 0%,#000 10%,#000 90%,transparent 100%);
+    mask-image:linear-gradient(to bottom,transparent 0%,#000 10%,#000 90%,transparent 100%);
+  }
+  .slot{
+    --cell:36px;
+    position:absolute;
+    inset:0;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:0;
+    z-index:1;
+  }
+  .slot__col{
+    position:relative;
     overflow:hidden;
   }
-  .frame__shot{
-    display:block;
-    flex:1;
-    min-height:0;
-    border:1px solid rgba(255,255,255,.2);
-    border-radius:2px;
-    background:rgba(255,255,255,.04);
+  .slot__col + .slot__col{
+    border-left:1px solid rgba(255,255,255,.1);
   }
-  .frame__row{
-    display:flex;
-    align-items:center;
-    gap:6px;
-    flex:0 0 auto;
-  }
-  .frame__avatar{
-    width:10px;
-    height:10px;
-    border-radius:50%;
-    border:1px solid rgba(255,255,255,.35);
-    flex:0 0 auto;
-  }
-  .frame__lines{
+  .slot__reel{
+    position:relative;
     display:flex;
     flex-direction:column;
+    align-items:center;
+    will-change:transform,filter;
+  }
+  .slot__sym{
+    box-sizing:border-box;
+    width:28px;
+    height:var(--cell);
+    flex:0 0 var(--cell);
+    display:flex;
+    align-items:center;
     justify-content:center;
-    gap:3px;
-    flex:1;
-    min-width:0;
   }
-  .frame__lines i{
+  .slot__sym i{
     display:block;
-    height:1px;
-    background:rgba(255,255,255,.32);
     font-style:normal;
+    box-sizing:border-box;
   }
-  .frame__lines i:first-child{width:72%}
-  .frame__lines i:last-child{width:48%}
-  .frame--lock{
-    border-color:var(--gold);
-    background:rgba(232,201,10,.08);
-    box-shadow:0 0 0 1px var(--gold), 0 0 18px rgba(232,201,10,.28);
+  .slot__sym--box i{
+    width:16px;
+    height:12px;
+    border:1px solid rgba(255,255,255,.5);
+    border-radius:2px;
+  }
+  .slot__sym--bar i{
+    width:14px;
+    height:1px;
+    background:rgba(255,255,255,.52);
+  }
+  .slot__sym--dot i{
+    width:5px;
+    height:5px;
+    border:1px solid rgba(255,255,255,.55);
+    border-radius:50%;
+  }
+  .slot__sym--bars i{
+    width:10px;
+    height:8px;
+    border-top:1px solid rgba(255,255,255,.5);
+    border-bottom:1px solid rgba(255,255,255,.5);
+  }
+  .slot__sym--hit i{
+    width:16px;
+    height:16px;
+    border:1.25px solid var(--gold);
+    border-radius:2px;
+    background:rgba(232,201,10,.12);
+    box-shadow:0 0 8px rgba(232,201,10,.35);
+  }
+  .slot__payline{
+    position:absolute;
+    left:6px;
+    right:6px;
+    top:50%;
+    height:0;
+    border-top:1px solid rgba(232,201,10,.22);
+    z-index:2;
+    pointer-events:none;
+    transform:translateY(-0.5px);
+  }
+  .slot__flash{
+    position:absolute;
+    inset:0;
+    z-index:3;
+    pointer-events:none;
+    background:radial-gradient(circle at 50% 50%,rgba(232,201,10,.5) 0%,rgba(232,201,10,.12) 28%,transparent 68%);
+    opacity:0;
+  }
+  .slot__ring{
+    position:absolute;
+    left:50%;
+    top:50%;
+    width:24px;
+    height:24px;
+    margin:-12px 0 0 -12px;
+    border:1px solid rgba(232,201,10,.85);
+    border-radius:50%;
+    z-index:3;
+    pointer-events:none;
+    opacity:0;
+    transform:scale(.35);
   }
 
-  /* Educate: play / progress bar */
-  .playbar{
+  /* Educate: figures gather to a brand */
+  .crowd{
     display:block;
-    width:min(220px,100%);
+    width:min(240px,100%);
     height:auto;
     overflow:visible;
   }
-  .playbar__icon{
-    fill:none;
-    stroke:var(--gold);
-    stroke-width:1.25;
-    stroke-linejoin:round;
-    stroke-linecap:round;
+  .crowd__fig{
+    color:rgba(255,255,255,.88);
+    transform:translate(0,0);
   }
-  .playbar__track{fill:rgba(255,255,255,.16)}
-  .playbar__fill{
-    fill:var(--gold);
+  .crowd__fig use,
+  .crowd__teacher use{
+    fill:none;
+    stroke:currentColor;
+    stroke-width:1.15;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+  }
+  .crowd__teacher{color:var(--gold)}
+  .crowd__teacher use{stroke-width:1.45}
+  .crowd__halo{
+    fill:url(#crowd-halo);
+    opacity:.9;
     transform-box:fill-box;
-    transform-origin:0 50%;
-    transform:scaleX(.72);
+    transform-origin:center;
+  }
+  .crowd__label{
+    fill:var(--gold);
+    font-family:var(--montserrat),sans-serif;
+    font-size:7px;
+    font-weight:600;
+    letter-spacing:.22em;
   }
 
-  /* Sell: brand-mark afterimage */
-  .afterimage{
+  /* Sell: neon brand mark */
+  .neon{
     position:relative;
     width:130px;
     height:150px;
     display:grid;
     place-items:center;
   }
-  .afterimage__letter,
-  .afterimage__ghost{
+  .neon__after,
+  .neon__core{
     font-family:var(--playfair);
     font-size:120px;
     font-weight:600;
     line-height:1;
     letter-spacing:-.05em;
   }
-  .afterimage__letter{
+  .neon__core{
     position:relative;
     z-index:1;
     color:#fff;
   }
-  .afterimage__ghost{
+  .neon__after{
     position:absolute;
     left:50%;
     top:50%;
     color:var(--gold);
-    opacity:.42;
-    filter:blur(5px);
-    transform:translate(calc(-50% + 8px), calc(-50% + 7px));
+    opacity:.5;
+    filter:blur(6px);
+    transform:translate(calc(-50% + 7px), calc(-50% + 6px));
     z-index:0;
     pointer-events:none;
   }
 
+  /* Final / reduced-motion defaults: the landed state */
+  .slot__reel{transform:translate3d(0,var(--lock),0)}
+  .slot__payline{border-top-color:rgba(232,201,10,.7); box-shadow:0 0 10px rgba(232,201,10,.28)}
+  .neon__core{
+    text-shadow:0 0 8px rgba(232,201,10,.7), 0 0 22px rgba(232,201,10,.35);
+  }
+
   @media (prefers-reduced-motion:no-preference){
-    .phone__feed{
+    .slot__reel{
       transform:translate3d(0,0,0);
-      filter:blur(6px);
+      filter:blur(5px);
     }
-    .frame--lock{
-      border-color:rgba(255,255,255,.22);
-      background:#050505;
-      box-shadow:none;
-    }
-    .playbar__fill{transform:scaleX(0)}
-    [data-motion].is-playing .phone__feed{
-      animation:method-feed 10s linear infinite;
-    }
-    [data-motion].is-playing .frame--lock{
-      animation:method-lock 10s linear infinite;
-    }
-    [data-motion].is-playing .playbar__fill{
-      animation:method-fill 10s cubic-bezier(.22,.8,.24,1) infinite;
-    }
-    [data-motion].is-playing .afterimage__ghost{
-      animation:method-glow 4.5s ease-in-out infinite;
-    }
-    @keyframes method-feed{
-      0%{transform:translate3d(0,0,0);filter:blur(6px);opacity:0}
-      4%{opacity:1}
-      18%{transform:translate3d(0,calc(var(--lock)*0.85),0);filter:blur(4px);opacity:1}
-      35%{transform:translate3d(0,calc(var(--lock)*0.98),0);filter:blur(.6px)}
-      40%{transform:translate3d(0,var(--lock),0);filter:blur(0)}
+    .slot__payline{border-top-color:rgba(232,201,10,.18); box-shadow:none}
+    .crowd__fig{opacity:0; transform:translate(var(--tx),var(--ty))}
+    .crowd__halo{opacity:0}
+    .crowd__teacher{opacity:0}
+    .crowd__label{opacity:0}
+    .neon__core{opacity:0; text-shadow:none}
+    .neon__after{opacity:0}
+
+    [data-motion].is-playing .slot__reel--1{animation:slot-spin-1 10s linear infinite}
+    [data-motion].is-playing .slot__reel--2{animation:slot-spin-2 10s linear infinite}
+    [data-motion].is-playing .slot__reel--3{animation:slot-spin-3 10s linear infinite}
+    [data-motion].is-playing .slot__payline{animation:slot-line 10s linear infinite}
+    [data-motion].is-playing .slot__flash{animation:slot-flash 10s linear infinite}
+    [data-motion].is-playing .slot__ring{animation:slot-ring 10s linear infinite}
+    [data-motion].is-playing .slot__sym--hit i{animation:slot-hit 10s linear infinite}
+
+    [data-motion].is-playing .crowd__halo{animation:crowd-halo 10s ease-in-out infinite}
+    [data-motion].is-playing .crowd__teacher{animation:crowd-teacher 10s ease-out infinite}
+    [data-motion].is-playing .crowd__label{animation:crowd-label 10s ease-out infinite}
+    [data-motion].is-playing .crowd__fig{animation:crowd-gather 10s ease-out var(--delay,0s) infinite}
+
+    [data-motion].is-playing .neon__core{animation:neon-on 10s linear infinite}
+    [data-motion].is-playing .neon__after{animation:neon-after 10s linear infinite}
+
+    @keyframes slot-spin-1{
+      0%{transform:translate3d(0,0,0);filter:blur(6px)}
+      20%{transform:translate3d(0,calc(var(--lock) - 48px),0);filter:blur(4px)}
+      26%{transform:translate3d(0,calc(var(--lock) + 8px),0);filter:blur(0)}
+      30%{transform:translate3d(0,var(--lock),0);filter:blur(0)}
       88%{transform:translate3d(0,var(--lock),0);filter:blur(0);opacity:1}
       100%{transform:translate3d(0,var(--lock),0);filter:blur(0);opacity:0}
     }
-    @keyframes method-lock{
-      0%,38%{
-        border-color:rgba(255,255,255,.22);
-        background:#050505;
+    @keyframes slot-spin-2{
+      0%{transform:translate3d(0,0,0);filter:blur(6px)}
+      28%{transform:translate3d(0,calc(var(--lock) - 56px),0);filter:blur(4px)}
+      36%{transform:translate3d(0,calc(var(--lock) + 9px),0);filter:blur(0)}
+      41%{transform:translate3d(0,var(--lock),0);filter:blur(0)}
+      88%{transform:translate3d(0,var(--lock),0);filter:blur(0);opacity:1}
+      100%{transform:translate3d(0,var(--lock),0);filter:blur(0);opacity:0}
+    }
+    @keyframes slot-spin-3{
+      0%{transform:translate3d(0,0,0);filter:blur(6px)}
+      38%{transform:translate3d(0,calc(var(--lock) - 64px),0);filter:blur(4px)}
+      48%{transform:translate3d(0,calc(var(--lock) + 10px),0);filter:blur(0)}
+      54%{transform:translate3d(0,var(--lock),0);filter:blur(0)}
+      88%{transform:translate3d(0,var(--lock),0);filter:blur(0);opacity:1}
+      100%{transform:translate3d(0,var(--lock),0);filter:blur(0);opacity:0}
+    }
+    @keyframes slot-line{
+      0%,52%{border-top-color:rgba(232,201,10,.18);box-shadow:none}
+      56%,86%{border-top-color:rgba(232,201,10,.85);box-shadow:0 0 12px rgba(232,201,10,.4)}
+      92%,100%{border-top-color:rgba(232,201,10,.18);box-shadow:none}
+    }
+    @keyframes slot-flash{
+      0%,54%{opacity:0}
+      57%{opacity:.85}
+      64%{opacity:0}
+      100%{opacity:0}
+    }
+    @keyframes slot-ring{
+      0%,54%{opacity:0;transform:scale(.35)}
+      56%{opacity:.9;transform:scale(.5)}
+      70%{opacity:0;transform:scale(3.2)}
+      100%{opacity:0;transform:scale(3.2)}
+    }
+    @keyframes slot-hit{
+      0%,52%{
+        border-color:rgba(255,255,255,.28);
+        background:transparent;
         box-shadow:none;
       }
-      42%,84%{
+      56%,86%{
         border-color:var(--gold);
-        background:rgba(232,201,10,.08);
-        box-shadow:0 0 0 1px var(--gold), 0 0 18px rgba(232,201,10,.28);
+        background:rgba(232,201,10,.16);
+        box-shadow:0 0 12px rgba(232,201,10,.55);
       }
-      63%{
-        box-shadow:0 0 0 1px var(--gold), 0 0 28px rgba(232,201,10,.5);
-      }
+      64%{box-shadow:0 0 18px rgba(232,201,10,.8)}
       92%,100%{
-        border-color:rgba(255,255,255,.22);
-        background:#050505;
+        border-color:rgba(255,255,255,.28);
+        background:transparent;
         box-shadow:none;
       }
     }
-    @keyframes method-fill{
-      0%{transform:scaleX(0)}
-      8%{transform:scaleX(0)}
-      42%{transform:scaleX(.72)}
-      88%{transform:scaleX(.72)}
-      100%{transform:scaleX(0)}
+    @keyframes crowd-halo{
+      0%,6%{opacity:0;transform:scale(.7)}
+      18%{opacity:.85;transform:scale(1)}
+      50%{opacity:1;transform:scale(1.06)}
+      84%{opacity:.85;transform:scale(1)}
+      92%,100%{opacity:0;transform:scale(1)}
     }
-    @keyframes method-glow{
-      0%,100%{opacity:.26;filter:blur(6px)}
-      50%{opacity:.55;filter:blur(3.5px)}
+    @keyframes crowd-teacher{
+      0%,4%{opacity:0}
+      14%,86%{opacity:1}
+      94%,100%{opacity:0}
+    }
+    @keyframes crowd-label{
+      0%,16%{opacity:0}
+      28%,86%{opacity:1}
+      94%,100%{opacity:0}
+    }
+    @keyframes crowd-gather{
+      0%{transform:translate(var(--tx),var(--ty));opacity:0}
+      8%{transform:translate(var(--tx),var(--ty));opacity:0}
+      42%{transform:translate(0,0);opacity:.88}
+      86%{transform:translate(0,0);opacity:.88}
+      94%,100%{transform:translate(0,0);opacity:0}
+    }
+    @keyframes neon-on{
+      0%,10%{opacity:0;text-shadow:none}
+      12%{opacity:.65;text-shadow:0 0 6px rgba(232,201,10,.5)}
+      14%{opacity:0;text-shadow:none}
+      20%{opacity:1;text-shadow:0 0 8px rgba(232,201,10,.7),0 0 22px rgba(232,201,10,.35)}
+      23%{opacity:.18;text-shadow:none}
+      25%{opacity:1;text-shadow:0 0 8px rgba(232,201,10,.8),0 0 24px rgba(232,201,10,.4)}
+      30%{opacity:.45}
+      33%{opacity:1;text-shadow:0 0 10px rgba(232,201,10,.85),0 0 28px rgba(232,201,10,.45)}
+      50%{text-shadow:0 0 8px rgba(232,201,10,.7),0 0 20px rgba(232,201,10,.32)}
+      62%{opacity:1;text-shadow:0 0 12px rgba(232,201,10,.9),0 0 30px rgba(232,201,10,.5)}
+      86%{opacity:1;text-shadow:0 0 8px rgba(232,201,10,.7),0 0 22px rgba(232,201,10,.35)}
+      94%,100%{opacity:0;text-shadow:none}
+    }
+    @keyframes neon-after{
+      0%,24%{opacity:0;transform:translate(calc(-50% + 7px), calc(-50% + 6px));filter:blur(8px)}
+      36%{opacity:.28}
+      50%{opacity:.55;filter:blur(5px);transform:translate(calc(-50% + 8px), calc(-50% + 7px))}
+      68%{opacity:.4;filter:blur(7px)}
+      86%{opacity:.5;filter:blur(5px)}
+      94%,100%{opacity:0;filter:blur(8px)}
     }
   }
 </style>
@@ -844,33 +973,14 @@
                   <rect x="48" y="10" width="32" height="5" rx="2.5" fill="rgba(255,255,255,0.35)"/>
                 </svg>
                 <div class="phone__screen">
-                  <div class="phone__feed">
-                    <div class="frame"><span class="frame__shot"></span></div>
-                    <div class="frame">
-                      <span class="frame__row"><span class="frame__avatar"></span><span class="frame__lines"><i></i><i></i></span></span>
-                      <span class="frame__shot"></span>
-                    </div>
-                    <div class="frame">
-                      <span class="frame__shot"></span>
-                      <span class="frame__lines"><i></i><i></i></span>
-                    </div>
-                    <div class="frame">
-                      <span class="frame__row"><span class="frame__avatar"></span><span class="frame__lines"><i></i><i></i></span></span>
-                    </div>
-                    <div class="frame"><span class="frame__shot"></span></div>
-                    <div class="frame frame--lock">
-                      <span class="frame__shot"></span>
-                      <span class="frame__lines"><i></i><i></i></span>
-                    </div>
-                    <div class="frame">
-                      <span class="frame__row"><span class="frame__avatar"></span><span class="frame__lines"><i></i><i></i></span></span>
-                      <span class="frame__shot"></span>
-                    </div>
-                    <div class="frame">
-                      <span class="frame__shot"></span>
-                      <span class="frame__lines"><i></i><i></i></span>
-                    </div>
-                  </div>
+                  <div class="slot">
+                    <div class="slot__col"><div class="slot__reel slot__reel--1" style="--lock:-422px"><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span></div></div>
+                    <div class="slot__col"><div class="slot__reel slot__reel--2" style="--lock:-422px"><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span></div></div>
+                    <div class="slot__col"><div class="slot__reel slot__reel--3" style="--lock:-422px"><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span></div>
+                  </div></div>
+                  <div class="slot__payline"></div>
+                  <div class="slot__flash"></div>
+                  <div class="slot__ring"></div>
                 </div>
               </div>
             </div>
@@ -881,10 +991,25 @@
 
           <article class="method__part" data-animate>
             <div class="method__visual" data-motion="educate" aria-hidden="true">
-              <svg class="playbar" viewBox="0 0 220 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <polygon class="playbar__icon" points="8,18 8,62 46,40"/>
-                <rect class="playbar__track" x="64" y="39" width="148" height="2" rx="1"/>
-                <rect class="playbar__fill" x="64" y="39" width="148" height="2" rx="1"/>
+              <svg class="crowd" viewBox="0 0 240 200" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <defs>
+                  <radialGradient id="crowd-halo" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stop-color="#E8C90A" stop-opacity=".42"/>
+                    <stop offset="55%" stop-color="#E8C90A" stop-opacity=".12"/>
+                    <stop offset="100%" stop-color="#E8C90A" stop-opacity="0"/>
+                  </radialGradient>
+                  <g id="crowd-fig" fill="none" stroke="currentColor" stroke-width="1.15" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="0" cy="2.4" r="2.25"/>
+                    <path d="M0 4.8v1.1"/>
+                    <path d="M-3.6 12.2C-3.2 8.4-1.8 6.6 0 6.6s3.2 1.8 3.6 5.6"/>
+                  </g>
+                </defs>
+                <ellipse class="crowd__halo" cx="120" cy="82" rx="46" ry="46"/>
+                <g class="crowd__teacher" transform="translate(120 70) scale(2.15)">
+                  <use href="#crowd-fig" xlink:href="#crowd-fig"/>
+                </g>
+                <text class="crowd__label" x="120" y="128" text-anchor="middle">YOUR BRAND</text>
+                <g class="crowd__fig" style="--tx:0px;--ty:-54px;--delay:0s"><g transform="translate(120 38) scale(1.28)"><use href="#crowd-fig" xlink:href="#crowd-fig"/></g></g><g class="crowd__fig" style="--tx:-42px;--ty:-36px;--delay:0.08s"><g transform="translate(82 52) scale(1.28)"><use href="#crowd-fig" xlink:href="#crowd-fig"/></g></g><g class="crowd__fig" style="--tx:45px;--ty:-36px;--delay:0.05s"><g transform="translate(160 50) scale(1.28)"><use href="#crowd-fig" xlink:href="#crowd-fig"/></g></g><g class="crowd__fig" style="--tx:-66px;--ty:-12px;--delay:0.16s"><g transform="translate(46 80) scale(1.28)"><use href="#crowd-fig" xlink:href="#crowd-fig"/></g></g><g class="crowd__fig" style="--tx:69px;--ty:-12px;--delay:0.12s"><g transform="translate(196 78) scale(1.28)"><use href="#crowd-fig" xlink:href="#crowd-fig"/></g></g><g class="crowd__fig" style="--tx:-75px;--ty:24px;--delay:0.22s"><g transform="translate(36 118) scale(1.28)"><use href="#crowd-fig" xlink:href="#crowd-fig"/></g></g><g class="crowd__fig" style="--tx:78px;--ty:24px;--delay:0.18s"><g transform="translate(206 116) scale(1.28)"><use href="#crowd-fig" xlink:href="#crowd-fig"/></g></g><g class="crowd__fig" style="--tx:-48px;--ty:54px;--delay:0.3s"><g transform="translate(68 150) scale(1.28)"><use href="#crowd-fig" xlink:href="#crowd-fig"/></g></g><g class="crowd__fig" style="--tx:0px;--ty:66px;--delay:0.26s"><g transform="translate(120 164) scale(1.28)"><use href="#crowd-fig" xlink:href="#crowd-fig"/></g></g><g class="crowd__fig" style="--tx:51px;--ty:51px;--delay:0.34s"><g transform="translate(174 148) scale(1.28)"><use href="#crowd-fig" xlink:href="#crowd-fig"/></g></g>
               </svg>
             </div>
             <p class="method__index">02</p>
@@ -894,9 +1019,9 @@
 
           <article class="method__part" data-animate>
             <div class="method__visual" data-motion="sell" aria-hidden="true">
-              <div class="afterimage">
-                <span class="afterimage__ghost">C</span>
-                <span class="afterimage__letter">C</span>
+              <div class="neon">
+                <span class="neon__after">C</span>
+                <span class="neon__core">C</span>
               </div>
             </div>
             <p class="method__index">03</p>
