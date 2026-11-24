@@ -427,7 +427,7 @@
   .recycle__head{
     position:absolute;
     top:0;left:0;
-    width:54px;
+    width:62px;
     height:60px;
     overflow:visible;
     transform-box:border-box;
@@ -440,7 +440,7 @@
   .recycle__head--3{offset-distance:89.166%}
   .recycle__head svg{
     display:block;
-    width:54px;
+    width:62px;
     height:60px;
     overflow:visible;
   }
@@ -1103,16 +1103,16 @@
     [data-motion].is-playing .recycle__head--2{animation:recycle-snake-head-2 9s linear infinite}
     [data-motion].is-playing .recycle__head--3{animation:recycle-snake-head-3 9s linear infinite}
     @keyframes recycle-snake-head-1{
-      from{offset-distance:22.5%}
-      to{offset-distance:122.5%}
+      from{offset-distance:22.5%;offset-rotate:auto}
+      to{offset-distance:122.5%;offset-rotate:auto}
     }
     @keyframes recycle-snake-head-2{
-      from{offset-distance:55.833%}
-      to{offset-distance:155.833%}
+      from{offset-distance:55.833%;offset-rotate:auto}
+      to{offset-distance:155.833%;offset-rotate:auto}
     }
     @keyframes recycle-snake-head-3{
-      from{offset-distance:89.166%}
-      to{offset-distance:189.166%}
+      from{offset-distance:89.166%;offset-rotate:auto}
+      to{offset-distance:189.166%;offset-rotate:auto}
     }
     [data-motion="services"]:not(.is-playing):not(.is-static) .services__slice{
       fill-opacity:0;
@@ -1543,9 +1543,9 @@
           </div>
           <div class="follow__visual" data-motion="evergreen" aria-hidden="true">
             <div class="recycle">
-              <div class="recycle__head recycle__head--1"><svg viewBox="0 0 54 60" aria-hidden="true"><path class="recycle__head-shape" d="M2.00,2.00 L50.50,30.00 L2.00,58.00 Z"/></svg></div>
-              <div class="recycle__head recycle__head--2"><svg viewBox="0 0 54 60" aria-hidden="true"><path class="recycle__head-shape" d="M2.00,2.00 L50.50,30.00 L2.00,58.00 Z"/></svg></div>
-              <div class="recycle__head recycle__head--3"><svg viewBox="0 0 54 60" aria-hidden="true"><path class="recycle__head-shape" d="M2.00,2.00 L50.50,30.00 L2.00,58.00 Z"/></svg></div>
+              <div class="recycle__head recycle__head--1"><svg viewBox="0 0 62 60" aria-hidden="true"><path class="recycle__head-shape" d="M2,9 L58,30 L2,51 Z"/></svg></div>
+              <div class="recycle__head recycle__head--2"><svg viewBox="0 0 62 60" aria-hidden="true"><path class="recycle__head-shape" d="M2,9 L58,30 L2,51 Z"/></svg></div>
+              <div class="recycle__head recycle__head--3"><svg viewBox="0 0 62 60" aria-hidden="true"><path class="recycle__head-shape" d="M2,9 L58,30 L2,51 Z"/></svg></div>
             </div>
           </div>
         </div>
