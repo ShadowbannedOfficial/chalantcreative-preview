@@ -45,12 +45,14 @@
   .method__inner,
   .follow__inner,
   .results__inner,
-  .signal__inner{max-width:1180px}
+  .signal__inner,
+  .services__inner{max-width:1180px}
   .hero,
   .method,
   .follow,
   .results,
-  .signal{
+  .signal,
+  .services{
     padding-left:max(16px,4.5vw,env(safe-area-inset-left,0px));
     padding-right:max(16px,4.5vw,env(safe-area-inset-right,0px));
     color:#fff;
@@ -291,16 +293,19 @@
 
   /* Scroll reveals */
   .method [data-animate],
-  .results [data-animate]{--rise:18px}
+  .results [data-animate],
+  .services [data-animate]{--rise:18px}
   @media (prefers-reduced-motion:no-preference){
     .method [data-animate],
-    .results [data-animate]{
+    .results [data-animate],
+    .services [data-animate]{
       opacity:0;
       transform:translateY(var(--rise));
       transition:opacity .9s cubic-bezier(.22,.8,.24,1), transform .9s cubic-bezier(.22,.8,.24,1);
     }
     .method [data-animate].is-in,
-    .results [data-animate].is-in{
+    .results [data-animate].is-in,
+    .services [data-animate].is-in{
       opacity:1;
       transform:none;
     }
@@ -486,6 +491,134 @@
     .signal__lamp{transition:none}
     .signal__lamp--green{fill:#141414;stroke:rgba(255,255,255,.28);filter:none}
     .signal__lamp--yellow{fill:var(--gold);stroke:#F3DE55;filter:url(#signal-yellow-glow)}
+  }
+
+
+  /* ---------- Services ---------- */
+  .services{
+    padding-block:clamp(88px,16vh,200px);
+    border-top:1px solid rgba(255,255,255,.16);
+  }
+  .services__eyebrow{
+    margin:0 0 clamp(18px,3vh,32px);
+    color:var(--gold);
+    font-family:var(--montserrat);
+    font-size:clamp(11px,.85vw,13px);
+    font-weight:600;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+  }
+  .services__title{
+    margin:0;
+    max-width:14em;
+    color:#fff;
+    font-family:var(--heading);
+    font-size:clamp(44px,6.5vw,96px);
+    font-weight:700;
+    line-height:.95;
+    letter-spacing:-.02em;
+    text-wrap:pretty;
+  }
+  .services__layout{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:clamp(32px,5vw,56px);
+    align-items:center;
+    margin-top:clamp(40px,7vh,80px);
+  }
+  @media (min-width:900px){
+    .services__layout{
+      grid-template-columns:minmax(280px,48%) minmax(0,1fr);
+      gap:clamp(40px,7vw,96px);
+    }
+  }
+  .services__visual{
+    display:flex;
+    justify-content:flex-start;
+    min-width:0;
+  }
+  .services__chart{
+    width:min(440px,100%);
+    margin:0;
+  }
+  .services__chart svg{
+    display:block;
+    width:100%;
+    height:auto;
+    overflow:visible;
+  }
+  .services__ring{
+    fill:none;
+    stroke:rgba(255,255,255,.48);
+    stroke-width:1.25;
+    pointer-events:none;
+    vector-effect:non-scaling-stroke;
+  }
+  .services__slice{
+    fill:#1c1c1c;
+    stroke:none;
+    cursor:pointer;
+    transition:fill .25s ease, fill-opacity .25s ease;
+  }
+  .services__label{
+    fill:rgba(255,255,255,.88);
+    font-family:var(--montserrat);
+    font-size:13px;
+    font-weight:600;
+    letter-spacing:.04em;
+    pointer-events:none;
+    transition:fill .25s ease, opacity .25s ease;
+  }
+  @media (min-width:900px){
+    .services__label{font-size:15px}
+  }
+  .services__slice:focus{outline:none}
+  .services__wedge.is-active .services__slice,
+  .services__wedge:has(.services__slice:focus-visible) .services__slice{
+    fill:#E8C90A;
+    fill-opacity:1;
+  }
+  .services__wedge.is-active .services__label,
+  .services__wedge:has(.services__slice:focus-visible) .services__label{
+    fill:#111;
+  }
+  @media (hover:hover) and (pointer:fine){
+    .services__wedge:hover .services__slice{
+      fill:#E8C90A;
+      fill-opacity:1;
+    }
+    .services__wedge:hover .services__label{fill:#111}
+  }
+  .services__panel{
+    min-width:0;
+    min-height:8.5em;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+  }
+  .services__panel-title{
+    margin:0 0 .7em;
+    color:#fff;
+    font-family:var(--montserrat);
+    font-size:clamp(16px,1.35vw,22px);
+    font-weight:600;
+    letter-spacing:.06em;
+    line-height:1.25;
+  }
+  .services__panel-title:empty{display:none;margin:0}
+  .services__panel-body{
+    margin:0;
+    max-width:28em;
+    color:rgba(255,255,255,.84);
+    font-family:var(--inter);
+    font-size:clamp(17px,1.5vw,24px);
+    font-weight:400;
+    line-height:1.5;
+    letter-spacing:-.011em;
+    text-wrap:pretty;
+  }
+  .services__panel.is-idle .services__panel-body{
+    color:rgba(255,255,255,.62);
   }
 
   /* ---------- The mantra ---------- */
@@ -981,6 +1114,48 @@
       from{offset-distance:89.166%}
       to{offset-distance:189.166%}
     }
+    [data-motion="services"]:not(.is-playing):not(.is-static) .services__slice{
+      fill-opacity:0;
+    }
+    [data-motion="services"]:not(.is-playing):not(.is-static) .services__label,
+    [data-motion="services"]:not(.is-playing):not(.is-static) .services__ring{
+      opacity:0;
+    }
+    [data-motion="services"]:not(.is-playing):not(.is-static) .services__ring{
+      opacity:1;
+      stroke-dasharray:100;
+      stroke-dashoffset:100;
+    }
+    [data-motion="services"].is-playing .services__ring{
+      stroke-dasharray:100;
+      animation:services-ring-draw 1s cubic-bezier(.22,.8,.24,1) forwards;
+    }
+    [data-motion="services"].is-playing .services__slice{
+      animation:services-slice-in .85s cubic-bezier(.22,.8,.24,1) forwards;
+    }
+    [data-motion="services"].is-playing .services__wedge:nth-of-type(1) .services__slice{animation-delay:.08s}
+    [data-motion="services"].is-playing .services__wedge:nth-of-type(2) .services__slice{animation-delay:.20s}
+    [data-motion="services"].is-playing .services__wedge:nth-of-type(3) .services__slice{animation-delay:.32s}
+    [data-motion="services"].is-playing .services__wedge:nth-of-type(4) .services__slice{animation-delay:.44s}
+    [data-motion="services"].is-playing .services__label{
+      animation:services-label-in .7s cubic-bezier(.22,.8,.24,1) .5s forwards;
+      opacity:0;
+    }
+    [data-motion="services"].is-static .services__slice{fill-opacity:1}
+    [data-motion="services"].is-static .services__label,
+    [data-motion="services"].is-static .services__ring{opacity:1;stroke-dashoffset:0}
+    @keyframes services-ring-draw{
+      from{stroke-dashoffset:100}
+      to{stroke-dashoffset:0}
+    }
+    @keyframes services-slice-in{
+      from{fill-opacity:0}
+      to{fill-opacity:1}
+    }
+    @keyframes services-label-in{
+      from{opacity:0}
+      to{opacity:1}
+    }
   }
 </style>
 </head>
@@ -1313,6 +1488,52 @@
       </div>
     </section>
 
+
+    <section class="services" id="services" aria-labelledby="services-heading">
+      <div class="services__inner">
+        <p class="services__eyebrow" data-animate>Services</p>
+        <h2 class="services__title" id="services-heading" data-animate>What we do.</h2>
+        <div class="services__layout">
+          <div class="services__visual">
+            <div class="services__chart" data-motion="services" role="radiogroup" aria-label="Areas of service">
+              <svg viewBox="0 0 400 400">
+                <circle class="services__ring" cx="200" cy="200" r="168" pathLength="100"/>
+              <g class="services__wedge" data-service="strategy">
+                <path class="services__slice" id="service-strategy" role="radio" aria-checked="false" aria-label="Content Strategy" tabindex="0" data-service="strategy" pathLength="100" d="M200.00,200.00 L203.81,32.04 A168.00,168.00 0 0 1 367.96,196.19 Z"/>
+                <text class="services__label" x="268.90" y="131.10" text-anchor="middle">
+                  <tspan x="268.90" dy="-0.65em">Content</tspan>
+                  <tspan x="268.90" dy="1.3em">Strategy</tspan>
+                </text>
+              </g>
+              <g class="services__wedge" data-service="creation">
+                <path class="services__slice" id="service-creation" role="radio" aria-checked="false" aria-label="Content Creation" tabindex="-1" data-service="creation" pathLength="100" d="M200.00,200.00 L367.96,203.81 A168.00,168.00 0 0 1 203.81,367.96 Z"/>
+                <text class="services__label" x="268.90" y="268.90" text-anchor="middle">
+                  <tspan x="268.90" dy="-0.65em">Content</tspan>
+                  <tspan x="268.90" dy="1.3em">Creation</tspan>
+                </text>
+              </g>
+              <g class="services__wedge" data-service="campaign">
+                <path class="services__slice" id="service-campaign" role="radio" aria-checked="false" aria-label="Campaign" tabindex="-1" data-service="campaign" pathLength="100" d="M200.00,200.00 L196.19,367.96 A168.00,168.00 0 0 1 32.04,203.81 Z"/>
+                <text class="services__label" x="131.10" y="268.90" text-anchor="middle" dominant-baseline="middle">Campaign</text>
+              </g>
+              <g class="services__wedge" data-service="community">
+                <path class="services__slice" id="service-community" role="radio" aria-checked="false" aria-label="Community Management" tabindex="-1" data-service="community" pathLength="100" d="M200.00,200.00 L32.04,196.19 A168.00,168.00 0 0 1 196.19,32.04 Z"/>
+                <text class="services__label" x="131.10" y="131.10" text-anchor="middle">
+                  <tspan x="131.10" dy="-0.65em">Community</tspan>
+                  <tspan x="131.10" dy="1.3em">Management</tspan>
+                </text>
+              </g>
+              </svg>
+            </div>
+          </div>
+          <div class="services__panel is-idle" id="services-panel" aria-live="polite">
+            <h3 class="services__panel-title"></h3>
+            <p class="services__panel-body">Four practices, given equal weight.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="follow" id="evergreen">
       <div class="follow__inner">
         <div class="follow__layout">
@@ -1464,7 +1685,7 @@
 
 <script>
 (function(){
-  var nodes = document.querySelectorAll('.method [data-animate], .results [data-animate]');
+  var nodes = document.querySelectorAll('.method [data-animate], .results [data-animate], .services [data-animate]');
   if (!nodes.length) return;
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var motions = document.querySelectorAll('[data-motion]:not([data-motion="signal"])');
@@ -1518,6 +1739,100 @@
     });
   }, { threshold: 0.5 });
   signals.forEach(function(el){ sio.observe(el); });
+
+  var layout = document.querySelector('.services__layout');
+  if (layout){
+    var slices = Array.prototype.slice.call(layout.querySelectorAll('.services__slice'));
+    var wedges = Array.prototype.slice.call(layout.querySelectorAll('.services__wedge'));
+    var panel = layout.querySelector('.services__panel');
+    var panelTitle = layout.querySelector('.services__panel-title');
+    var panelBody = layout.querySelector('.services__panel-body');
+    var idleBody = 'Four practices, given equal weight.';
+    var copy = {
+      strategy: { title: 'Content Strategy', body: 'We address your public relations needs and find the best way to present your business to the market.' },
+      creation: { title: 'Content Creation', body: 'We find the style your brand needs: cinematic, documentary, found footage, even goofy. Whatever fits your business.' },
+      campaign: { title: 'Campaign', body: 'A campaign strategy built around the specific needs of your business.' },
+      community: { title: 'Community Management', body: 'Distributing your content, replying to DMs, handling Google reviews, commenting back on posts, and scheduling.' }
+    };
+    var current = null;
+    var pinned = false;
+
+    function setActive(id, pin){
+      current = id || null;
+      if (pin) pinned = !!id;
+      wedges.forEach(function(w){
+        var on = w.getAttribute('data-service') === current;
+        w.classList.toggle('is-active', on);
+        var sl = w.querySelector('.services__slice');
+        sl.setAttribute('aria-checked', on ? 'true' : 'false');
+        sl.setAttribute('tabindex', on || (!current && sl === slices[0]) ? '0' : '-1');
+      });
+      if (!current){
+        panel.classList.add('is-idle');
+        panelTitle.textContent = '';
+        panelBody.textContent = idleBody;
+      } else {
+        panel.classList.remove('is-idle');
+        panelTitle.textContent = copy[current].title;
+        panelBody.textContent = copy[current].body;
+      }
+    }
+
+    function sliceOf(node){
+      return node && node.closest ? node.closest('.services__slice') : null;
+    }
+
+    slices.forEach(function(sl){
+      sl.addEventListener('pointerenter', function(e){
+        if (e.pointerType === 'mouse') setActive(sl.getAttribute('data-service'), false);
+      });
+      sl.addEventListener('focus', function(){
+        setActive(sl.getAttribute('data-service'), false);
+      });
+      sl.addEventListener('click', function(){
+        var id = sl.getAttribute('data-service');
+        if (pinned && current === id){
+          setActive(null, true);
+        } else {
+          setActive(id, true);
+        }
+      });
+      sl.addEventListener('keydown', function(e){
+        var i = slices.indexOf(sl);
+        var next = i;
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') next = (i + 1) % slices.length;
+        else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') next = (i - 1 + slices.length) % slices.length;
+        else if (e.key === 'Home') next = 0;
+        else if (e.key === 'End') next = slices.length - 1;
+        else if (e.key === 'Escape'){
+          setActive(null, true);
+          e.preventDefault();
+          return;
+        } else if (e.key === ' ' || e.key === 'Enter'){
+          var id = sl.getAttribute('data-service');
+          setActive(current === id && pinned ? null : id, true);
+          e.preventDefault();
+          return;
+        } else return;
+        e.preventDefault();
+        slices[next].focus();
+      });
+    });
+
+    layout.addEventListener('pointerleave', function(e){
+      if (e.pointerType !== 'mouse') return;
+      if (pinned) return;
+      var ae = document.activeElement;
+      if (ae && layout.contains(ae) && ae.classList.contains('services__slice')) return;
+      setActive(null, false);
+    });
+
+    document.addEventListener('pointerdown', function(e){
+      if (!pinned) return;
+      if (layout.contains(e.target)) return;
+      setActive(null, true);
+    });
+  }
 })();
 </script>
 </body>
