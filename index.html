@@ -445,7 +445,7 @@
   }
   @media (min-width:900px){
     .method__row{
-      grid-template-columns:minmax(0,1fr) auto;
+      grid-template-columns:minmax(0,1fr) 240px;
       gap:clamp(40px,6vw,80px);
     }
   }
@@ -479,7 +479,11 @@
     min-height:0;
   }
   @media (min-width:900px){
-    .method__visual{justify-content:center}
+    .method__visual{
+      justify-content:center;
+      width:240px;
+      min-height:236px;
+    }
   }
 
   /* Entertain: phone as a classy slot reel */
@@ -867,7 +871,7 @@
         <div class="method__list">
           <article class="method__row" data-animate>
             <div class="method__copy">
-              <h3 class="method__title">Entertain the masses</h3>
+              <h3 class="method__title">Entertain<br>the masses</h3>
               <p class="method__sub">Content engineered to stop the scroll.</p>
             </div>
             <div class="method__visual" data-motion="entertain" aria-hidden="true">
@@ -891,7 +895,7 @@
           </article>
           <article class="method__row" data-animate>
             <div class="method__copy">
-              <h3 class="method__title">Educate the interested</h3>
+              <h3 class="method__title">Educate the<br>interested</h3>
               <p class="method__sub">Reward them for watching and they will follow.</p>
             </div>
             <div class="method__visual" data-motion="educate" aria-hidden="true">
@@ -1035,7 +1039,7 @@
           </article>
           <article class="method__row" data-animate>
             <div class="method__copy">
-              <h3 class="method__title">Sell the committed</h3>
+              <h3 class="method__title">Sell the<br>committed</h3>
               <p class="method__sub">Be the first name they think of when your industry comes up.</p>
             </div>
             <div class="method__visual" data-motion="sell" aria-hidden="true">
