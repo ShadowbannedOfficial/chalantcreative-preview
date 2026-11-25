@@ -1164,9 +1164,15 @@
     .tap__waves-mark{transform:scale(.92);opacity:.55}
     .crowd__spark{opacity:0}
 
-    [data-motion="entertain"] .feed__reel--1{animation:feed-spin 2.05s linear infinite}
-    [data-motion="entertain"] .feed__reel--2{animation:feed-spin 2.28s linear infinite}
-    [data-motion="entertain"] .feed__reel--3{animation:feed-spin 1.9s linear infinite}
+    /* Already mid-scroll from the first frame: linear, no ease-in,
+       negative delay so a first paint or WebKit restart is never at 0. */
+    [data-motion="entertain"]:not(.is-landing):not(.is-landed) .feed__reel{
+      transform:translate3d(0,calc(-2 * var(--cell, 100cqh)),0);
+      animation-play-state:running;
+    }
+    [data-motion="entertain"] .feed__reel--1{animation:feed-spin 2.05s linear infinite;animation-delay:-0.82s}
+    [data-motion="entertain"] .feed__reel--2{animation:feed-spin 2.28s linear infinite;animation-delay:-1.37s}
+    [data-motion="entertain"] .feed__reel--3{animation:feed-spin 1.9s linear infinite;animation-delay:-0.51s}
     [data-motion="entertain"].is-landing .feed__reel,
     [data-motion="entertain"].is-landed .feed__reel{animation:none}
     [data-motion="entertain"].is-landed .feed__reel{transform:translate3d(0,calc(-4 * var(--cell, 100cqh)),0)}
@@ -2201,6 +2207,51 @@
     var group = root.querySelector('.slots') || root;
     var reels = root.querySelectorAll('.feed__reel');
     var landed = false;
+    /* slot-spin-mid-v1: clock starts at page load. Negative CSS delays
+       put the first frame mid-loop; this resyncs currentTime from that
+       clock if WebKit paused or restarted the offscreen animation. */
+    var spinOrigin = performance.now();
+    var spinDurs = [2050, 2280, 1900];
+    var spinShift = [820, 1370, 510];
+    function syncSpinClock(){
+      if (landed || root.classList.contains('is-landing') || root.classList.contains('is-landed')) return;
+      var elapsed = performance.now() - spinOrigin;
+      for (var i = 0; i < reels.length; i++){
+        var dur = spinDurs[i];
+        var t = (elapsed + spinShift[i]) % dur;
+        var anims = reels[i].getAnimations();
+        var n = 0;
+        for (var k = 0; k < anims.length; k++){
+          var a = anims[k];
+          var name = a.animationName;
+          if (name && name !== 'feed-spin') continue;
+          if (!name && a.effect && a.effect.getTiming){
+            var td = a.effect.getTiming().duration;
+            if (td !== dur) continue;
+          }
+          try { a.currentTime = t; } catch (err){}
+          if (a.playState !== 'running' && a.play) a.play();
+          n++;
+        }
+        if (!n){
+          /* no animation object yet; CSS delay still covers first paint */
+        }
+      }
+    }
+    var spinWasOff = true;
+    function syncSpinIfEntering(){
+      if (landed) return;
+      var r = group.getBoundingClientRect();
+      var vh = window.innerHeight || document.documentElement.clientHeight;
+      var near = r.top < vh + 120 && r.bottom > -120;
+      if (near && spinWasOff) syncSpinClock();
+      spinWasOff = !near;
+    }
+    syncSpinClock();
+    document.addEventListener('visibilitychange', function(){
+      if (!document.hidden) syncSpinClock();
+    });
+    window.addEventListener('pageshow', syncSpinClock);
     function land(){
       if (landed || root.classList.contains('is-landed')) return;
       landed = true;
@@ -2257,6 +2308,7 @@
       slotTick = true;
       requestAnimationFrame(function(){
         slotTick = false;
+        syncSpinIfEntering();
         if (!landed && slotReadyToLand(group)){
           window.removeEventListener('scroll', onSlotScrollTick);
           window.removeEventListener('resize', onSlotScrollTick);
