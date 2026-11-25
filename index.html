@@ -61,29 +61,46 @@
 
   /* ---------- Hero: B3 lockup, tape edge to edge, wordmark in-gutter ---------- */
   .hero{
-    --gutter:max(16px,4.5vw,env(safe-area-inset-right,0px));
+    --gutter:max(16px, 4.5vw);
     position:relative;
     overflow:hidden;
     padding:0;
+    box-sizing:border-box;
+  }
+  @supports (padding:max(16px, 4.5vw, env(safe-area-inset-right, 0px))){
+    .hero{--gutter:max(16px, 4.5vw, env(safe-area-inset-right, 0px))}
   }
   .hero__stage{
     position:relative;
+    box-sizing:border-box;
+    width:100%;
+    max-width:100%;
     display:flex;
     justify-content:flex-end;
     padding-top:max(48px,7vw);
     padding-bottom:max(64px,9vw);
+    padding-right:max(16px, 4.5vw);
     padding-right:var(--gutter);
     padding-left:0;
   }
   .hero__lockup{
     position:relative;
-    width:min(68.5vw, calc(100vw - 2 * var(--gutter)));
-    flex:0 0 auto;
+    box-sizing:border-box;
+    width:min(68.5vw, 100%);
+    max-width:100%;
+    flex:0 1 auto;
+    min-width:0;
+  }
+  .hero__lockup picture{
+    display:block;
+    width:100%;
+    max-width:100%;
   }
   .hero__logo{
     display:block;
     width:100%;
     height:auto;
+    max-width:100%;
     position:relative;
     z-index:1;
     user-select:none;
@@ -416,8 +433,9 @@
     height:85px;
     overflow:visible;
     transform-box:border-box;
+    transform-origin:50% 50%;
     offset-path:path("M200,60 L620,620 L40,620 Z");
-    offset-anchor:2.84px 42.5px;
+    offset-anchor:50% 50%;
     offset-rotate:auto;
   }
   .recycle__head svg{
@@ -430,7 +448,6 @@
     .recycle__head{
       width:120px;
       height:116px;
-      offset-anchor:3.87px 58px;
     }
     .recycle__head svg{
       width:120px;
@@ -653,7 +670,7 @@
   .method__sub{
     margin:clamp(16px,2.4vh,28px) 0 0;
     max-width:28em;
-    color:rgba(255,255,255,.84);
+    color:#E8C90A;
     font-family:var(--inter);
     font-size:clamp(18px,1.6vw,26px);
     font-weight:400;
@@ -838,13 +855,6 @@
     opacity:.9;
     transform-box:fill-box;
     transform-origin:center;
-  }
-  .crowd__label{
-    fill:var(--gold);
-    font-family:var(--montserrat),sans-serif;
-    font-size:8px;
-    font-weight:600;
-    letter-spacing:.18em;
   }
   .crowd__ground{
     stroke:rgba(255,255,255,.16);
@@ -1235,7 +1245,6 @@
                       <path class="walker__leg walker__leg--r" d="M0 10.2 L0 16.5"/>
                     </g>
                   </g></g>
-                <text class="crowd__label" x="186" y="208" text-anchor="middle">YOUR BRAND</text>
                 <g class="crowd__fig" style="--delay:0.1s" transform="translate(28 118) scale(3.5)"><g class="walker" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
                     <g class="walker__bob">
                       <path class="walker__arm walker__arm--l" d="M1.0 5.4 L1.0 11.0"/>
@@ -1425,9 +1434,9 @@
       <div class="follow__inner">
         <div class="follow__stage" data-motion="evergreen">
           <div class="recycle" aria-hidden="true">
-            <div class="recycle__head recycle__head--1"><svg viewBox="0 0 62 60" aria-hidden="true"><path class="recycle__head-shape" d="M2,9 L58,30 L2,51 Z"/></svg></div>
-            <div class="recycle__head recycle__head--2"><svg viewBox="0 0 62 60" aria-hidden="true"><path class="recycle__head-shape" d="M2,9 L58,30 L2,51 Z"/></svg></div>
-            <div class="recycle__head recycle__head--3"><svg viewBox="0 0 62 60" aria-hidden="true"><path class="recycle__head-shape" d="M2,9 L58,30 L2,51 Z"/></svg></div>
+            <div class="recycle__head recycle__head--1"><svg viewBox="-31 -30 62 60" aria-hidden="true"><path class="recycle__head-shape" d="M-18.667,-21 L37.333,0 L-18.667,21 Z"/></svg></div>
+            <div class="recycle__head recycle__head--2"><svg viewBox="-31 -30 62 60" aria-hidden="true"><path class="recycle__head-shape" d="M-18.667,-21 L37.333,0 L-18.667,21 Z"/></svg></div>
+            <div class="recycle__head recycle__head--3"><svg viewBox="-31 -30 62 60" aria-hidden="true"><path class="recycle__head-shape" d="M-18.667,-21 L37.333,0 L-18.667,21 Z"/></svg></div>
           </div>
           <div class="follow__copy">
             <h2 class="follow__title">A video you post today can bring you business months from now.</h2>
