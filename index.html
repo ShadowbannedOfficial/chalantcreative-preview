@@ -364,86 +364,82 @@
     padding-block:clamp(88px,16vh,200px);
     border-top:1px solid rgba(255,255,255,.16);
   }
+  .follow__stage{
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:clamp(72px,16vw,140px) clamp(56px,10vw,120px) clamp(80px,14vw,140px);
+  }
+  .follow__copy{
+    position:relative;
+    z-index:1;
+    width:100%;
+    max-width:min(400px,100%);
+  }
   .follow__title{
-    margin:0;
-    max-width:16em;
+    margin:0 auto;
     color:#fff;
     font-family:var(--heading);
-    font-size:clamp(36px,5.2vw,72px);
+    font-size:clamp(34px,4.6vw,58px);
     font-weight:700;
-    line-height:1.05;
+    line-height:1.08;
     letter-spacing:-.02em;
     text-wrap:pretty;
   }
   .follow__body{
-    margin:clamp(28px,5vh,56px) 0 0;
-    max-width:34em;
+    margin:clamp(18px,2.8vh,32px) auto 0;
+    max-width:22em;
     color:#fff;
     font-family:var(--inter);
-    font-size:clamp(18px,1.55vw,24px);
+    font-size:clamp(17px,1.4vw,22px);
     font-weight:400;
     line-height:1.5;
     letter-spacing:-.011em;
     text-wrap:pretty;
   }
-  .follow__layout{
-    display:grid;
-    grid-template-columns:1fr;
-    grid-template-areas:"copy" "visual";
-    gap:clamp(36px,6vw,64px);
-    align-items:center;
-  }
-  @media (min-width:900px){
-    .follow__layout{
-      grid-template-columns:240px minmax(0,1fr);
-      grid-template-areas:"visual copy";
-      gap:clamp(40px,6vw,80px);
-    }
-  }
-  .follow__copy{grid-area:copy;min-width:0}
-  .follow__visual{
-    display:flex;
-    align-items:center;
-    justify-content:flex-start;
-    margin:0;
-    min-height:0;
-    overflow:visible;
-  }
-  @media (min-width:900px){
-    .follow__visual{
-      justify-content:center;
-      width:240px;
-      min-height:236px;
-    }
-  }
-  .follow__visual{overflow:visible}
+  .follow__inner,.follow__stage{overflow:visible}
   .recycle{
-    position:relative;
-    width:240px;
-    height:236px;
-    flex:0 0 auto;
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    pointer-events:none;
     overflow:visible;
   }
   .recycle__head{
     position:absolute;
     top:0;left:0;
-    width:62px;
-    height:60px;
+    width:88px;
+    height:85px;
     overflow:visible;
     transform-box:border-box;
-    offset-path:path("M120.00,54.00L122.60,54.11L125.19,54.45L127.73,55.01L130.22,55.79L132.63,56.79L134.94,57.99L137.14,59.38L139.22,60.96L141.14,62.72L142.91,64.63L144.50,66.69L145.91,68.89L147.22,71.14L148.52,73.40L149.83,75.66L151.13,77.92L152.43,80.18L153.74,82.43L155.04,84.69L156.34,86.95L157.65,89.21L158.95,91.46L160.25,93.72L161.56,95.98L162.86,98.24L164.16,100.49L165.47,102.75L166.77,105.01L168.07,107.27L169.38,109.53L170.68,111.78L171.99,114.04L173.29,116.30L174.59,118.56L175.90,120.81L177.20,123.07L178.50,125.33L179.81,127.59L181.11,129.85L182.41,132.10L183.72,134.36L184.97,136.65L186.03,139.03L186.87,141.49L187.50,144.02L187.91,146.60L188.09,149.20L188.05,151.80L187.78,154.39L187.29,156.95L186.57,159.46L185.65,161.90L184.51,164.24L183.17,166.48L181.65,168.59L179.95,170.57L178.08,172.38L176.06,174.03L173.91,175.50L171.63,176.78L169.26,177.85L166.80,178.71L164.28,179.36L161.70,179.78L159.11,179.98L156.50,180.00L153.89,180.00L151.28,180.00L148.68,180.00L146.07,180.00L143.46,180.00L140.86,180.00L138.25,180.00L135.64,180.00L133.04,180.00L130.43,180.00L127.82,180.00L125.21,180.00L122.61,180.00L120.00,180.00L117.39,180.00L114.79,180.00L112.18,180.00L109.57,180.00L106.96,180.00L104.36,180.00L101.75,180.00L99.14,180.00L96.54,180.00L93.93,180.00L91.32,180.00L88.72,180.00L86.11,180.00L83.50,180.00L80.89,179.98L78.30,179.78L75.72,179.36L73.20,178.71L70.74,177.85L68.37,176.78L66.09,175.50L63.94,174.03L61.92,172.38L60.05,170.57L58.35,168.59L56.83,166.48L55.49,164.24L54.35,161.90L53.43,159.46L52.71,156.95L52.22,154.39L51.95,151.80L51.91,149.20L52.09,146.60L52.50,144.02L53.13,141.49L53.97,139.03L55.03,136.65L56.28,134.36L57.59,132.10L58.89,129.85L60.19,127.59L61.50,125.33L62.80,123.07L64.10,120.81L65.41,118.56L66.71,116.30L68.01,114.04L69.32,111.78L70.62,109.53L71.93,107.27L73.23,105.01L74.53,102.75L75.84,100.49L77.14,98.24L78.44,95.98L79.75,93.72L81.05,91.46L82.35,89.21L83.66,86.95L84.96,84.69L86.26,82.43L87.57,80.18L88.87,77.92L90.17,75.66L91.48,73.40L92.78,71.14L94.09,68.89L95.50,66.69L97.09,64.63L98.86,62.72L100.78,60.96L102.86,59.38L105.06,57.99L107.37,56.79L109.78,55.79L112.27,55.01L114.81,54.45L117.40,54.11L120.00,54.00Z");
-    offset-anchor:2px 30px;
+    offset-path:path("M200,60 L620,620 L40,620 Z");
+    offset-anchor:2.84px 42.5px;
     offset-rotate:auto;
+  }
+  .recycle__head svg{
+    display:block;
+    width:88px;
+    height:85px;
+    overflow:visible;
+  }
+  @media (min-width:900px){
+    .recycle__head{
+      width:120px;
+      height:116px;
+      offset-anchor:3.87px 58px;
+    }
+    .recycle__head svg{
+      width:120px;
+      height:116px;
+    }
   }
   .recycle__head--1{offset-distance:22.5%}
   .recycle__head--2{offset-distance:55.833%}
   .recycle__head--3{offset-distance:89.166%}
-  .recycle__head svg{
-    display:block;
-    width:62px;
-    height:60px;
-    overflow:visible;
-  }
   .recycle__head-shape{fill:#E8C90A}
 
   /* ---------- Traffic light: NYC-style signal, green until in view, then yellow ---------- */
@@ -538,7 +534,7 @@
     min-width:0;
   }
   .services__chart{
-    width:min(440px,100%);
+    width:min(560px,100%);
     margin:0;
   }
   .services__chart svg{
@@ -547,18 +543,17 @@
     height:auto;
     overflow:visible;
   }
-  .services__ring{
-    fill:none;
-    stroke:rgba(255,255,255,.48);
-    stroke-width:1.25;
+  .services__core{
+    fill:#fff;
     pointer-events:none;
-    vector-effect:non-scaling-stroke;
   }
-  .services__slice{
+  .services__blade{
     fill:#1c1c1c;
-    stroke:none;
+    stroke:rgba(255,255,255,.46);
+    stroke-width:1.25;
     cursor:pointer;
-    transition:fill .25s ease, fill-opacity .25s ease;
+    transition:fill .25s ease, stroke .25s ease;
+    vector-effect:non-scaling-stroke;
   }
   .services__label{
     fill:rgba(255,255,255,.88);
@@ -567,27 +562,23 @@
     font-weight:600;
     letter-spacing:.04em;
     pointer-events:none;
-    transition:fill .25s ease, opacity .25s ease;
   }
   @media (min-width:900px){
     .services__label{font-size:15px}
   }
-  .services__slice:focus{outline:none}
-  .services__wedge.is-active .services__slice,
-  .services__wedge:has(.services__slice:focus-visible) .services__slice{
+  .services__blade:focus{outline:none}
+  .services__wing.is-active .services__blade{
     fill:#E8C90A;
-    fill-opacity:1;
+    stroke:#E8C90A;
   }
-  .services__wedge.is-active .services__label,
-  .services__wedge:has(.services__slice:focus-visible) .services__label{
-    fill:#111;
+  .services__wing:has(.services__blade:focus-visible) .services__blade{
+    stroke:#fff;
+    stroke-width:2;
   }
   @media (hover:hover) and (pointer:fine){
-    .services__wedge:hover .services__slice{
-      fill:#E8C90A;
-      fill-opacity:1;
+    .services__wing:not(.is-active):hover .services__blade{
+      stroke:rgba(255,255,255,.85);
     }
-    .services__wedge:hover .services__label{fill:#111}
   }
   .services__panel{
     min-width:0;
@@ -605,7 +596,6 @@
     letter-spacing:.06em;
     line-height:1.25;
   }
-  .services__panel-title:empty{display:none;margin:0}
   .services__panel-body{
     margin:0;
     max-width:28em;
@@ -616,9 +606,6 @@
     line-height:1.5;
     letter-spacing:-.011em;
     text-wrap:pretty;
-  }
-  .services__panel.is-idle .services__panel-body{
-    color:rgba(255,255,255,.62);
   }
 
   /* ---------- The mantra ---------- */
@@ -781,10 +768,10 @@
   .slot__sym--hit i{
     width:16px;
     height:16px;
-    border:1.25px solid var(--gold);
+    border:none;
     border-radius:2px;
-    background:rgba(232,201,10,.12);
-    box-shadow:0 0 8px rgba(232,201,10,.35);
+    background:#E8C90A;
+    box-shadow:0 0 8px rgba(232,201,10,.4);
   }
   .slot__payline{
     position:absolute;
@@ -956,23 +943,15 @@
   .slot__payline{border-top-color:rgba(232,201,10,.7); box-shadow:0 0 10px rgba(232,201,10,.28)}
 
   @media (prefers-reduced-motion:no-preference){
-    .slot__reel{
-      transform:translate3d(0,0,0);
-      filter:blur(5px);
-    }
-    .slot__payline{border-top-color:rgba(232,201,10,.18); box-shadow:none}
+    .slot__payline{border-top-color:rgba(232,201,10,.45); box-shadow:none}
     .wallet__book{transform:translateX(-21.667%)}
     .wallet__flap{transform:rotateY(0deg)}
     .wallet__cash{transform:translateY(0);opacity:0}
     .wallet__glow{opacity:0;transform:scale(.6)}
 
-    [data-motion].is-playing .slot__reel--1{animation:slot-spin-1 10s linear infinite}
-    [data-motion].is-playing .slot__reel--2{animation:slot-spin-2 10s linear infinite}
-    [data-motion].is-playing .slot__reel--3{animation:slot-spin-3 10s linear infinite}
-    [data-motion].is-playing .slot__payline{animation:slot-line 10s linear infinite}
-    [data-motion].is-playing .slot__flash{animation:slot-flash 10s linear infinite}
-    [data-motion].is-playing .slot__ring{animation:slot-ring 10s linear infinite}
-    [data-motion].is-playing .slot__sym--hit i{animation:slot-hit 10s linear infinite}
+    [data-motion].is-playing .slot__reel--1{animation:slot-spin-1 1.6s linear infinite}
+    [data-motion].is-playing .slot__reel--2{animation:slot-spin-2 2s linear infinite}
+    [data-motion].is-playing .slot__reel--3{animation:slot-spin-3 2.4s linear infinite}
 
     [data-motion].is-playing .crowd__halo{animation:crowd-halo 3.2s ease-in-out infinite}
     [data-motion].is-playing .walker__bob{animation:walk-bob .7s ease-in-out var(--delay,0s) infinite}
@@ -987,63 +966,16 @@
     [data-motion].is-playing .wallet__glow{animation:wallet-glow 10s ease-in-out infinite}
 
     @keyframes slot-spin-1{
-      0%{transform:translate3d(0,0,0);filter:blur(6px)}
-      20%{transform:translate3d(0,calc(var(--lock) - 48px),0);filter:blur(4px)}
-      26%{transform:translate3d(0,calc(var(--lock) + 8px),0);filter:blur(0)}
-      30%{transform:translate3d(0,var(--lock),0);filter:blur(0)}
-      88%{transform:translate3d(0,var(--lock),0);filter:blur(0);opacity:1}
-      100%{transform:translate3d(0,var(--lock),0);filter:blur(0);opacity:0}
+      from{transform:translate3d(0,0,0)}
+      to{transform:translate3d(0,calc(var(--loop) * -1),0)}
     }
     @keyframes slot-spin-2{
-      0%{transform:translate3d(0,0,0);filter:blur(6px)}
-      28%{transform:translate3d(0,calc(var(--lock) - 56px),0);filter:blur(4px)}
-      36%{transform:translate3d(0,calc(var(--lock) + 9px),0);filter:blur(0)}
-      41%{transform:translate3d(0,var(--lock),0);filter:blur(0)}
-      88%{transform:translate3d(0,var(--lock),0);filter:blur(0);opacity:1}
-      100%{transform:translate3d(0,var(--lock),0);filter:blur(0);opacity:0}
+      from{transform:translate3d(0,0,0)}
+      to{transform:translate3d(0,calc(var(--loop) * -1),0)}
     }
     @keyframes slot-spin-3{
-      0%{transform:translate3d(0,0,0);filter:blur(6px)}
-      38%{transform:translate3d(0,calc(var(--lock) - 64px),0);filter:blur(4px)}
-      48%{transform:translate3d(0,calc(var(--lock) + 10px),0);filter:blur(0)}
-      54%{transform:translate3d(0,var(--lock),0);filter:blur(0)}
-      88%{transform:translate3d(0,var(--lock),0);filter:blur(0);opacity:1}
-      100%{transform:translate3d(0,var(--lock),0);filter:blur(0);opacity:0}
-    }
-    @keyframes slot-line{
-      0%,52%{border-top-color:rgba(232,201,10,.18);box-shadow:none}
-      56%,86%{border-top-color:rgba(232,201,10,.85);box-shadow:0 0 12px rgba(232,201,10,.4)}
-      92%,100%{border-top-color:rgba(232,201,10,.18);box-shadow:none}
-    }
-    @keyframes slot-flash{
-      0%,54%{opacity:0}
-      57%{opacity:.85}
-      64%{opacity:0}
-      100%{opacity:0}
-    }
-    @keyframes slot-ring{
-      0%,54%{opacity:0;transform:scale(.35)}
-      56%{opacity:.9;transform:scale(.5)}
-      70%{opacity:0;transform:scale(3.2)}
-      100%{opacity:0;transform:scale(3.2)}
-    }
-    @keyframes slot-hit{
-      0%,52%{
-        border-color:var(--gold);
-        background:rgba(232,201,10,.12);
-        box-shadow:0 0 6px rgba(232,201,10,.28);
-      }
-      56%,86%{
-        border-color:var(--gold);
-        background:rgba(232,201,10,.2);
-        box-shadow:0 0 12px rgba(232,201,10,.55);
-      }
-      64%{box-shadow:0 0 18px rgba(232,201,10,.8)}
-      92%,100%{
-        border-color:var(--gold);
-        background:rgba(232,201,10,.12);
-        box-shadow:0 0 6px rgba(232,201,10,.28);
-      }
+      from{transform:translate3d(0,0,0)}
+      to{transform:translate3d(0,calc(var(--loop) * -1),0)}
     }
     @keyframes crowd-halo{
       0%,100%{opacity:.8;transform:scale(1)}
@@ -1070,34 +1002,34 @@
       50%{transform:rotate(-22deg)}
     }
     @keyframes wallet-shift{
-      0%,8%{transform:translateX(-21.667%)}
-      28%,82%{transform:translateX(0)}
-      94%,100%{transform:translateX(-21.667%)}
+      0%,3%{transform:translateX(-21.667%)}
+      24%,84%{transform:translateX(0)}
+      97%,100%{transform:translateX(-21.667%)}
     }
     @keyframes wallet-open{
-      0%,8%{transform:rotateY(0deg)}
-      18%{transform:rotateY(-90deg)}
-      28%,82%{transform:rotateY(-180deg)}
-      92%{transform:rotateY(-90deg)}
-      94%,100%{transform:rotateY(0deg)}
+      0%,3%{transform:rotateY(0deg)}
+      14%{transform:rotateY(-90deg)}
+      24%,84%{transform:rotateY(-180deg)}
+      93%{transform:rotateY(-90deg)}
+      97%,100%{transform:rotateY(0deg)}
     }
     @keyframes wallet-rise{
-      0%,16%{transform:translateY(0);opacity:0}
-      20%,30%{transform:translateY(0);opacity:1}
-      48%{transform:translateY(-70px);opacity:1}
-      56%{transform:translateY(-78px);opacity:1}
-      64%{transform:translateY(-64px);opacity:1}
-      72%{transform:translateY(-76px);opacity:1}
-      80%{transform:translateY(-70px);opacity:1}
-      88%{transform:translateY(0);opacity:1}
+      0%,8%{transform:translateY(0);opacity:0}
+      16%,24%{transform:translateY(0);opacity:1}
+      42%{transform:translateY(-70px);opacity:1}
+      50%{transform:translateY(-78px);opacity:1}
+      58%{transform:translateY(-64px);opacity:1}
+      66%{transform:translateY(-76px);opacity:1}
+      76%{transform:translateY(-70px);opacity:1}
+      86%{transform:translateY(0);opacity:1}
       93%,100%{transform:translateY(0);opacity:0}
     }
     @keyframes wallet-glow{
-      0%,10%{opacity:0;transform:scale(.6)}
-      18%{opacity:.4;transform:scale(.8)}
-      28%{opacity:.7;transform:scale(1)}
-      48%,80%{opacity:.95;transform:scale(1.15)}
-      92%,100%{opacity:0;transform:scale(.6)}
+      0%,6%{opacity:0;transform:scale(.6)}
+      14%{opacity:.4;transform:scale(.8)}
+      24%{opacity:.7;transform:scale(1)}
+      42%,76%{opacity:.95;transform:scale(1.15)}
+      93%,100%{opacity:0;transform:scale(.6)}
     }
     [data-motion].is-playing .recycle__head--1{animation:recycle-snake-head-1 9s linear infinite}
     [data-motion].is-playing .recycle__head--2{animation:recycle-snake-head-2 9s linear infinite}
@@ -1113,47 +1045,6 @@
     @keyframes recycle-snake-head-3{
       from{offset-distance:89.166%;offset-rotate:auto}
       to{offset-distance:189.166%;offset-rotate:auto}
-    }
-    [data-motion="services"]:not(.is-playing):not(.is-static) .services__slice{
-      fill-opacity:0;
-    }
-    [data-motion="services"]:not(.is-playing):not(.is-static) .services__label,
-    [data-motion="services"]:not(.is-playing):not(.is-static) .services__ring{
-      opacity:0;
-    }
-    [data-motion="services"]:not(.is-playing):not(.is-static) .services__ring{
-      opacity:1;
-      stroke-dasharray:100;
-      stroke-dashoffset:100;
-    }
-    [data-motion="services"].is-playing .services__ring{
-      stroke-dasharray:100;
-      animation:services-ring-draw 1s cubic-bezier(.22,.8,.24,1) forwards;
-    }
-    [data-motion="services"].is-playing .services__slice{
-      animation:services-slice-in .85s cubic-bezier(.22,.8,.24,1) forwards;
-    }
-    [data-motion="services"].is-playing .services__wedge:nth-of-type(1) .services__slice{animation-delay:.08s}
-    [data-motion="services"].is-playing .services__wedge:nth-of-type(2) .services__slice{animation-delay:.20s}
-    [data-motion="services"].is-playing .services__wedge:nth-of-type(3) .services__slice{animation-delay:.32s}
-    [data-motion="services"].is-playing .services__label{
-      animation:services-label-in .7s cubic-bezier(.22,.8,.24,1) .5s forwards;
-      opacity:0;
-    }
-    [data-motion="services"].is-static .services__slice{fill-opacity:1}
-    [data-motion="services"].is-static .services__label,
-    [data-motion="services"].is-static .services__ring{opacity:1;stroke-dashoffset:0}
-    @keyframes services-ring-draw{
-      from{stroke-dashoffset:100}
-      to{stroke-dashoffset:0}
-    }
-    @keyframes services-slice-in{
-      from{fill-opacity:0}
-      to{fill-opacity:1}
-    }
-    @keyframes services-label-in{
-      from{opacity:0}
-      to{opacity:1}
     }
   }
 </style>
@@ -1301,9 +1192,9 @@
                 </svg>
                 <div class="phone__screen">
                   <div class="slot">
-                    <div class="slot__col"><div class="slot__reel slot__reel--1" style="--lock:-422px"><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span></div></div>
-                    <div class="slot__col"><div class="slot__reel slot__reel--2" style="--lock:-422px"><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span></div></div>
-                    <div class="slot__col"><div class="slot__reel slot__reel--3" style="--lock:-422px"><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span></div>
+                    <div class="slot__col"><div class="slot__reel slot__reel--1" style="--lock:-422px;--loop:720px"><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span></div></div>
+                    <div class="slot__col"><div class="slot__reel slot__reel--2" style="--lock:-422px;--loop:720px"><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span></div></div>
+                    <div class="slot__col"><div class="slot__reel slot__reel--3" style="--lock:-422px;--loop:720px"><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span></div>
                   </div></div>
                   <div class="slot__payline"></div>
                   <div class="slot__flash"></div>
@@ -1495,35 +1386,36 @@
         <div class="services__layout">
           <div class="services__visual">
             <div class="services__chart" data-motion="services" role="radiogroup" aria-label="Areas of service">
-                            <svg viewBox="0 0 400 400">
-                <circle class="services__ring" cx="200" cy="200" r="168" pathLength="100"/>
-              <g class="services__wedge" data-service="campaign">
-                <path class="services__slice" id="service-campaign" role="radio" aria-checked="false" aria-label="Campaign Strategy" tabindex="0" data-service="campaign" pathLength="100" d="M200.00,200.00 L203.81,32.04 A168.00,168.00 0 0 1 347.36,280.68 Z"/>
-                <text class="services__label" x="284.39" y="151.28" text-anchor="middle">
-                  <tspan x="284.39" dy="-0.65em">Campaign</tspan>
-                  <tspan x="284.39" dy="1.3em">Strategy</tspan>
+              <!-- trefoil-v1 -->
+              <svg viewBox="-64 36 528 450" overflow="visible">
+              <g class="services__wing is-active" data-service="campaign">
+                <path class="services__blade" id="service-campaign" role="radio" aria-checked="true" aria-label="Campaign Strategy" tabindex="0" data-service="campaign" d="M276.00,68.36 A152.00,152.00 0 0 1 352.00,200.00 L255.31,200.00 A55.31,55.31 0 0 0 227.65,152.10 Z"/>
+                <text class="services__label" x="392.26" y="89.00" text-anchor="middle">
+                  <tspan x="392.26" dy="-0.65em">Campaign</tspan>
+                  <tspan x="392.26" dy="1.3em">Strategy</tspan>
                 </text>
               </g>
-              <g class="services__wedge" data-service="creation">
-                <path class="services__slice" id="service-creation" role="radio" aria-checked="false" aria-label="Content Creation" tabindex="-1" data-service="creation" pathLength="100" d="M200.00,200.00 L343.55,287.28 A168.00,168.00 0 0 1 56.45,287.28 Z"/>
-                <text class="services__label" x="200.00" y="297.44" text-anchor="middle">
+              <g class="services__wing" data-service="creation">
+                <path class="services__blade" id="service-creation" role="radio" aria-checked="false" aria-label="Content Creation" tabindex="-1" data-service="creation" d="M276.00,331.64 A152.00,152.00 0 0 1 124.00,331.64 L172.35,247.90 A55.31,55.31 0 0 0 227.65,247.90 Z"/>
+                <text class="services__label" x="200.00" y="422.00" text-anchor="middle">
                   <tspan x="200.00" dy="-0.65em">Content</tspan>
                   <tspan x="200.00" dy="1.3em">Creation</tspan>
                 </text>
               </g>
-              <g class="services__wedge" data-service="community">
-                <path class="services__slice" id="service-community" role="radio" aria-checked="false" aria-label="Community Management" tabindex="-1" data-service="community" pathLength="100" d="M200.00,200.00 L52.64,280.68 A168.00,168.00 0 0 1 196.19,32.04 Z"/>
-                <text class="services__label" x="115.61" y="151.28" text-anchor="middle">
-                  <tspan x="115.61" dy="-0.65em">Community</tspan>
-                  <tspan x="115.61" dy="1.3em">Management</tspan>
+              <g class="services__wing" data-service="community">
+                <path class="services__blade" id="service-community" role="radio" aria-checked="false" aria-label="Community Management" tabindex="-1" data-service="community" d="M48.00,200.00 A152.00,152.00 0 0 1 124.00,68.36 L172.35,152.10 A55.31,55.31 0 0 0 144.69,200.00 Z"/>
+                <text class="services__label" x="7.74" y="89.00" text-anchor="middle">
+                  <tspan x="7.74" dy="-0.65em">Community</tspan>
+                  <tspan x="7.74" dy="1.3em">Management</tspan>
                 </text>
               </g>
+              <circle class="services__core" cx="200.00" cy="200.00" r="37.62"/>
               </svg>
             </div>
           </div>
-          <div class="services__panel is-idle" id="services-panel" aria-live="polite">
-            <h3 class="services__panel-title"></h3>
-            <p class="services__panel-body">Three practices, given equal weight.</p>
+          <div class="services__panel" id="services-panel" aria-live="polite">
+            <h3 class="services__panel-title">Campaign Strategy</h3>
+            <p class="services__panel-body">We address your public relations needs and find the best way to present your business to the market.</p>
           </div>
         </div>
       </div>
@@ -1531,17 +1423,15 @@
 
     <section class="follow" id="evergreen">
       <div class="follow__inner">
-        <div class="follow__layout">
+        <div class="follow__stage" data-motion="evergreen">
+          <div class="recycle" aria-hidden="true">
+            <div class="recycle__head recycle__head--1"><svg viewBox="0 0 62 60" aria-hidden="true"><path class="recycle__head-shape" d="M2,9 L58,30 L2,51 Z"/></svg></div>
+            <div class="recycle__head recycle__head--2"><svg viewBox="0 0 62 60" aria-hidden="true"><path class="recycle__head-shape" d="M2,9 L58,30 L2,51 Z"/></svg></div>
+            <div class="recycle__head recycle__head--3"><svg viewBox="0 0 62 60" aria-hidden="true"><path class="recycle__head-shape" d="M2,9 L58,30 L2,51 Z"/></svg></div>
+          </div>
           <div class="follow__copy">
             <h2 class="follow__title">A video you post today can bring you business months from now.</h2>
             <p class="follow__body">We write, produce, and distribute content people can keep finding.</p>
-          </div>
-          <div class="follow__visual" data-motion="evergreen" aria-hidden="true">
-            <div class="recycle">
-              <div class="recycle__head recycle__head--1"><svg viewBox="0 0 62 60" aria-hidden="true"><path class="recycle__head-shape" d="M2,9 L58,30 L2,51 Z"/></svg></div>
-              <div class="recycle__head recycle__head--2"><svg viewBox="0 0 62 60" aria-hidden="true"><path class="recycle__head-shape" d="M2,9 L58,30 L2,51 Z"/></svg></div>
-              <div class="recycle__head recycle__head--3"><svg viewBox="0 0 62 60" aria-hidden="true"><path class="recycle__head-shape" d="M2,9 L58,30 L2,51 Z"/></svg></div>
-            </div>
           </div>
         </div>
       </div>
@@ -1636,8 +1526,9 @@
           </figure>
 
           <figure class="results__chart" data-animate>
-            <figcaption class="results__chart-title">Who was watching</figcaption>
-            <svg class="chart" viewBox="0 0 520 220" role="img" aria-label="Views from followers 45.7 percent and from non-followers 54.3 percent.">
+            <figcaption class="results__chart-title">Reach</figcaption>
+            <p class="results__chart-note">A strong content strategy reaches at least half its audience from outside its followers. Here, 54.3% of views came from people who were not already following.</p>
+            <svg class="chart" viewBox="0 0 520 220" role="img" aria-label="Reach: views from followers 45.7 percent and from non-followers 54.3 percent.">
               <rect class="bar-track" x="150" y="40" width="340" height="36" rx="2"/>
               <rect class="bar" x="150" y="40" width="155.38" height="36" rx="2"/>
               <text class="lbl" x="0" y="63">Followers</text>
@@ -1648,7 +1539,6 @@
               <text class="lbl" x="0" y="139">Non-followers</text>
               <text class="val" x="504" y="141" text-anchor="end">54.3%</text>
             </svg>
-            <p class="results__chart-body">A strong content strategy reaches at least half its audience from outside its followers. Here, 54.3% of views came from people who were not already following.</p>
           </figure>
 
           <figure class="results__chart results__chart--wide" data-animate>
@@ -1681,10 +1571,233 @@
 <script>
 (function(){
   var nodes = document.querySelectorAll('.method [data-animate], .results [data-animate], .services [data-animate]');
-  if (!nodes.length) return;
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var motions = document.querySelectorAll('[data-motion]:not([data-motion="signal"])');
   var signals = document.querySelectorAll('[data-motion="signal"]');
+
+  function initServices(reduceMotion){
+    var layout = document.querySelector('.services__layout');
+    if (!layout) return;
+    var chart = layout.querySelector('.services__chart');
+    var blades = Array.prototype.slice.call(layout.querySelectorAll('.services__blade'));
+    var wings = Array.prototype.slice.call(layout.querySelectorAll('.services__wing'));
+    var panelTitle = layout.querySelector('.services__panel-title');
+    var panelBody = layout.querySelector('.services__panel-body');
+    var ids = ['campaign', 'creation', 'community'];
+    var copy = {
+      campaign: { title: 'Campaign Strategy', body: 'We address your public relations needs and find the best way to present your business to the market.' },
+      creation: { title: 'Content Creation', body: 'We find the style your brand needs: cinematic, documentary, found footage, even goofy. Whatever fits your business.' },
+      community: { title: 'Community Management', body: 'Distributing your content, replying to DMs, handling Google reviews, commenting back on posts, and scheduling.' }
+    };
+    var current = 'campaign';
+    var pinned = false;
+    var index = 0;
+    var timer = null;
+
+    function show(id){
+      if (!copy[id]) return;
+      current = id;
+      index = ids.indexOf(id);
+      wings.forEach(function(w){
+        var on = w.getAttribute('data-service') === current;
+        w.classList.toggle('is-active', on);
+        var blade = w.querySelector('.services__blade');
+        if (!blade) return;
+        blade.setAttribute('aria-checked', on ? 'true' : 'false');
+        blade.tabIndex = on ? 0 : -1;
+      });
+      panelTitle.textContent = copy[id].title;
+      panelBody.textContent = copy[id].body;
+    }
+
+    function stopCycle(){
+      if (timer){
+        clearInterval(timer);
+        timer = null;
+      }
+    }
+
+    function startCycle(){
+      if (pinned || reduceMotion) return;
+      stopCycle();
+      timer = setInterval(function(){
+        show(ids[(index + 1) % ids.length]);
+      }, 3000);
+    }
+
+    function userSelect(id){
+      pinned = true;
+      stopCycle();
+      show(id);
+    }
+
+    blades.forEach(function(blade){
+      blade.addEventListener('click', function(){
+        userSelect(blade.getAttribute('data-service'));
+      });
+      blade.addEventListener('keydown', function(e){
+        var i = blades.indexOf(blade);
+        var next = i;
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') next = (i + 1) % blades.length;
+        else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') next = (i - 1 + blades.length) % blades.length;
+        else if (e.key === 'Home') next = 0;
+        else if (e.key === 'End') next = blades.length - 1;
+        else if (e.key === ' ' || e.key === 'Enter'){
+          userSelect(blade.getAttribute('data-service'));
+          e.preventDefault();
+          return;
+        } else return;
+        e.preventDefault();
+        blades[next].focus();
+      });
+    });
+
+    show(ids[0]);
+    if (!reduceMotion && chart){
+      if (chart.classList.contains('is-playing')) startCycle();
+      if ('MutationObserver' in window){
+        new MutationObserver(function(){
+          if (pinned || reduceMotion) return;
+          if (chart.classList.contains('is-playing')) startCycle();
+          else stopCycle();
+        }).observe(chart, { attributes:true, attributeFilter:['class'] });
+      }
+    }
+  }
+
+  function initEvergreen(){
+    var rec = document.querySelector('.recycle');
+    if (!rec) return;
+    var heads = rec.querySelectorAll('.recycle__head');
+    if (!heads.length) return;
+
+    function roundedPath(pts, radius){
+      var n = pts.length;
+      var t1 = [], t2 = [], rad = [], sw = [];
+      var i, p0, p1, p2, v1x, v1y, v2x, v2y, l1, l2, a1x, a1y, a2x, a2y, d, ang, cross, r;
+      for (i = 0; i < n; i++){
+        p0 = pts[(i + n - 1) % n];
+        p1 = pts[i];
+        p2 = pts[(i + 1) % n];
+        v1x = p0[0] - p1[0]; v1y = p0[1] - p1[1];
+        v2x = p2[0] - p1[0]; v2y = p2[1] - p1[1];
+        l1 = Math.hypot(v1x, v1y); l2 = Math.hypot(v2x, v2y);
+        a1x = v1x / l1; a1y = v1y / l1;
+        a2x = v2x / l2; a2y = v2y / l2;
+        ang = Math.acos(Math.max(-1, Math.min(1, a1x * a2x + a1y * a2y)));
+        d = radius / Math.tan(ang / 2);
+        if (d > l1 * 0.42) d = l1 * 0.42;
+        if (d > l2 * 0.42) d = l2 * 0.42;
+        r = d * Math.tan(ang / 2);
+        t1.push([p1[0] + a1x * d, p1[1] + a1y * d]);
+        t2.push([p1[0] + a2x * d, p1[1] + a2y * d]);
+        rad.push(r);
+        cross = a1x * a2y - a1y * a2x;
+        sw.push(cross < 0 ? 1 : 0);
+      }
+      var dstr = 'M' + t2[0][0].toFixed(2) + ',' + t2[0][1].toFixed(2);
+      for (i = 1; i < n; i++){
+        dstr += 'L' + t1[i][0].toFixed(2) + ',' + t1[i][1].toFixed(2);
+        dstr += 'A' + rad[i].toFixed(2) + ',' + rad[i].toFixed(2) + ' 0 0 ' + sw[i] + ' ' + t2[i][0].toFixed(2) + ',' + t2[i][1].toFixed(2);
+      }
+      dstr += 'L' + t1[0][0].toFixed(2) + ',' + t1[0][1].toFixed(2);
+      dstr += 'A' + rad[0].toFixed(2) + ',' + rad[0].toFixed(2) + ' 0 0 ' + sw[0] + ' ' + t2[0][0].toFixed(2) + ',' + t2[0][1].toFixed(2);
+      dstr += 'Z';
+      return dstr;
+    }
+
+    function roundedRect(w, h, margin, r){
+      var x = margin, y = margin, rw = w - 2 * margin, rh = h - 2 * margin;
+      if (r > rw / 2) r = rw / 2;
+      if (r > rh / 2) r = rh / 2;
+      return 'M' + (x + r) + ',' + y +
+        ' L' + (x + rw - r) + ',' + y +
+        ' A' + r + ',' + r + ' 0 0 1 ' + (x + rw) + ',' + (y + r) +
+        ' L' + (x + rw) + ',' + (y + rh - r) +
+        ' A' + r + ',' + r + ' 0 0 1 ' + (x + rw - r) + ',' + (y + rh) +
+        ' L' + (x + r) + ',' + (y + rh) +
+        ' A' + r + ',' + r + ' 0 0 1 ' + x + ',' + (y + rh - r) +
+        ' L' + x + ',' + (y + r) +
+        ' A' + r + ',' + r + ' 0 0 1 ' + (x + r) + ',' + y + ' Z';
+    }
+
+    function applyPath(d){
+      for (var i = 0; i < heads.length; i++){
+        heads[i].style.offsetPath = 'path("' + d + '")';
+      }
+    }
+
+    function layout(){
+      var stage = rec.parentElement;
+      var copy = stage ? stage.querySelector('.follow__copy') : null;
+      var w = rec.clientWidth, h = rec.clientHeight;
+      if (w < 40 || h < 40 || !copy) return;
+      var margin = 20;
+      var clearance = 88;
+      var cw = copy.offsetWidth, ch = copy.offsetHeight;
+      var narrow = w < 700;
+
+      if (narrow){
+        var need = 72;
+        var curX = parseFloat(getComputedStyle(stage).paddingLeft) || 0;
+        if (Math.abs(curX - need) > 1){
+          stage.style.padding = need + 'px ' + need + 'px ' + need + 'px';
+          return;
+        }
+        var rad = Math.min(64, (w - 2 * margin) * 0.18, (h - 2 * margin) * 0.14);
+        applyPath(roundedRect(w, h, margin, rad));
+        return;
+      }
+
+      var peak = 120;
+      var padTop = Math.ceil(peak + clearance + 56);
+      var padBot = Math.ceil(clearance + 56);
+      var cs = getComputedStyle(stage);
+      var curTop = parseFloat(cs.paddingTop) || 0;
+      var curBot = parseFloat(cs.paddingBottom) || 0;
+      if (Math.abs(curTop - padTop) > 2 || Math.abs(curBot - padBot) > 2){
+        stage.style.paddingTop = padTop + 'px';
+        stage.style.paddingBottom = padBot + 'px';
+        return;
+      }
+      var sr = rec.getBoundingClientRect();
+      var cr = copy.getBoundingClientRect();
+      var cL = cr.left - sr.left;
+      var cT = cr.top - sr.top;
+      var cR = cL + cw;
+      var cB = cT + ch;
+      var left = cL - clearance;
+      var right = cR + clearance;
+      var shoulder = cT - clearance;
+      var bottom = cB + clearance;
+      var tipY = shoulder - peak;
+      if (tipY < 8) tipY = 8;
+      if (left < 8) left = 8;
+      if (right > w - 8) right = w - 8;
+      if (bottom > h - 8) bottom = h - 8;
+      var top = [(left + right) / 2, tipY];
+      var ur = [right, shoulder];
+      var br = [right, bottom];
+      var bl = [left, bottom];
+      var ul = [left, shoulder];
+      var radius = Math.min(64, peak * 0.42, (bottom - shoulder) * 0.16);
+      applyPath(roundedPath([top, ur, br, bl, ul], radius));
+    }
+
+    layout();
+    if ('ResizeObserver' in window){
+      new ResizeObserver(layout).observe(rec);
+    } else {
+      window.addEventListener('resize', layout);
+    }
+    if (document.fonts && document.fonts.ready){
+      document.fonts.ready.then(layout);
+    }
+  }
+
+  initServices(reduce);
+  initEvergreen();
+
   if (reduce || !('IntersectionObserver' in window)){
     nodes.forEach(function(el){ el.classList.add('is-in'); });
     motions.forEach(function(el){ el.classList.add('is-static'); });
@@ -1734,100 +1847,8 @@
     });
   }, { threshold: 0.5 });
   signals.forEach(function(el){ sio.observe(el); });
-
-  var layout = document.querySelector('.services__layout');
-  if (layout){
-    var slices = Array.prototype.slice.call(layout.querySelectorAll('.services__slice'));
-    var wedges = Array.prototype.slice.call(layout.querySelectorAll('.services__wedge'));
-    var panel = layout.querySelector('.services__panel');
-    var panelTitle = layout.querySelector('.services__panel-title');
-    var panelBody = layout.querySelector('.services__panel-body');
-    var idleBody = 'Three practices, given equal weight.';
-    var copy = {
-      campaign: { title: 'Campaign Strategy', body: 'We address your public relations needs and find the best way to present your business to the market.' },
-      creation: { title: 'Content Creation', body: 'We find the style your brand needs: cinematic, documentary, found footage, even goofy. Whatever fits your business.' },
-      community: { title: 'Community Management', body: 'Distributing your content, replying to DMs, handling Google reviews, commenting back on posts, and scheduling.' }
-    };
-    var current = null;
-    var pinned = false;
-
-    function setActive(id, pin){
-      current = id || null;
-      if (pin) pinned = !!id;
-      wedges.forEach(function(w){
-        var on = w.getAttribute('data-service') === current;
-        w.classList.toggle('is-active', on);
-        var sl = w.querySelector('.services__slice');
-        sl.setAttribute('aria-checked', on ? 'true' : 'false');
-        sl.setAttribute('tabindex', on || (!current && sl === slices[0]) ? '0' : '-1');
-      });
-      if (!current){
-        panel.classList.add('is-idle');
-        panelTitle.textContent = '';
-        panelBody.textContent = idleBody;
-      } else {
-        panel.classList.remove('is-idle');
-        panelTitle.textContent = copy[current].title;
-        panelBody.textContent = copy[current].body;
-      }
-    }
-
-    function sliceOf(node){
-      return node && node.closest ? node.closest('.services__slice') : null;
-    }
-
-    slices.forEach(function(sl){
-      sl.addEventListener('pointerenter', function(e){
-        if (e.pointerType === 'mouse') setActive(sl.getAttribute('data-service'), false);
-      });
-      sl.addEventListener('focus', function(){
-        setActive(sl.getAttribute('data-service'), false);
-      });
-      sl.addEventListener('click', function(){
-        var id = sl.getAttribute('data-service');
-        if (pinned && current === id){
-          setActive(null, true);
-        } else {
-          setActive(id, true);
-        }
-      });
-      sl.addEventListener('keydown', function(e){
-        var i = slices.indexOf(sl);
-        var next = i;
-        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') next = (i + 1) % slices.length;
-        else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') next = (i - 1 + slices.length) % slices.length;
-        else if (e.key === 'Home') next = 0;
-        else if (e.key === 'End') next = slices.length - 1;
-        else if (e.key === 'Escape'){
-          setActive(null, true);
-          e.preventDefault();
-          return;
-        } else if (e.key === ' ' || e.key === 'Enter'){
-          var id = sl.getAttribute('data-service');
-          setActive(current === id && pinned ? null : id, true);
-          e.preventDefault();
-          return;
-        } else return;
-        e.preventDefault();
-        slices[next].focus();
-      });
-    });
-
-    layout.addEventListener('pointerleave', function(e){
-      if (e.pointerType !== 'mouse') return;
-      if (pinned) return;
-      var ae = document.activeElement;
-      if (ae && layout.contains(ae) && ae.classList.contains('services__slice')) return;
-      setActive(null, false);
-    });
-
-    document.addEventListener('pointerdown', function(e){
-      if (!pinned) return;
-      if (layout.contains(e.target)) return;
-      setActive(null, true);
-    });
-  }
 })();
 </script>
+
 </body>
 </html>
