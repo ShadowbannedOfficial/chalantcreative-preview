@@ -137,7 +137,6 @@
   /* ---------- Case study ---------- */
   .results{
     padding-block:clamp(88px,16vh,200px) clamp(96px,18vh,220px);
-    border-top:1px solid var(--gold);
   }
   .results__eyebrow{
     margin:0 0 clamp(18px,3vh,32px);
@@ -396,7 +395,6 @@
   /* ---------- Evergreen ---------- */
   .follow{
     padding-block:clamp(88px,16vh,200px);
-    border-top:1px solid rgba(255,255,255,.16);
   }
   .follow__stage{
     position:relative;
@@ -408,35 +406,46 @@
     padding:96px 24px 48px;
   }
   .follow__copy{
-    position:relative;
+    position:absolute;
     z-index:1;
-    width:100%;
-    max-width:min(20em,100%);
+    text-align:center;
+    box-sizing:border-box;
+  }
+  .follow__cut{
+    display:block;
+    width:50%;
+    height:100%;
+    pointer-events:none;
+    shape-margin:4px;
+  }
+  .follow__cut--l{
+    float:left;
+    shape-outside:polygon(0 0, 78% 0, 0 100%);
+  }
+  .follow__cut--r{
+    float:right;
+    shape-outside:polygon(22% 0, 100% 0, 100% 100%);
   }
   .follow__title{
-    margin:0 auto;
+    margin:0;
     color:#fff;
     font-family:var(--heading);
-    font-size:clamp(22px,2.5vw,32px);
+    font-size:clamp(20px,2.5vw,32px);
     font-weight:700;
     line-height:1.12;
     letter-spacing:-.02em;
-    text-wrap:pretty;
   }
   .follow__body{
-    margin:clamp(10px,1.4vw,16px) auto 0;
-    max-width:22em;
+    margin:clamp(8px,1.2vw,14px) 0 0;
     color:#fff;
     font-family:var(--inter);
-    font-size:clamp(14px,1.25vw,17px);
+    font-size:clamp(13px,1.2vw,17px);
     font-weight:400;
-    line-height:1.4;
+    line-height:1.35;
     letter-spacing:-.011em;
-    text-wrap:pretty;
   }
   @media (max-width:699px){
-    .follow__copy{max-width:10em}
-    .follow__title{font-size:14px;line-height:1.12}
+    .follow__title{font-size:15px;line-height:1.15}
     .follow__body{font-size:12px;line-height:1.3;margin-top:6px}
   }
   .follow__inner,.follow__stage{overflow:visible}
@@ -542,7 +551,8 @@
   /* ---------- Services ---------- */
   .services{
     padding-block:clamp(88px,16vh,200px);
-    border-top:1px solid rgba(255,255,255,.16);
+    border-top:1px solid #E8C90A;
+    border-bottom:1px solid #E8C90A;
   }
   .services__eyebrow{
     margin:0 0 clamp(18px,3vh,32px);
@@ -1440,13 +1450,15 @@
 
     <section class="follow" id="evergreen">
       <div class="follow__inner">
-        <div class="follow__stage" data-motion="evergreen"><!-- evergreen-recycle-v1 -->
+        <div class="follow__stage" data-motion="evergreen"><!-- evergreen-shaped-v1 -->
           <div class="recycle" aria-hidden="true">
             <div class="recycle__head recycle__head--1"><svg viewBox="-31 -30 62 60" aria-hidden="true"><path class="recycle__head-shape" d="M-18.667,-21 L37.333,0 L-18.667,21 Z"/></svg></div>
             <div class="recycle__head recycle__head--2"><svg viewBox="-31 -30 62 60" aria-hidden="true"><path class="recycle__head-shape" d="M-18.667,-21 L37.333,0 L-18.667,21 Z"/></svg></div>
             <div class="recycle__head recycle__head--3"><svg viewBox="-31 -30 62 60" aria-hidden="true"><path class="recycle__head-shape" d="M-18.667,-21 L37.333,0 L-18.667,21 Z"/></svg></div>
           </div>
           <div class="follow__copy">
+            <span class="follow__cut follow__cut--l" aria-hidden="true"></span>
+            <span class="follow__cut follow__cut--r" aria-hidden="true"></span>
             <h2 class="follow__title">A video you post today can bring you business months from now.</h2>
             <p class="follow__body">We write, produce, and distribute content people can keep finding.</p>
           </div>
@@ -1841,58 +1853,115 @@
       }
     }
 
+    var lastKey = '';
+
+    function setCuts(copy, width){
+      var cap = Math.min(Math.max(width * 0.38, 120), width * 0.46);
+      var pct = (1 - cap / width) * 100;
+      var left = copy.querySelector('.follow__cut--l');
+      var right = copy.querySelector('.follow__cut--r');
+      if (left) left.style.shapeOutside = 'polygon(0 0, ' + pct.toFixed(2) + '% 0, 0 100%)';
+      if (right) right.style.shapeOutside = 'polygon(' + (100 - pct).toFixed(2) + '% 0, 100% 0, 100% 100%)';
+    }
+
+    function applyType(copy, titlePx, narrow){
+      var title = copy.querySelector('.follow__title');
+      var body = copy.querySelector('.follow__body');
+      if (!title || !body) return;
+      title.style.fontSize = titlePx + 'px';
+      body.style.fontSize = Math.max(narrow ? 11 : 13, titlePx * 0.52).toFixed(1) + 'px';
+      body.style.marginTop = Math.max(narrow ? 6 : 8, titlePx * 0.38).toFixed(1) + 'px';
+    }
+
+    function fits(copy){
+      return copy.scrollHeight <= copy.clientHeight + 1;
+    }
+
     function layout(){
-      var stage = rec.parentElement;
       var copy = stage ? stage.querySelector('.follow__copy') : null;
       if (!stage || !copy) return;
-      var w = rec.clientWidth, h = rec.clientHeight;
-      if (w < 40 || h < 40) return;
+      var w = rec.clientWidth;
+      if (w < 40) return;
 
-      var headW = heads[0].offsetWidth || 52;
       var headH = heads[0].offsetHeight || 50;
       var inward = headH * 21 / 60;
       var narrow = w < 700;
-      var gap = narrow ? 12 : 22;
+      var gap = narrow ? 16 : 34;
       var edge = narrow ? 6 : 12;
       var inset = inward + gap;
       var outward = inward;
-      var cw = copy.offsetWidth, ch = copy.offsetHeight;
       var sqrt3 = Math.sqrt(3);
 
       var vw = document.documentElement.clientWidth || w;
       var maxPathW = Math.max(w, vw) - 2 * (outward + edge);
       var maxR = maxPathW / (2 * sqrt3);
-      var rPrime = cw / (2 * sqrt3) + ch / 3;
+      var maxRp = Math.max(24, maxR - inset);
+      var maxS = 2 * maxRp * sqrt3;
+
+      var prefTitle = narrow ? 15 : 32;
+      var minTitle = narrow ? 12 : 20;
+      var titlePx = prefTitle;
+
+      function placeBox(s){
+        var rp = s / (2 * sqrt3);
+        var hBox = 3 * rp;
+        copy.style.width = s.toFixed(2) + 'px';
+        copy.style.height = hBox.toFixed(2) + 'px';
+        setCuts(copy, s);
+        applyType(copy, titlePx, narrow);
+        return hBox;
+      }
+
+      // shrink type until some width <= maxS can hold the copy in an equilateral
+      var s, lo, hi, mid, best, i;
+      while (titlePx >= minTitle){
+        lo = Math.min(140, maxS);
+        hi = maxS;
+        best = 0;
+        for (i = 0; i < 14; i++){
+          mid = (lo + hi) / 2;
+          placeBox(mid);
+          copy.getBoundingClientRect();
+          if (fits(copy)){ best = mid; hi = mid - 1; }
+          else lo = mid + 1;
+        }
+        if (best > 0){ s = best; placeBox(s); break; }
+        titlePx -= 1;
+      }
+      if (!s){
+        titlePx = minTitle;
+        s = maxS;
+        placeBox(s);
+      }
+
+      var rPrime = s / (2 * sqrt3);
       var r = rPrime + inset;
       if (r > maxR) r = maxR;
       if (r < 40) r = 40;
-
       var pathH = 3 * r;
       var pathW = 2 * r * sqrt3;
-      var padTop = Math.ceil(outward + edge + pathH - inset - ch);
-      var padBot = Math.ceil(outward + edge + inset);
-      if (padTop < Math.ceil(outward + edge)) padTop = Math.ceil(outward + edge);
-      var padX = Math.max(0, Math.ceil((w - pathW) / 2));
+      var midX = w / 2;
+      var tipY = outward + edge;
+      var baseY = tipY + pathH;
+      var copyW = 2 * rPrime * sqrt3;
+      var copyH = 3 * rPrime;
+      var copyLeft = midX - copyW / 2;
+      var copyTop = tipY + 2 * inset;
+      var stageH = pathH + 2 * (outward + edge);
 
-      var cs = getComputedStyle(stage);
-      var curTop = parseFloat(cs.paddingTop) || 0;
-      var curBot = parseFloat(cs.paddingBottom) || 0;
-      var curX = parseFloat(cs.paddingLeft) || 0;
-      if (Math.abs(curTop - padTop) > 1 || Math.abs(curBot - padBot) > 1 || Math.abs(curX - padX) > 1){
-        stage.style.padding = padTop + 'px ' + padX + 'px ' + padBot + 'px';
-        rec.clientWidth;
-        w = rec.clientWidth;
-        h = rec.clientHeight;
-        cw = copy.offsetWidth;
-        ch = copy.offsetHeight;
-      }
+      var key = [Math.round(w), narrow ? 1 : 0, Math.round(s), titlePx, Math.round(stageH)].join(',');
+      if (key === lastKey) return;
+      lastKey = key;
 
-      var sr = rec.getBoundingClientRect();
-      var cr = copy.getBoundingClientRect();
-      var midX = (cr.left + cr.right) / 2 - sr.left;
-      var copyBottom = cr.bottom - sr.top;
-      var baseY = copyBottom + inset;
-      var tipY = baseY - pathH;
+      stage.style.height = Math.ceil(stageH) + 'px';
+      stage.style.padding = '0';
+      copy.style.left = copyLeft.toFixed(2) + 'px';
+      copy.style.top = copyTop.toFixed(2) + 'px';
+      copy.style.width = copyW.toFixed(2) + 'px';
+      copy.style.height = copyH.toFixed(2) + 'px';
+      setCuts(copy, copyW);
+      applyType(copy, titlePx, narrow);
+
       var top = [midX, tipY];
       var br = [midX + pathW / 2, baseY];
       var bl = [midX - pathW / 2, baseY];
@@ -1952,17 +2021,17 @@
         clearTimeout(el._signalTimer);
         el._signalTimer = null;
       }
-      if (entry.isIntersecting){
-        // Brief green first, then yellow — even if already in view on load
+      if (entry.intersectionRatio >= 0.12){
+        // Flip to yellow once ~12% of the fixture is in view
         el._signalTimer = setTimeout(function(){
           el._signalTimer = null;
           el.classList.add('is-playing');
-        }, 700);
+        }, 150);
       } else {
         el.classList.remove('is-playing');
       }
     });
-  }, { threshold: 0.5 });
+  }, { threshold: [0, 0.12] });
   signals.forEach(function(el){ sio.observe(el); });
 })();
 </script>
