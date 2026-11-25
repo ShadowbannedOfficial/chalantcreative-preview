@@ -2178,10 +2178,12 @@
   }, { threshold: 0.22, rootMargin: '0px 0px -8% 0px' });
   nodes.forEach(function(el){ io.observe(el); });
 
-  /* slot-feed-v1: feeds spin continuously from load; a standalone
-     IntersectionObserver (threshold 0.15 on the three-phone group,
-     not the stoplight) triggers a one-shot staggered land on the
-     gold post. Once landed, they stay landed. */
+  /* slot-land-late-v1: feeds spin at full speed until the three-phone
+     group is mostly on screen. Slowdown starts when the group's
+     bottom is in the viewport and its center has crossed ~60% of
+     the viewport height (not the stoplight, not a 15% peek).
+     A ~2.4s staggered deceleration lands on the gold post once
+     and stays landed. */
   function currentY(el){
     var t = getComputedStyle(el).transform;
     if (!t || t === 'none') return 0;
@@ -2212,13 +2214,13 @@
         reels[i].style.transform = 'translate3d(0,' + yList[i] + 'px,0)';
       }
       root.classList.add('is-landing');
-      var durs = [900, 1250, 1700];
-      var delays = [0, 280, 620];
+      var durs = [1400, 1600, 1800];
+      var delays = [0, 300, 600];
       for (var j = 0; j < reels.length; j++){
         (function(reel, y, dur, delay){
           var next = lock;
           while (next > y + 0.5) next -= loop;
-          if ((y - next) < loop * 0.5) next -= loop;
+          if ((y - next) < loop) next -= loop;
           reel.style.transform = 'translate3d(0,' + y + 'px,0)';
           reel.getAnimations().forEach(function(a){ a.cancel(); });
           reel.style.transform = 'translate3d(0,' + y + 'px,0)';
@@ -2227,7 +2229,7 @@
               {transform:'translate3d(0,' + y + 'px,0)'},
               {transform:'translate3d(0,' + next + 'px,0)'}
             ],
-            {duration:dur, delay:delay, easing:'cubic-bezier(.05,.7,.15,1)', fill:'forwards'}
+            {duration:dur, delay:delay, easing:'cubic-bezier(.2,.5,.15,1)', fill:'forwards'}
           );
           anim.addEventListener('finish', function(){
             reel.style.transform = 'translate3d(0, calc(-4 * var(--cell, 100cqh)), 0)';
@@ -2241,15 +2243,30 @@
         root.classList.remove('is-landing');
       }, lastDelay);
     }
-    var slotIo = new IntersectionObserver(function(entries){
-      entries.forEach(function(entry){
-        if (entry.isIntersecting){
+    function slotReadyToLand(el){
+      var r = el.getBoundingClientRect();
+      var vh = window.innerHeight || document.documentElement.clientHeight;
+      if (vh <= 0) return false;
+      var mid = (r.top + r.bottom) / 2;
+      return r.bottom <= vh && mid <= vh * 0.60;
+    }
+    var slotTick = false;
+    function onSlotScrollTick(){
+      if (landed) return;
+      if (slotTick) return;
+      slotTick = true;
+      requestAnimationFrame(function(){
+        slotTick = false;
+        if (!landed && slotReadyToLand(group)){
+          window.removeEventListener('scroll', onSlotScrollTick);
+          window.removeEventListener('resize', onSlotScrollTick);
           land();
-          slotIo.unobserve(entry.target);
         }
       });
-    }, {threshold:0.15});
-    slotIo.observe(group);
+    }
+    window.addEventListener('scroll', onSlotScrollTick, {passive:true});
+    window.addEventListener('resize', onSlotScrollTick);
+    onSlotScrollTick();
   }
   initEntertain();
 
