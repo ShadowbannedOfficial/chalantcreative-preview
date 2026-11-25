@@ -411,21 +411,6 @@
     text-align:center;
     box-sizing:border-box;
   }
-  .follow__cut{
-    display:block;
-    width:50%;
-    height:100%;
-    pointer-events:none;
-    shape-margin:4px;
-  }
-  .follow__cut--l{
-    float:left;
-    shape-outside:polygon(0 0, 78% 0, 0 100%);
-  }
-  .follow__cut--r{
-    float:right;
-    shape-outside:polygon(22% 0, 100% 0, 100% 100%);
-  }
   .follow__title{
     margin:0;
     color:#fff;
@@ -434,6 +419,13 @@
     font-weight:700;
     line-height:1.12;
     letter-spacing:-.02em;
+  }
+  .follow__line{
+    display:block;
+    width:fit-content;
+    max-width:100%;
+    margin-inline:auto;
+    white-space:nowrap;
   }
   .follow__body{
     margin:clamp(8px,1.2vw,14px) 0 0;
@@ -445,7 +437,7 @@
     letter-spacing:-.011em;
   }
   @media (max-width:699px){
-    .follow__title{font-size:15px;line-height:1.15}
+    .follow__title{font-size:16px;line-height:1.15}
     .follow__body{font-size:12px;line-height:1.3;margin-top:6px}
   }
   .follow__inner,.follow__stage{overflow:visible}
@@ -852,7 +844,7 @@
     inset:0;
     z-index:3;
     pointer-events:none;
-    background:radial-gradient(circle at 50% 50%,rgba(232,201,10,.5) 0%,rgba(232,201,10,.12) 28%,transparent 68%);
+    background:radial-gradient(circle at 50% 50%,rgba(232,201,10,.32) 0%,rgba(232,201,10,.08) 28%,transparent 68%);
     opacity:0;
   }
   .slot__win{
@@ -860,21 +852,6 @@
     inset:0;
     z-index:4;
     pointer-events:none;
-  }
-  .slot__jackpot{
-    position:absolute;
-    left:0;right:0;
-    top:26%;
-    text-align:center;
-    color:#E8C90A;
-    font-family:var(--heading);
-    font-size:11px;
-    font-weight:700;
-    letter-spacing:.14em;
-    line-height:1;
-    opacity:0;
-    transform:scale(.82);
-    text-shadow:0 0 10px rgba(232,201,10,.45);
   }
   .slot__coin{
     position:absolute;
@@ -1024,18 +1001,17 @@
     .wallet__cash{transform:translateY(0);opacity:0}
     .wallet__glow{opacity:0;transform:scale(.6)}
 
-    [data-motion].is-playing .slot__reel--1{animation:slot-jackpot-1 5.4s infinite}
-    [data-motion].is-playing .slot__reel--2{animation:slot-jackpot-2 5.4s infinite}
-    [data-motion].is-playing .slot__reel--3{animation:slot-jackpot-3 5.4s infinite}
-    [data-motion].is-playing .slot__payline{animation:slot-jackpot-line 5.4s infinite}
-    [data-motion].is-playing .slot__flash{animation:slot-jackpot-flash 5.4s infinite}
-    [data-motion].is-playing .slot__jackpot{animation:slot-jackpot-word 5.4s infinite}
-    [data-motion].is-playing .slot__coin--1{animation:slot-coin-1 5.4s infinite}
-    [data-motion].is-playing .slot__coin--2{animation:slot-coin-2 5.4s infinite}
-    [data-motion].is-playing .slot__coin--3{animation:slot-coin-3 5.4s infinite}
-    [data-motion].is-playing .slot__coin--4{animation:slot-coin-4 5.4s infinite}
-    [data-motion].is-playing .slot__coin--5{animation:slot-coin-5 5.4s infinite}
-    [data-motion].is-playing .slot__coin--6{animation:slot-coin-6 5.4s infinite}
+    [data-motion].is-playing .slot__reel--1{animation:slot-jackpot-1 5.4s infinite;animation-delay:-1.2s}
+    [data-motion].is-playing .slot__reel--2{animation:slot-jackpot-2 5.4s infinite;animation-delay:-1.2s}
+    [data-motion].is-playing .slot__reel--3{animation:slot-jackpot-3 5.4s infinite;animation-delay:-1.2s}
+    [data-motion].is-playing .slot__payline{animation:slot-jackpot-line 5.4s infinite;animation-delay:-1.2s}
+    [data-motion].is-playing .slot__flash{animation:slot-jackpot-flash 5.4s infinite;animation-delay:-1.2s}
+    [data-motion].is-playing .slot__coin--1{animation:slot-coin-1 5.4s infinite;animation-delay:-1.2s}
+    [data-motion].is-playing .slot__coin--2{animation:slot-coin-2 5.4s infinite;animation-delay:-1.2s}
+    [data-motion].is-playing .slot__coin--3{animation:slot-coin-3 5.4s infinite;animation-delay:-1.2s}
+    [data-motion].is-playing .slot__coin--4{animation:slot-coin-4 5.4s infinite;animation-delay:-1.2s}
+    [data-motion].is-playing .slot__coin--5{animation:slot-coin-5 5.4s infinite;animation-delay:-1.2s}
+    [data-motion].is-playing .slot__coin--6{animation:slot-coin-6 5.4s infinite;animation-delay:-1.2s}
 
     [data-motion].is-playing .crowd__halo{animation:crowd-halo 3.2s ease-in-out infinite}
     [data-motion].is-playing .walker__bob{animation:walk-bob .7s ease-in-out var(--delay,0s) infinite}
@@ -1071,14 +1047,9 @@
     }
     @keyframes slot-jackpot-flash{
       0%,77.8%{opacity:0}
-      80%{opacity:1}
-      88%{opacity:.55}
-      100%{opacity:.2}
-    }
-    @keyframes slot-jackpot-word{
-      0%,77.8%{opacity:0;transform:scale(.82)}
-      81%,94%{opacity:1;transform:scale(1)}
-      100%{opacity:0;transform:scale(.96)}
+      80%{opacity:.65}
+      88%{opacity:.32}
+      100%{opacity:.12}
     }
     @keyframes slot-coin-1{
       0%,77.8%{opacity:0;transform:translate(0,0) scale(.6)}
@@ -1212,14 +1183,13 @@
                   <rect x="48" y="10" width="32" height="5" rx="2.5" fill="rgba(255,255,255,0.35)"/>
                 </svg>
                 <div class="phone__screen">
-                  <div class="slot"><!-- slot-jackpot-v1 -->
+                  <div class="slot"><!-- slot-jackpot-v2 -->
                     <div class="slot__col"><div class="slot__reel slot__reel--1" style="--lock:-422px;--loop:720px"><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span></div></div>
                     <div class="slot__col"><div class="slot__reel slot__reel--2" style="--lock:-422px;--loop:720px"><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span></div></div>
                     <div class="slot__col"><div class="slot__reel slot__reel--3" style="--lock:-422px;--loop:720px"><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span></div></div>
                   <div class="slot__payline"></div>
                   <div class="slot__flash"></div>
                   <div class="slot__win" aria-hidden="true">
-                    <span class="slot__jackpot">JACKPOT</span>
                     <span class="slot__coin slot__coin--1"></span>
                     <span class="slot__coin slot__coin--2"></span>
                     <span class="slot__coin slot__coin--3"></span>
@@ -1413,7 +1383,7 @@
         <div class="services__layout">
           <div class="services__visual">
             <div class="services__chart" data-motion="services" role="radiogroup" aria-label="Areas of service">
-              <!-- trefoil-v3 -->
+              <!-- trefoil-v4 -->
               <svg viewBox="-64 36 528 450" overflow="visible">
               <g class="services__wing is-active" data-service="campaign">
                 <path class="services__blade" id="service-campaign" role="radio" aria-checked="true" aria-label="Campaign Strategy" tabindex="0" data-service="campaign" d="M48.00,200.00 A152.00,152.00 0 0 1 124.00,68.36 L172.35,152.10 A55.31,55.31 0 0 0 144.69,200.00 Z"/>
@@ -1441,7 +1411,7 @@
             </div>
           </div>
           <div class="services__panel" id="services-panel" aria-live="polite">
-            <h3 class="services__panel-title">Campaign Strategy</h3>
+            <h3 class="services__panel-title">1. Campaign Strategy</h3>
             <p class="services__panel-body">We address your public relations needs and find the best way to present your business to the market.</p>
           </div>
         </div>
@@ -1450,16 +1420,22 @@
 
     <section class="follow" id="evergreen">
       <div class="follow__inner">
-        <div class="follow__stage" data-motion="evergreen"><!-- evergreen-shaped-v1 -->
+        <div class="follow__stage" data-motion="evergreen"><!-- evergreen-breaks-v1 -->
           <div class="recycle" aria-hidden="true">
             <div class="recycle__head recycle__head--1"><svg viewBox="-31 -30 62 60" aria-hidden="true"><path class="recycle__head-shape" d="M-18.667,-21 L37.333,0 L-18.667,21 Z"/></svg></div>
             <div class="recycle__head recycle__head--2"><svg viewBox="-31 -30 62 60" aria-hidden="true"><path class="recycle__head-shape" d="M-18.667,-21 L37.333,0 L-18.667,21 Z"/></svg></div>
             <div class="recycle__head recycle__head--3"><svg viewBox="-31 -30 62 60" aria-hidden="true"><path class="recycle__head-shape" d="M-18.667,-21 L37.333,0 L-18.667,21 Z"/></svg></div>
           </div>
           <div class="follow__copy">
-            <span class="follow__cut follow__cut--l" aria-hidden="true"></span>
-            <span class="follow__cut follow__cut--r" aria-hidden="true"></span>
-            <h2 class="follow__title">A video you post today can bring you business months from now.</h2>
+            <h2 class="follow__title" aria-label="A video you post today can bring you business months from now.">
+              <span class="follow__line">A</span>
+              <span class="follow__line">video</span>
+              <span class="follow__line">you post</span>
+              <span class="follow__line">today can</span>
+              <span class="follow__line">bring you</span>
+              <span class="follow__line">business months</span>
+              <span class="follow__line">from now.</span>
+            </h2>
             <p class="follow__body">We write, produce, and distribute content people can keep finding.</p>
           </div>
         </div>
@@ -1725,9 +1701,9 @@
     var panelBody = layout.querySelector('.services__panel-body');
     var ids = ['campaign', 'creation', 'community'];
     var copy = {
-      campaign: { title: 'Campaign Strategy', body: 'We address your public relations needs and find the best way to present your business to the market.' },
-      creation: { title: 'Content Creation', body: 'We find the style your brand needs: cinematic, documentary, found footage, even goofy. Whatever fits your business.' },
-      community: { title: 'Community Management', body: 'We distribute your content, reply to DMs, handle Google reviews, comment back on posts, and schedule.' }
+      campaign: { title: '1. Campaign Strategy', body: 'We address your public relations needs and find the best way to present your business to the market.' },
+      creation: { title: '2. Content Creation', body: 'We find the style your brand needs: cinematic, documentary, found footage, even goofy. Whatever fits your business.' },
+      community: { title: '3. Community Management', body: 'We distribute your content, reply to DMs, handle Google reviews, comment back on posts, and schedule.' }
     };
     var current = 'campaign';
     var pinned = false;
@@ -1854,32 +1830,36 @@
     }
 
     var lastKey = '';
-
-    function setCuts(copy, width){
-      var cap = Math.min(Math.max(width * 0.38, 120), width * 0.46);
-      var pct = (1 - cap / width) * 100;
-      var left = copy.querySelector('.follow__cut--l');
-      var right = copy.querySelector('.follow__cut--r');
-      if (left) left.style.shapeOutside = 'polygon(0 0, ' + pct.toFixed(2) + '% 0, 0 100%)';
-      if (right) right.style.shapeOutside = 'polygon(' + (100 - pct).toFixed(2) + '% 0, 100% 0, 100% 100%)';
-    }
+    var wideLine = stage ? stage.querySelectorAll('.follow__line')[5] : null;
+    var probe = document.createElement('span');
+    probe.setAttribute('aria-hidden','true');
+    probe.style.cssText='position:absolute;left:-9999px;top:0;white-space:nowrap;visibility:hidden;';
+    document.body.appendChild(probe);
 
     function applyType(copy, titlePx, narrow){
       var title = copy.querySelector('.follow__title');
       var body = copy.querySelector('.follow__body');
       if (!title || !body) return;
       title.style.fontSize = titlePx + 'px';
-      body.style.fontSize = Math.max(narrow ? 11 : 13, titlePx * 0.52).toFixed(1) + 'px';
-      body.style.marginTop = Math.max(narrow ? 6 : 8, titlePx * 0.38).toFixed(1) + 'px';
+      title.style.lineHeight = '1.12';
+      body.style.fontSize = Math.max(narrow ? 12 : 14, titlePx * 0.52).toFixed(1) + 'px';
+      body.style.marginTop = Math.max(narrow ? 6 : 10, titlePx * 0.4).toFixed(1) + 'px';
     }
 
-    function fits(copy){
-      return copy.scrollHeight <= copy.clientHeight + 1;
+    function measureWide(titlePx){
+      var title = stage.querySelector('.follow__title');
+      var cs = getComputedStyle(title);
+      probe.style.fontFamily = cs.fontFamily;
+      probe.style.fontWeight = cs.fontWeight;
+      probe.style.fontSize = titlePx + 'px';
+      probe.style.letterSpacing = cs.letterSpacing;
+      probe.textContent = 'business months';
+      return probe.getBoundingClientRect().width;
     }
 
     function layout(){
       var copy = stage ? stage.querySelector('.follow__copy') : null;
-      if (!stage || !copy) return;
+      if (!stage || !copy || !wideLine) return;
       var w = rec.clientWidth;
       if (w < 40) return;
 
@@ -1891,76 +1871,76 @@
       var inset = inward + gap;
       var outward = inward;
       var sqrt3 = Math.sqrt(3);
-
       var vw = document.documentElement.clientWidth || w;
       var maxPathW = Math.max(w, vw) - 2 * (outward + edge);
       var maxR = maxPathW / (2 * sqrt3);
       var maxRp = Math.max(24, maxR - inset);
-      var maxS = 2 * maxRp * sqrt3;
+      var maxH = 3 * maxRp;
+      var padX = narrow ? 8 : 12;
+      var basePad = narrow ? 8 : 14;
+      var titlePx = narrow ? 17 : 32;
+      var minTitle = narrow ? 13 : 22;
+      var body = copy.querySelector('.follow__body');
+      var tipPad, H, r, rPrime, lh, wideW, bodyH, bodyMargin;
 
-      var prefTitle = narrow ? 15 : 32;
-      var minTitle = narrow ? 12 : 20;
-      var titlePx = prefTitle;
-
-      function placeBox(s){
-        var rp = s / (2 * sqrt3);
-        var hBox = 3 * rp;
-        copy.style.width = s.toFixed(2) + 'px';
-        copy.style.height = hBox.toFixed(2) + 'px';
-        setCuts(copy, s);
+      function computeH(){
         applyType(copy, titlePx, narrow);
-        return hBox;
+        wideW = measureWide(titlePx) + padX;
+        lh = titlePx * 1.12;
+        tipPad = Math.max(lh * 0.45, wideW * sqrt3 / 2 - 5.5 * lh);
+        bodyMargin = Math.max(narrow ? 6 : 10, titlePx * 0.4);
+        var tentW = Math.max(wideW * 1.08, (tipPad + 7 * lh + bodyMargin + lh * 2 + basePad) * 2 / sqrt3);
+        tentW = Math.min(tentW, 2 * maxRp * sqrt3);
+        copy.style.width = tentW.toFixed(2) + 'px';
+        copy.style.height = 'auto';
+        copy.style.paddingTop = '0';
+        copy.getBoundingClientRect();
+        bodyH = body.getBoundingClientRect().height;
+        H = tipPad + 7 * lh + bodyMargin + bodyH + basePad;
+        return H;
       }
 
-      // shrink type until some width <= maxS can hold the copy in an equilateral
-      var s, lo, hi, mid, best, i;
       while (titlePx >= minTitle){
-        lo = Math.min(140, maxS);
-        hi = maxS;
-        best = 0;
-        for (i = 0; i < 14; i++){
-          mid = (lo + hi) / 2;
-          placeBox(mid);
-          copy.getBoundingClientRect();
-          if (fits(copy)){ best = mid; hi = mid - 1; }
-          else lo = mid + 1;
-        }
-        if (best > 0){ s = best; placeBox(s); break; }
-        titlePx -= 1;
+        computeH();
+        rPrime = H / 3;
+        r = rPrime + inset;
+        if (r <= maxR + 0.5) break;
+        titlePx -= 0.5;
       }
-      if (!s){
-        titlePx = minTitle;
-        s = maxS;
-        placeBox(s);
+      computeH();
+      rPrime = H / 3;
+      r = rPrime + inset;
+      if (r > maxR){
+        r = maxR;
+        rPrime = Math.max(24, r - inset);
+        H = 3 * rPrime;
       }
 
-      var rPrime = s / (2 * sqrt3);
-      var r = rPrime + inset;
-      if (r > maxR) r = maxR;
-      if (r < 40) r = 40;
       var pathH = 3 * r;
       var pathW = 2 * r * sqrt3;
+      var copyW = 2 * rPrime * sqrt3;
+      var copyH = 3 * rPrime;
       var midX = w / 2;
       var tipY = outward + edge;
       var baseY = tipY + pathH;
-      var copyW = 2 * rPrime * sqrt3;
-      var copyH = 3 * rPrime;
       var copyLeft = midX - copyW / 2;
       var copyTop = tipY + 2 * inset;
       var stageH = pathH + 2 * (outward + edge);
 
-      var key = [Math.round(w), narrow ? 1 : 0, Math.round(s), titlePx, Math.round(stageH)].join(',');
-      if (key === lastKey) return;
-      lastKey = key;
-
+      // Always reapply box styles: computeH() mutates width/padding while measuring.
       stage.style.height = Math.ceil(stageH) + 'px';
       stage.style.padding = '0';
       copy.style.left = copyLeft.toFixed(2) + 'px';
       copy.style.top = copyTop.toFixed(2) + 'px';
       copy.style.width = copyW.toFixed(2) + 'px';
       copy.style.height = copyH.toFixed(2) + 'px';
-      setCuts(copy, copyW);
+      copy.style.paddingTop = tipPad.toFixed(2) + 'px';
+      copy.style.boxSizing = 'border-box';
       applyType(copy, titlePx, narrow);
+
+      var key = [Math.round(w), narrow ? 1 : 0, Math.round(copyW), titlePx.toFixed(1), Math.round(stageH)].join(',');
+      if (key === lastKey) return;
+      lastKey = key;
 
       var top = [midX, tipY];
       var br = [midX + pathW / 2, baseY];
@@ -2000,6 +1980,9 @@
   }, { threshold: 0.22, rootMargin: '0px 0px -8% 0px' });
   nodes.forEach(function(el){ io.observe(el); });
 
+  var entertain = document.querySelector('[data-motion="entertain"]');
+  if (entertain) entertain.classList.add('is-playing');
+
   var mio = new IntersectionObserver(function(entries){
     entries.forEach(function(entry){
       if (entry.isIntersecting){
@@ -2012,7 +1995,10 @@
       }
     });
   }, { threshold: 0.35 });
-  motions.forEach(function(el){ mio.observe(el); });
+  motions.forEach(function(el){
+    if (el.getAttribute('data-motion') === 'entertain') return;
+    mio.observe(el);
+  });
 
   var sio = new IntersectionObserver(function(entries){
     entries.forEach(function(entry){
@@ -2021,8 +2007,8 @@
         clearTimeout(el._signalTimer);
         el._signalTimer = null;
       }
-      if (entry.intersectionRatio >= 0.12){
-        // Flip to yellow once ~12% of the fixture is in view
+      if (entry.intersectionRatio >= 0.25){
+        // Flip to yellow once a quarter of the fixture is in view
         el._signalTimer = setTimeout(function(){
           el._signalTimer = null;
           el.classList.add('is-playing');
@@ -2031,7 +2017,7 @@
         el.classList.remove('is-playing');
       }
     });
-  }, { threshold: [0, 0.12] });
+  }, { threshold: [0, 0.25] });
   signals.forEach(function(el){ sio.observe(el); });
 })();
 </script>
