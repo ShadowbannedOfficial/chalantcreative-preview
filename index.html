@@ -741,6 +741,14 @@
       width:240px;
       min-height:236px;
     }
+    .method__row--entertain{
+      grid-template-columns:minmax(0,1fr) clamp(300px,34vw,400px);
+    }
+    .method__row--entertain .method__visual{
+      width:auto;
+      max-width:400px;
+      min-height:0;
+    }
   }
 
   /* Entertain: phone as a classy slot reel */
@@ -773,12 +781,9 @@
     mask-image:linear-gradient(to bottom,transparent 0%,#000 10%,#000 90%,transparent 100%);
   }
   .slots{
-    --cell:20px;
-    --lock:-234.44px;
-    --loop:400px;
     position:relative;
-    width:min(240px,100%);
-    height:236px;
+    width:min(400px,100%);
+    height:auto;
     flex:0 0 auto;
     display:flex;
     align-items:center;
@@ -790,13 +795,14 @@
     display:flex;
     align-items:center;
     justify-content:center;
-    gap:6px;
+    gap:3.2%;
     width:100%;
-    height:133px;
+    height:auto;
   }
   .slots .phone{
-    width:72px;
-    height:133px;
+    width:calc((100% - 6.4%) / 3);
+    height:auto;
+    aspect-ratio:128 / 236;
     flex:0 0 auto;
   }
   .slots .phone__screen{
@@ -805,23 +811,125 @@
     right:7.81%;
     bottom:5.93%;
     border-radius:6.25%;
+    -webkit-mask-image:none;
+    mask-image:none;
+    background:#050505;
   }
-  .slots .slot{
-    --cell:20px;
-    --lock:-234.44px;
-    --loop:400px;
+  .feed{
+    position:absolute;
+    inset:0;
+    overflow:hidden;
+    container-type:size;
   }
-  .slots .slot__col + .slot__col{border-left:none}
-  .slots .slot__sym{width:calc(var(--cell) * 28 / 36)}
-  .slots .slot__sym--box i{width:calc(var(--cell) * 16 / 36);height:calc(var(--cell) * 12 / 36)}
-  .slots .slot__sym--bar i{width:calc(var(--cell) * 14 / 36)}
-  .slots .slot__sym--dot i{width:calc(var(--cell) * 5 / 36);height:calc(var(--cell) * 5 / 36)}
-  .slots .slot__sym--bars i{width:calc(var(--cell) * 10 / 36);height:calc(var(--cell) * 8 / 36)}
-  .slots .slot__sym--hit i{width:calc(var(--cell) * 16 / 36);height:calc(var(--cell) * 16 / 36);box-shadow:0 0 6px rgba(232,201,10,.4)}
+  .feed__reel{
+    display:flex;
+    flex-direction:column;
+    width:100%;
+    will-change:transform;
+  }
+  .post{
+    box-sizing:border-box;
+    display:flex;
+    flex-direction:column;
+    width:100%;
+    height:var(--cell,100cqh);
+    flex:0 0 var(--cell,100cqh);
+    padding:7.5% 8% 6.5%;
+    color:rgba(255,255,255,.7);
+  }
+  .post__head{
+    display:flex;
+    align-items:center;
+    gap:7%;
+    flex:0 0 11%;
+  }
+  .post__avatar{
+    box-sizing:border-box;
+    width:13.5%;
+    aspect-ratio:1;
+    flex:0 0 auto;
+    border:1px solid rgba(255,255,255,.5);
+    border-radius:50%;
+  }
+  .post__handle{
+    width:46%;
+    height:1.5px;
+    border-radius:1px;
+    background:rgba(255,255,255,.42);
+  }
+  .post--a .post__handle{width:38%}
+  .post--b .post__handle{width:54%}
+  .post--c .post__handle{width:30%}
+  .post--bars .post__handle{width:44%}
+  .post--frame .post__handle{width:50%}
+  .post__image{
+    position:relative;
+    flex:1 1 auto;
+    min-height:0;
+    margin:6.5% 0 6%;
+    border:1px solid rgba(255,255,255,.4);
+    border-radius:2px;
+    overflow:hidden;
+  }
+  .post--frame .post__image::after{
+    content:"";
+    position:absolute;
+    inset:14%;
+    border:1px solid rgba(255,255,255,.28);
+    pointer-events:none;
+  }
+  .post--bars .post__image::after{
+    content:"";
+    position:absolute;
+    left:18%;
+    right:18%;
+    top:46%;
+    height:12%;
+    border-top:1px solid rgba(255,255,255,.32);
+    border-bottom:1px solid rgba(255,255,255,.32);
+    pointer-events:none;
+  }
+  .post--c .post__image::after{
+    content:"";
+    position:absolute;
+    left:50%;
+    top:50%;
+    width:18%;
+    aspect-ratio:1;
+    margin:-9% 0 0 -9%;
+    border:1px solid rgba(255,255,255,.3);
+    border-radius:50%;
+    pointer-events:none;
+  }
+  .post--win .post__image{
+    background:#E8C90A;
+    border-color:#E8C90A;
+    box-shadow:0 0 12px rgba(232,201,10,.45);
+  }
+  .post--win .post__image::after{content:none}
+  .post__actions{
+    display:flex;
+    align-items:center;
+    gap:9%;
+    flex:0 0 10%;
+  }
+  .post__ico{
+    display:block;
+    width:15%;
+    max-width:18px;
+    aspect-ratio:1;
+    flex:0 0 auto;
+    background-repeat:no-repeat;
+    background-position:center;
+    background-size:contain;
+  }
+  .post__ico--like{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='rgba(255,255,255,0.7)' stroke-width='1.25' stroke-linejoin='round'%3E%3Cpath d='M8 13.2S2.2 9.4 2.2 5.8A3.1 3.1 0 0 1 8 4.4 3.1 3.1 0 0 1 13.8 5.8C13.8 9.4 8 13.2 8 13.2z'/%3E%3C/svg%3E")}
+  .post__ico--cmt{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='rgba(255,255,255,0.7)' stroke-width='1.25' stroke-linejoin='round' stroke-linecap='round'%3E%3Cpath d='M3.3 3.6h9.4c.7 0 1.3.6 1.3 1.3v5.1c0 .7-.6 1.3-1.3 1.3H7.1L4.2 13.3v-2H3.3c-.7 0-1.3-.6-1.3-1.3V4.9c0-.7.6-1.3 1.3-1.3z'/%3E%3C/svg%3E")}
+  .post__ico--sh{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='rgba(255,255,255,0.7)' stroke-width='1.25' stroke-linejoin='round' stroke-linecap='round'%3E%3Cpath d='M3 8h9.2M8.8 4.6 13.2 8 8.8 11.4'/%3E%3C/svg%3E")}
   .slots .slot__payline{
-    left:8px;
-    right:8px;
-    top:51.7%;
+    left:4%;
+    right:4%;
+    top:54%;
     z-index:5;
   }
   .slots .slot__flash{
@@ -829,76 +937,7 @@
     border-radius:8px;
   }
   .slots .slot__win{z-index:6}
-  .slot{
-    --cell:36px;
-    --lock:-422px;
-    --loop:720px;
-    position:absolute;
-    inset:0;
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:0;
-    z-index:1;
-  }
-  .slot__col{
-    position:relative;
-    overflow:hidden;
-  }
-  .slot__col + .slot__col{
-    border-left:1px solid rgba(255,255,255,.1);
-  }
-  .slot__reel{
-    position:relative;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    will-change:transform,filter;
-  }
-  .slot__sym{
-    box-sizing:border-box;
-    width:28px;
-    height:var(--cell);
-    flex:0 0 var(--cell);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-  }
-  .slot__sym i{
-    display:block;
-    font-style:normal;
-    box-sizing:border-box;
-  }
-  .slot__sym--box i{
-    width:16px;
-    height:12px;
-    border:1px solid rgba(255,255,255,.5);
-    border-radius:2px;
-  }
-  .slot__sym--bar i{
-    width:14px;
-    height:1px;
-    background:rgba(255,255,255,.52);
-  }
-  .slot__sym--dot i{
-    width:5px;
-    height:5px;
-    border:1px solid rgba(255,255,255,.55);
-    border-radius:50%;
-  }
-  .slot__sym--bars i{
-    width:10px;
-    height:8px;
-    border-top:1px solid rgba(255,255,255,.5);
-    border-bottom:1px solid rgba(255,255,255,.5);
-  }
-  .slot__sym--hit i{
-    width:16px;
-    height:16px;
-    border:none;
-    border-radius:2px;
-    background:#E8C90A;
-    box-shadow:0 0 8px rgba(232,201,10,.4);
-  }
+
   .slot__payline{
     position:absolute;
     left:6px;
@@ -988,7 +1027,11 @@
   .walker__arm--cheer-l,
   .walker__arm--cheer-r{
     transform-box:fill-box;
-    transform-origin:50% 0%;
+    transform-origin:50% 100%;
+  }
+  .crowd__fig .walker__head circle{
+    fill:#000;
+    stroke:currentColor;
   }
   .crowd__spark{
     fill:#E8C90A;
@@ -1102,29 +1145,41 @@
     transform-origin:center;
   }
 
-  /* Final / reduced-motion defaults: the landed state */
-  .slot__reel{transform:translate3d(0,var(--lock),0)}
+  /* Final / reduced-motion defaults: feeds landed on the gold post */
+  .feed__reel{transform:translate3d(0,calc(-4 * var(--cell, 100cqh)),0)}
   .slot__payline{border-top-color:rgba(232,201,10,.7); box-shadow:0 0 10px rgba(232,201,10,.28)}
+  @media (prefers-reduced-motion:reduce){
+    [data-motion="entertain"] .slot__flash{opacity:.18}
+  }
 
   @media (prefers-reduced-motion:no-preference){
-    .slot__payline{border-top-color:rgba(232,201,10,.45); box-shadow:none}
+    .slot__payline{border-top-color:rgba(232,201,10,.28); box-shadow:none}
     .tap__phone{transform:translate(-36px,8px) rotate(-8deg)}
     .tap__paid{opacity:0}
     .tap__wave{stroke:rgba(255,255,255,.45)}
     .tap__waves-mark{transform:scale(.92);opacity:.55}
     .crowd__spark{opacity:0}
 
-    [data-motion].is-playing .slot__reel--1{animation:slot-jackpot-1 5.4s infinite;animation-delay:-1.2s}
-    [data-motion].is-playing .slot__reel--2{animation:slot-jackpot-2 5.4s infinite;animation-delay:-1.2s}
-    [data-motion].is-playing .slot__reel--3{animation:slot-jackpot-3 5.4s infinite;animation-delay:-1.2s}
-    [data-motion].is-playing .slot__payline{animation:slot-jackpot-line 5.4s infinite;animation-delay:-1.2s}
-    [data-motion].is-playing .slot__flash{animation:slot-jackpot-flash 5.4s infinite;animation-delay:-1.2s}
-    [data-motion].is-playing .slot__coin--1{animation:slot-coin-1 5.4s infinite;animation-delay:-1.2s}
-    [data-motion].is-playing .slot__coin--2{animation:slot-coin-2 5.4s infinite;animation-delay:-1.2s}
-    [data-motion].is-playing .slot__coin--3{animation:slot-coin-3 5.4s infinite;animation-delay:-1.2s}
-    [data-motion].is-playing .slot__coin--4{animation:slot-coin-4 5.4s infinite;animation-delay:-1.2s}
-    [data-motion].is-playing .slot__coin--5{animation:slot-coin-5 5.4s infinite;animation-delay:-1.2s}
-    [data-motion].is-playing .slot__coin--6{animation:slot-coin-6 5.4s infinite;animation-delay:-1.2s}
+    [data-motion="entertain"] .feed__reel--1{animation:feed-spin 2.05s linear infinite}
+    [data-motion="entertain"] .feed__reel--2{animation:feed-spin 2.28s linear infinite}
+    [data-motion="entertain"] .feed__reel--3{animation:feed-spin 1.9s linear infinite}
+    [data-motion="entertain"].is-landing .feed__reel,
+    [data-motion="entertain"].is-landed .feed__reel{animation:none}
+    [data-motion="entertain"].is-landed .feed__reel{transform:translate3d(0,calc(-4 * var(--cell, 100cqh)),0)}
+    [data-motion="entertain"] .slot__payline{
+      transition:border-top-color .35s ease,box-shadow .35s ease;
+    }
+    [data-motion="entertain"].is-landed .slot__payline{
+      border-top-color:#E8C90A;
+      box-shadow:0 0 14px rgba(232,201,10,.9),0 0 4px #E8C90A;
+    }
+    [data-motion="entertain"].is-landed .slot__flash{animation:feed-flash .7s ease-out forwards}
+    [data-motion="entertain"].is-landed .slot__coin--1{animation:slot-coin-1 .7s ease-out both}
+    [data-motion="entertain"].is-landed .slot__coin--2{animation:slot-coin-2 .7s ease-out both}
+    [data-motion="entertain"].is-landed .slot__coin--3{animation:slot-coin-3 .72s ease-out both}
+    [data-motion="entertain"].is-landed .slot__coin--4{animation:slot-coin-4 .72s ease-out both}
+    [data-motion="entertain"].is-landed .slot__coin--5{animation:slot-coin-5 .74s ease-out both}
+    [data-motion="entertain"].is-landed .slot__coin--6{animation:slot-coin-6 .74s ease-out both}
 
     [data-motion].is-playing .crowd__halo{animation:crowd-halo 3.2s ease-in-out infinite}
     [data-motion].is-playing .crowd__teacher .walker__bob{animation:walk-bob .7s ease-in-out var(--delay,0s) infinite}
@@ -1144,66 +1199,50 @@
     [data-motion].is-playing .crowd__spark--7{animation:spark-burst 2.2s ease-out .7s infinite}
     [data-motion].is-playing .crowd__spark--8{animation:spark-burst 2.4s ease-out .15s infinite}
 
-    [data-motion].is-playing .tap__phone{animation:tap-phone 5s ease-in-out infinite;animation-delay:-1s}
-    [data-motion].is-playing .tap__paid{animation:tap-paid 5s ease-in-out infinite;animation-delay:-1s}
-    [data-motion].is-playing .tap__waves-mark{animation:tap-waves 5s ease-in-out infinite;animation-delay:-1s}
-    [data-motion].is-playing .tap__wave{animation:tap-wave-stroke 5s ease-in-out infinite;animation-delay:-1s}
+    [data-motion].is-playing .tap__phone{animation:tap-phone 2.4s ease-in-out forwards}
+    [data-motion].is-playing .tap__paid{animation:tap-paid 2.4s ease-in-out forwards}
+    [data-motion].is-playing .tap__waves-mark{animation:tap-waves 2.4s ease-in-out forwards}
+    [data-motion].is-playing .tap__wave{animation:tap-wave-stroke 2.4s ease-in-out forwards}
 
-    @keyframes slot-jackpot-1{
-      0%{transform:translate3d(0,var(--lock),0);animation-timing-function:cubic-bezier(.4,0,1,.4)}
-      42.6%{transform:translate3d(0,calc(var(--lock) - 4 * var(--loop)),0);animation-timing-function:cubic-bezier(.05,.7,.15,1)}
-      50%,100%{transform:translate3d(0,calc(var(--lock) - 5 * var(--loop)),0)}
+    @keyframes feed-spin{
+      from{transform:translate3d(0,0,0)}
+      to{transform:translate3d(0,calc(-6 * var(--cell, 100cqh)),0)}
     }
-    @keyframes slot-jackpot-2{
-      0%{transform:translate3d(0,var(--lock),0);animation-timing-function:cubic-bezier(.4,0,1,.4)}
-      54.6%{transform:translate3d(0,calc(var(--lock) - 5 * var(--loop)),0);animation-timing-function:cubic-bezier(.05,.7,.15,1)}
-      62%,100%{transform:translate3d(0,calc(var(--lock) - 6 * var(--loop)),0)}
-    }
-    @keyframes slot-jackpot-3{
-      0%{transform:translate3d(0,var(--lock),0);animation-timing-function:cubic-bezier(.4,0,1,.4)}
-      66.7%{transform:translate3d(0,calc(var(--lock) - 6 * var(--loop)),0);animation-timing-function:cubic-bezier(.05,.7,.15,1)}
-      77.8%,100%{transform:translate3d(0,calc(var(--lock) - 7 * var(--loop)),0)}
-    }
-    @keyframes slot-jackpot-line{
-      0%,77.8%{border-top-color:rgba(232,201,10,.28);box-shadow:none}
-      80%,90%{border-top-color:#E8C90A;box-shadow:0 0 14px rgba(232,201,10,.9),0 0 4px #E8C90A}
-      100%{border-top-color:rgba(232,201,10,.75);box-shadow:0 0 8px rgba(232,201,10,.45)}
-    }
-    @keyframes slot-jackpot-flash{
-      0%,77.8%{opacity:0}
-      80%{opacity:.65}
-      88%{opacity:.32}
-      100%{opacity:.12}
+    @keyframes feed-flash{
+      0%{opacity:0}
+      20%{opacity:.65}
+      60%{opacity:.3}
+      100%{opacity:.18}
     }
     @keyframes slot-coin-1{
-      0%,77.8%{opacity:0;transform:translate(0,0) scale(.6)}
-      80%{opacity:1;transform:translate(0,0) scale(1)}
-      92%,100%{opacity:0;transform:translate(-16px,-28px) scale(.5)}
+      0%{opacity:0;transform:translate(0,0) scale(.6)}
+      15%{opacity:1;transform:translate(0,0) scale(1)}
+      100%{opacity:0;transform:translate(-16px,-28px) scale(.5)}
     }
     @keyframes slot-coin-2{
-      0%,77.8%{opacity:0;transform:translate(0,0) scale(.6)}
-      80%{opacity:1;transform:translate(0,0) scale(1)}
-      92%,100%{opacity:0;transform:translate(18px,-26px) scale(.5)}
+      0%{opacity:0;transform:translate(0,0) scale(.6)}
+      15%{opacity:1;transform:translate(0,0) scale(1)}
+      100%{opacity:0;transform:translate(18px,-26px) scale(.5)}
     }
     @keyframes slot-coin-3{
-      0%,77.8%{opacity:0;transform:translate(0,0) scale(.6)}
-      81%{opacity:1;transform:translate(0,0) scale(1)}
-      93%,100%{opacity:0;transform:translate(-22px,-10px) scale(.5)}
+      0%{opacity:0;transform:translate(0,0) scale(.6)}
+      18%{opacity:1;transform:translate(0,0) scale(1)}
+      100%{opacity:0;transform:translate(-22px,-10px) scale(.5)}
     }
     @keyframes slot-coin-4{
-      0%,77.8%{opacity:0;transform:translate(0,0) scale(.6)}
-      81%{opacity:1;transform:translate(0,0) scale(1)}
-      93%,100%{opacity:0;transform:translate(22px,-8px) scale(.5)}
+      0%{opacity:0;transform:translate(0,0) scale(.6)}
+      18%{opacity:1;transform:translate(0,0) scale(1)}
+      100%{opacity:0;transform:translate(22px,-8px) scale(.5)}
     }
     @keyframes slot-coin-5{
-      0%,77.8%{opacity:0;transform:translate(0,0) scale(.6)}
-      82%{opacity:1;transform:translate(0,0) scale(1)}
-      94%,100%{opacity:0;transform:translate(-10px,22px) scale(.45)}
+      0%{opacity:0;transform:translate(0,0) scale(.6)}
+      20%{opacity:1;transform:translate(0,0) scale(1)}
+      100%{opacity:0;transform:translate(-10px,22px) scale(.45)}
     }
     @keyframes slot-coin-6{
-      0%,77.8%{opacity:0;transform:translate(0,0) scale(.6)}
-      82%{opacity:1;transform:translate(0,0) scale(1)}
-      94%,100%{opacity:0;transform:translate(12px,20px) scale(.45)}
+      0%{opacity:0;transform:translate(0,0) scale(.6)}
+      20%{opacity:1;transform:translate(0,0) scale(1)}
+      100%{opacity:0;transform:translate(12px,20px) scale(.45)}
     }
     @keyframes crowd-halo{
       0%,100%{opacity:.8;transform:scale(1)}
@@ -1247,29 +1286,25 @@
       70%,100%{opacity:0;transform:translate(var(--sx,8px),-26px) scale(.25)}
     }
     @keyframes tap-phone{
-      0%,8%{transform:translate(-36px,8px) rotate(-8deg)}
-      28%{transform:translate(-6px,2px) rotate(6deg)}
-      32%{transform:translate(-2px,3px) rotate(7deg)}
-      36%,66%{transform:translate(0,4px) rotate(8deg)}
-      80%,100%{transform:translate(-36px,8px) rotate(-8deg)}
+      0%,16.7%{transform:translate(-36px,8px) rotate(-8deg)}
+      58.3%{transform:translate(-6px,2px) rotate(6deg)}
+      66.7%{transform:translate(-2px,3px) rotate(7deg)}
+      75%,100%{transform:translate(0,4px) rotate(8deg)}
     }
     @keyframes tap-paid{
-      0%,38%{opacity:0}
-      44%,66%{opacity:1}
-      74%,100%{opacity:0}
+      0%,79%{opacity:0}
+      91.7%,100%{opacity:1}
     }
     @keyframes tap-waves{
-      0%,22%{transform:scale(.92);opacity:.5}
-      30%{transform:scale(1.08);opacity:1}
-      36%{transform:scale(.98);opacity:.85}
-      42%{transform:scale(1.12);opacity:1}
-      50%,66%{transform:scale(1.04);opacity:.9}
-      80%,100%{transform:scale(.92);opacity:.5}
+      0%,45.8%{transform:scale(.92);opacity:.5}
+      62.5%{transform:scale(1.08);opacity:1}
+      75%{transform:scale(.98);opacity:.85}
+      87.5%{transform:scale(1.12);opacity:1}
+      100%{transform:scale(1.04);opacity:.9}
     }
     @keyframes tap-wave-stroke{
-      0%,24%{stroke:rgba(255,255,255,.45)}
-      30%,66%{stroke:#E8C90A}
-      80%,100%{stroke:rgba(255,255,255,.45)}
+      0%,50%{stroke:rgba(255,255,255,.45)}
+      62.5%,100%{stroke:#E8C90A}
     }
     [data-motion].is-playing .recycle__head--1{animation:recycle-snake-head-1 9s linear infinite}
     [data-motion].is-playing .recycle__head--2{animation:recycle-snake-head-2 9s linear infinite}
@@ -1307,7 +1342,7 @@
       <div class="method__inner">
         <h2 class="method__eyebrow" id="mantra-heading" data-animate>The mantra</h2>
         <div class="method__list">
-          <article class="method__row" data-animate>
+          <article class="method__row method__row--entertain" data-animate>
             <div class="method__copy">
               <h3 class="method__title" aria-label="Entertain the masses">
               <span class="method__title-line">Entertain</span>
@@ -1316,7 +1351,7 @@
               <p class="method__sub">Content engineered to stop the scroll.</p>
             </div>
                         <div class="method__visual" data-motion="entertain" aria-hidden="true">
-              <div class="slots"><!-- slot-three-v1 -->
+              <div class="slots"><!-- slot-feed-v1 -->
                 <div class="slots__row">
                 <div class="phone">
                   <svg class="phone__shell" viewBox="0 0 128 236" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1324,8 +1359,8 @@
                   <rect x="48" y="10" width="32" height="5" rx="2.5" fill="rgba(255,255,255,0.35)"/>
                 </svg>
                   <div class="phone__screen">
-                    <div class="slot">
-                      <div class="slot__col"><div class="slot__reel slot__reel--1"><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span></div></div>
+                    <div class="feed">
+                      <div class="feed__reel feed__reel--1"><article class="post post--a"><div class="post__head"><span class="post__avatar"></span><span class="post__handle"></span></div><div class="post__image"></div><div class="post__actions"><i class="post__ico post__ico--like"></i><i class="post__ico post__ico--cmt"></i><i class="post__ico post__ico--sh"></i></div></article><article class="post post--frame"><div class="post__head"><span class="post__avatar"></span><span class="post__handle"></span></div><div class="post__image"></div><div class="post__actions"><i class="post__ico post__ico--like"></i><i class="post__ico post__ico--cmt"></i><i class="post__ico post__ico--sh"></i></div></article><article class="post post--bars"><div class="post__head"><span class="post__avatar"></span><span class="post__handle"></span></div><div class="post__image"></div><div class="post__actions"><i class="post__ico post__ico--like"></i><i class="post__ico post__ico--cmt"></i><i class="post__ico post__ico--sh"></i></div></article><article class="post post--b"><div class="post__head"><span class="post__avatar"></span><span class="post__handle"></span></div><div class="post__image"></div><div class="post__actions"><i class="post__ico post__ico--like"></i><i class="post__ico post__ico--cmt"></i><i class="post__ico post__ico--sh"></i></div></article><article class="post post--win"><div class="post__head"><span class="post__avatar"></span><span class="post__handle"></span></div><div class="post__image"></div><div class="post__actions"><i class="post__ico post__ico--like"></i><i class="post__ico post__ico--cmt"></i><i class="post__ico post__ico--sh"></i></div></article><article class="post post--c"><div class="post__head"><span class="post__avatar"></span><span class="post__handle"></span></div><div class="post__image"></div><div class="post__actions"><i class="post__ico post__ico--like"></i><i class="post__ico post__ico--cmt"></i><i class="post__ico post__ico--sh"></i></div></article><article class="post post--a"><div class="post__head"><span class="post__avatar"></span><span class="post__handle"></span></div><div class="post__image"></div><div class="post__actions"><i class="post__ico post__ico--like"></i><i class="post__ico post__ico--cmt"></i><i class="post__ico post__ico--sh"></i></div></article><article class="post post--frame"><div class="post__head"><span class="post__avatar"></span><span class="post__handle"></span></div><div class="post__image"></div><div class="post__actions"><i class="post__ico post__ico--like"></i><i class="post__ico post__ico--cmt"></i><i class="post__ico post__ico--sh"></i></div></article><article class="post post--bars"><div class="post__head"><span class="post__avatar"></span><span class="post__handle"></span></div><div class="post__image"></div><div class="post__actions"><i class="post__ico post__ico--like"></i><i class="post__ico post__ico--cmt"></i><i class="post__ico post__ico--sh"></i></div></article><article class="post post--b"><div class="post__head"><span class="post__avatar"></span><span class="post__handle"></span></div><div class="post__image"></div><div class="post__actions"><i class="post__ico post__ico--like"></i><i class="post__ico post__ico--cmt"></i><i class="post__ico post__ico--sh"></i></div></article><article class="post post--win"><div class="post__head"><span class="post__avatar"></span><span class="post__handle"></span></div><div class="post__image"></div><div class="post__actions"><i class="post__ico post__ico--like"></i><i class="post__ico post__ico--cmt"></i><i class="post__ico post__ico--sh"></i></div></article><article class="post post--c"><div class="post__head"><span class="post__avatar"></span><span class="post__handle"></span></div><div class="post__image"></div><div class="post__actions"><i class="post__ico post__ico--like"></i><i class="post__ico post__ico--cmt"></i><i class="post__ico post__ico--sh"></i></div></article><article class="post post--a"><div class="post__head"><span class="post__avatar"></span><span class="post__handle"></span></div><div class="post__image"></div><div class="post__actions"><i class="post__ico post__ico--like"></i><i class="post__ico post__ico--cmt"></i><i class="post__ico post__ico--sh"></i></div></article><article class="post post--frame"><div class="post__head"><span class="post__avatar"></span><span class="post__handle"></span></div><div class="post__image"></div><div class="post__actions"><i class="post__ico post__ico--like"></i><i class="post__ico post__ico--cmt"></i><i class="post__ico post__ico--sh"></i></div></article><article class="post post--bars"><div class="post__head"><span class="post__avatar"></span><span class="post__handle"></span></div><div class="post__image"></div><div class="post__actions"><i class="post__ico post__ico--like"></i><i class="post__ico post__ico--cmt"></i><i class="post__ico post__ico--sh"></i></div></article><article class="post post--b"><div class="post__head"><span class="post__avatar"></span><span class="post__handle"></span></div><div class="post__image"></div><div class="post__actions"><i class="post__ico post__ico--like"></i><i class="post__ico post__ico--cmt"></i><i class="post__ico post__ico--sh"></i></div></article><article class="post post--win"><div class="post__head"><span class="post__avatar"></span><span class="post__handle"></span></div><div class="post__image"></div><div class="post__actions"><i class="post__ico post__ico--like"></i><i class="post__ico post__ico--cmt"></i><i class="post__ico post__ico--sh"></i></div></article><article class="post post--c"><div class="post__head"><span class="post__avatar"></span><span class="post__handle"></span></div><div class="post__image"></div><div class="post__actions"><i class="post__ico post__ico--like"></i><i class="post__ico post__ico--cmt"></i><i class="post__ico post__ico--sh"></i></div></article><article class="post post--a"><div class="post__head"><span class="post__avatar"></span><span class="post__handle"></span></div><div class="post__image"></div><div class="post__actions"><i class="post__ico post__ico--like"></i><i class="post__ico post__ico--cmt"></i><i class="post__ico post__ico--sh"></i></div></article><article class="post post--frame"><div class="post__head"><span class="post__avatar"></span><span class="post__handle"></span></div><div class="post__image"></div><div class="post__actions"><i class="post__ico post__ico--like"></i><i class="post__ico post__ico--cmt"></i><i class="post__ico post__ico--sh"></i></div></article><article class="post post--bars"><div class="post__head"><span class="post__avatar"></span><span class="post__handle"></span></div><div class="post__image"></div><div class="post__actions"><i class="post__ico post__ico--like"></i><i class="post__ico post__ico--cmt"></i><i class="post__ico post__ico--sh"></i></div></article><article class="post post--b"><div class="post__head"><span class="post__avatar"></span><span class="post__handle"></span></div><div class="post__image"></div><div class="post__actions"><i class="post__ico post__ico--like"></i><i class="post__ico post__ico--cmt"></i><i class="post__ico post__ico--sh"></i></div></article><article class="post post--win"><div class="post__head"><span class="post__avatar"></span><span class="post__handle"></span></div><div class="post__image"></div><div class="post__actions"><i class="post__ico post__ico--like"></i><i class="post__ico post__ico--cmt"></i><i class="post__ico post__ico--sh"></i></div></article><article class="post post--c"><div class="post__head"><span class="post__avatar"></span><span class="post__handle"></span></div><div class="post__image"></div><div class="post__actions"><i class="post__ico post__ico--like"></i><i class="post__ico post__ico--cmt"></i><i class="post__ico post__ico--sh"></i></div></article></div>
                     </div>
                   </div>
                 </div>
@@ -1335,8 +1370,8 @@
                   <rect x="48" y="10" width="32" height="5" rx="2.5" fill="rgba(255,255,255,0.35)"/>
                 </svg>
                   <div class="phone__screen">
-                    <div class="slot">
-                      <div class="slot__col"><div class="slot__reel slot__reel--2"><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span></div></div>
+                    <div class="feed">
+                      <div class="feed__reel feed__reel--2"><article class="post post--frame"><div class="post__head"><span class="post__avatar"></span><span class="post__handle"></span></div><div class="post__image"></div><div class="post__actions"><i class="post__ico post__ico--like"></i><i class="post__ico post__ico--cmt"></i><i class="post__ico post__ico--sh"></i></div></article><article class="post post--c"><div class="post__head"><span class="post__avatar"></span><span class="post__handle"></span></div><div class="post__image"></div><div class="post__actions"><i class="post__ico post__ico--like"></i><i class="post__ico post__ico--cmt"></i><i class="post__ico post__ico--sh"></i></div></article><article class="post post--a"><div class="post__head"><span class="post__avatar"></span><span class="post__handle"></span></div><div class="post__image"></div><div class="post__actions"><i class="post__ico post__ico--like"></i><i class="post__ico post__ico--cmt"></i><i class="post__ico post__ico--sh"></i></div></article><article class="post post--bars"><div class="post__head"><span class="post__avatar"></span><span class="post__handle"></span></div><div class="post__image"></div><div class="post__actions"><i class="post__ico post__ico--like"></i><i class="post__ico post__ico--cmt"></i><i class="post__ico post__ico--sh"></i></div></article><article class="post post--win"><div class="post__head"><span class="post__avatar"></span><span class="post__handle"></span></div><div class="post__image"></div><div class="post__actions"><i class="post__ico post__ico--like"></i><i class="post__ico post__ico--cmt"></i><i class="post__ico post__ico--sh"></i></div></article><article class="post post--b"><div class="post__head"><span class="post__avatar"></span><span class="post__handle"></span></div><div class="post__image"></div><div class="post__actions"><i class="post__ico post__ico--like"></i><i class="post__ico post__ico--cmt"></i><i class="post__ico post__ico--sh"></i></div></article><article class="post post--frame"><div class="post__head"><span class="post__avatar"></span><span class="post__handle"></span></div><div class="post__image"></div><div class="post__actions"><i class="post__ico post__ico--like"></i><i class="post__ico post__ico--cmt"></i><i class="post__ico post__ico--sh"></i></div></article><article class="post post--c"><div class="post__head"><span class="post__avatar"></span><span class="post__handle"></span></div><div class="post__image"></div><div class="post__actions"><i class="post__ico post__ico--like"></i><i class="post__ico post__ico--cmt"></i><i class="post__ico post__ico--sh"></i></div></article><article class="post post--a"><div class="post__head"><span class="post__avatar"></span><span class="post__handle"></span></div><div class="post__image"></div><div class="post__actions"><i class="post__ico post__ico--like"></i><i class="post__ico post__ico--cmt"></i><i class="post__ico post__ico--sh"></i></div></article><article class="post post--bars"><div class="post__head"><span class="post__avatar"></span><span class="post__handle"></span></div><div class="post__image"></div><div class="post__actions"><i class="post__ico post__ico--like"></i><i class="post__ico post__ico--cmt"></i><i class="post__ico post__ico--sh"></i></div></article><article class="post post--win"><div class="post__head"><span class="post__avatar"></span><span class="post__handle"></span></div><div class="post__image"></div><div class="post__actions"><i class="post__ico post__ico--like"></i><i class="post__ico post__ico--cmt"></i><i class="post__ico post__ico--sh"></i></div></article><article class="post post--b"><div class="post__head"><span class="post__avatar"></span><span class="post__handle"></span></div><div class="post__image"></div><div class="post__actions"><i class="post__ico post__ico--like"></i><i class="post__ico post__ico--cmt"></i><i class="post__ico post__ico--sh"></i></div></article><article class="post post--frame"><div class="post__head"><span class="post__avatar"></span><span class="post__handle"></span></div><div class="post__image"></div><div class="post__actions"><i class="post__ico post__ico--like"></i><i class="post__ico post__ico--cmt"></i><i class="post__ico post__ico--sh"></i></div></article><article class="post post--c"><div class="post__head"><span class="post__avatar"></span><span class="post__handle"></span></div><div class="post__image"></div><div class="post__actions"><i class="post__ico post__ico--like"></i><i class="post__ico post__ico--cmt"></i><i class="post__ico post__ico--sh"></i></div></article><article class="post post--a"><div class="post__head"><span class="post__avatar"></span><span class="post__handle"></span></div><div class="post__image"></div><div class="post__actions"><i class="post__ico post__ico--like"></i><i class="post__ico post__ico--cmt"></i><i class="post__ico post__ico--sh"></i></div></article><article class="post post--bars"><div class="post__head"><span class="post__avatar"></span><span class="post__handle"></span></div><div class="post__image"></div><div class="post__actions"><i class="post__ico post__ico--like"></i><i class="post__ico post__ico--cmt"></i><i class="post__ico post__ico--sh"></i></div></article><article class="post post--win"><div class="post__head"><span class="post__avatar"></span><span class="post__handle"></span></div><div class="post__image"></div><div class="post__actions"><i class="post__ico post__ico--like"></i><i class="post__ico post__ico--cmt"></i><i class="post__ico post__ico--sh"></i></div></article><article class="post post--b"><div class="post__head"><span class="post__avatar"></span><span class="post__handle"></span></div><div class="post__image"></div><div class="post__actions"><i class="post__ico post__ico--like"></i><i class="post__ico post__ico--cmt"></i><i class="post__ico post__ico--sh"></i></div></article><article class="post post--frame"><div class="post__head"><span class="post__avatar"></span><span class="post__handle"></span></div><div class="post__image"></div><div class="post__actions"><i class="post__ico post__ico--like"></i><i class="post__ico post__ico--cmt"></i><i class="post__ico post__ico--sh"></i></div></article><article class="post post--c"><div class="post__head"><span class="post__avatar"></span><span class="post__handle"></span></div><div class="post__image"></div><div class="post__actions"><i class="post__ico post__ico--like"></i><i class="post__ico post__ico--cmt"></i><i class="post__ico post__ico--sh"></i></div></article><article class="post post--a"><div class="post__head"><span class="post__avatar"></span><span class="post__handle"></span></div><div class="post__image"></div><div class="post__actions"><i class="post__ico post__ico--like"></i><i class="post__ico post__ico--cmt"></i><i class="post__ico post__ico--sh"></i></div></article><article class="post post--bars"><div class="post__head"><span class="post__avatar"></span><span class="post__handle"></span></div><div class="post__image"></div><div class="post__actions"><i class="post__ico post__ico--like"></i><i class="post__ico post__ico--cmt"></i><i class="post__ico post__ico--sh"></i></div></article><article class="post post--win"><div class="post__head"><span class="post__avatar"></span><span class="post__handle"></span></div><div class="post__image"></div><div class="post__actions"><i class="post__ico post__ico--like"></i><i class="post__ico post__ico--cmt"></i><i class="post__ico post__ico--sh"></i></div></article><article class="post post--b"><div class="post__head"><span class="post__avatar"></span><span class="post__handle"></span></div><div class="post__image"></div><div class="post__actions"><i class="post__ico post__ico--like"></i><i class="post__ico post__ico--cmt"></i><i class="post__ico post__ico--sh"></i></div></article></div>
                     </div>
                   </div>
                 </div>
@@ -1346,8 +1381,8 @@
                   <rect x="48" y="10" width="32" height="5" rx="2.5" fill="rgba(255,255,255,0.35)"/>
                 </svg>
                   <div class="phone__screen">
-                    <div class="slot">
-                      <div class="slot__col"><div class="slot__reel slot__reel--3"><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span></div></div>
+                    <div class="feed">
+                      <div class="feed__reel feed__reel--3"><article class="post post--bars"><div class="post__head"><span class="post__avatar"></span><span class="post__handle"></span></div><div class="post__image"></div><div class="post__actions"><i class="post__ico post__ico--like"></i><i class="post__ico post__ico--cmt"></i><i class="post__ico post__ico--sh"></i></div></article><article class="post post--b"><div class="post__head"><span class="post__avatar"></span><span class="post__handle"></span></div><div class="post__image"></div><div class="post__actions"><i class="post__ico post__ico--like"></i><i class="post__ico post__ico--cmt"></i><i class="post__ico post__ico--sh"></i></div></article><article class="post post--frame"><div class="post__head"><span class="post__avatar"></span><span class="post__handle"></span></div><div class="post__image"></div><div class="post__actions"><i class="post__ico post__ico--like"></i><i class="post__ico post__ico--cmt"></i><i class="post__ico post__ico--sh"></i></div></article><article class="post post--c"><div class="post__head"><span class="post__avatar"></span><span class="post__handle"></span></div><div class="post__image"></div><div class="post__actions"><i class="post__ico post__ico--like"></i><i class="post__ico post__ico--cmt"></i><i class="post__ico post__ico--sh"></i></div></article><article class="post post--win"><div class="post__head"><span class="post__avatar"></span><span class="post__handle"></span></div><div class="post__image"></div><div class="post__actions"><i class="post__ico post__ico--like"></i><i class="post__ico post__ico--cmt"></i><i class="post__ico post__ico--sh"></i></div></article><article class="post post--a"><div class="post__head"><span class="post__avatar"></span><span class="post__handle"></span></div><div class="post__image"></div><div class="post__actions"><i class="post__ico post__ico--like"></i><i class="post__ico post__ico--cmt"></i><i class="post__ico post__ico--sh"></i></div></article><article class="post post--bars"><div class="post__head"><span class="post__avatar"></span><span class="post__handle"></span></div><div class="post__image"></div><div class="post__actions"><i class="post__ico post__ico--like"></i><i class="post__ico post__ico--cmt"></i><i class="post__ico post__ico--sh"></i></div></article><article class="post post--b"><div class="post__head"><span class="post__avatar"></span><span class="post__handle"></span></div><div class="post__image"></div><div class="post__actions"><i class="post__ico post__ico--like"></i><i class="post__ico post__ico--cmt"></i><i class="post__ico post__ico--sh"></i></div></article><article class="post post--frame"><div class="post__head"><span class="post__avatar"></span><span class="post__handle"></span></div><div class="post__image"></div><div class="post__actions"><i class="post__ico post__ico--like"></i><i class="post__ico post__ico--cmt"></i><i class="post__ico post__ico--sh"></i></div></article><article class="post post--c"><div class="post__head"><span class="post__avatar"></span><span class="post__handle"></span></div><div class="post__image"></div><div class="post__actions"><i class="post__ico post__ico--like"></i><i class="post__ico post__ico--cmt"></i><i class="post__ico post__ico--sh"></i></div></article><article class="post post--win"><div class="post__head"><span class="post__avatar"></span><span class="post__handle"></span></div><div class="post__image"></div><div class="post__actions"><i class="post__ico post__ico--like"></i><i class="post__ico post__ico--cmt"></i><i class="post__ico post__ico--sh"></i></div></article><article class="post post--a"><div class="post__head"><span class="post__avatar"></span><span class="post__handle"></span></div><div class="post__image"></div><div class="post__actions"><i class="post__ico post__ico--like"></i><i class="post__ico post__ico--cmt"></i><i class="post__ico post__ico--sh"></i></div></article><article class="post post--bars"><div class="post__head"><span class="post__avatar"></span><span class="post__handle"></span></div><div class="post__image"></div><div class="post__actions"><i class="post__ico post__ico--like"></i><i class="post__ico post__ico--cmt"></i><i class="post__ico post__ico--sh"></i></div></article><article class="post post--b"><div class="post__head"><span class="post__avatar"></span><span class="post__handle"></span></div><div class="post__image"></div><div class="post__actions"><i class="post__ico post__ico--like"></i><i class="post__ico post__ico--cmt"></i><i class="post__ico post__ico--sh"></i></div></article><article class="post post--frame"><div class="post__head"><span class="post__avatar"></span><span class="post__handle"></span></div><div class="post__image"></div><div class="post__actions"><i class="post__ico post__ico--like"></i><i class="post__ico post__ico--cmt"></i><i class="post__ico post__ico--sh"></i></div></article><article class="post post--c"><div class="post__head"><span class="post__avatar"></span><span class="post__handle"></span></div><div class="post__image"></div><div class="post__actions"><i class="post__ico post__ico--like"></i><i class="post__ico post__ico--cmt"></i><i class="post__ico post__ico--sh"></i></div></article><article class="post post--win"><div class="post__head"><span class="post__avatar"></span><span class="post__handle"></span></div><div class="post__image"></div><div class="post__actions"><i class="post__ico post__ico--like"></i><i class="post__ico post__ico--cmt"></i><i class="post__ico post__ico--sh"></i></div></article><article class="post post--a"><div class="post__head"><span class="post__avatar"></span><span class="post__handle"></span></div><div class="post__image"></div><div class="post__actions"><i class="post__ico post__ico--like"></i><i class="post__ico post__ico--cmt"></i><i class="post__ico post__ico--sh"></i></div></article><article class="post post--bars"><div class="post__head"><span class="post__avatar"></span><span class="post__handle"></span></div><div class="post__image"></div><div class="post__actions"><i class="post__ico post__ico--like"></i><i class="post__ico post__ico--cmt"></i><i class="post__ico post__ico--sh"></i></div></article><article class="post post--b"><div class="post__head"><span class="post__avatar"></span><span class="post__handle"></span></div><div class="post__image"></div><div class="post__actions"><i class="post__ico post__ico--like"></i><i class="post__ico post__ico--cmt"></i><i class="post__ico post__ico--sh"></i></div></article><article class="post post--frame"><div class="post__head"><span class="post__avatar"></span><span class="post__handle"></span></div><div class="post__image"></div><div class="post__actions"><i class="post__ico post__ico--like"></i><i class="post__ico post__ico--cmt"></i><i class="post__ico post__ico--sh"></i></div></article><article class="post post--c"><div class="post__head"><span class="post__avatar"></span><span class="post__handle"></span></div><div class="post__image"></div><div class="post__actions"><i class="post__ico post__ico--like"></i><i class="post__ico post__ico--cmt"></i><i class="post__ico post__ico--sh"></i></div></article><article class="post post--win"><div class="post__head"><span class="post__avatar"></span><span class="post__handle"></span></div><div class="post__image"></div><div class="post__actions"><i class="post__ico post__ico--like"></i><i class="post__ico post__ico--cmt"></i><i class="post__ico post__ico--sh"></i></div></article><article class="post post--a"><div class="post__head"><span class="post__avatar"></span><span class="post__handle"></span></div><div class="post__image"></div><div class="post__actions"><i class="post__ico post__ico--like"></i><i class="post__ico post__ico--cmt"></i><i class="post__ico post__ico--sh"></i></div></article></div>
                     </div>
                   </div>
                 </div>
@@ -1400,7 +1435,7 @@
                       <path class="walker__leg walker__leg--r" d="M0 10.2 L0 16.5"/>
                     </g>
                   </g></g>
-                <g class="crowd__confetti"><!-- educate-cheer-v1 -->
+                <g class="crowd__confetti"><!-- educate-cheer-v2 -->
                   <circle class="crowd__spark crowd__spark--1" cx="46" cy="96" r="1.7" style="--sx:6px"/>
                   <circle class="crowd__spark crowd__spark--2" cx="78" cy="84" r="1.3" style="--sx:-5px"/>
                   <circle class="crowd__spark crowd__spark--3" cx="110" cy="100" r="1.8" style="--sx:8px"/>
@@ -2109,6 +2144,20 @@
   initServices(reduce);
   initEvergreen();
 
+  function sizeFeeds(){
+    var slots = document.querySelector('.slots');
+    var screen = slots && slots.querySelector('.phone__screen');
+    if (!slots || !screen) return;
+    var h = screen.clientHeight;
+    if (h) slots.style.setProperty('--cell', h + 'px');
+  }
+  sizeFeeds();
+  if (window.ResizeObserver){
+    var slotsEl = document.querySelector('.slots');
+    if (slotsEl) new ResizeObserver(sizeFeeds).observe(slotsEl);
+  }
+  window.addEventListener('resize', sizeFeeds);
+
   if (reduce || !('IntersectionObserver' in window)){
     nodes.forEach(function(el){ el.classList.add('is-in'); });
     motions.forEach(function(el){ el.classList.add('is-static'); });
@@ -2125,17 +2174,103 @@
   }, { threshold: 0.22, rootMargin: '0px 0px -8% 0px' });
   nodes.forEach(function(el){ io.observe(el); });
 
-  var entertain = document.querySelector('[data-motion="entertain"]');
-  if (entertain) entertain.classList.add('is-playing');
+  /* slot-feed-v1: feeds spin continuously from load; a standalone
+     IntersectionObserver (threshold 0.15 on the three-phone group,
+     not the stoplight) triggers a one-shot staggered land on the
+     gold post. Once landed, they stay landed. */
+  function currentY(el){
+    var t = getComputedStyle(el).transform;
+    if (!t || t === 'none') return 0;
+    try { return new DOMMatrixReadOnly(t).m42; }
+    catch (err){
+      var m = t.match(/matrix(?:3d)?\(([^)]+)\)/);
+      if (!m) return 0;
+      var p = m[1].split(',').map(Number);
+      return p.length === 16 ? p[13] : p[5];
+    }
+  }
+  function initEntertain(){
+    var root = document.querySelector('[data-motion="entertain"]');
+    if (!root) return;
+    var group = root.querySelector('.slots') || root;
+    var reels = root.querySelectorAll('.feed__reel');
+    var landed = false;
+    function land(){
+      if (landed || root.classList.contains('is-landed')) return;
+      landed = true;
+      var post = root.querySelector('.post');
+      var cell = post ? post.getBoundingClientRect().height : 0;
+      var loop = cell * 6;
+      var lock = cell * -4;
+      var yList = [];
+      for (var i = 0; i < reels.length; i++){
+        yList[i] = currentY(reels[i]);
+        reels[i].style.transform = 'translate3d(0,' + yList[i] + 'px,0)';
+      }
+      root.classList.add('is-landing');
+      var durs = [900, 1250, 1700];
+      var delays = [0, 280, 620];
+      for (var j = 0; j < reels.length; j++){
+        (function(reel, y, dur, delay){
+          var next = lock;
+          while (next > y + 0.5) next -= loop;
+          if ((y - next) < loop * 0.5) next -= loop;
+          reel.style.transform = 'translate3d(0,' + y + 'px,0)';
+          reel.getAnimations().forEach(function(a){ a.cancel(); });
+          reel.style.transform = 'translate3d(0,' + y + 'px,0)';
+          var anim = reel.animate(
+            [
+              {transform:'translate3d(0,' + y + 'px,0)'},
+              {transform:'translate3d(0,' + next + 'px,0)'}
+            ],
+            {duration:dur, delay:delay, easing:'cubic-bezier(.05,.7,.15,1)', fill:'forwards'}
+          );
+          anim.addEventListener('finish', function(){
+            reel.style.transform = 'translate3d(0, calc(-4 * var(--cell, 100cqh)), 0)';
+            anim.cancel();
+          });
+        })(reels[j], yList[j], durs[j], delays[j]);
+      }
+      var lastDelay = delays[reels.length - 1] + durs[reels.length - 1];
+      setTimeout(function(){
+        root.classList.add('is-landed');
+        root.classList.remove('is-landing');
+      }, lastDelay);
+    }
+    var slotIo = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting){
+          land();
+          slotIo.unobserve(entry.target);
+        }
+      });
+    }, {threshold:0.15});
+    slotIo.observe(group);
+  }
+  initEntertain();
+
+  /* sell-tap-once-v1: play the tap once when Sell comes into view,
+     flood PAID, and hold. No loop, no replay. */
   var sell = document.querySelector('[data-motion="sell"]');
-  if (sell) sell.classList.add('is-playing');
+  if (sell){
+    var sellIo = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting){
+          sell.classList.add('is-playing');
+          watchPaidChimeOnce();
+          sellIo.unobserve(entry.target);
+        }
+      });
+    }, {threshold:0.15});
+    sellIo.observe(sell);
+  }
 
   /* paid-chime-v1: original two-tone success chime on the PAID flash.
-     Unlocks on first pointer/key/touch; plays only if Sell is in view,
-     the tab is visible, and motion is allowed. Modest volume. */
+     Unlocks on first pointer/key/touch; plays only once, if Sell is
+     in view, the tab is visible, and motion is allowed. Modest volume. */
   var paidAudio = null;
   var paidAudioReady = false;
-  var paidChimeCycle = -1;
+  var paidChimePlayed = false;
   function unlockPaidAudio(){
     var Ctx = window.AudioContext || window.webkitAudioContext;
     if (!Ctx) return;
@@ -2147,12 +2282,14 @@
     window.addEventListener(type, unlockPaidAudio, {passive:true, capture:true});
   });
   function playPaidChime(){
+    if (paidChimePlayed) return;
     if (!paidAudioReady || !paidAudio || paidAudio.state !== 'running') return;
     if (document.hidden) return;
     var vis = document.querySelector('[data-motion="sell"]');
     if (!vis) return;
     var r = vis.getBoundingClientRect();
     if (r.bottom < 0 || r.top > window.innerHeight || r.right < 0 || r.left > window.innerWidth) return;
+    paidChimePlayed = true;
     var t0 = paidAudio.currentTime;
     function tone(freq, start, dur, peak){
       var osc = paidAudio.createOscillator();
@@ -2170,27 +2307,22 @@
     tone(1318.5, 0, 0.11, 0.07);
     tone(1760, 0.10, 0.16, 0.08);
   }
-  function watchPaidChime(){
+  function watchPaidChimeOnce(){
     var paid = document.querySelector('.tap__paid');
     if (!paid) return;
     function tick(){
       var anims = paid.getAnimations();
       if (anims.length){
         var cur = anims[0].currentTime || 0;
-        var key = (cur + 1000) % 5000;
-        var cycle = Math.floor((cur + 1000) / 5000);
-        if (key >= 2200 && key < 2600){
-          if (paidChimeCycle !== cycle){
-            paidChimeCycle = cycle;
-            playPaidChime();
-          }
+        if (cur >= 2200){
+          playPaidChime();
+          return;
         }
       }
       requestAnimationFrame(tick);
     }
     requestAnimationFrame(tick);
   }
-  watchPaidChime();
 
   var mio = new IntersectionObserver(function(entries){
     entries.forEach(function(entry){
