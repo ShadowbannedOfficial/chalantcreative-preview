@@ -84,23 +84,31 @@
     padding-left:0;
   }
   .hero__lockup{
+    /* hero-width-cap: size the box from the viewport, not the 1370x468 intrinsic
+       SVG/PNG. Safari + <picture> srcset can otherwise paint the wordmark at
+       intrinsic size (~240px-tall letters) and clip the right edge. */
     position:relative;
     box-sizing:border-box;
-    width:min(68.5vw, 100%);
-    max-width:100%;
+    width:min(68.5vw, calc(100vw - 2 * var(--gutter)));
+    max-width:calc(100vw - 2 * var(--gutter));
+    aspect-ratio:1370 / 468;
     flex:0 1 auto;
     min-width:0;
+    overflow:visible;
   }
   .hero__lockup picture{
     display:block;
     width:100%;
     max-width:100%;
+    height:100%;
   }
   .hero__logo{
     display:block;
     width:100%;
-    height:auto;
+    height:100%;
     max-width:100%;
+    object-fit:contain;
+    object-position:right center;
     position:relative;
     z-index:1;
     user-select:none;
@@ -2000,15 +2008,23 @@
     mio.observe(el);
   });
 
-  var sio = new IntersectionObserver(function(entries){
-    entries.forEach(function(entry){
-      var el = entry.target;
+  // signal-mid-v1: yellow when the housing center crosses ~58% of the viewport
+  // from the top (band 55–60%). 150ms delay to yellow; immediate green when
+  // scrolled back above that line.
+  var SIGNAL_LINE = 0.58;
+  function housingCenterCrossed(el){
+    var housing = el.querySelector('.signal__housing') || el;
+    var r = housing.getBoundingClientRect();
+    var mid = (r.top + r.bottom) / 2;
+    return mid <= (window.innerHeight * SIGNAL_LINE);
+  }
+  function updateSignals(){
+    signals.forEach(function(el){
       if (el._signalTimer){
         clearTimeout(el._signalTimer);
         el._signalTimer = null;
       }
-      if (entry.intersectionRatio >= 0.25){
-        // Flip to yellow once a quarter of the fixture is in view
+      if (housingCenterCrossed(el)){
         el._signalTimer = setTimeout(function(){
           el._signalTimer = null;
           el.classList.add('is-playing');
@@ -2017,8 +2033,19 @@
         el.classList.remove('is-playing');
       }
     });
-  }, { threshold: [0, 0.25] });
-  signals.forEach(function(el){ sio.observe(el); });
+  }
+  var signalTick = false;
+  function onSignalScroll(){
+    if (signalTick) return;
+    signalTick = true;
+    requestAnimationFrame(function(){
+      signalTick = false;
+      updateSignals();
+    });
+  }
+  window.addEventListener('scroll', onSignalScroll, {passive:true});
+  window.addEventListener('resize', onSignalScroll);
+  updateSignals();
 })();
 </script>
 
