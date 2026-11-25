@@ -772,8 +772,67 @@
     -webkit-mask-image:linear-gradient(to bottom,transparent 0%,#000 10%,#000 90%,transparent 100%);
     mask-image:linear-gradient(to bottom,transparent 0%,#000 10%,#000 90%,transparent 100%);
   }
+  .slots{
+    --cell:20px;
+    --lock:-234.44px;
+    --loop:400px;
+    position:relative;
+    width:min(240px,100%);
+    height:236px;
+    flex:0 0 auto;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:visible;
+  }
+  .slots__row{
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:6px;
+    width:100%;
+    height:133px;
+  }
+  .slots .phone{
+    width:72px;
+    height:133px;
+    flex:0 0 auto;
+  }
+  .slots .phone__screen{
+    top:9.32%;
+    left:7.81%;
+    right:7.81%;
+    bottom:5.93%;
+    border-radius:6.25%;
+  }
+  .slots .slot{
+    --cell:20px;
+    --lock:-234.44px;
+    --loop:400px;
+  }
+  .slots .slot__col + .slot__col{border-left:none}
+  .slots .slot__sym{width:calc(var(--cell) * 28 / 36)}
+  .slots .slot__sym--box i{width:calc(var(--cell) * 16 / 36);height:calc(var(--cell) * 12 / 36)}
+  .slots .slot__sym--bar i{width:calc(var(--cell) * 14 / 36)}
+  .slots .slot__sym--dot i{width:calc(var(--cell) * 5 / 36);height:calc(var(--cell) * 5 / 36)}
+  .slots .slot__sym--bars i{width:calc(var(--cell) * 10 / 36);height:calc(var(--cell) * 8 / 36)}
+  .slots .slot__sym--hit i{width:calc(var(--cell) * 16 / 36);height:calc(var(--cell) * 16 / 36);box-shadow:0 0 6px rgba(232,201,10,.4)}
+  .slots .slot__payline{
+    left:8px;
+    right:8px;
+    top:51.7%;
+    z-index:5;
+  }
+  .slots .slot__flash{
+    z-index:4;
+    border-radius:8px;
+  }
+  .slots .slot__win{z-index:6}
   .slot{
     --cell:36px;
+    --lock:-422px;
+    --loop:720px;
     position:absolute;
     inset:0;
     display:grid;
@@ -921,11 +980,23 @@
     transform-box:fill-box;
     transform-origin:50% 0%;
   }
-  /* Static / reduced-motion: mid-stride, facing right */
+  /* Static / reduced-motion: teacher mid-stride; followers cheering, heads up */
   .walker__leg--l{transform:rotate(26deg)}
   .walker__leg--r{transform:rotate(-26deg)}
   .walker__arm--l{transform:rotate(-22deg)}
   .walker__arm--r{transform:rotate(22deg)}
+  .walker__arm--cheer-l,
+  .walker__arm--cheer-r{
+    transform-box:fill-box;
+    transform-origin:50% 0%;
+  }
+  .crowd__spark{
+    fill:#E8C90A;
+    stroke:none;
+    opacity:.85;
+    transform-box:fill-box;
+    transform-origin:center;
+  }
   .walker__phone-body{
     fill:#000;
     stroke:currentColor;
@@ -1041,6 +1112,7 @@
     .tap__paid{opacity:0}
     .tap__wave{stroke:rgba(255,255,255,.45)}
     .tap__waves-mark{transform:scale(.92);opacity:.55}
+    .crowd__spark{opacity:0}
 
     [data-motion].is-playing .slot__reel--1{animation:slot-jackpot-1 5.4s infinite;animation-delay:-1.2s}
     [data-motion].is-playing .slot__reel--2{animation:slot-jackpot-2 5.4s infinite;animation-delay:-1.2s}
@@ -1055,11 +1127,22 @@
     [data-motion].is-playing .slot__coin--6{animation:slot-coin-6 5.4s infinite;animation-delay:-1.2s}
 
     [data-motion].is-playing .crowd__halo{animation:crowd-halo 3.2s ease-in-out infinite}
-    [data-motion].is-playing .walker__bob{animation:walk-bob .7s ease-in-out var(--delay,0s) infinite}
-    [data-motion].is-playing .walker__leg--l{animation:walk-leg-l .7s ease-in-out var(--delay,0s) infinite}
-    [data-motion].is-playing .walker__leg--r{animation:walk-leg-r .7s ease-in-out var(--delay,0s) infinite}
-    [data-motion].is-playing .walker__arm--l{animation:walk-arm-l .7s ease-in-out var(--delay,0s) infinite}
-    [data-motion].is-playing .walker__arm--r{animation:walk-arm-r .7s ease-in-out var(--delay,0s) infinite}
+    [data-motion].is-playing .crowd__teacher .walker__bob{animation:walk-bob .7s ease-in-out var(--delay,0s) infinite}
+    [data-motion].is-playing .crowd__teacher .walker__leg--l{animation:walk-leg-l .7s ease-in-out var(--delay,0s) infinite}
+    [data-motion].is-playing .crowd__teacher .walker__leg--r{animation:walk-leg-r .7s ease-in-out var(--delay,0s) infinite}
+    [data-motion].is-playing .crowd__teacher .walker__arm--l{animation:walk-arm-l .7s ease-in-out var(--delay,0s) infinite}
+    [data-motion].is-playing .crowd__teacher .walker__arm--r{animation:walk-arm-r .7s ease-in-out var(--delay,0s) infinite}
+    [data-motion].is-playing .crowd__fig .walker__bob{animation:cheer-bob .7s ease-in-out var(--delay,0s) infinite}
+    [data-motion].is-playing .crowd__fig .walker__arm--cheer-l{animation:cheer-arm-l .7s ease-in-out var(--delay,0s) infinite}
+    [data-motion].is-playing .crowd__fig .walker__arm--cheer-r{animation:cheer-arm-r .7s ease-in-out var(--delay,0s) infinite}
+    [data-motion].is-playing .crowd__spark--1{animation:spark-burst 2.2s ease-out 0s infinite}
+    [data-motion].is-playing .crowd__spark--2{animation:spark-burst 2.4s ease-out .2s infinite}
+    [data-motion].is-playing .crowd__spark--3{animation:spark-burst 2.1s ease-out .45s infinite}
+    [data-motion].is-playing .crowd__spark--4{animation:spark-burst 2.5s ease-out .1s infinite}
+    [data-motion].is-playing .crowd__spark--5{animation:spark-burst 2.3s ease-out .55s infinite}
+    [data-motion].is-playing .crowd__spark--6{animation:spark-burst 2.6s ease-out .3s infinite}
+    [data-motion].is-playing .crowd__spark--7{animation:spark-burst 2.2s ease-out .7s infinite}
+    [data-motion].is-playing .crowd__spark--8{animation:spark-burst 2.4s ease-out .15s infinite}
 
     [data-motion].is-playing .tap__phone{animation:tap-phone 5s ease-in-out infinite;animation-delay:-1s}
     [data-motion].is-playing .tap__paid{animation:tap-paid 5s ease-in-out infinite;animation-delay:-1s}
@@ -1146,6 +1229,23 @@
       0%,100%{transform:rotate(22deg)}
       50%{transform:rotate(-22deg)}
     }
+    @keyframes cheer-bob{
+      0%,100%{transform:translateY(0)}
+      50%{transform:translateY(-2.2px)}
+    }
+    @keyframes cheer-arm-l{
+      0%,100%{transform:rotate(-8deg)}
+      50%{transform:rotate(12deg)}
+    }
+    @keyframes cheer-arm-r{
+      0%,100%{transform:rotate(8deg)}
+      50%{transform:rotate(-12deg)}
+    }
+    @keyframes spark-burst{
+      0%{opacity:0;transform:translate(0,10px) scale(.35)}
+      18%{opacity:1;transform:translate(var(--sx,4px),-6px) scale(1)}
+      70%,100%{opacity:0;transform:translate(var(--sx,8px),-26px) scale(.25)}
+    }
     @keyframes tap-phone{
       0%,8%{transform:translate(-36px,8px) rotate(-8deg)}
       28%{transform:translate(-6px,2px) rotate(6deg)}
@@ -1215,17 +1315,42 @@
             </h3>
               <p class="method__sub">Content engineered to stop the scroll.</p>
             </div>
-            <div class="method__visual" data-motion="entertain" aria-hidden="true">
-              <div class="phone">
-                <svg class="phone__shell" viewBox="0 0 128 236" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <div class="method__visual" data-motion="entertain" aria-hidden="true">
+              <div class="slots"><!-- slot-three-v1 -->
+                <div class="slots__row">
+                <div class="phone">
+                  <svg class="phone__shell" viewBox="0 0 128 236" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <rect x="1.25" y="1.25" width="125.5" height="233.5" rx="26" stroke="rgba(255,255,255,0.42)" stroke-width="1.25"/>
                   <rect x="48" y="10" width="32" height="5" rx="2.5" fill="rgba(255,255,255,0.35)"/>
                 </svg>
-                <div class="phone__screen">
-                  <div class="slot"><!-- slot-jackpot-v2 -->
-                    <div class="slot__col"><div class="slot__reel slot__reel--1" style="--lock:-422px;--loop:720px"><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span></div></div>
-                    <div class="slot__col"><div class="slot__reel slot__reel--2" style="--lock:-422px;--loop:720px"><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span></div></div>
-                    <div class="slot__col"><div class="slot__reel slot__reel--3" style="--lock:-422px;--loop:720px"><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span></div></div>
+                  <div class="phone__screen">
+                    <div class="slot">
+                      <div class="slot__col"><div class="slot__reel slot__reel--1"><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span></div></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="phone">
+                  <svg class="phone__shell" viewBox="0 0 128 236" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="1.25" y="1.25" width="125.5" height="233.5" rx="26" stroke="rgba(255,255,255,0.42)" stroke-width="1.25"/>
+                  <rect x="48" y="10" width="32" height="5" rx="2.5" fill="rgba(255,255,255,0.35)"/>
+                </svg>
+                  <div class="phone__screen">
+                    <div class="slot">
+                      <div class="slot__col"><div class="slot__reel slot__reel--2"><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span></div></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="phone">
+                  <svg class="phone__shell" viewBox="0 0 128 236" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="1.25" y="1.25" width="125.5" height="233.5" rx="26" stroke="rgba(255,255,255,0.42)" stroke-width="1.25"/>
+                  <rect x="48" y="10" width="32" height="5" rx="2.5" fill="rgba(255,255,255,0.35)"/>
+                </svg>
+                  <div class="phone__screen">
+                    <div class="slot">
+                      <div class="slot__col"><div class="slot__reel slot__reel--3"><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--hit"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bars"><i></i></span><span class="slot__sym slot__sym--box"><i></i></span><span class="slot__sym slot__sym--dot"><i></i></span><span class="slot__sym slot__sym--bar"><i></i></span></div></div>
+                    </div>
+                  </div>
+                </div>
                   <div class="slot__payline"></div>
                   <div class="slot__flash"></div>
                   <div class="slot__win" aria-hidden="true">
@@ -1275,93 +1400,78 @@
                       <path class="walker__leg walker__leg--r" d="M0 10.2 L0 16.5"/>
                     </g>
                   </g></g>
+                <g class="crowd__confetti"><!-- educate-cheer-v1 -->
+                  <circle class="crowd__spark crowd__spark--1" cx="46" cy="96" r="1.7" style="--sx:6px"/>
+                  <circle class="crowd__spark crowd__spark--2" cx="78" cy="84" r="1.3" style="--sx:-5px"/>
+                  <circle class="crowd__spark crowd__spark--3" cx="110" cy="100" r="1.8" style="--sx:8px"/>
+                  <circle class="crowd__spark crowd__spark--4" cx="62" cy="70" r="1.2" style="--sx:-7px"/>
+                  <rect class="crowd__spark crowd__spark--5" x="132" y="88" width="2.2" height="2.2" transform="rotate(20 133.1 89.1)" style="--sx:5px"/>
+                  <circle class="crowd__spark crowd__spark--6" cx="96" cy="64" r="1.4" style="--sx:-4px"/>
+                  <rect class="crowd__spark crowd__spark--7" x="40" y="74" width="1.8" height="1.8" transform="rotate(35 40.9 74.9)" style="--sx:9px"/>
+                  <circle class="crowd__spark crowd__spark--8" cx="148" cy="78" r="1.5" style="--sx:-6px"/>
+                </g>
                 <g class="crowd__fig" style="--delay:0.1s" transform="translate(28 118) scale(3.5)"><g class="walker" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
                     <g class="walker__bob">
-                      <path class="walker__arm walker__arm--l" d="M1.0 5.4 L1.0 11.0"/>
+                      <path class="walker__arm walker__arm--cheer-l" d="M1.0 5.4 L-1.1 0.7"/>
                       <path class="walker__leg walker__leg--l" d="M0 10.2 L0 16.5"/>
                       <path d="M1.4 4.55 L0 10.2"/>
-                      <ellipse class="walker__face-glow" cx="4.7" cy="5.15" rx="2.8" ry="2.4"/>
-                      <g class="walker__head" transform="rotate(55 2.15 4.52)">
+                      <g class="walker__head">
                         <circle cx="2.6" cy="2.3" r="2.35"/>
-                        <path d="M4.88 2.40 L6.25 3.35"/>
+                        <path d="M4.85 2.45 L5.45 2.85"/>
                       </g>
-                      <path class="walker__arm-hold" d="M1.0 5.4 Q2.25 8.15 5.6 7.65"/>
-                      <g class="walker__phone" transform="translate(5.45 6.95) rotate(62)">
-                        <rect class="walker__phone-body" x="0" y="0" width="2.1" height="3.6" rx="0.3"/>
-                        <rect class="walker__phone-screen" x="0.28" y="0.32" width="1.54" height="2.6" rx="0.1"/>
-                      </g>
+                      <path class="walker__arm walker__arm--cheer-r" d="M1.0 5.4 L5.1 0.5"/>
                       <path class="walker__leg walker__leg--r" d="M0 10.2 L0 16.5"/>
                     </g>
                   </g></g>
                 <g class="crowd__fig" style="--delay:0.0s" transform="translate(54 110) scale(3.5)"><g class="walker" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
                     <g class="walker__bob">
-                      <path class="walker__arm walker__arm--l" d="M1.0 5.4 L1.0 11.0"/>
+                      <path class="walker__arm walker__arm--cheer-l" d="M1.0 5.4 L-1.1 0.7"/>
                       <path class="walker__leg walker__leg--l" d="M0 10.2 L0 16.5"/>
                       <path d="M1.4 4.55 L0 10.2"/>
-                      <ellipse class="walker__face-glow" cx="4.7" cy="5.15" rx="2.8" ry="2.4"/>
-                      <g class="walker__head" transform="rotate(55 2.15 4.52)">
+                      <g class="walker__head">
                         <circle cx="2.6" cy="2.3" r="2.35"/>
-                        <path d="M4.88 2.40 L6.25 3.35"/>
+                        <path d="M4.85 2.45 L5.45 2.85"/>
                       </g>
-                      <path class="walker__arm-hold" d="M1.0 5.4 Q2.25 8.15 5.6 7.65"/>
-                      <g class="walker__phone" transform="translate(5.45 6.95) rotate(62)">
-                        <rect class="walker__phone-body" x="0" y="0" width="2.1" height="3.6" rx="0.3"/>
-                        <rect class="walker__phone-screen" x="0.28" y="0.32" width="1.54" height="2.6" rx="0.1"/>
-                      </g>
+                      <path class="walker__arm walker__arm--cheer-r" d="M1.0 5.4 L5.1 0.5"/>
                       <path class="walker__leg walker__leg--r" d="M0 10.2 L0 16.5"/>
                     </g>
                   </g></g>
                 <g class="crowd__fig" style="--delay:0.2s" transform="translate(80 120) scale(3.5)"><g class="walker" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
                     <g class="walker__bob">
-                      <path class="walker__arm walker__arm--l" d="M1.0 5.4 L1.0 11.0"/>
+                      <path class="walker__arm walker__arm--cheer-l" d="M1.0 5.4 L-1.1 0.7"/>
                       <path class="walker__leg walker__leg--l" d="M0 10.2 L0 16.5"/>
                       <path d="M1.4 4.55 L0 10.2"/>
-                      <ellipse class="walker__face-glow" cx="4.7" cy="5.15" rx="2.8" ry="2.4"/>
-                      <g class="walker__head" transform="rotate(55 2.15 4.52)">
+                      <g class="walker__head">
                         <circle cx="2.6" cy="2.3" r="2.35"/>
-                        <path d="M4.88 2.40 L6.25 3.35"/>
+                        <path d="M4.85 2.45 L5.45 2.85"/>
                       </g>
-                      <path class="walker__arm-hold" d="M1.0 5.4 Q2.25 8.15 5.6 7.65"/>
-                      <g class="walker__phone" transform="translate(5.45 6.95) rotate(62)">
-                        <rect class="walker__phone-body" x="0" y="0" width="2.1" height="3.6" rx="0.3"/>
-                        <rect class="walker__phone-screen" x="0.28" y="0.32" width="1.54" height="2.6" rx="0.1"/>
-                      </g>
+                      <path class="walker__arm walker__arm--cheer-r" d="M1.0 5.4 L5.1 0.5"/>
                       <path class="walker__leg walker__leg--r" d="M0 10.2 L0 16.5"/>
                     </g>
                   </g></g>
                 <g class="crowd__fig" style="--delay:0.08s" transform="translate(106 112) scale(3.5)"><g class="walker" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
                     <g class="walker__bob">
-                      <path class="walker__arm walker__arm--l" d="M1.0 5.4 L1.0 11.0"/>
+                      <path class="walker__arm walker__arm--cheer-l" d="M1.0 5.4 L-1.1 0.7"/>
                       <path class="walker__leg walker__leg--l" d="M0 10.2 L0 16.5"/>
                       <path d="M1.4 4.55 L0 10.2"/>
-                      <ellipse class="walker__face-glow" cx="4.7" cy="5.15" rx="2.8" ry="2.4"/>
-                      <g class="walker__head" transform="rotate(55 2.15 4.52)">
+                      <g class="walker__head">
                         <circle cx="2.6" cy="2.3" r="2.35"/>
-                        <path d="M4.88 2.40 L6.25 3.35"/>
+                        <path d="M4.85 2.45 L5.45 2.85"/>
                       </g>
-                      <path class="walker__arm-hold" d="M1.0 5.4 Q2.25 8.15 5.6 7.65"/>
-                      <g class="walker__phone" transform="translate(5.45 6.95) rotate(62)">
-                        <rect class="walker__phone-body" x="0" y="0" width="2.1" height="3.6" rx="0.3"/>
-                        <rect class="walker__phone-screen" x="0.28" y="0.32" width="1.54" height="2.6" rx="0.1"/>
-                      </g>
+                      <path class="walker__arm walker__arm--cheer-r" d="M1.0 5.4 L5.1 0.5"/>
                       <path class="walker__leg walker__leg--r" d="M0 10.2 L0 16.5"/>
                     </g>
                   </g></g>
                 <g class="crowd__fig" style="--delay:0.16s" transform="translate(132 117) scale(3.5)"><g class="walker" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
                     <g class="walker__bob">
-                      <path class="walker__arm walker__arm--l" d="M1.0 5.4 L1.0 11.0"/>
+                      <path class="walker__arm walker__arm--cheer-l" d="M1.0 5.4 L-1.1 0.7"/>
                       <path class="walker__leg walker__leg--l" d="M0 10.2 L0 16.5"/>
                       <path d="M1.4 4.55 L0 10.2"/>
-                      <ellipse class="walker__face-glow" cx="4.7" cy="5.15" rx="2.8" ry="2.4"/>
-                      <g class="walker__head" transform="rotate(55 2.15 4.52)">
+                      <g class="walker__head">
                         <circle cx="2.6" cy="2.3" r="2.35"/>
-                        <path d="M4.88 2.40 L6.25 3.35"/>
+                        <path d="M4.85 2.45 L5.45 2.85"/>
                       </g>
-                      <path class="walker__arm-hold" d="M1.0 5.4 Q2.25 8.15 5.6 7.65"/>
-                      <g class="walker__phone" transform="translate(5.45 6.95) rotate(62)">
-                        <rect class="walker__phone-body" x="0" y="0" width="2.1" height="3.6" rx="0.3"/>
-                        <rect class="walker__phone-screen" x="0.28" y="0.32" width="1.54" height="2.6" rx="0.1"/>
-                      </g>
+                      <path class="walker__arm walker__arm--cheer-r" d="M1.0 5.4 L5.1 0.5"/>
                       <path class="walker__leg walker__leg--r" d="M0 10.2 L0 16.5"/>
                     </g>
                   </g></g>
@@ -2019,6 +2129,68 @@
   if (entertain) entertain.classList.add('is-playing');
   var sell = document.querySelector('[data-motion="sell"]');
   if (sell) sell.classList.add('is-playing');
+
+  /* paid-chime-v1: original two-tone success chime on the PAID flash.
+     Unlocks on first pointer/key/touch; plays only if Sell is in view,
+     the tab is visible, and motion is allowed. Modest volume. */
+  var paidAudio = null;
+  var paidAudioReady = false;
+  var paidChimeCycle = -1;
+  function unlockPaidAudio(){
+    var Ctx = window.AudioContext || window.webkitAudioContext;
+    if (!Ctx) return;
+    if (!paidAudio) paidAudio = new Ctx();
+    if (paidAudio.state === 'suspended') paidAudio.resume();
+    paidAudioReady = paidAudio.state === 'running';
+  }
+  ['pointerdown','keydown','touchstart'].forEach(function(type){
+    window.addEventListener(type, unlockPaidAudio, {passive:true, capture:true});
+  });
+  function playPaidChime(){
+    if (!paidAudioReady || !paidAudio || paidAudio.state !== 'running') return;
+    if (document.hidden) return;
+    var vis = document.querySelector('[data-motion="sell"]');
+    if (!vis) return;
+    var r = vis.getBoundingClientRect();
+    if (r.bottom < 0 || r.top > window.innerHeight || r.right < 0 || r.left > window.innerWidth) return;
+    var t0 = paidAudio.currentTime;
+    function tone(freq, start, dur, peak){
+      var osc = paidAudio.createOscillator();
+      var gain = paidAudio.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(freq, t0 + start);
+      gain.gain.setValueAtTime(0.0001, t0 + start);
+      gain.gain.exponentialRampToValueAtTime(peak, t0 + start + 0.012);
+      gain.gain.exponentialRampToValueAtTime(0.0001, t0 + start + dur);
+      osc.connect(gain);
+      gain.connect(paidAudio.destination);
+      osc.start(t0 + start);
+      osc.stop(t0 + start + dur + 0.02);
+    }
+    tone(1318.5, 0, 0.11, 0.07);
+    tone(1760, 0.10, 0.16, 0.08);
+  }
+  function watchPaidChime(){
+    var paid = document.querySelector('.tap__paid');
+    if (!paid) return;
+    function tick(){
+      var anims = paid.getAnimations();
+      if (anims.length){
+        var cur = anims[0].currentTime || 0;
+        var key = (cur + 1000) % 5000;
+        var cycle = Math.floor((cur + 1000) / 5000);
+        if (key >= 2200 && key < 2600){
+          if (paidChimeCycle !== cycle){
+            paidChimeCycle = cycle;
+            playPaidChime();
+          }
+        }
+      }
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+  watchPaidChime();
 
   var mio = new IntersectionObserver(function(entries){
     entries.forEach(function(entry){
