@@ -6,14 +6,16 @@
 <title>CHALANT CREATIVE — Coming Soon</title>
 <meta name="description" content="Chalant Creative. Something is coming. Under construction.">
 <meta name="theme-color" content="#000000">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta property="og:title" content="CHALANT CREATIVE — Coming Soon">
 <meta property="og:description" content="Under construction. Coming soon.">
-<meta property="og:image" content="https://shadowbannedofficial.github.io/chalantcreative-preview/logo.png">
+<meta property="og:image" content="https://shadowbannedofficial.github.io/chalantcreative-preview/logo.png?v=slotraf1">
 <meta property="og:type" content="website">
-<link rel="icon" href="favicon.png">
-<link rel="apple-touch-icon" href="favicon.png">
+<link rel="icon" href="favicon.png?v=slotraf1">
+<link rel="apple-touch-icon" href="favicon.png?v=slotraf1">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,500;0,14..32,600;1,14..32,400&family=Montserrat:wght@500;600;700&family=Playfair+Display:wght@500;600;700&display=swap">
@@ -1149,12 +1151,16 @@
     transform-origin:center;
   }
 
-  /* Final / reduced-motion defaults: feeds landed on the gold post */
-  .feed__reel{transform:translate3d(0,calc(-4 * var(--cell, 100cqh)),0)}
-  .slot__payline{border-top-color:rgba(232,201,10,.7); box-shadow:0 0 10px rgba(232,201,10,.28)}
+  /* Reduced-motion / final: feeds landed on the gold post.
+     Motion: rAF sets transform from absolute time; no CSS animation
+     and no transition on the track, so WebKit cannot restart from 0. */
+  .feed__reel{transition:none;animation:none}
   @media (prefers-reduced-motion:reduce){
+    .feed__reel{transform:translate3d(0,calc(-4 * var(--cell, 100cqh)),0)}
+    .slot__payline{border-top-color:rgba(232,201,10,.7); box-shadow:0 0 10px rgba(232,201,10,.28)}
     [data-motion="entertain"] .slot__flash{opacity:.18}
   }
+  .slot__payline{border-top-color:rgba(232,201,10,.7); box-shadow:0 0 10px rgba(232,201,10,.28)}
 
   @media (prefers-reduced-motion:no-preference){
     .slot__payline{border-top-color:rgba(232,201,10,.28); box-shadow:none}
@@ -1164,17 +1170,6 @@
     .tap__waves-mark{transform:scale(.92);opacity:.55}
     .crowd__spark{opacity:0}
 
-    /* Already mid-scroll from the first frame: linear, no ease-in,
-       negative delay so a first paint or WebKit restart is never at 0. */
-    [data-motion="entertain"]:not(.is-landing):not(.is-landed) .feed__reel{
-      transform:translate3d(0,calc(-2 * var(--cell, 100cqh)),0);
-      animation-play-state:running;
-    }
-    [data-motion="entertain"] .feed__reel--1{animation:feed-spin 2.05s linear infinite;animation-delay:-0.82s}
-    [data-motion="entertain"] .feed__reel--2{animation:feed-spin 2.28s linear infinite;animation-delay:-1.37s}
-    [data-motion="entertain"] .feed__reel--3{animation:feed-spin 1.9s linear infinite;animation-delay:-0.51s}
-    [data-motion="entertain"].is-landing .feed__reel,
-    [data-motion="entertain"].is-landed .feed__reel{animation:none}
     [data-motion="entertain"].is-landed .feed__reel{transform:translate3d(0,calc(-4 * var(--cell, 100cqh)),0)}
     [data-motion="entertain"] .slot__payline{
       transition:border-top-color .35s ease,box-shadow .35s ease;
@@ -1214,10 +1209,6 @@
     [data-motion].is-playing .tap__waves-mark{animation:tap-waves 2.4s ease-in-out forwards}
     [data-motion].is-playing .tap__wave{animation:tap-wave-stroke 2.4s ease-in-out forwards}
 
-    @keyframes feed-spin{
-      from{transform:translate3d(0,0,0)}
-      to{transform:translate3d(0,calc(-6 * var(--cell, 100cqh)),0)}
-    }
     @keyframes feed-flash{
       0%{opacity:0}
       20%{opacity:.65}
@@ -1339,10 +1330,10 @@
     <section class="hero" id="top" aria-label="CHALANT CREATIVE">
       <div class="hero__stage">
         <div class="hero__lockup">
-          <img class="hero__tape" src="tape-b3.svg" alt="" width="8000" height="900" aria-hidden="true">
+          <img class="hero__tape" src="tape-b3.svg?v=slotraf1" alt="" width="8000" height="900" aria-hidden="true">
           <picture>
-            <source srcset="wordmark.svg" type="image/svg+xml">
-            <img class="hero__logo" src="wordmark.png" alt="CHALANT CREATIVE" width="1370" height="468">
+            <source srcset="wordmark.svg?v=slotraf1" type="image/svg+xml">
+            <img class="hero__logo" src="wordmark.png?v=slotraf1" alt="CHALANT CREATIVE" width="1370" height="468">
           </picture>
         </div>
       </div>
@@ -1361,7 +1352,7 @@
               <p class="method__sub">Content engineered to stop the scroll.</p>
             </div>
                         <div class="method__visual" data-motion="entertain" aria-hidden="true">
-              <div class="slots"><!-- slot-feed-v1 -->
+              <div class="slots"><!-- slot-raf-v1 -->
                 <div class="slots__row">
                 <div class="phone">
                   <svg class="phone__shell" viewBox="0 0 128 236" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -2184,115 +2175,97 @@
   }, { threshold: 0.22, rootMargin: '0px 0px -8% 0px' });
   nodes.forEach(function(el){ io.observe(el); });
 
-  /* slot-land-late-v1: feeds spin at full speed until the three-phone
-     group is mostly on screen. Slowdown starts when the group's
-     bottom is in the viewport and its center has crossed ~60% of
-     the viewport height (not the stoplight, not a 15% peek).
-     A ~2.4s staggered deceleration lands on the gold post once
-     and stays landed. */
-  function currentY(el){
-    var t = getComputedStyle(el).transform;
-    if (!t || t === 'none') return 0;
-    try { return new DOMMatrixReadOnly(t).m42; }
-    catch (err){
-      var m = t.match(/matrix(?:3d)?\(([^)]+)\)/);
-      if (!m) return 0;
-      var p = m[1].split(',').map(Number);
-      return p.length === 16 ? p[13] : p[5];
-    }
-  }
+  /* slot-raf-v1: feed position is (now + phase) * speed mod loop,
+     from absolute time, in one rAF loop. The first paint after WebKit
+     un-throttles is already mid-scroll at full speed. Landing eases
+     velocity from that full speed to 0 over ~2.4s, staggered, on the
+     existing mostly-in-view trigger, then stays landed. */
   function initEntertain(){
     var root = document.querySelector('[data-motion="entertain"]');
     if (!root) return;
     var group = root.querySelector('.slots') || root;
     var reels = root.querySelectorAll('.feed__reel');
+    if (!reels.length) return;
     var landed = false;
-    /* slot-spin-mid-v1: clock starts at page load. Negative CSS delays
-       put the first frame mid-loop; this resyncs currentTime from that
-       clock if WebKit paused or restarted the offscreen animation. */
-    var spinOrigin = performance.now();
+    var landing = false;
     var spinDurs = [2050, 2280, 1900];
-    var spinShift = [820, 1370, 510];
-    function syncSpinClock(){
-      if (landed || root.classList.contains('is-landing') || root.classList.contains('is-landed')) return;
-      var elapsed = performance.now() - spinOrigin;
-      for (var i = 0; i < reels.length; i++){
-        var dur = spinDurs[i];
-        var t = (elapsed + spinShift[i]) % dur;
-        var anims = reels[i].getAnimations();
-        var n = 0;
-        for (var k = 0; k < anims.length; k++){
-          var a = anims[k];
-          var name = a.animationName;
-          if (name && name !== 'feed-spin') continue;
-          if (!name && a.effect && a.effect.getTiming){
-            var td = a.effect.getTiming().duration;
-            if (td !== dur) continue;
-          }
-          try { a.currentTime = t; } catch (err){}
-          if (a.playState !== 'running' && a.play) a.play();
-          n++;
-        }
-        if (!n){
-          /* no animation object yet; CSS delay still covers first paint */
-        }
-      }
+    var phases = [820, 1370, 510];
+    var landDelay = [0, 350, 700];
+    var landDur = [1700, 1750, 1700];
+    var landStart = [null, null, null];
+    var landY0 = [null, null, null];
+    var landTarget = [null, null, null];
+    var landDone = [false, false, false];
+    var rafId = 0;
+
+    function cellSize(){
+      var screen = group.querySelector('.phone__screen');
+      var h = screen ? screen.clientHeight : 0;
+      if (h) group.style.setProperty('--cell', h + 'px');
+      return h;
     }
-    var spinWasOff = true;
-    function syncSpinIfEntering(){
-      if (landed) return;
-      var r = group.getBoundingClientRect();
-      var vh = window.innerHeight || document.documentElement.clientHeight;
-      var near = r.top < vh + 120 && r.bottom > -120;
-      if (near && spinWasOff) syncSpinClock();
-      spinWasOff = !near;
+    function spinY(i, now, loop, speed){
+      var off = (now + phases[i]) * speed;
+      off = off % loop;
+      if (off < 0) off += loop;
+      return -off;
     }
-    syncSpinClock();
-    document.addEventListener('visibilitychange', function(){
-      if (!document.hidden) syncSpinClock();
-    });
-    window.addEventListener('pageshow', syncSpinClock);
-    function land(){
-      if (landed || root.classList.contains('is-landed')) return;
-      landed = true;
-      var post = root.querySelector('.post');
-      var cell = post ? post.getBoundingClientRect().height : 0;
+    function hermite(y0, v0, y1, v1, dur, t){
+      if (t <= 0) return y0;
+      if (t >= dur) return y1;
+      var u = t / dur;
+      var u2 = u * u;
+      var u3 = u2 * u;
+      var h00 = 2 * u3 - 3 * u2 + 1;
+      var h10 = u3 - 2 * u2 + u;
+      var h01 = -2 * u3 + 3 * u2;
+      var h11 = u3 - u2;
+      return h00 * y0 + h10 * dur * v0 + h01 * y1 + h11 * dur * v1;
+    }
+    function apply(){
+      var now = performance.now();
+      var cell = cellSize();
+      if (cell < 1) return;
       var loop = cell * 6;
-      var lock = cell * -4;
-      var yList = [];
+      var lock = -4 * cell;
+      var allDone = landing;
       for (var i = 0; i < reels.length; i++){
-        yList[i] = currentY(reels[i]);
-        reels[i].style.transform = 'translate3d(0,' + yList[i] + 'px,0)';
+        var speed = loop / spinDurs[i];
+        var y;
+        if (landStart[i] != null && now >= landStart[i]){
+          if (landY0[i] == null){
+            landY0[i] = spinY(i, now, loop, speed);
+            var target = lock;
+            var minTravel = loop * 0.35;
+            while (target > landY0[i] - minTravel) target -= loop;
+            landTarget[i] = target;
+          }
+          var t = now - landStart[i];
+          if (t >= landDur[i]){
+            y = landTarget[i];
+            landDone[i] = true;
+          } else {
+            y = hermite(landY0[i], -speed, landTarget[i], 0, landDur[i], t);
+            allDone = false;
+          }
+        } else {
+          y = spinY(i, now, loop, speed);
+          if (landing) allDone = false;
+        }
+        reels[i].style.transform = 'translate3d(0,' + y + 'px,0)';
       }
-      root.classList.add('is-landing');
-      var durs = [1400, 1600, 1800];
-      var delays = [0, 300, 600];
-      for (var j = 0; j < reels.length; j++){
-        (function(reel, y, dur, delay){
-          var next = lock;
-          while (next > y + 0.5) next -= loop;
-          if ((y - next) < loop) next -= loop;
-          reel.style.transform = 'translate3d(0,' + y + 'px,0)';
-          reel.getAnimations().forEach(function(a){ a.cancel(); });
-          reel.style.transform = 'translate3d(0,' + y + 'px,0)';
-          var anim = reel.animate(
-            [
-              {transform:'translate3d(0,' + y + 'px,0)'},
-              {transform:'translate3d(0,' + next + 'px,0)'}
-            ],
-            {duration:dur, delay:delay, easing:'cubic-bezier(.2,.5,.15,1)', fill:'forwards'}
-          );
-          anim.addEventListener('finish', function(){
-            reel.style.transform = 'translate3d(0, calc(-4 * var(--cell, 100cqh)), 0)';
-            anim.cancel();
-          });
-        })(reels[j], yList[j], durs[j], delays[j]);
-      }
-      var lastDelay = delays[reels.length - 1] + durs[reels.length - 1];
-      setTimeout(function(){
+      if (landing && allDone){
+        landed = true;
+        landing = false;
         root.classList.add('is-landed');
         root.classList.remove('is-landing');
-      }, lastDelay);
+        var lockY = -4 * cellSize();
+        for (var j = 0; j < reels.length; j++){
+          reels[j].style.transform = 'translate3d(0,' + lockY + 'px,0)';
+        }
+        if (rafId) cancelAnimationFrame(rafId);
+        rafId = 0;
+      }
     }
     function slotReadyToLand(el){
       var r = el.getBoundingClientRect();
@@ -2301,24 +2274,26 @@
       var mid = (r.top + r.bottom) / 2;
       return r.bottom <= vh && mid <= vh * 0.60;
     }
-    var slotTick = false;
-    function onSlotScrollTick(){
-      if (landed) return;
-      if (slotTick) return;
-      slotTick = true;
-      requestAnimationFrame(function(){
-        slotTick = false;
-        syncSpinIfEntering();
-        if (!landed && slotReadyToLand(group)){
-          window.removeEventListener('scroll', onSlotScrollTick);
-          window.removeEventListener('resize', onSlotScrollTick);
-          land();
-        }
-      });
+    function beginLand(){
+      if (landed || landing) return;
+      landing = true;
+      root.classList.add('is-landing');
+      var now = performance.now();
+      for (var i = 0; i < reels.length; i++){
+        landStart[i] = now + landDelay[i];
+        landY0[i] = null;
+        landTarget[i] = null;
+        landDone[i] = false;
+      }
     }
-    window.addEventListener('scroll', onSlotScrollTick, {passive:true});
-    window.addEventListener('resize', onSlotScrollTick);
-    onSlotScrollTick();
+    function tick(){
+      if (landed) return;
+      rafId = requestAnimationFrame(tick);
+      apply();
+      if (!landing && !landed && slotReadyToLand(group)) beginLand();
+    }
+    apply();
+    rafId = requestAnimationFrame(tick);
   }
   initEntertain();
 
