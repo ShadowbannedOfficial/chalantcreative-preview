@@ -12,10 +12,10 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta property="og:title" content="CHALANT CREATIVE — Coming Soon">
 <meta property="og:description" content="Under construction. Coming soon.">
-<meta property="og:image" content="https://shadowbannedofficial.github.io/chalantcreative-preview/logo.png?v=feedhue1">
+<meta property="og:image" content="https://shadowbannedofficial.github.io/chalantcreative-preview/logo.png?v=nosignal1">
 <meta property="og:type" content="website">
-<link rel="icon" href="favicon.png?v=feedhue1">
-<link rel="apple-touch-icon" href="favicon.png?v=feedhue1">
+<link rel="icon" href="favicon.png?v=nosignal1">
+<link rel="apple-touch-icon" href="favicon.png?v=nosignal1">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,500;0,14..32,600;1,14..32,400&family=Montserrat:wght@500;600;700&family=Playfair+Display:wght@500;600;700&display=swap">
@@ -47,13 +47,11 @@
   .method__inner,
   .follow__inner,
   .results__inner,
-  .signal__inner,
   .services__inner{max-width:1180px}
   .hero,
   .method,
   .follow,
   .results,
-  .signal,
   .services{
     padding-left:max(16px,4.5vw,env(safe-area-inset-left,0px));
     padding-right:max(16px,4.5vw,env(safe-area-inset-right,0px));
@@ -146,7 +144,7 @@
 
   /* ---------- Case study ---------- */
   .results{
-    padding-block:clamp(88px,16vh,200px) clamp(96px,18vh,220px);
+    padding-block:clamp(64px,9vh,112px) clamp(96px,18vh,220px);
   }
   .results__eyebrow{
     margin:0 0 clamp(18px,3vh,32px);
@@ -404,7 +402,7 @@
 
   /* ---------- Evergreen ---------- */
   .follow{
-    padding-block:clamp(88px,16vh,200px);
+    padding-block:clamp(88px,16vh,200px) clamp(36px,6vh,72px);
   }
   .follow__stage{
     position:relative;
@@ -501,54 +499,6 @@
   .recycle__head--2{offset-distance:55.833%}
   .recycle__head--3{offset-distance:89.166%}
   .recycle__head-shape{fill:#E8C90A}
-
-  /* ---------- Traffic light: NYC-style signal, green until in view, then yellow ---------- */
-  .signal{
-    padding-block:clamp(8px,1.8vh,20px) 0;
-  }
-  .signal__light{
-    display:block;
-    width:100%;
-    height:auto;
-    overflow:visible;
-  }
-  .signal__mast{fill:url(#mast-metal);stroke:#0A0A0A;stroke-width:.8}
-  .signal__mast-hi{fill:none;stroke:rgba(255,255,255,.18);stroke-width:1.4;stroke-linecap:round}
-  .signal__backplate{fill:#0B130E;stroke:#1C2A20;stroke-width:1}
-  .signal__housing{fill:url(#housing-paint);stroke:#0A140F;stroke-width:1.2}
-  .signal__housing-lip{fill:#0C1812;stroke:#0A140F;stroke-width:.6}
-  .signal__door{fill:url(#door-paint);stroke:#0D1A12;stroke-width:.9}
-  .signal__seam{stroke:#0A140F;stroke-width:2;stroke-linecap:round}
-  .signal__hanger-bar{fill:#1A1A1A;stroke:#0A0A0A;stroke-width:.6}
-  .signal__hanger-plate,
-  .signal__hanger-foot{fill:#242424;stroke:#0A0A0A;stroke-width:.6}
-  .signal__visor{fill:#0A120E;stroke:#060A07;stroke-width:.8}
-  .signal__visor-lip{stroke:#1A2A20;stroke-width:1.2;fill:none}
-  .signal__tunnel{fill:#050806}
-  .signal__bezel{fill:none;stroke:#1C2C22;stroke-width:2.4}
-  .signal__fresnel circle{fill:none;stroke:rgba(255,255,255,.15);stroke-width:.7}
-  .signal__glint{fill:rgba(255,255,255,.15);stroke:none}
-  .signal__lamp{
-    stroke-width:1.1;
-    transition:fill .4s ease,stroke .4s ease,filter .4s ease;
-  }
-  .signal__lamp--red{fill:#1a0a0a;stroke:rgba(255,80,80,.28)}
-  .signal__lamp--yellow{fill:#141414;stroke:rgba(255,255,255,.28)}
-  .signal__lamp--green{fill:#2EBB5A;stroke:#6EE58A;filter:url(#signal-green-glow)}
-  [data-motion="signal"].is-playing .signal__lamp--green,
-  [data-motion="signal"].is-static .signal__lamp--green{
-    fill:#141414;stroke:rgba(255,255,255,.28);filter:none;
-  }
-  [data-motion="signal"].is-playing .signal__lamp--yellow,
-  [data-motion="signal"].is-static .signal__lamp--yellow{
-    fill:var(--gold);stroke:#F3DE55;filter:url(#signal-yellow-glow);
-  }
-  @media (prefers-reduced-motion:reduce){
-    .signal__lamp{transition:none}
-    .signal__lamp--green{fill:#141414;stroke:rgba(255,255,255,.28);filter:none}
-    .signal__lamp--yellow{fill:var(--gold);stroke:#F3DE55;filter:url(#signal-yellow-glow)}
-  }
-
 
   /* ---------- Services ---------- */
   .services{
@@ -1347,10 +1297,10 @@
     <section class="hero" id="top" aria-label="CHALANT CREATIVE">
       <div class="hero__stage">
         <div class="hero__lockup">
-          <img class="hero__tape" src="tape-b3.svg?v=feedhue1" alt="" width="8000" height="900" aria-hidden="true">
+          <img class="hero__tape" src="tape-b3.svg?v=nosignal1" alt="" width="8000" height="900" aria-hidden="true">
           <picture>
-            <source srcset="wordmark.svg?v=feedhue1" type="image/svg+xml">
-            <img class="hero__logo" src="wordmark.png?v=feedhue1" alt="CHALANT CREATIVE" width="1370" height="468">
+            <source srcset="wordmark.svg?v=nosignal1" type="image/svg+xml">
+            <img class="hero__logo" src="wordmark.png?v=nosignal1" alt="CHALANT CREATIVE" width="1370" height="468">
           </picture>
         </div>
       </div>
@@ -1640,117 +1590,6 @@
       </div>
     </section>
 
-    <section class="signal" id="signal" aria-label="Yellow means speed up to the next section">
-      <div class="signal__inner">
-        <svg class="signal__light" data-motion="signal" viewBox="0 0 720 248" aria-hidden="true">
-          <defs>
-            <linearGradient id="mast-metal" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#5A5A5A"/>
-              <stop offset="22%" stop-color="#3A3A3A"/>
-              <stop offset="55%" stop-color="#1E1E1E"/>
-              <stop offset="100%" stop-color="#111"/>
-            </linearGradient>
-            <linearGradient id="housing-paint" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#2C4A38"/>
-              <stop offset="14%" stop-color="#1A3326"/>
-              <stop offset="100%" stop-color="#101E16"/>
-            </linearGradient>
-            <linearGradient id="door-paint" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#243E30"/>
-              <stop offset="100%" stop-color="#15261C"/>
-            </linearGradient>
-            <filter id="signal-green-glow" x="-40%" y="-40%" width="180%" height="180%">
-              <feGaussianBlur stdDeviation="5" result="blur"/>
-              <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-            </filter>
-            <filter id="signal-yellow-glow" x="-50%" y="-50%" width="200%" height="200%">
-              <feGaussianBlur stdDeviation="7" result="blur"/>
-              <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-            </filter>
-          </defs>
-          <rect class="signal__mast" x="16" y="20" width="688" height="16" rx="8"/>
-          <path class="signal__mast-hi" d="M28 23.6 H692"/>
-          <g class="signal__hanger" transform="translate(168 0)">
-            <rect class="signal__hanger-bar" x="-6" y="30" width="12" height="46" rx="1.5"/>
-            <rect class="signal__hanger-plate" x="-16" y="18" width="32" height="18" rx="2"/>
-            <rect class="signal__hanger-foot" x="-14" y="68" width="28" height="12" rx="2"/>
-            <g class="signal__rivet" transform="translate(0,27)"><circle r="2.4" fill="#3A5548" stroke="#0A120E" stroke-width="0.6"/><circle cx="-0.5" cy="-0.6" r="0.84" fill="#6A8A74" opacity=".7"/></g><g class="signal__rivet" transform="translate(-8,27)"><circle r="1.8" fill="#3A5548" stroke="#0A120E" stroke-width="0.6"/><circle cx="-0.5" cy="-0.6" r="0.63" fill="#6A8A74" opacity=".7"/></g><g class="signal__rivet" transform="translate(8,27)"><circle r="1.8" fill="#3A5548" stroke="#0A120E" stroke-width="0.6"/><circle cx="-0.5" cy="-0.6" r="0.63" fill="#6A8A74" opacity=".7"/></g><g class="signal__rivet" transform="translate(0,74)"><circle r="2.2" fill="#3A5548" stroke="#0A120E" stroke-width="0.6"/><circle cx="-0.5" cy="-0.6" r="0.77" fill="#6A8A74" opacity=".7"/></g>
-          </g>
-          <g class="signal__hanger" transform="translate(360 0)">
-            <rect class="signal__hanger-bar" x="-6" y="30" width="12" height="46" rx="1.5"/>
-            <rect class="signal__hanger-plate" x="-16" y="18" width="32" height="18" rx="2"/>
-            <rect class="signal__hanger-foot" x="-14" y="68" width="28" height="12" rx="2"/>
-            <g class="signal__rivet" transform="translate(0,27)"><circle r="2.4" fill="#3A5548" stroke="#0A120E" stroke-width="0.6"/><circle cx="-0.5" cy="-0.6" r="0.84" fill="#6A8A74" opacity=".7"/></g><g class="signal__rivet" transform="translate(-8,27)"><circle r="1.8" fill="#3A5548" stroke="#0A120E" stroke-width="0.6"/><circle cx="-0.5" cy="-0.6" r="0.63" fill="#6A8A74" opacity=".7"/></g><g class="signal__rivet" transform="translate(8,27)"><circle r="1.8" fill="#3A5548" stroke="#0A120E" stroke-width="0.6"/><circle cx="-0.5" cy="-0.6" r="0.63" fill="#6A8A74" opacity=".7"/></g><g class="signal__rivet" transform="translate(0,74)"><circle r="2.2" fill="#3A5548" stroke="#0A120E" stroke-width="0.6"/><circle cx="-0.5" cy="-0.6" r="0.77" fill="#6A8A74" opacity=".7"/></g>
-          </g>
-          <g class="signal__hanger" transform="translate(552 0)">
-            <rect class="signal__hanger-bar" x="-6" y="30" width="12" height="46" rx="1.5"/>
-            <rect class="signal__hanger-plate" x="-16" y="18" width="32" height="18" rx="2"/>
-            <rect class="signal__hanger-foot" x="-14" y="68" width="28" height="12" rx="2"/>
-            <g class="signal__rivet" transform="translate(0,27)"><circle r="2.4" fill="#3A5548" stroke="#0A120E" stroke-width="0.6"/><circle cx="-0.5" cy="-0.6" r="0.84" fill="#6A8A74" opacity=".7"/></g><g class="signal__rivet" transform="translate(-8,27)"><circle r="1.8" fill="#3A5548" stroke="#0A120E" stroke-width="0.6"/><circle cx="-0.5" cy="-0.6" r="0.63" fill="#6A8A74" opacity=".7"/></g><g class="signal__rivet" transform="translate(8,27)"><circle r="1.8" fill="#3A5548" stroke="#0A120E" stroke-width="0.6"/><circle cx="-0.5" cy="-0.6" r="0.63" fill="#6A8A74" opacity=".7"/></g><g class="signal__rivet" transform="translate(0,74)"><circle r="2.2" fill="#3A5548" stroke="#0A120E" stroke-width="0.6"/><circle cx="-0.5" cy="-0.6" r="0.77" fill="#6A8A74" opacity=".7"/></g>
-          </g>
-          <rect class="signal__backplate" x="44" y="68" width="632" height="156" rx="8"/>
-          <rect class="signal__housing" x="56" y="78" width="608" height="140" rx="7"/>
-          <rect class="signal__housing-lip" x="56" y="212" width="608" height="8" rx="2"/>
-          <rect class="signal__door" x="66.0" y="88" width="188.0" height="120" rx="5"/>
-          <rect class="signal__door" x="262.0" y="88" width="188.0" height="120" rx="5"/>
-          <rect class="signal__door" x="458.0" y="88" width="188.0" height="120" rx="5"/>
-          <line class="signal__seam" x1="258.7" y1="84" x2="258.7" y2="212"/>
-          <line class="signal__seam" x1="461.3" y1="84" x2="461.3" y2="212"/>
-          <g class="signal__rivet" transform="translate(74.0,96)"><circle r="2.1" fill="#3A5548" stroke="#0A120E" stroke-width="0.6"/><circle cx="-0.5" cy="-0.6" r="0.735" fill="#6A8A74" opacity=".7"/></g>
-          <g class="signal__rivet" transform="translate(246.0,96)"><circle r="2.1" fill="#3A5548" stroke="#0A120E" stroke-width="0.6"/><circle cx="-0.5" cy="-0.6" r="0.735" fill="#6A8A74" opacity=".7"/></g>
-          <g class="signal__rivet" transform="translate(74.0,200)"><circle r="2.1" fill="#3A5548" stroke="#0A120E" stroke-width="0.6"/><circle cx="-0.5" cy="-0.6" r="0.735" fill="#6A8A74" opacity=".7"/></g>
-          <g class="signal__rivet" transform="translate(246.0,200)"><circle r="2.1" fill="#3A5548" stroke="#0A120E" stroke-width="0.6"/><circle cx="-0.5" cy="-0.6" r="0.735" fill="#6A8A74" opacity=".7"/></g>
-          <g class="signal__rivet" transform="translate(160.0,96)"><circle r="2.1" fill="#3A5548" stroke="#0A120E" stroke-width="0.6"/><circle cx="-0.5" cy="-0.6" r="0.735" fill="#6A8A74" opacity=".7"/></g>
-          <g class="signal__rivet" transform="translate(160.0,200)"><circle r="2.1" fill="#3A5548" stroke="#0A120E" stroke-width="0.6"/><circle cx="-0.5" cy="-0.6" r="0.735" fill="#6A8A74" opacity=".7"/></g>
-          <g class="signal__rivet" transform="translate(270.0,96)"><circle r="2.1" fill="#3A5548" stroke="#0A120E" stroke-width="0.6"/><circle cx="-0.5" cy="-0.6" r="0.735" fill="#6A8A74" opacity=".7"/></g>
-          <g class="signal__rivet" transform="translate(442.0,96)"><circle r="2.1" fill="#3A5548" stroke="#0A120E" stroke-width="0.6"/><circle cx="-0.5" cy="-0.6" r="0.735" fill="#6A8A74" opacity=".7"/></g>
-          <g class="signal__rivet" transform="translate(270.0,200)"><circle r="2.1" fill="#3A5548" stroke="#0A120E" stroke-width="0.6"/><circle cx="-0.5" cy="-0.6" r="0.735" fill="#6A8A74" opacity=".7"/></g>
-          <g class="signal__rivet" transform="translate(442.0,200)"><circle r="2.1" fill="#3A5548" stroke="#0A120E" stroke-width="0.6"/><circle cx="-0.5" cy="-0.6" r="0.735" fill="#6A8A74" opacity=".7"/></g>
-          <g class="signal__rivet" transform="translate(356.0,96)"><circle r="2.1" fill="#3A5548" stroke="#0A120E" stroke-width="0.6"/><circle cx="-0.5" cy="-0.6" r="0.735" fill="#6A8A74" opacity=".7"/></g>
-          <g class="signal__rivet" transform="translate(356.0,200)"><circle r="2.1" fill="#3A5548" stroke="#0A120E" stroke-width="0.6"/><circle cx="-0.5" cy="-0.6" r="0.735" fill="#6A8A74" opacity=".7"/></g>
-          <g class="signal__rivet" transform="translate(466.0,96)"><circle r="2.1" fill="#3A5548" stroke="#0A120E" stroke-width="0.6"/><circle cx="-0.5" cy="-0.6" r="0.735" fill="#6A8A74" opacity=".7"/></g>
-          <g class="signal__rivet" transform="translate(638.0,96)"><circle r="2.1" fill="#3A5548" stroke="#0A120E" stroke-width="0.6"/><circle cx="-0.5" cy="-0.6" r="0.735" fill="#6A8A74" opacity=".7"/></g>
-          <g class="signal__rivet" transform="translate(466.0,200)"><circle r="2.1" fill="#3A5548" stroke="#0A120E" stroke-width="0.6"/><circle cx="-0.5" cy="-0.6" r="0.735" fill="#6A8A74" opacity=".7"/></g>
-          <g class="signal__rivet" transform="translate(638.0,200)"><circle r="2.1" fill="#3A5548" stroke="#0A120E" stroke-width="0.6"/><circle cx="-0.5" cy="-0.6" r="0.735" fill="#6A8A74" opacity=".7"/></g>
-          <g class="signal__rivet" transform="translate(552.0,96)"><circle r="2.1" fill="#3A5548" stroke="#0A120E" stroke-width="0.6"/><circle cx="-0.5" cy="-0.6" r="0.735" fill="#6A8A74" opacity=".7"/></g>
-          <g class="signal__rivet" transform="translate(552.0,200)"><circle r="2.1" fill="#3A5548" stroke="#0A120E" stroke-width="0.6"/><circle cx="-0.5" cy="-0.6" r="0.735" fill="#6A8A74" opacity=".7"/></g>
-          <g class="signal__unit" transform="translate(162 148)">
-            <path class="signal__visor" d="M-48,22 L-48,-4 C-48,-50 48,-50 48,-4 L48,22 L35,22 L35,-2 C35,-34 -35,-34 -35,-2 L-35,22 Z"/>
-            <path class="signal__visor-lip" d="M-35,-2 C-35,-34 35,-34 35,-2"/>
-            <circle class="signal__tunnel" r="33.5"/>
-            <circle class="signal__bezel" r="36.5"/>
-            <circle class="signal__lamp signal__lamp--red" r="32"/>
-            <g class="signal__fresnel">
-              <circle r="26"/><circle r="20"/><circle r="14"/><circle r="8"/>
-            </g>
-            <ellipse class="signal__glint" cx="-9" cy="-11" rx="11" ry="6" transform="rotate(-32)"/>
-          </g>
-          <g class="signal__unit" transform="translate(360 148)">
-            <path class="signal__visor" d="M-48,22 L-48,-4 C-48,-50 48,-50 48,-4 L48,22 L35,22 L35,-2 C35,-34 -35,-34 -35,-2 L-35,22 Z"/>
-            <path class="signal__visor-lip" d="M-35,-2 C-35,-34 35,-34 35,-2"/>
-            <circle class="signal__tunnel" r="33.5"/>
-            <circle class="signal__bezel" r="36.5"/>
-            <circle class="signal__lamp signal__lamp--yellow" r="32"/>
-            <g class="signal__fresnel">
-              <circle r="26"/><circle r="20"/><circle r="14"/><circle r="8"/>
-            </g>
-            <ellipse class="signal__glint" cx="-9" cy="-11" rx="11" ry="6" transform="rotate(-32)"/>
-          </g>
-          <g class="signal__unit" transform="translate(558 148)">
-            <path class="signal__visor" d="M-48,22 L-48,-4 C-48,-50 48,-50 48,-4 L48,22 L35,22 L35,-2 C35,-34 -35,-34 -35,-2 L-35,22 Z"/>
-            <path class="signal__visor-lip" d="M-35,-2 C-35,-34 35,-34 35,-2"/>
-            <circle class="signal__tunnel" r="33.5"/>
-            <circle class="signal__bezel" r="36.5"/>
-            <circle class="signal__lamp signal__lamp--green" r="32"/>
-            <g class="signal__fresnel">
-              <circle r="26"/><circle r="20"/><circle r="14"/><circle r="8"/>
-            </g>
-            <ellipse class="signal__glint" cx="-9" cy="-11" rx="11" ry="6" transform="rotate(-32)"/>
-          </g>
-        </svg>
-      </div>
-    </section>
-
     <section class="results" id="case-study" aria-labelledby="case-study-heading">
       <div class="results__inner">
         <p class="results__eyebrow" id="case-study-heading" data-animate>Case study</p>
@@ -1886,8 +1725,7 @@
 (function(){
   var nodes = document.querySelectorAll('.method [data-animate], .results [data-animate], .services [data-animate]');
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var motions = document.querySelectorAll('[data-motion]:not([data-motion="signal"])');
-  var signals = document.querySelectorAll('[data-motion="signal"]');
+  var motions = document.querySelectorAll('[data-motion]');
 
   function initServices(reduceMotion){
     var layout = document.querySelector('.services__layout');
@@ -2179,7 +2017,6 @@
   if (reduce || !('IntersectionObserver' in window)){
     nodes.forEach(function(el){ el.classList.add('is-in'); });
     motions.forEach(function(el){ el.classList.add('is-static'); });
-    signals.forEach(function(el){ el.classList.add('is-static'); });
     return;
   }
   var io = new IntersectionObserver(function(entries){
@@ -2405,45 +2242,6 @@
     if (el.getAttribute('data-motion') === 'entertain' || el.getAttribute('data-motion') === 'sell') return;
     mio.observe(el);
   });
-
-  // signal-mid-v1: yellow when the housing center crosses ~58% of the viewport
-  // from the top (band 55–60%). 150ms delay to yellow; immediate green when
-  // scrolled back above that line.
-  var SIGNAL_LINE = 0.58;
-  function housingCenterCrossed(el){
-    var housing = el.querySelector('.signal__housing') || el;
-    var r = housing.getBoundingClientRect();
-    var mid = (r.top + r.bottom) / 2;
-    return mid <= (window.innerHeight * SIGNAL_LINE);
-  }
-  function updateSignals(){
-    signals.forEach(function(el){
-      if (el._signalTimer){
-        clearTimeout(el._signalTimer);
-        el._signalTimer = null;
-      }
-      if (housingCenterCrossed(el)){
-        el._signalTimer = setTimeout(function(){
-          el._signalTimer = null;
-          el.classList.add('is-playing');
-        }, 150);
-      } else {
-        el.classList.remove('is-playing');
-      }
-    });
-  }
-  var signalTick = false;
-  function onSignalScroll(){
-    if (signalTick) return;
-    signalTick = true;
-    requestAnimationFrame(function(){
-      signalTick = false;
-      updateSignals();
-    });
-  }
-  window.addEventListener('scroll', onSignalScroll, {passive:true});
-  window.addEventListener('resize', onSignalScroll);
-  updateSignals();
 })();
 </script>
 
