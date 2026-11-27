@@ -12,13 +12,13 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta property="og:title" content="CHALANT | Organic Social Media Agency in Dallas–Fort Worth">
 <meta property="og:description" content="CHALANT is a Dallas–Fort Worth social media agency. Campaign strategy, content creation, and community management, without paid ads.">
-<meta property="og:image" content="https://shadowbannedofficial.github.io/chalantcreative-preview/logo.png?v=seohome1">
+<meta property="og:image" content="https://shadowbannedofficial.github.io/chalantcreative-preview/logo.png?v=svclist1">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="CHALANT | Organic Social Media Agency in Dallas–Fort Worth">
 <meta name="twitter:description" content="CHALANT is a Dallas–Fort Worth social media agency. Campaign strategy, content creation, and community management, without paid ads."><!-- seo-home-v1 -->
-<link rel="icon" href="favicon.png?v=seohome1">
-<link rel="apple-touch-icon" href="favicon.png?v=seohome1">
+<link rel="icon" href="favicon.png?v=svclist1">
+<link rel="apple-touch-icon" href="favicon.png?v=svclist1">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,500;0,14..32,600;1,14..32,400&family=Montserrat:wght@500;600;700&family=Playfair+Display:wght@500;600;700&display=swap">
@@ -625,6 +625,122 @@
     letter-spacing:-.011em;
     text-wrap:pretty;
   }
+  .services__pane[hidden]{display:none}
+  .services__bullets{
+    margin:1.05em 0 0;
+    padding:0 0 0 1.15em;
+    max-width:32em;
+    color:#fff;
+    font-family:var(--inter);
+    font-size:clamp(15px,1.2vw,18px);
+    font-weight:400;
+    line-height:1.45;
+    letter-spacing:-.011em;
+  }
+  .services__bullets li{margin:0 0 .42em}
+  .services__bullets li::marker{color:var(--gold)}
+  .services__all{margin-top:1.35em;max-width:46em}
+  .services__all-toggle{
+    display:inline-flex;
+    align-items:center;
+    gap:.55em;
+    margin:0;
+    padding:0 0 .28em;
+    border:0;
+    border-bottom:1px solid rgba(232,201,10,.5);
+    background:none;
+    color:var(--gold);
+    font-family:var(--montserrat);
+    font-size:clamp(11px,.85vw,13px);
+    font-weight:600;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    cursor:pointer;
+    line-height:1.2;
+  }
+  .services__all-toggle:focus{outline:none}
+  .services__all-toggle:focus-visible{
+    outline:2px solid var(--gold);
+    outline-offset:4px;
+  }
+  .services__all-toggle-mark{
+    display:inline-block;
+    width:.55em;
+    height:.55em;
+    border-right:1.5px solid currentColor;
+    border-bottom:1.5px solid currentColor;
+    transform:rotate(45deg) translateY(-1px);
+    transition:transform .2s ease;
+  }
+  .services__all-toggle[aria-expanded="true"] .services__all-toggle-mark{
+    transform:rotate(225deg) translateY(-1px);
+  }
+  @media (prefers-reduced-motion:reduce){
+    .services__all-toggle-mark{transition:none}
+  }
+  .services__catalog[hidden]{display:none}
+  .services__catalog{
+    grid-column:1/-1;
+    margin-top:0;
+    display:grid;
+    grid-template-columns:1fr;
+    gap:1.35em 2.25em;
+  }
+  @media (min-width:700px){
+    .services__catalog{grid-template-columns:repeat(3,minmax(0,1fr))}
+  }
+  @media (min-width:900px){
+    .services__layout:has(#services-catalog:not([hidden])){align-items:start}
+  }
+  .services__catalog-group{min-width:0}
+  .services__catalog-group h4{
+    margin:0 0 .55em;
+    padding-bottom:.35em;
+    border-bottom:1px solid rgba(232,201,10,.4);
+    color:var(--gold);
+    font-family:var(--montserrat);
+    font-size:clamp(11px,.8vw,12px);
+    font-weight:600;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+  }
+  .services__catalog-group ul{
+    margin:0;
+    padding:0;
+    list-style:none;
+    color:#fff;
+    font-family:var(--inter);
+    font-size:clamp(13px,1.05vw,15px);
+    font-weight:400;
+    line-height:1.4;
+    letter-spacing:-.011em;
+  }
+  .services__catalog-group li{
+    margin:0 0 .48em;
+    padding-left:.9em;
+    position:relative;
+  }
+  .services__catalog-group li::before{
+    content:"";
+    position:absolute;
+    left:0;
+    top:.55em;
+    width:.35em;
+    height:.35em;
+    background:var(--gold);
+    border-radius:50%;
+  }
+  .services__catalog-note{
+    margin:1em 0 0;
+    color:rgba(255,255,255,.62);
+    font-family:var(--inter);
+    font-size:clamp(12px,.95vw,13px);
+    font-weight:400;
+    line-height:1.4;
+    letter-spacing:-.01em;
+    grid-column:1/-1;
+  }
+  .services__panel{min-height:0}
 
   /* ---------- The mantra ---------- */
   .method{
@@ -1272,10 +1388,10 @@
     <section class="hero" id="top" aria-label="CHALANT CREATIVE">
       <div class="hero__stage">
         <div class="hero__lockup">
-          <img class="hero__tape" src="tape-b3.svg?v=seohome1" alt="" width="8000" height="900" aria-hidden="true">
+          <img class="hero__tape" src="tape-b3.svg?v=svclist1" alt="" width="8000" height="900" aria-hidden="true">
           <picture>
-            <source srcset="wordmark.svg?v=seohome1" type="image/svg+xml">
-            <img class="hero__logo" src="wordmark.png?v=seohome1" alt="CHALANT CREATIVE" width="1370" height="468">
+            <source srcset="wordmark.svg?v=svclist1" type="image/svg+xml">
+            <img class="hero__logo" src="wordmark.png?v=svclist1" alt="CHALANT CREATIVE" width="1370" height="468">
           </picture>
         </div>
       </div>
@@ -1532,9 +1648,73 @@
               </svg>
             </div>
           </div>
-          <div class="services__panel" id="services-panel" aria-live="polite">
-            <h3 class="services__panel-title">1. Campaign Strategy</h3>
-            <p class="services__panel-body">We address your public relations needs and find the best way to present your business to the market.</p>
+          <div class="services__panel" id="services-panel"><!-- services-list-v1 -->
+            <div class="services__pane is-active" data-service="campaign" role="region" aria-labelledby="service-title-campaign">
+              <h3 class="services__panel-title" id="service-title-campaign">1. Campaign Strategy</h3>
+              <p class="services__panel-body">We address your public relations needs and find the best way to present your business to the market.</p>
+              <ul class="services__bullets">
+                <li>Audit profiles and analyze competitors.</li>
+                <li>Lock voice, visual style, and content pillars.</li>
+                <li>Clean up bios, highlights, and links across platforms.</li>
+                <li>A 12-month organic, no-ad content strategy.</li>
+                <li>Set a baseline and report each month — keep, kill, or add.</li>
+              </ul>
+            </div>
+            <div class="services__pane" data-service="creation" role="region" aria-labelledby="service-title-creation" hidden>
+              <h3 class="services__panel-title" id="service-title-creation">2. Content Creation</h3>
+              <p class="services__panel-body">We find the style your brand needs: cinematic, documentary, found footage, even goofy. Whatever fits your business.</p>
+            </div>
+            <div class="services__pane" data-service="community" role="region" aria-labelledby="service-title-community" hidden>
+              <h3 class="services__panel-title" id="service-title-community">3. Community Management</h3>
+              <p class="services__panel-body">We distribute your content, reply to DMs, handle Google reviews, comment back on posts, and schedule.</p>
+              <div class="services__all">
+                <button type="button" class="services__all-toggle" id="services-all-toggle" aria-expanded="false" aria-controls="services-catalog">
+                  <span class="services__all-toggle-mark" aria-hidden="true"></span>
+                  All services
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="services__catalog" id="services-catalog" hidden>
+            <div class="services__catalog-group">
+              <h4>Strategy</h4>
+              <ul>
+                <li>Look and tone guidelines</li>
+                <li>Content calendar and posting cadence</li>
+                <li>Event planning against the calendar</li>
+                <li>Creative direction and shot lists for on-site teams</li>
+                <li>Weekly progress reports</li>
+              </ul>
+            </div>
+            <div class="services__catalog-group">
+              <h4>Content</h4>
+              <ul>
+                <li>Feed posts, Reels, and Stories</li>
+                <li>Documentary-style and short-form video</li>
+                <li>On-site photography and videography</li>
+                <li>On-site film crew and writers’ room, as scoped</li>
+                <li>Serialized, episode-style content</li>
+                <li>Staff and interview features</li>
+                <li>Editing, captions, and scheduling</li>
+                <li>Guest and customer content, reshared with permission</li>
+                <li>Cross-posting to Facebook, TikTok, and YouTube Shorts</li>
+                <li>Google Business Profile content</li>
+                <li>Website or landing-page refresh, when scoped</li>
+                <li>Clipping campaigns, after the first 90 days</li>
+              </ul>
+            </div>
+            <div class="services__catalog-group">
+              <h4>Community</h4>
+              <ul>
+                <li>DMs and public replies during business hours</li>
+                <li>Comments on posts</li>
+                <li>Google and Yelp review replies</li>
+                <li>Scheduling and publishing</li>
+                <li>Same-day escalation when a manager is needed</li>
+                <li>Content approvals before posting</li>
+              </ul>
+            </div>
+            <p class="services__catalog-note">Bilingual posting is also listed here. It does not appear in our proposals, but it is an organic practice some DFW agencies publish, and it fits work without paid ads.</p>
           </div>
         </div>
       </div>
@@ -1707,21 +1887,23 @@
     var chart = layout.querySelector('.services__chart');
     var blades = Array.prototype.slice.call(layout.querySelectorAll('.services__blade'));
     var wings = Array.prototype.slice.call(layout.querySelectorAll('.services__wing'));
-    var panelTitle = layout.querySelector('.services__panel-title');
-    var panelBody = layout.querySelector('.services__panel-body');
+    var panes = Array.prototype.slice.call(layout.querySelectorAll('.services__pane'));
     var ids = ['campaign', 'creation', 'community'];
-    var copy = {
-      campaign: { title: '1. Campaign Strategy', body: 'We address your public relations needs and find the best way to present your business to the market.' },
-      creation: { title: '2. Content Creation', body: 'We find the style your brand needs: cinematic, documentary, found footage, even goofy. Whatever fits your business.' },
-      community: { title: '3. Community Management', body: 'We distribute your content, reply to DMs, handle Google reviews, comment back on posts, and schedule.' }
-    };
     var current = 'campaign';
     var pinned = false;
     var index = 0;
     var timer = null;
+    var allToggle = layout.querySelector('.services__all-toggle');
+    var allCatalog = layout.querySelector('#services-catalog');
 
+    function setCatalogOpen(open){
+      if (!allToggle || !allCatalog) return;
+      allToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      if (open) allCatalog.removeAttribute('hidden');
+      else allCatalog.setAttribute('hidden', '');
+    }
     function show(id){
-      if (!copy[id]) return;
+      if (ids.indexOf(id) < 0) return;
       current = id;
       index = ids.indexOf(id);
       wings.forEach(function(w){
@@ -1732,8 +1914,19 @@
         blade.setAttribute('aria-checked', on ? 'true' : 'false');
         blade.tabIndex = on ? 0 : -1;
       });
-      panelTitle.textContent = copy[id].title;
-      panelBody.textContent = copy[id].body;
+      panes.forEach(function(pane){
+        var on = pane.getAttribute('data-service') === current;
+        pane.classList.toggle('is-active', on);
+        if (on) pane.removeAttribute('hidden');
+        else pane.setAttribute('hidden', '');
+      });
+      if (current !== 'community') setCatalogOpen(false);
+    }
+    if (allToggle){
+      allToggle.addEventListener('click', function(){
+        var open = allToggle.getAttribute('aria-expanded') !== 'true';
+        setCatalogOpen(open);
+      });
     }
 
     function stopCycle(){
