@@ -12,13 +12,13 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta property="og:title" content="CHALANT | Organic Social Media Agency in Dallas–Fort Worth">
 <meta property="og:description" content="CHALANT is a Dallas–Fort Worth social media agency. Campaign strategy, content creation, and community management, without paid ads.">
-<meta property="og:image" content="https://shadowbannedofficial.github.io/chalantcreative-preview/logo.png?v=svclist2">
+<meta property="og:image" content="https://shadowbannedofficial.github.io/chalantcreative-preview/logo.png?v=dfoot1">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="CHALANT | Organic Social Media Agency in Dallas–Fort Worth">
 <meta name="twitter:description" content="CHALANT is a Dallas–Fort Worth social media agency. Campaign strategy, content creation, and community management, without paid ads."><!-- seo-home-v1 -->
-<link rel="icon" href="favicon.png?v=svclist2">
-<link rel="apple-touch-icon" href="favicon.png?v=svclist2">
+<link rel="icon" href="favicon.png?v=dfoot1">
+<link rel="apple-touch-icon" href="favicon.png?v=dfoot1">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,500;0,14..32,600;1,14..32,400&family=Montserrat:wght@500;600;700&family=Playfair+Display:wght@500;600;700&display=swap">
@@ -626,6 +626,45 @@
     text-wrap:pretty;
   }
   .services__pane[hidden]{display:none}
+  .services__pillars{
+    margin:1.05em 0 0;
+    padding:0;
+    list-style:none;
+    display:grid;
+    grid-template-columns:1fr;
+    gap:0.85em 1.25em;
+    max-width:36em;
+  }
+  .services__pillar-name{
+    display:block;
+    margin:0 0 .28em;
+    color:var(--gold);
+    font-family:var(--montserrat);
+    font-size:clamp(11px,.85vw,13px);
+    font-weight:600;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    line-height:1.2;
+  }
+  .services__pillar-line{
+    display:block;
+    color:#fff;
+    font-family:var(--inter);
+    font-size:clamp(15px,1.2vw,18px);
+    font-weight:400;
+    line-height:1.4;
+    letter-spacing:-.011em;
+  }
+  .services__pillar-close{
+    margin:.9em 0 0;
+    max-width:32em;
+    color:var(--gold);
+    font-family:var(--inter);
+    font-size:clamp(14px,1.1vw,16px);
+    font-weight:400;
+    line-height:1.4;
+    letter-spacing:-.011em;
+  }
   .services__bullets{
     margin:1.05em 0 0;
     padding:0 0 0 1.15em;
@@ -687,7 +726,10 @@
     gap:1.35em 2.25em;
   }
   @media (min-width:700px){
-    .services__catalog{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .services__catalog{grid-template-columns:repeat(2,minmax(0,1fr))}
+  }
+  @media (min-width:1100px){
+    .services__catalog{grid-template-columns:repeat(4,minmax(0,1fr))}
   }
   @media (min-width:900px){
     .services__layout:has(#services-catalog:not([hidden])){align-items:start}
@@ -1378,10 +1420,10 @@
     <section class="hero" id="top" aria-label="CHALANT CREATIVE">
       <div class="hero__stage">
         <div class="hero__lockup">
-          <img class="hero__tape" src="tape-b3.svg?v=svclist2" alt="" width="8000" height="900" aria-hidden="true">
+          <img class="hero__tape" src="tape-b3.svg?v=dfoot1" alt="" width="8000" height="900" aria-hidden="true">
           <picture>
-            <source srcset="wordmark.svg?v=svclist2" type="image/svg+xml">
-            <img class="hero__logo" src="wordmark.png?v=svclist2" alt="CHALANT CREATIVE" width="1370" height="468">
+            <source srcset="wordmark.svg?v=dfoot1" type="image/svg+xml">
+            <img class="hero__logo" src="wordmark.png?v=dfoot1" alt="CHALANT CREATIVE" width="1370" height="468">
           </picture>
         </div>
       </div>
@@ -1611,27 +1653,35 @@
         <div class="services__layout">
           <div class="services__visual">
             <div class="services__chart" data-motion="services" role="radiogroup" aria-label="Areas of service">
-              <!-- trefoil-v4 -->
-              <svg viewBox="-64 36 528 450" overflow="visible">
+              <!-- services-mark-v5 -->
+              <svg viewBox="-80 -44 560 536" overflow="visible">
               <g class="services__wing is-active" data-service="campaign">
-                <path class="services__blade" id="service-campaign" role="radio" aria-checked="true" aria-label="Campaign Strategy" tabindex="0" data-service="campaign" d="M48.00,200.00 A152.00,152.00 0 0 1 124.00,68.36 L172.35,152.10 A55.31,55.31 0 0 0 144.69,200.00 Z"/>
-                <text class="services__label" x="7.74" y="89.00" text-anchor="middle">
-                  <tspan x="7.74" dy="-0.65em">Campaign</tspan>
-                  <tspan x="7.74" dy="1.3em">Strategy</tspan>
+                <path class="services__blade" id="service-campaign" role="radio" aria-checked="true" aria-label="Campaign Strategy" tabindex="0" data-service="campaign" d="M62.24,264.24 A152.00,152.00 0 0 1 62.24,135.76 L149.87,176.62 A55.31,55.31 0 0 0 149.87,223.38 Z"/>
+                <text class="services__label" x="0.00" y="200.00" text-anchor="middle">
+                  <tspan x="0.00" dy="-0.65em">Campaign</tspan>
+                  <tspan x="0.00" dy="1.3em">Strategy</tspan>
                 </text>
               </g>
               <g class="services__wing" data-service="creation">
-                <path class="services__blade" id="service-creation" role="radio" aria-checked="false" aria-label="Content Creation" tabindex="-1" data-service="creation" d="M276.00,68.36 A152.00,152.00 0 0 1 352.00,200.00 L255.31,200.00 A55.31,55.31 0 0 0 227.65,152.10 Z"/>
-                <text class="services__label" x="392.26" y="89.00" text-anchor="middle">
-                  <tspan x="392.26" dy="-0.65em">Content</tspan>
-                  <tspan x="392.26" dy="1.3em">Creation</tspan>
+                <path class="services__blade" id="service-creation" role="radio" aria-checked="false" aria-label="Content Creation" tabindex="-1" data-service="creation" d="M337.76,135.76 A152.00,152.00 0 0 1 337.76,264.24 L250.13,223.38 A55.31,55.31 0 0 0 250.13,176.62 Z"/>
+                <text class="services__label" x="400.00" y="200.00" text-anchor="middle">
+                  <tspan x="400.00" dy="-0.65em">Content</tspan>
+                  <tspan x="400.00" dy="1.3em">Creation</tspan>
                 </text>
               </g>
               <g class="services__wing" data-service="community">
-                <path class="services__blade" id="service-community" role="radio" aria-checked="false" aria-label="Community Management" tabindex="-1" data-service="community" d="M276.00,331.64 A152.00,152.00 0 0 1 124.00,331.64 L172.35,247.90 A55.31,55.31 0 0 0 227.65,247.90 Z"/>
-                <text class="services__label" x="200.00" y="422.00" text-anchor="middle">
+                <path class="services__blade" id="service-community" role="radio" aria-checked="false" aria-label="Community Management" tabindex="-1" data-service="community" d="M264.24,337.76 A152.00,152.00 0 0 1 135.76,337.76 L176.62,250.13 A55.31,55.31 0 0 0 223.38,250.13 Z"/>
+                <text class="services__label" x="200.00" y="408.00" text-anchor="middle">
                   <tspan x="200.00" dy="-0.65em">Community</tspan>
                   <tspan x="200.00" dy="1.3em">Management</tspan>
+                </text>
+              </g>
+              <g class="services__wing" data-service="footprint">
+                <path class="services__blade" id="service-footprint" role="radio" aria-checked="false" aria-label="Digital Footprint Architects" tabindex="-1" data-service="footprint" d="M135.76,62.24 A152.00,152.00 0 0 1 264.24,62.24 L223.38,149.87 A55.31,55.31 0 0 0 176.62,149.87 Z"/>
+                <text class="services__label" x="200.00" y="2.00" text-anchor="middle">
+                  <tspan x="200.00" dy="-1.3em">Digital</tspan>
+                  <tspan x="200.00" dy="1.3em">Footprint</tspan>
+                  <tspan x="200.00" dy="1.3em">Architects</tspan>
                 </text>
               </g>
               <circle class="services__core" cx="200.00" cy="200.00" r="37.62"/>
@@ -1663,6 +1713,31 @@
                   All services
                 </button>
               </div>
+            </div>
+            <div class="services__pane" data-service="footprint" role="region" aria-labelledby="service-title-footprint" hidden>
+              <h3 class="services__panel-title" id="service-title-footprint">4. Digital Footprint Architects</h3>
+              <ul class="services__pillars">
+                <li>
+                  <span class="services__pillar-name">Design</span>
+                  <span class="services__pillar-line">We design the message.</span>
+                </li>
+                <li>
+                  <span class="services__pillar-name">Execute</span>
+                  <span class="services__pillar-line">We execute the message.</span>
+                </li>
+                <li>
+                  <span class="services__pillar-name">Distribute &amp; Amplify</span>
+                  <span class="services__pillar-line">We get the message out and make it visible.</span>
+                </li>
+              </ul>
+              <p class="services__pillar-close">Community involvement, in real time.</p>
+              <ul class="services__bullets">
+                <li>Set up and tend a Google Business Profile.</li>
+                <li>Write on-page titles, descriptions, and schema.</li>
+                <li>Build a keyword and content plan tied to the social calendar.</li>
+                <li>Keep name, address, and phone consistent across local listings.</li>
+                <li>Report on organic search each month.</li>
+              </ul>
             </div>
           </div>
           <div class="services__catalog" id="services-catalog" hidden>
@@ -1702,6 +1777,15 @@
                 <li>Scheduling and publishing</li>
                 <li>Same-day escalation when a manager is needed</li>
                 <li>Content approvals before posting</li>
+              </ul>
+            </div>
+            <div class="services__catalog-group">
+              <h4>Search</h4>
+              <ul>
+                <li>Search Console setup</li>
+                <li>Sitemap, robots.txt, and canonical tags</li>
+                <li>Service, location, and FAQ pages, when scoped</li>
+                <li>Internal links and headings that match the offer</li>
               </ul>
             </div>
           </div>
@@ -1877,7 +1961,7 @@
     var blades = Array.prototype.slice.call(layout.querySelectorAll('.services__blade'));
     var wings = Array.prototype.slice.call(layout.querySelectorAll('.services__wing'));
     var panes = Array.prototype.slice.call(layout.querySelectorAll('.services__pane'));
-    var ids = ['campaign', 'creation', 'community'];
+    var ids = ['campaign', 'creation', 'community', 'footprint'];
     var current = 'campaign';
     var pinned = false;
     var index = 0;
