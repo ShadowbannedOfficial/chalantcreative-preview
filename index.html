@@ -12,13 +12,13 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta property="og:title" content="CHALANT | Organic Social Media Agency in Dallas–Fort Worth">
 <meta property="og:description" content="CHALANT is a Dallas–Fort Worth social media agency. Campaign strategy, content creation, and community management, without paid ads.">
-<meta property="og:image" content="https://shadowbannedofficial.github.io/chalantcreative-preview/logo.png?v=sign3v1">
+<meta property="og:image" content="https://shadowbannedofficial.github.io/chalantcreative-preview/logo.png?v=footnav1">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="CHALANT | Organic Social Media Agency in Dallas–Fort Worth">
 <meta name="twitter:description" content="CHALANT is a Dallas–Fort Worth social media agency. Campaign strategy, content creation, and community management, without paid ads."><!-- seo-home-v1 -->
-<link rel="icon" href="favicon.png?v=sign3v1">
-<link rel="apple-touch-icon" href="favicon.png?v=sign3v1">
+<link rel="icon" href="favicon.png?v=footnav1">
+<link rel="apple-touch-icon" href="favicon.png?v=footnav1">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,500;0,14..32,600;1,14..32,400&family=Montserrat:wght@500;600;700&family=Playfair+Display:wght@500;600;700&display=swap">
@@ -31,8 +31,18 @@
     --montserrat:"Montserrat",Helvetica,Arial,sans-serif;
     --inter:"Inter",Helvetica,Arial,sans-serif;
     --ink:#0a0a0a;
+    --nav-h:56px;
   }
   *{box-sizing:border-box}
+  html{
+    height:auto;
+    min-height:100%;
+    scroll-behavior:smooth;
+    scroll-padding-top:calc(var(--nav-h) + env(safe-area-inset-top, 0px) + 16px);
+  }
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+  }
   html,body{height:auto;min-height:100%}
   body{
     margin:0;
@@ -43,6 +53,7 @@
     -webkit-font-smoothing:antialiased;
     -webkit-text-size-adjust:100%;
     font-family:var(--inter);
+    padding-top:calc(var(--nav-h) + env(safe-area-inset-top, 0px));
   }
 
   /* Shared editorial measure, matching Results */
@@ -50,16 +61,130 @@
   .method__inner,
   .follow__inner,
   .results__inner,
-  .services__inner{max-width:1180px}
+  .services__inner,
+  .beat__inner{max-width:1180px}
   .hero,
   .method,
   .follow,
   .results,
-  .services{
+  .services,
+  .beat{
     padding-left:max(16px,4.5vw,env(safe-area-inset-left,0px));
     padding-right:max(16px,4.5vw,env(safe-area-inset-right,0px));
     color:#fff;
     background:#000;
+  }
+
+  /* ---------- Page nav ---------- */
+  .page-nav{
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    z-index:200;
+    background:#000;
+    border-bottom:1px solid rgba(232,201,10,.45);
+    padding-top:env(safe-area-inset-top, 0px);
+  }
+  .page-nav__list{
+    display:flex;
+    flex-wrap:nowrap;
+    align-items:center;
+    gap:clamp(1rem,2.4vw,1.75rem);
+    margin:0;
+    padding:0 max(16px,4.5vw);
+    height:var(--nav-h);
+    list-style:none;
+    overflow-x:auto;
+    overflow-y:hidden;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:thin;
+    scrollbar-color:rgba(232,201,10,.45) transparent;
+  }
+  .page-nav__link{
+    display:inline-block;
+    flex:0 0 auto;
+    padding:.2em 0;
+    border:0;
+    border-bottom:1px solid transparent;
+    color:#fff;
+    font-family:var(--montserrat);
+    font-size:clamp(10px,.8vw,12px);
+    font-weight:600;
+    letter-spacing:.16em;
+    text-decoration:none;
+    text-transform:uppercase;
+    line-height:1.2;
+    white-space:nowrap;
+  }
+  .page-nav__link:hover{color:var(--gold)}
+  .page-nav__link[aria-current="location"]{
+    color:var(--gold);
+    border-bottom-color:var(--gold);
+  }
+  .page-nav__link:focus{outline:none}
+  .page-nav__link:focus-visible{
+    outline:2px solid var(--gold);
+    outline-offset:4px;
+  }
+  #entertain,
+  #educate,
+  #sell,
+  #architects,
+  #design,
+  #execute,
+  #distribute,
+  #involvement,
+  #evergreen,
+  #case-study{
+    scroll-margin-top:calc(var(--nav-h) + env(safe-area-inset-top, 0px) + 16px);
+  }
+
+  /* ---------- Footprint beats ---------- */
+  .beat{
+    padding-block:clamp(72px,12vh,160px);
+  }
+  .beat__inner{margin:0 auto;width:100%}
+  .beat__title{
+    margin:0;
+    max-width:16em;
+    color:#fff;
+    font-family:var(--heading);
+    font-size:clamp(44px,6.5vw,96px);
+    font-weight:700;
+    line-height:.95;
+    letter-spacing:-.02em;
+    text-wrap:pretty;
+  }
+  .beat__line{
+    margin:.7em 0 0;
+    max-width:28em;
+    color:var(--gold);
+    font-family:var(--inter);
+    font-size:clamp(17px,1.5vw,24px);
+    font-weight:400;
+    line-height:1.5;
+    letter-spacing:-.011em;
+    text-wrap:pretty;
+  }
+  .beat__bullets{
+    margin:1.2em 0 0;
+    padding:0 0 0 1.15em;
+    max-width:32em;
+    color:#fff;
+    font-family:var(--inter);
+    font-size:clamp(15px,1.2vw,18px);
+    font-weight:400;
+    line-height:1.45;
+    letter-spacing:-.011em;
+  }
+  .beat__bullets li{margin:0 0 .42em}
+  .beat__bullets li::marker{color:var(--gold)}
+  .beat--close{padding-block:clamp(64px,10vh,140px)}
+  .beat__title--close{
+    max-width:18em;
+    color:var(--gold);
+    font-size:clamp(32px,5vw,72px);
   }
 
   /* ---------- Hero: B3 lockup, tape edge to edge, wordmark in-gutter ---------- */
@@ -136,6 +261,7 @@
       min-height:100vh;
       min-height:-webkit-fill-available;
       min-height:100svh;
+      min-height:calc(100svh - var(--nav-h) - env(safe-area-inset-top, 0px));
     }
     .hero__stage{
       width:100%;
@@ -520,7 +646,7 @@
   }
   .services__title{
     margin:0;
-    max-width:14em;
+    max-width:18em;
     color:#fff;
     font-family:var(--heading);
     font-size:clamp(44px,6.5vw,96px);
@@ -1377,14 +1503,28 @@
 </style>
 </head>
 <body>
+  <nav class="page-nav" aria-label="On this page">
+    <ul class="page-nav__list">
+      <li><a class="page-nav__link" href="#entertain">Entertain</a></li>
+      <li><a class="page-nav__link" href="#educate">Educate</a></li>
+      <li><a class="page-nav__link" href="#sell">Sell</a></li>
+      <li><a class="page-nav__link" href="#architects">Architects</a></li>
+      <li><a class="page-nav__link" href="#design">Design</a></li>
+      <li><a class="page-nav__link" href="#execute">Execute</a></li>
+      <li><a class="page-nav__link" href="#distribute">Distribute</a></li>
+      <li><a class="page-nav__link" href="#involvement">Community</a></li>
+      <li><a class="page-nav__link" href="#evergreen">Evergreen</a></li>
+      <li><a class="page-nav__link" href="#case-study">Case study</a></li>
+    </ul>
+  </nav>
   <main>
     <section class="hero" id="top" aria-label="CHALANT CREATIVE">
       <div class="hero__stage">
         <div class="hero__lockup">
-          <img class="hero__tape" src="tape-b3.svg?v=sign3v1" alt="" width="8000" height="900" aria-hidden="true">
+          <img class="hero__tape" src="tape-b3.svg?v=footnav1" alt="" width="8000" height="900" aria-hidden="true">
           <picture>
-            <source srcset="wordmark.svg?v=sign3v1" type="image/svg+xml">
-            <img class="hero__logo" src="wordmark.png?v=sign3v1" alt="CHALANT CREATIVE" width="1370" height="468">
+            <source srcset="wordmark.svg?v=footnav1" type="image/svg+xml">
+            <img class="hero__logo" src="wordmark.png?v=footnav1" alt="CHALANT CREATIVE" width="1370" height="468">
           </picture>
         </div>
       </div>
@@ -1394,7 +1534,7 @@
       <div class="method__inner">
         <h2 class="method__eyebrow" id="mantra-heading" data-animate>The mantra</h2>
         <div class="method__list">
-          <article class="method__row method__row--entertain" data-animate>
+          <article class="method__row method__row--entertain" id="entertain" data-animate>
             <div class="method__copy">
               <h3 class="method__title" aria-label="Entertain the masses">
               <span class="method__title-line">Entertain</span>
@@ -1451,7 +1591,7 @@
               </div>
             </div>
           </article>
-          <article class="method__row" data-animate>
+          <article class="method__row" id="educate" data-animate>
             <div class="method__copy">
               <h3 class="method__title" aria-label="Educate the interested">
               <span class="method__title-line">Educate</span>
@@ -1564,7 +1704,7 @@
               </svg>
             </div>
           </article>
-          <article class="method__row" data-animate>
+          <article class="method__row" id="sell" data-animate>
             <div class="method__copy">
               <h3 class="method__title" aria-label="Sell the committed">
               <span class="method__title-line">Sell</span>
@@ -1607,10 +1747,10 @@
     </section>
 
 
-    <section class="services" id="services" aria-labelledby="services-heading">
+    <section class="services" id="architects" aria-labelledby="services-heading">
       <div class="services__inner">
         <p class="services__eyebrow" data-animate>Services</p>
-        <h2 class="services__title" id="services-heading" data-animate>What we do.</h2>
+        <h2 class="services__title" id="services-heading" data-animate>Digital Footprint Architects</h2>
         <div class="services__layout">
           <div class="services__visual">
             <div class="services__chart" data-motion="services" role="radiogroup" aria-label="Areas of service">
@@ -1718,6 +1858,40 @@
             </div>
           </div>
         </div>
+      </div>
+    </section>
+
+    <section class="beat" id="design" aria-labelledby="design-heading">
+      <div class="beat__inner">
+        <h2 class="beat__title" id="design-heading">Design</h2>
+        <p class="beat__line">We design the message.</p>
+      </div>
+    </section>
+
+    <section class="beat" id="execute" aria-labelledby="execute-heading">
+      <div class="beat__inner">
+        <h2 class="beat__title" id="execute-heading">Execute</h2>
+        <p class="beat__line">We execute the message.</p>
+      </div>
+    </section>
+
+    <section class="beat" id="distribute" aria-labelledby="distribute-heading">
+      <div class="beat__inner">
+        <h2 class="beat__title" id="distribute-heading">Distribute &amp; Amplify</h2>
+        <p class="beat__line">We get the message out and make it visible.</p>
+        <ul class="beat__bullets">
+          <li>Set up and tend a Google Business Profile.</li>
+          <li>Write on-page titles, descriptions, and schema.</li>
+          <li>Build a keyword and content plan tied to the social calendar.</li>
+          <li>Keep name, address, and phone consistent across local listings.</li>
+          <li>Report on organic search each month.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="beat beat--close" id="involvement" aria-labelledby="involvement-heading">
+      <div class="beat__inner">
+        <h2 class="beat__title beat__title--close" id="involvement-heading">Community involvement, in real time.</h2>
       </div>
     </section>
 
@@ -2165,8 +2339,75 @@
     }
   }
 
+
+  function initPageNav(){
+    var nav = document.querySelector('.page-nav');
+    if (!nav) return;
+    var links = Array.prototype.slice.call(nav.querySelectorAll('a[href^="#"]'));
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function navOffset(){
+      return nav.getBoundingClientRect().height;
+    }
+    function scrollToId(id){
+      var target = document.getElementById(id);
+      if (!target) return false;
+      var top = window.pageYOffset + target.getBoundingClientRect().top - navOffset() - 16;
+      window.scrollTo({ top: Math.max(0, top), behavior: reduce ? 'auto' : 'smooth' });
+      return true;
+    }
+    links.forEach(function(link){
+      link.addEventListener('click', function(e){
+        var href = link.getAttribute('href') || '';
+        if (href.charAt(0) !== '#') return;
+        var id = href.slice(1);
+        if (!id) return;
+        if (scrollToId(id)){
+          e.preventDefault();
+          // setCurrent is assigned below; click after init is fine
+          if (typeof setCurrent === 'function') setCurrent(link);
+          if (history.replaceState) history.replaceState(null, '', href);
+        }
+      });
+    });
+
+    var targets = [];
+    links.forEach(function(link){
+      var id = (link.getAttribute('href') || '').slice(1);
+      var el = id && document.getElementById(id);
+      if (el) targets.push({ el: el, link: link });
+    });
+    function setCurrent(link){
+      links.forEach(function(l){
+        if (l === link) l.setAttribute('aria-current', 'location');
+        else l.removeAttribute('aria-current');
+      });
+      if (link && link.scrollIntoView){
+        link.scrollIntoView({ inline: 'nearest', block: 'nearest', behavior: 'auto' });
+      }
+    }
+    function updateCurrent(){
+      var line = navOffset() + 24;
+      var current = null;
+      targets.forEach(function(t){
+        if (t.el.getBoundingClientRect().top <= line) current = t.link;
+      });
+      setCurrent(current || (targets[0] && targets[0].link));
+    }
+    window.addEventListener('scroll', updateCurrent, {passive:true});
+    window.addEventListener('resize', updateCurrent);
+    updateCurrent();
+    if (location.hash){
+      var startId = location.hash.replace('#','');
+      if (document.getElementById(startId)){
+        requestAnimationFrame(function(){ scrollToId(startId); });
+      }
+    }
+  }
+
   initServices(reduce);
   initEvergreen();
+  initPageNav();
 
   function sizeFeeds(){
     var slots = document.querySelector('.slots');
