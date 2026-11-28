@@ -12,13 +12,59 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta property="og:title" content="CHALANT | Organic Social Media Agency in Dallas–Fort Worth">
 <meta property="og:description" content="CHALANT is a Dallas–Fort Worth social media agency. Campaign strategy, content creation, and community management, without paid ads.">
-<meta property="og:image" content="https://shadowbannedofficial.github.io/chalantcreative-preview/logo.png?v=navv2">
+<meta property="og:image" content="https://chalantcreative.com/logo.png">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="CHALANT | Organic Social Media Agency in Dallas–Fort Worth">
 <meta name="twitter:description" content="CHALANT is a Dallas–Fort Worth social media agency. Campaign strategy, content creation, and community management, without paid ads."><!-- seo-home-v1 -->
-<link rel="icon" href="favicon.png?v=navv2">
-<link rel="apple-touch-icon" href="favicon.png?v=navv2">
+<link rel="canonical" href="https://chalantcreative.com/">
+<meta property="og:url" content="https://chalantcreative.com/">
+<meta property="og:site_name" content="CHALANT">
+<meta property="og:locale" content="en_US">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": ["ProfessionalService", "LocalBusiness"],
+  "name": "CHALANT",
+  "alternateName": "CHALANT Creative",
+  "legalName": "CHALANT CREATIVE LLC",
+  "url": "https://chalantcreative.com",
+  "image": "https://chalantcreative.com/logo.png",
+  "email": "Brian@chalantcreative.com",
+  "telephone": "+12148082189",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "4312 Munger Ave",
+    "addressLocality": "Dallas",
+    "addressRegion": "TX",
+    "postalCode": "75204",
+    "addressCountry": "US"
+  },
+  "areaServed": [
+    { "@type": "AdministrativeArea", "name": "Dallas–Fort Worth" },
+    { "@type": "City", "name": "Dallas" },
+    { "@type": "City", "name": "Fort Worth" },
+    { "@type": "City", "name": "Plano" },
+    { "@type": "City", "name": "Frisco" },
+    { "@type": "City", "name": "Carrollton" },
+    { "@type": "City", "name": "Addison" },
+    { "@type": "City", "name": "Irving" }
+  ],
+  "knowsAbout": [
+    "Social media management",
+    "Organic social media",
+    "Content creation",
+    "Community management",
+    "Hospitality marketing"
+  ],
+  "sameAs": [
+    "https://www.instagram.com/chalant_agency/"
+  ],
+  "description": "CHALANT is a Dallas–Fort Worth social media agency. Campaign strategy, content creation, and community management, without paid ads."
+}
+</script>
+<link rel="icon" href="favicon.png?v=seo1">
+<link rel="apple-touch-icon" href="favicon.png?v=seo1">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,500;0,14..32,600;1,14..32,400&family=Montserrat:wght@500;600;700&family=Playfair+Display:wght@500;600;700&display=swap">
@@ -62,13 +108,19 @@
   .follow__inner,
   .results__inner,
   .services__inner,
-  .beat__inner{max-width:1180px}
+  .beat__inner,
+  .intro__inner,
+  .included__inner,
+  .footer__inner{max-width:1180px}
   .hero,
   .method,
   .follow,
   .results,
   .services,
-  .beat{
+  .beat,
+  .intro,
+  .included,
+  .footer{
     padding-left:max(16px,4.5vw,env(safe-area-inset-left,0px));
     padding-right:max(16px,4.5vw,env(safe-area-inset-right,0px));
     color:#fff;
@@ -137,7 +189,9 @@
   #distribute,
   #involvement,
   #evergreen,
-  #case-study{
+  #case-study,
+  #included,
+  #contact{
     scroll-margin-top:calc(var(--nav-h) + env(safe-area-inset-top, 0px) + 16px);
   }
 
@@ -1516,6 +1570,184 @@
       62.5%,100%{stroke:#E8C90A}
     }
   }
+
+  /* ---------- Intro H1 ---------- */
+  .intro{
+    padding-block:clamp(48px,8vh,88px) clamp(32px,5vh,56px);
+  }
+  .intro__inner{width:100%}
+  .intro__title{
+    margin:0;
+    max-width:18em;
+    color:#fff;
+    font-family:var(--heading);
+    font-size:clamp(28px,4.2vw,56px);
+    font-weight:700;
+    line-height:1.05;
+    letter-spacing:-.02em;
+    text-wrap:pretty;
+  }
+
+  /* ---------- What's included ---------- */
+  .included{
+    padding-block:clamp(72px,12vh,160px);
+  }
+  .included__inner{width:100%}
+  .included__eyebrow{
+    margin:0 0 clamp(18px,3vh,32px);
+    color:var(--gold);
+    font-family:var(--montserrat);
+    font-size:clamp(11px,.85vw,13px);
+    font-weight:600;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+  }
+  .included__title{
+    margin:0;
+    max-width:16em;
+    color:#fff;
+    font-family:var(--heading);
+    font-size:clamp(44px,6.5vw,96px);
+    font-weight:700;
+    line-height:.95;
+    letter-spacing:-.02em;
+    text-wrap:pretty;
+  }
+  .included__lede{
+    margin:clamp(24px,4vh,40px) 0 0;
+    max-width:34em;
+    color:#fff;
+    font-family:var(--inter);
+    font-size:clamp(18px,1.55vw,24px);
+    font-weight:400;
+    line-height:1.5;
+    letter-spacing:-.011em;
+    text-wrap:pretty;
+  }
+  .included__grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:1.6em 2.25em;
+    margin-top:clamp(48px,8vh,80px);
+  }
+  @media (min-width:700px){
+    .included__grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  }
+  @media (min-width:1100px){
+    .included__grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+  }
+  .included__group{min-width:0}
+  .included__group h3{
+    margin:0 0 .55em;
+    padding-bottom:.35em;
+    border-bottom:1px solid rgba(232,201,10,.4);
+    color:var(--gold);
+    font-family:var(--montserrat);
+    font-size:clamp(11px,.8vw,12px);
+    font-weight:600;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+  }
+  .included__group ul{
+    margin:0;
+    padding:0;
+    list-style:none;
+    color:#fff;
+    font-family:var(--inter);
+    font-size:clamp(13px,1.05vw,15px);
+    font-weight:400;
+    line-height:1.4;
+    letter-spacing:-.011em;
+  }
+  .included__group li{
+    margin:0 0 .48em;
+    padding-left:.9em;
+    position:relative;
+  }
+  .included__group li::before{
+    content:"";
+    position:absolute;
+    left:0;
+    top:.55em;
+    width:.35em;
+    height:.35em;
+    background:var(--gold);
+    border-radius:50%;
+  }
+
+  /* ---------- Footer contact ---------- */
+  .footer{
+    padding-block:clamp(64px,10vh,120px) clamp(48px,8vh,88px);
+    border-top:1px solid rgba(232,201,10,.45);
+  }
+  .footer__inner{width:100%}
+  .footer__eyebrow{
+    margin:0 0 clamp(18px,3vh,32px);
+    color:var(--gold);
+    font-family:var(--montserrat);
+    font-size:clamp(11px,.85vw,13px);
+    font-weight:600;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+  }
+  .footer__title{
+    margin:0;
+    color:#fff;
+    font-family:var(--heading);
+    font-size:clamp(44px,6.5vw,96px);
+    font-weight:700;
+    line-height:.95;
+    letter-spacing:-.02em;
+  }
+  .footer__area{
+    margin:clamp(16px,2.4vh,28px) 0 0;
+    color:var(--gold);
+    font-family:var(--montserrat);
+    font-size:clamp(11px,.85vw,13px);
+    font-weight:600;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+  }
+  .footer__address{
+    margin:clamp(28px,4vh,48px) 0 0;
+    font-style:normal;
+    font-family:var(--inter);
+    font-size:clamp(16px,1.25vw,20px);
+    font-weight:400;
+    line-height:1.5;
+    letter-spacing:-.011em;
+  }
+  .footer__list{
+    margin:clamp(20px,3vh,32px) 0 0;
+    padding:0;
+    list-style:none;
+    font-family:var(--inter);
+    font-size:clamp(16px,1.25vw,20px);
+    font-weight:400;
+    line-height:1.6;
+    letter-spacing:-.011em;
+  }
+  .footer__list li{margin:0 0 .25em}
+  .footer a{
+    color:#fff;
+    text-decoration:none;
+    border-bottom:1px solid rgba(232,201,10,.45);
+  }
+  .footer a:hover{color:var(--gold)}
+  .footer a:focus{outline:none}
+  .footer a:focus-visible{
+    outline:2px solid var(--gold);
+    outline-offset:4px;
+  }
+  .footer__hours{
+    margin:clamp(20px,3vh,32px) 0 0;
+    color:rgba(255,255,255,.84);
+    font-family:var(--inter);
+    font-size:clamp(16px,1.25vw,20px);
+    font-weight:400;
+    line-height:1.5;
+    letter-spacing:-.011em;
+  }
 </style>
 </head>
 <body>
@@ -1530,12 +1762,18 @@
     <section class="hero" id="top" aria-label="CHALANT CREATIVE">
       <div class="hero__stage">
         <div class="hero__lockup">
-          <img class="hero__tape" src="tape-b3.svg?v=navv2" alt="" width="8000" height="900" aria-hidden="true">
+          <img class="hero__tape" src="tape-b3.svg?v=seo1" alt="" width="8000" height="900" aria-hidden="true">
           <picture>
-            <source srcset="wordmark.svg?v=navv2" type="image/svg+xml">
-            <img class="hero__logo" src="wordmark.png?v=navv2" alt="CHALANT CREATIVE" width="1370" height="468">
+            <source srcset="wordmark.svg?v=seo1" type="image/svg+xml">
+            <img class="hero__logo" src="wordmark.png?v=seo1" alt="CHALANT CREATIVE" width="1370" height="468">
           </picture>
         </div>
+      </div>
+    </section>
+
+    <section class="intro" aria-labelledby="page-heading">
+      <div class="intro__inner">
+        <h1 class="intro__title" id="page-heading">Organic social media management in Dallas–Fort Worth</h1>
       </div>
     </section>
 
@@ -1890,6 +2128,74 @@
       </div>
     </section>
 
+    <section class="included" id="included" aria-labelledby="included-heading">
+      <div class="included__inner">
+        <p class="included__eyebrow" data-animate>What's included</p>
+        <h2 class="included__title" id="included-heading" data-animate>The work, without paid ads.</h2>
+        <p class="included__lede" data-animate>A 12-month organic strategy, with a 90-day commitment. The list is the engagement. Items marked as scoped are included when they are part of the work.</p>
+        <div class="included__grid">
+          <div class="included__group">
+            <h3>Strategy</h3>
+            <ul>
+              <li>Campaign design around the brand’s public-relations needs</li>
+              <li>Audit profiles and analyze competitors</li>
+              <li>Lock voice, visual style, and content pillars</li>
+              <li>Clean up bios, highlights, and links across platforms</li>
+              <li>A 12-month organic, no-ad content strategy</li>
+              <li>Look and tone guidelines</li>
+              <li>Content calendar and posting cadence</li>
+              <li>Event planning against the calendar</li>
+              <li>Creative direction and shot lists for on-site teams</li>
+              <li>Set a baseline and report each month — keep, kill, or add</li>
+              <li>Weekly progress reports</li>
+            </ul>
+          </div>
+          <div class="included__group">
+            <h3>Content</h3>
+            <ul>
+              <li>Feed posts, Reels, and Stories</li>
+              <li>Documentary-style and short-form video</li>
+              <li>On-site photography and videography</li>
+              <li>On-site film crew and writers’ room, as scoped</li>
+              <li>Serialized, episode-style content</li>
+              <li>Staff and interview features</li>
+              <li>Editing, captions, and scheduling</li>
+              <li>Guest and customer content, reshared with permission</li>
+              <li>Cross-posting to Facebook, TikTok, and YouTube Shorts</li>
+              <li>Google Business Profile content</li>
+              <li>Website or landing-page refresh, when scoped</li>
+              <li>Clipping campaigns, after the first 90 days</li>
+            </ul>
+          </div>
+          <div class="included__group">
+            <h3>Community</h3>
+            <ul>
+              <li>DMs and public replies during business hours</li>
+              <li>Comments on posts</li>
+              <li>Google and Yelp review replies</li>
+              <li>Scheduling and publishing</li>
+              <li>Same-day escalation when a manager is needed</li>
+              <li>Content approvals before posting</li>
+              <li>Set up and tend a Google Business Profile</li>
+            </ul>
+          </div>
+          <div class="included__group">
+            <h3>Search, when scoped</h3>
+            <ul>
+              <li>Search Console setup</li>
+              <li>Sitemap, robots.txt, and canonical tags</li>
+              <li>Service, location, and FAQ pages</li>
+              <li>Internal links and headings that match the offer</li>
+              <li>On-page titles, descriptions, and schema</li>
+              <li>A keyword and content plan tied to the social calendar</li>
+              <li>Name, address, and phone kept consistent across local listings</li>
+              <li>Monthly reporting on organic search</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="beat beat--close" id="involvement" aria-labelledby="involvement-heading">
       <div class="beat__inner">
         <h2 class="beat__title beat__title--close" id="involvement-heading">Community involvement, in real time.</h2>
@@ -1927,7 +2233,7 @@
       <div class="results__inner">
         <p class="results__eyebrow" id="case-study-heading" data-animate>Case study</p>
         <h2 class="results__title" data-animate><span>The first thirty days.</span> <span>Organic only.</span></h2>
-        <p class="results__lede" data-animate>For a DFW hospitality client, CHALANT built a new account using an organic content strategy and a no-ad creative campaign.</p>
+        <p class="results__lede" data-animate>For a Dallas-area bar, CHALANT built a new account using an organic content strategy and a no-ad creative campaign.</p>
 
         <div class="results__hero" data-animate>
           <p class="results__hero-num">114,586</p>
@@ -2054,9 +2360,27 @@
     </section>
   </main>
 
+  <footer class="footer" id="contact">
+    <div class="footer__inner">
+      <p class="footer__eyebrow">Contact</p>
+      <p class="footer__title">CHALANT</p>
+      <p class="footer__area">Dallas–Fort Worth</p>
+      <address class="footer__address">
+        4312 Munger Ave<br>
+        Dallas, TX 75204
+      </address>
+      <ul class="footer__list">
+        <li><a href="tel:+12148082189">214-808-2189</a></li>
+        <li><a href="mailto:Brian@chalantcreative.com">Brian@chalantcreative.com</a></li>
+        <li><a href="https://www.instagram.com/chalant_agency/">Instagram</a></li>
+      </ul>
+      <p class="footer__hours">By appointment only</p>
+    </div>
+  </footer>
+
 <script>
 (function(){
-  var nodes = document.querySelectorAll('.method [data-animate], .results [data-animate], .services [data-animate]');
+  var nodes = document.querySelectorAll('.method [data-animate], .results [data-animate], .services [data-animate], .included [data-animate]');
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var motions = document.querySelectorAll('[data-motion]');
 
