@@ -12,13 +12,13 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta property="og:title" content="CHALANT | Organic Social Media Agency in Dallas–Fort Worth">
 <meta property="og:description" content="CHALANT is a Dallas–Fort Worth social media agency. Campaign strategy, content creation, and community management, without paid ads.">
-<meta property="og:image" content="https://shadowbannedofficial.github.io/chalantcreative-preview/logo.png?v=recyclev5">
+<meta property="og:image" content="https://shadowbannedofficial.github.io/chalantcreative-preview/logo.png?v=foldbeats1">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="CHALANT | Organic Social Media Agency in Dallas–Fort Worth">
 <meta name="twitter:description" content="CHALANT is a Dallas–Fort Worth social media agency. Campaign strategy, content creation, and community management, without paid ads."><!-- seo-home-v1 -->
-<link rel="icon" href="favicon.png?v=recyclev5">
-<link rel="apple-touch-icon" href="favicon.png?v=recyclev5">
+<link rel="icon" href="favicon.png?v=foldbeats1">
+<link rel="apple-touch-icon" href="favicon.png?v=foldbeats1">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,500;0,14..32,600;1,14..32,400&family=Montserrat:wght@500;600;700&family=Playfair+Display:wght@500;600;700&display=swap">
@@ -629,9 +629,19 @@
 
   /* ---------- Services ---------- */
   .services{
+    position:relative;
     padding-block:clamp(88px,16vh,200px);
     border-top:1px solid #E8C90A;
     border-bottom:1px solid #E8C90A;
+  }
+  .services__jump{
+    position:absolute;
+    top:0;
+    left:0;
+    width:1px;
+    height:1px;
+    overflow:hidden;
+    pointer-events:none;
   }
   .services__eyebrow{
     margin:0 0 clamp(18px,3vh,32px);
@@ -736,6 +746,28 @@
     font-weight:700;
     letter-spacing:-.02em;
     line-height:1.1;
+    text-wrap:pretty;
+  }
+  .services__beat{margin:0 0 .9em}
+  .services__beat-label{
+    margin:0 0 .4em;
+    color:var(--gold);
+    font-family:var(--montserrat);
+    font-size:clamp(11px,.85vw,13px);
+    font-weight:600;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    line-height:1.2;
+  }
+  .services__beat-line{
+    margin:0;
+    max-width:28em;
+    color:#fff;
+    font-family:var(--inter);
+    font-size:clamp(16px,1.4vw,22px);
+    font-weight:400;
+    line-height:1.45;
+    letter-spacing:-.011em;
     text-wrap:pretty;
   }
   .services__panel-body{
@@ -1492,9 +1524,6 @@
       <li><a class="page-nav__link" href="#educate">Educate</a></li>
       <li><a class="page-nav__link" href="#sell">Sell</a></li>
       <li><a class="page-nav__link" href="#architects">Architects</a></li>
-      <li><a class="page-nav__link" href="#design">Design</a></li>
-      <li><a class="page-nav__link" href="#execute">Execute</a></li>
-      <li><a class="page-nav__link" href="#distribute">Distribute</a></li>
       <li><a class="page-nav__link" href="#involvement">Community</a></li>
       <li><a class="page-nav__link" href="#evergreen">Evergreen</a></li>
       <li><a class="page-nav__link" href="#case-study">Case study</a></li>
@@ -1504,10 +1533,10 @@
     <section class="hero" id="top" aria-label="CHALANT CREATIVE">
       <div class="hero__stage">
         <div class="hero__lockup">
-          <img class="hero__tape" src="tape-b3.svg?v=recyclev5" alt="" width="8000" height="900" aria-hidden="true">
+          <img class="hero__tape" src="tape-b3.svg?v=foldbeats1" alt="" width="8000" height="900" aria-hidden="true">
           <picture>
-            <source srcset="wordmark.svg?v=recyclev5" type="image/svg+xml">
-            <img class="hero__logo" src="wordmark.png?v=recyclev5" alt="CHALANT CREATIVE" width="1370" height="468">
+            <source srcset="wordmark.svg?v=foldbeats1" type="image/svg+xml">
+            <img class="hero__logo" src="wordmark.png?v=foldbeats1" alt="CHALANT CREATIVE" width="1370" height="468">
           </picture>
         </div>
       </div>
@@ -1731,6 +1760,9 @@
 
 
     <section class="services" id="architects" aria-labelledby="services-heading">
+      <span id="design" class="services__jump" aria-hidden="true"></span>
+      <span id="execute" class="services__jump" aria-hidden="true"></span>
+      <span id="distribute" class="services__jump" aria-hidden="true"></span>
       <div class="services__inner">
         <p class="services__eyebrow" data-animate>Services</p>
         <h2 class="services__title" id="services-heading" data-animate>Digital Footprint Architects</h2>
@@ -1767,6 +1799,10 @@
           <div class="services__panel" id="services-panel"><!-- services-list-v1 -->
             <div class="services__pane is-active" data-service="campaign" role="region" aria-labelledby="service-title-campaign">
               <h3 class="services__panel-title" id="service-title-campaign">1. Campaign Strategy</h3>
+              <div class="services__beat">
+                <p class="services__beat-label">Design</p>
+                <p class="services__beat-line">We design the message.</p>
+              </div>
               <p class="services__panel-body">We address your public relations needs and find the best way to present your business to the market.</p>
               <ul class="services__bullets">
                 <li>Audit profiles and analyze competitors.</li>
@@ -1778,11 +1814,26 @@
             </div>
             <div class="services__pane" data-service="creation" role="region" aria-labelledby="service-title-creation" hidden>
               <h3 class="services__panel-title" id="service-title-creation">2. Content Creation</h3>
+              <div class="services__beat">
+                <p class="services__beat-label">Execute</p>
+                <p class="services__beat-line">We execute the message.</p>
+              </div>
               <p class="services__panel-body">We find the style your brand needs: cinematic, documentary, found footage, even goofy. Whatever fits your business.</p>
             </div>
             <div class="services__pane" data-service="community" role="region" aria-labelledby="service-title-community" hidden>
               <h3 class="services__panel-title" id="service-title-community">3. Community Management</h3>
+              <div class="services__beat">
+                <p class="services__beat-label">Distribute &amp; Amplify</p>
+                <p class="services__beat-line">We get the message out and make it visible.</p>
+              </div>
               <p class="services__panel-body">We distribute your content, reply to DMs, handle Google reviews, comment back on posts, and schedule.</p>
+              <ul class="services__bullets">
+                <li>Set up and tend a Google Business Profile.</li>
+                <li>Write on-page titles, descriptions, and schema.</li>
+                <li>Build a keyword and content plan tied to the social calendar.</li>
+                <li>Keep name, address, and phone consistent across local listings.</li>
+                <li>Report on organic search each month.</li>
+              </ul>
               <div class="services__all">
                 <button type="button" class="services__all-toggle" id="services-all-toggle" aria-expanded="false" aria-controls="services-catalog">
                   <span class="services__all-toggle-mark" aria-hidden="true"></span>
@@ -1841,34 +1892,6 @@
             </div>
           </div>
         </div>
-      </div>
-    </section>
-
-    <section class="beat" id="design" aria-labelledby="design-heading">
-      <div class="beat__inner">
-        <h2 class="beat__title" id="design-heading">Design</h2>
-        <p class="beat__line">We design the message.</p>
-      </div>
-    </section>
-
-    <section class="beat" id="execute" aria-labelledby="execute-heading">
-      <div class="beat__inner">
-        <h2 class="beat__title" id="execute-heading">Execute</h2>
-        <p class="beat__line">We execute the message.</p>
-      </div>
-    </section>
-
-    <section class="beat" id="distribute" aria-labelledby="distribute-heading">
-      <div class="beat__inner">
-        <h2 class="beat__title" id="distribute-heading">Distribute &amp; Amplify</h2>
-        <p class="beat__line">We get the message out and make it visible.</p>
-        <ul class="beat__bullets">
-          <li>Set up and tend a Google Business Profile.</li>
-          <li>Write on-page titles, descriptions, and schema.</li>
-          <li>Build a keyword and content plan tied to the social calendar.</li>
-          <li>Keep name, address, and phone consistent across local listings.</li>
-          <li>Report on organic search each month.</li>
-        </ul>
       </div>
     </section>
 
@@ -2132,7 +2155,10 @@
       });
     });
 
-    show(ids[0]);
+    var hashToService = { design:'campaign', execute:'creation', distribute:'community' };
+    var startHash = (location.hash || '').replace('#','');
+    if (hashToService[startHash]) userSelect(hashToService[startHash]);
+    else show(ids[0]);
     if (!reduceMotion && chart){
       if (chart.classList.contains('is-playing')) startCycle();
       if ('MutationObserver' in window){
