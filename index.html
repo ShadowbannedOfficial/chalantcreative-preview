@@ -12,13 +12,13 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta property="og:title" content="CHALANT | Organic Social Media Agency in Dallas–Fort Worth">
 <meta property="og:description" content="CHALANT is a Dallas–Fort Worth social media agency. Campaign strategy, content creation, and community management, without paid ads.">
-<meta property="og:image" content="https://shadowbannedofficial.github.io/chalantcreative-preview/logo.png?v=recyclev4">
+<meta property="og:image" content="https://shadowbannedofficial.github.io/chalantcreative-preview/logo.png?v=recyclev5">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="CHALANT | Organic Social Media Agency in Dallas–Fort Worth">
 <meta name="twitter:description" content="CHALANT is a Dallas–Fort Worth social media agency. Campaign strategy, content creation, and community management, without paid ads."><!-- seo-home-v1 -->
-<link rel="icon" href="favicon.png?v=recyclev4">
-<link rel="apple-touch-icon" href="favicon.png?v=recyclev4">
+<link rel="icon" href="favicon.png?v=recyclev5">
+<link rel="apple-touch-icon" href="favicon.png?v=recyclev5">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,500;0,14..32,600;1,14..32,400&family=Montserrat:wght@500;600;700&family=Playfair+Display:wght@500;600;700&display=swap">
@@ -1504,10 +1504,10 @@
     <section class="hero" id="top" aria-label="CHALANT CREATIVE">
       <div class="hero__stage">
         <div class="hero__lockup">
-          <img class="hero__tape" src="tape-b3.svg?v=recyclev4" alt="" width="8000" height="900" aria-hidden="true">
+          <img class="hero__tape" src="tape-b3.svg?v=recyclev5" alt="" width="8000" height="900" aria-hidden="true">
           <picture>
-            <source srcset="wordmark.svg?v=recyclev4" type="image/svg+xml">
-            <img class="hero__logo" src="wordmark.png?v=recyclev4" alt="CHALANT CREATIVE" width="1370" height="468">
+            <source srcset="wordmark.svg?v=recyclev5" type="image/svg+xml">
+            <img class="hero__logo" src="wordmark.png?v=recyclev5" alt="CHALANT CREATIVE" width="1370" height="468">
           </picture>
         </div>
       </div>
@@ -2221,6 +2221,12 @@
           var gapUnits = (Math.max(6, bandWNow * 0.4) / peri) * 300;
           var S = 100 - headUnits - gapUnits;
           if (S < 40) S = 40;
+          // v4 stem included the corner arc plus the straight run; keep the
+          // bend and heads, cut the straight segments to 75% of v4 length.
+          var arcUnits = (radiusNow * Math.PI * 2 / 3 / peri) * 300;
+          if (arcUnits < 0) arcUnits = 0;
+          if (arcUnits > S) arcUnits = S;
+          S = arcUnits + (S - arcUnits) * 0.75;
           dashStart = S;
           band.style.strokeDasharray = S + ' ' + (100 - S);
           if (!playing) band.style.strokeDashoffset = String(S);
@@ -2231,6 +2237,7 @@
     var bandWNow = 27;
     var headBNow = 42 * 27 / 16;
     var headLenNow = 37 * 27 / 16;
+    var radiusNow = 27;
 
     var lastKey = '';
     var wideLine = stage ? stage.querySelectorAll('.follow__line')[5] : null;
@@ -2355,6 +2362,7 @@
       bandWNow = bandW;
       headBNow = headB;
       headLenNow = headLen;
+      radiusNow = radius;
       applyMark(roundedPath([top, br, bl], radius), w, Math.ceil(stageH));
     }
 
